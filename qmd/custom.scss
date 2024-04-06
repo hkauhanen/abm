@@ -1,0 +1,15 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+div.float-images ul li img {
+	display: inline;
+	float: left;
+}
+
+.myfooter {
+  display: inline-block;
+	margin-top: 3em;
+	font-size: 80%;
+  color: #555555;
+}

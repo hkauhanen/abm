@@ -1,0 +1,14 @@
+[
+  {
+    "listing": "/lectures.html",
+    "items": [
+      "/lectures/intro.html"
+    ]
+  },
+  {
+    "listing": "/homework.html",
+    "items": [
+      "/homework/installing-julia.html"
+    ]
+  }
+]

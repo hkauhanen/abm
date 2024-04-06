@@ -1,0 +1,5 @@
+format:
+  html: default
+  pdf: default
+  revealjs:
+    theme: [default, ../custom-slides.scss]

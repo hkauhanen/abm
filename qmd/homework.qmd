@@ -1,0 +1,12 @@
+---
+title: "Homework"
+listing:
+  contents: homework
+  type: grid
+  fields: [date, title]
+  sort: date
+  sort-ui: false
+  filter-ui: false
+---
+
+

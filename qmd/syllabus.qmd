@@ -1,0 +1,45 @@
+---
+title: "Syllabus"
+sidebar: false
+---
+
+::: {.callout-note}
+The syllabus is tentative -- topics may get rearranged as the course proceeds.
+:::
+
+
+## Timetable
+
+| Date    | Topic    | Homework | Reading |
+|---------|---------|--------|-------|
+| 9.4.		| Welcome + [Intro to ABMs](lectures/intro.qmd)					| [Installing julia](homework/installing-julia.qmd) | @Gilbert2020, chapter 1 |
+| 16.4.		| Programming basics					| | |
+| 23.4.		|	A model of language learning				| | |
+| 30.4.		|	Two models of language change				| | |
+| 7.5.		|	Social networks				| | |
+| 14.5.		|	Spatial typology				| | |
+| 21.5.		|	Programming best practices				| | |
+| ~~28.5.~~ | *No lecture (Vorlesungsfreie Zeit)*					| | |
+| ~~4.6.~~  |	*No lecture (Vertiefungswoche)*				| | |
+| 11.6.		| Exemplar dynamics				| | |
+| 18.6.		|	Conformity				| | |
+| 25.6.		|	Roaming in space				| | |
+| 2.7.		| Presentations 1					| | |
+| 9.7.		|	Presentations 2				| | |
+| 16.7.		| Exam					| | |
+
+
+## Course requirements
+
+To pass this course, you will need to satisfactorily complete both:
+
+1. The final exam
+1. Small programming project + in-class presentation + written report, either solo or in small group (depending on your preference)
+
+The examination will be based on the following materials:
+
+1. Lectures and associated lecture notes (on this website)
+1. Homework contents (on this website)
+1. Readings (on [ILIAS](https://ilias.uni-konstanz.de/goto_ILIASKONSTANZ_crs_1712980.html))
+
+Programming project topics need to be decided before the *Vorlesungsfreie Zeit*. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible.

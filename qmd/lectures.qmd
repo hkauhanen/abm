@@ -1,0 +1,12 @@
+---
+title: "Lectures"
+listing:
+  contents: lectures
+  type: grid
+  fields: [date, title]
+  sort: date
+  sort-ui: false
+  filter-ui: false
+---
+
+

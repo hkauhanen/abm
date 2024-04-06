@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: ../docs
+  resources:
+    - videos/*.mp4
+    - img/*.gif
+    - img/*.png
+
+website:
+  body-footer: "<span class='myfooter'>© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span>"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Syllabus"
+        file: syllabus.qmd
+      - text: "Lectures"
+        file: lectures.qmd
+      - text: "Homework"
+        file: homework.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    published-title: "Date"
+    author-title: "Author"
+    date-format: "D MMMM YYYY"
+    reference-location: margin
+    citation-location: document
+    theme:
+      - journal
+      - custom.scss
+

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-09">
+
+<title>Intro to ABMs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lectures.html" rel="" target="">
+ <span class="menu-text">Lectures</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../homework.html" rel="" target="">
+ <span class="menu-text">Homework</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Intro to ABMs</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Date</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">9 April 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-is-an-agent-based-model-abm" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-is-an-agent-based-model-abm">What is an agent-based model (ABM)?</h2>
+<ul>
+<li>No rigorous definition (like most applied science)</li>
+<li>But: can characterize as a model consisting of
+<ol type="1">
+<li><strong>entities</strong> (the agents)…</li>
+<li>…which <strong>act</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> upon each other…</li>
+<li>…to create some <strong>emergent</strong> outcome</li>
+</ol></li>
+<li>“Emergent” = collective is more than the sum of its parts</li>
+<li>Implemented computationally, sometimes also analysed mathematically</li>
+</ul>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Eng. <em>agent</em> &lt; Lat. <em>agens</em>, pres. part. of <em>ago</em> ‘act’</p></li></div></section>
+<section id="what-is-the-benefit-of-abms-1" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-benefit-of-abms-1">What is the benefit of ABMs?</h2>
+<blockquote class="blockquote">
+<p>“Like equation-based modeling, but <strong>unlike prose</strong>, agent-based models must be <strong>complete</strong>, <strong>consistent</strong>, and <strong>unambiguous</strong> <strong>if they are to be capable of being executed on a computer</strong>” <span class="citation" data-cites="Gilbert2020">(<a href="#ref-Gilbert2020" role="doc-biblioref">Gilbert 2020, xii</a>, my emphasis)</span></p>
+</blockquote>
+<ul>
+<li><strong>complete</strong>: the modeller cannot leave anything out of the model description</li>
+<li><strong>consistent</strong>: no part of the model can logically contradict another part of the same model</li>
+<li><strong>unambiguous</strong>: the meaning of every part of the model must be objectively clear</li>
+</ul>
+</section>
+<section id="examples" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<p>These concepts are best explained through the use of examples…</p>
+<div class="page-columns page-full"><p>…so let’s look at a few!<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;The examples are taken from the <a href="https://juliadynamics.github.io/AgentsExampleZoo.jl/dev/">Example Zoo</a> of the Agents.jl package (released under the MIT license).</p></li></div></div>
+</section>
+<section id="example-1-conways-game-of-life" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-conways-game-of-life">Example 1: Conway’s Game of Life</h2>
+<ul>
+<li>Early example of a <strong>cellular automaton</strong> (subclass of ABMs) <span class="citation" data-cites="Gardner1970">(<a href="#ref-Gardner1970" role="doc-biblioref">Gardner 1970</a>)</span></li>
+<li>Lattice; each cell either “live” (L) or “dead” (D)</li>
+<li>Rules:
+<ol type="1">
+<li>Underpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies</li>
+<li>Sustenance: if a L cell is surrounded by two or three L neighbours, it continues to live</li>
+<li>Overpopulation: If a L cell is surrounded by more than three L neighbours, it dies</li>
+<li>Reproduction: If a D cell is surrounded by three L neighbours, it becomes L</li>
+</ol></li>
+</ul>
+</section>
+<section id="example-1-conways-game-of-life-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-conways-game-of-life-1">Example 1: Conway’s Game of Life</h2>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="../videos/game_of_life.mp4"></video></div>
+</section>
+<section id="question" class="level2">
+<h2 class="anchored" data-anchor-id="question">Question</h2>
+<p>Earlier we said ABMs are complete, consistent and unambiguous.</p>
+<p><strong>What have I left out of the definition of Conway’s Game of Life?</strong> (I.e. why is my description so far incomplete?)</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two very important things:</p>
+<ol type="1">
+<li>Is the lattice <strong>finite</strong> or <strong>infinite</strong>? If finite, then what happens at the boundaries? <em>It is infinite.</em></li>
+<li>Are the agents (the cells) updated <strong>synchronously</strong> (all at once) or <strong>asynchronously</strong>? <em>Synchronously.</em></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<p>What happens to the cells in A? What happens to those in B? (Black = live, white = dead)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>A</strong></p>
+<p><img src="../img/stilllife.png" class="img-fluid" width="160"></p>
+</div><div class="column" style="width:&quot;50%;">
+<p><strong>B</strong></p>
+<p><img src="../img/blinker1.png" class="img-fluid" width="200"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A is stable, B oscillates:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>A</strong></p>
+<p><img src="../img/stilllife.png" class="img-fluid" width="160"></p>
+</div><div class="column" style="width:&quot;50%;">
+<p><strong>B</strong></p>
+<p><img src="../img/blinker.gif" class="img-fluid" width="200"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="species" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="species">Species</h2>
+<div class="page-columns page-full"><p>The game supports many life forms (“species”), categorized into:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Images of Game of Life species from Wikimedia Commons (public domain).</p></li></div></div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<ul>
+<li>Still lifes, e.g.&nbsp;<img src="../img/stilllife.png" class="img-fluid" width="80"> <img src="../img/beehive.png" class="img-fluid" width="120"> <img src="../img/flower.png" class="img-fluid" width="100"></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<ul>
+<li>Oscillators, e.g.&nbsp;<img src="../img/blinker.gif" class="img-fluid" width="100"> <img src="../img/beacon.gif" class="img-fluid" width="120"> <img src="../img/pulsar.gif" class="img-fluid" width="120"></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<ul>
+<li>Spaceships, e.g.&nbsp;<img src="../img/glider.gif" class="img-fluid" width="120"> <img src="../img/medium.gif" class="img-fluid" width="180"></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="emergence" class="level2">
+<h2 class="anchored" data-anchor-id="emergence">Emergence</h2>
+<ul>
+<li>The game has simple rules, complex behaviour</li>
+<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!</li>
+<li>New facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)</li>
+</ul>
+</section>
+<section id="example-2-flocking" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-flocking">Example 2: Flocking</h2>
+<ul>
+<li>A simple model of the emergence of collective behaviour, namely flocking in birds</li>
+<li>Birds follow three rules:
+<ul>
+<li>Collision avoidance: maintain a minimum distance to other birds</li>
+<li>Tracking: fly towards the average position of neighbouring birds</li>
+<li>Navigation: fly in the average direction of your neighbours</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-2-flocking-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-flocking-1">Example 2: Flocking</h2>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="../videos/flocking.mp4"></video></div>
+</section>
+<section id="example-3-social-distancing" class="level2">
+<h2 class="anchored" data-anchor-id="example-3-social-distancing">Example 3: Social Distancing</h2>
+</section>
+<section id="bounded-rationality-locality" class="level2">
+<h2 class="anchored" data-anchor-id="bounded-rationality-locality">Bounded rationality / Locality</h2>
+<ul>
+<li>Common to all these examples is the following observation: the agents have <strong>bounded rationality</strong>
+<ul>
+<li>In Flocking, individual birds follow only three simple rules defined over the bird’s neighbours</li>
+<li>A bird <strong>does not know</strong> what flocking means, nor does it have a rule to accomplish flocking</li>
+<li>Rather, flocking emerges as the collective behaviour of a group of birds</li>
+</ul></li>
+<li>In other words, <strong>global</strong> patterns arise from numerous <strong>local</strong> interactions</li>
+<li>Similar remarks apply to Game of Life and Social Distancing, indeed to <strong>any</strong> ABM</li>
+</ul>
+</section>
+<section id="challenges-in-abm" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-in-abm">Challenges in ABM</h2>
+<ul>
+<li>How do we know what to model?</li>
+<li>How do we test our models against empirical data?</li>
+<li>How do we implement our models computationally?</li>
+</ul>
+</section>
+<section id="challenges-of-computational-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-of-computational-implementation">Challenges of computational implementation</h2>
+<ul>
+<li>Speed: we want simulations to be fast</li>
+<li>Randomness: when our code calls for random numbers, we want them to be really random!</li>
+<li>Cleanliness: we want our code to be understandable to other users</li>
+<li>Reproducibility: when others run our code, they should get the same results we do</li>
+</ul>
+</section>
+<section id="why-is-speed-an-issue" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-speed-an-issue">Why is speed an issue?</h2>
+<ul>
+<li>Central processing units (CPUs) in modern computers carry out billions of instructions each second</li>
+<li>However, with ABMs, computational requirements may be significant, and may not <strong>scale</strong> nicely</li>
+</ul>
+</section>
+<section id="speed-issues-an-example" class="level2">
+<h2 class="anchored" data-anchor-id="speed-issues-an-example">Speed issues: an example</h2>
+<ul>
+<li>You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.
+<ul>
+<li>Suppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.</li>
+<li>Suppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.</li>
+<li>Then you’re looking at a total of 1 million runs.</li>
+</ul></li>
+</ul>
+<ul>
+<li>With 1 minute / run, we’re looking at <strong>2 years</strong> to get the results!</li>
+</ul>
+</section>
+<section id="how-to-deal-with-issues-of-speed" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-deal-with-issues-of-speed">How to deal with issues of speed</h2>
+<ol type="1">
+<li>Choose a suitable programming language</li>
+<li>Write <strong>performant</strong> code</li>
+<li>Whenever possible, <strong>parallelize</strong> your code
+<ul>
+<li>This means running it simultaneously across many CPUs/computers; we will see later how it’s done</li>
+</ul></li>
+</ol>
+</section>
+<section id="why-is-randomness-needed" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-randomness-needed">Why is randomness needed?</h2>
+<ul>
+<li>Quite simple: real-world processes are complex, and to model such complex processes we resort to <strong>stochastic processes</strong></li>
+<li>A stochastic process is a sequence of random variables</li>
+<li>For example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a <strong>random number</strong>.</li>
+<li>Or consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are <strong>deterministic</strong> (which does not seem particularly sensible), we need some way of selecting interlocutors at random.</li>
+</ul>
+</section>
+<section id="why-is-randomness-an-issue" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-randomness-an-issue">Why is randomness an issue?</h2>
+<ul>
+<li>Conventional computers are deterministic devices</li>
+<li>So, if we need, say, a random number between 0 and 1, how is that accomplished?</li>
+<li>The answer is a <strong>pseudorandom number generator</strong> (PRNG)
+<ul>
+<li>This is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the <em>appearance</em> of being random</li>
+<li>The sequence is generated from a <strong>seed</strong> number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).</li>
+<li><strong>However</strong>, there are significant issues…</li>
+</ul></li>
+</ul>
+</section>
+<section id="issues-with-prngs" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="issues-with-prngs">Issues with PRNGs</h2>
+<ul>
+<li>Suppose your PRNG generates a sequence of 1M numbers…</li>
+<li>…but in your simulation you need to generate 10M random numbers<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>Then your “random” numbers will repeat 10 times</li>
+<li>This means that different parts of your simulation are <strong>not</strong> independent of each other – a major problem!</li>
+<li>Further issues can arise when we look at parallel processing… but more on that later!</li>
+</ul>
+<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;We’ll see later that this is by no means a crazy requirement!</p></li></div></section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>ABM is a powerful framework for modelling real-world processes</li>
+<li>Models are complete, consistent and unambiguous</li>
+<li>Individual agents exhibit bounded rationality</li>
+<li>Challenges involve, among other things, simulation speed and proper implementation of randomness</li>
+</ul>
+</section>
+<section id="the-scientific-community" class="level2">
+<h2 class="anchored" data-anchor-id="the-scientific-community">The scientific community</h2>
+<ul>
+<li>ABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics</li>
+<li>Examples of professional organisation in social sciences and linguistics:
+<ul>
+<li><a href="http://www.essa.eu.org/">European Social Simulation Association</a></li>
+<li><a href="https://www.jasss.org">The Journal of Artificial Societies and Social Simulation</a></li>
+<li><a href="https://iscss.org/">The International Society for Computational Social Science</a> (+IC2S2 conference)</li>
+<li><a href="https://brill.com/view/journals/ldc/ldc-overview.xml?language=en">Language Dynamics and Change</a> (journal)</li>
+</ul></li>
+</ul>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<p>Next week, we will start programming. To prepare your computer for this, complete the homework <a href="../homework/installing-julia.html">Installing Julia</a>.</p>
+</section>
+<section id="references" class="level2">
+
+
+
+
+</section>
+
+
+<p><span class="myfooter">© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Gardner1970" class="csl-entry" role="listitem">
+Gardner, Martin. 1970. <span>“The Fantastic Combinations of <span class="nocase">John Conway’s</span> New Solitaire Game ’Life’.”</span> <em>Scientific American</em> 223 (4): 120–23. <a href="https://doi.org/10.1038/scientificamerican1070-120">https://doi.org/10.1038/scientificamerican1070-120</a>.
+</div>
+<div id="ref-Gilbert2020" class="csl-entry" role="listitem">
+Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
+
+
+
+</body></html>

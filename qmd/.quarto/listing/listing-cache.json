@@ -1,0 +1,10 @@
+{
+  "listingMap": {
+    "lectures.qmd": [
+      "lectures"
+    ],
+    "homework.qmd": [
+      "homework"
+    ]
+  }
+}

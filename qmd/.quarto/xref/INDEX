@@ -1,0 +1,50 @@
+{
+  "index.qmd": {
+    "index.html": "9af883ee",
+    "index.tex": "8acaf998"
+  },
+  "intro.qmd": {
+    "intro.html": "93e81fa0",
+    "intro.tex": "8275e856"
+  },
+  "summary.qmd": {
+    "summary.html": "ba0330da",
+    "summary.tex": "1438ee30"
+  },
+  "references.qmd": {
+    "references.html": "9f934f6f",
+    "references.tex": "2cdd8845"
+  },
+  "syllabus.qmd": {
+    "syllabus.html": "1a5c6143",
+    "syllabus.tex": "1a0d0373"
+  },
+  "basics.qmd": {
+    "basics.html": "c5b20820",
+    "basics.tex": "f1136034"
+  },
+  "app_julia.qmd": {
+    "app_julia.html": "3eeee7e3"
+  },
+  "lectures/basics.qmd": {
+    "basics.html": "bc462820",
+    "basics-slides.html": "53254ee2",
+    "basics.tex": "b47306cc"
+  },
+  "lectures/intro.qmd": {
+    "intro.html": "779ee3f9",
+    "intro-slides.html": "ab941a9b",
+    "intro.tex": "af46d47c"
+  },
+  "lectures.qmd": {
+    "lectures.html": "bf0c7dda",
+    "lectures.tex": "2965d7bd"
+  },
+  "homework.qmd": {
+    "homework.html": "bc2c03d0"
+  },
+  "homework/installing-julia.qmd": {
+    "installing-julia.html": "04d3ccad",
+    "installing-julia.tex": "5ca4b104"
+  }
+}

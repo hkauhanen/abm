@@ -1,0 +1,86 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+.smol p {
+	font-size: 18pt;
+}
+
+.bg-white {
+	background: white;
+}
+
+.bg-translucent {
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.bordered {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border: 5px solid black;
+}
+
+ul li ul li {
+	font-size: 90%;
+}
+
+span.citation + span.citation::before {
+	content: ",";
+	font-size: 70%;
+	position: relative;
+	top: -0.5em;
+	left: -0.2em;
+}
+
+.reveal aside, .reveal ol.aside-footnotes, .reveal ol.aside-footnotes li, .reveal ol.aside-footnotes li p {
+	font-size: 18pt;
+	color: black;
+}
+
+div#piantadosi-quote, div#piantadosi-quote p {
+	font-size: 78%;
+}
+
+strong {
+	font-size: 120%;
+}
+
+p, li {
+	font-size: 24pt;
+}
+
+.math {
+	font-size: 22pt;
+}
+
+h2 .math {
+	font-size: 30pt;
+}
+
+.reveal h2 {
+	font-size: 38pt;
+	margin-bottom: 1em;
+}
+
+.reveal h3 {
+	font-size: 30pt;
+	margin-bottom: 1em;
+}
+
+h1.title {
+	font-size: 50pt;
+	margin-bottom: 1em;
+}
+
+div.huge p {
+	font-size: 500%;
+	text-align: center;
+}
+
+.reveal img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

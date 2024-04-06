@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-16">
+
+<title>2. Programming basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lectures.html" rel="" target="">
+ <span class="menu-text">Lectures</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lectures.html" rel="" target="">
+ <span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../references.html" rel="" target="">
+ <span class="menu-text">References</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="basics-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">2. Programming basics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 16, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="getting-started-with-julia" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-with-julia">Getting started with Julia</h2>
+<p>Programming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. <strong>Julia</strong> is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.</p>
+<p>To get started, visit <a href="https://julialang.org/">https://julialang.org/</a> to download and install Julia on your system. Make sure to download <strong>version 1.9.3</strong> or newer. See <a href="https://julialang.org/downloads/platform/">here</a> for platform-specific installation instructions.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you already speak another programming language, it is useful to refer to <a href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/">this document</a> that details some noteworthy differences between Julia and common languages such as R, Python and C.</p>
+</div>
+</div>
+<p>Next, launch Julia. How this is done depends on your operating system—you may find the program in a “Start” menu or similar, or you may have to launch it from the command line by typing <code>julia</code>.</p>
+<p>Having successfully launched Julia, you should see a screen like the one depicted in <a href="#fig-julia-REPL">Figure&nbsp;1</a>.</p>
+<div id="fig-julia-REPL" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/julia_REPL.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: The Julia REPL.</figcaption>
+</figure>
+</div>
+<p>This is called the Julia REPL (which stands for the <em>read-eval-print-loop</em>). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">+</span><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>5</code></pre>
+</div>
+</div>
+<p>Or you can store a couple of strings in variables and print them:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="op">=</span> <span class="st">"John"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lastname <span class="op">=</span> <span class="st">"Doe"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"My full name is </span><span class="sc">$</span>firstname<span class="st"> </span><span class="sc">$</span>lastname<span class="st">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>My full name is John Doe.</code></pre>
+</div>
+</div>
+<p>In principle, it is possible to do all your Julia programming using the REPL and external files, so-called <strong>scripts</strong>. Often, however, it is useful to carry out program development in a dedicated <strong>programming environment</strong> (also sometimes known as IDEs, for “integrated development environment”). In Julia, one such environment is called <em>Pluto</em>. We will now install Pluto and launch it.</p>
+<p><strong>Packages</strong> are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called <em>Pkg</em>. To use Pkg, we first need to tell Julia that we want to use it:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we use the <code>Pkg.add</code> function to install Pluto:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Pluto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at <a href="https://juliapackages.com/">https://juliapackages.com/</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Installing a package may take a while; this is often because packages have interrelationships—dependencies—between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.</p>
+</div>
+</div>
+<p>Having successfully installed Pluto, we instruct Julia that we want to use it, and call the <code>Pluto.run()</code> function. This will start Pluto in a browser window.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pluto</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Pluto.<span class="fu">run</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You should see something like the screen in <strong>?@fig-Pluto</strong>.</p>
+<p>Click on <em>Create a new notebook</em>. A notebook will open up, and you will be able type in code in a so-called code <strong>cell</strong>. Try typing up our little addition example from above:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">+</span><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Unlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.</p>
+<p>Next, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="op">=</span> <span class="st">"John"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lastname <span class="op">=</span> <span class="st">"Doe"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"My full name is </span><span class="sc">$</span>firstname<span class="st"> </span><span class="sc">$</span>lastname<span class="st">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a <code>begin ... end</code> block. Fortunately, this is very easy to do. Simply click on “Wrap all code in a <em>begin … end</em> block”, or add the <code>begin</code> and <code>end</code> keywords manually:</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">begin</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  firstname <span class="op">=</span> <span class="st">"John"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  lastname <span class="op">=</span> <span class="st">"Doe"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"My full name is </span><span class="sc">$</span>firstname<span class="st"> </span><span class="sc">$</span>lastname<span class="st">."</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And voilà—we have all we need!</p>
+<p>The following sections will consist of a <em>very</em> brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official <a href="https://docs.julialang.org/">Julia Documentation</a>.</p>
+</section>
+<section id="fundamental-types" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-types">Fundamental types</h2>
+<p>Most programming languages make available a number of different <strong>types</strong> of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).</p>
+<p>We have already seen integers and strings. These can be stored in <strong>variables</strong>. For instance, above we stored the strings <code>"John"</code> and <code>"Doe"</code> in the variables <code>firstname</code> and <code>lastname</code>. Think of variables as “boxes” that hold data. The contents of these boxes can be changed. For example, we reuse the <code>firstname</code> variable if we want to change our name:</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="op">=</span> <span class="st">"Jane"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now the variable <code>firstname</code> will hold the string <code>"Jane"</code> instead of the string <code>"John"</code>.</p>
+<p>We can even do something like the following, whereby the variable’s type changes from string to integer:</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="op">=</span> <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Pluto, if a variable is changed in one code cell, then its value also changes in all other cells that make use of the same variable.</p>
+</div>
+</div>
+<p>So-called <strong>floating-point numbers</strong>, which represent real numbers up to some precision which is determined by both the programming language and the computer’s architecture, are easy to create: just make sure that there is a decimal point in the number:</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>smallnumber <span class="op">=</span> <span class="fl">2.5</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>evensmallernumber <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>largenumber <span class="op">=</span> <span class="fl">49812093.30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Most mathematical operations are self-explanatory:</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>smallnumber <span class="op">=</span> <span class="fl">2.5</span> <span class="op">+</span> <span class="fl">4.0</span> <span class="co"># equals 6.5</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>anothernumber <span class="op">=</span> evensmallernumber <span class="op">*</span> <span class="fl">2</span> <span class="co"># equals 4.0</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>divided <span class="op">=</span> anothernumber<span class="op">/</span><span class="fl">4.0</span> <span class="co"># equals 1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Anything written after a hash sign (<code>#</code>) on a line in Julia constitutes a <strong>comment</strong>. Comments are not executed by the compiler; it does not “see” them. They can (and should!) be used to add explanations to source code that aid the programmer or someone else who might read the code later. For example, when defining custom types or functions (see below), it is good practice to add some lines of comments before the type or function definition, explaining what the type contains or what the function does, what the arguments to the function are, and what (if anything) the function returns.</p>
+</div>
+</div>
+</section>
+<section id="arrays-and-broadcasting" class="level2">
+<h2 class="anchored" data-anchor-id="arrays-and-broadcasting">Arrays and broadcasting</h2>
+<p>To represent a tuple (or vector) of numbers, we can make an <strong>array</strong>:</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>manynumbers <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The contents of an array can be fetched one by one, if necessary, or subsetted:</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>manynumbers[<span class="fl">2</span>] <span class="co"># equals 4</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>manynumbers[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="co"># equals [4, 6]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The special keyword <code>end</code> fetches the last item in an array:</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>manynumbers[<span class="kw">end</span>] <span class="co"># equals 20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Operations and functions (we’ll talk about functions below) in Julia can be <strong>broadcast</strong>, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, <code>manynumbers</code>. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>manynumbers <span class="op">+</span> <span class="fl">1</span> <span class="co"># will throw an error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following <em>will</em> work, but is cumbersome to write:</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>manynumbers <span class="op">+</span> [<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<pre><code>5-element Vector{Int64}:
+  2
+  5
+  7
+  3
+ 21</code></pre>
+</div>
+</div>
+<p>Instead of this, we can use the special <code>.</code> prefix to apply the sum operation elementwise:</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>manynumbers <span class="op">.+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>5-element Vector{Int64}:
+  2
+  5
+  7
+  3
+ 21</code></pre>
+</div>
+</div>
+<p>Note how the output is exactly the same.</p>
+</section>
+<section id="custom-types" class="level2">
+<h2 class="anchored" data-anchor-id="custom-types">Custom types</h2>
+<p>Sometimes basic types aren’t quite enough. For example, suppose we want to simulate the behaviour of a speaker–listener, i.e.&nbsp;an agent that has some representation of language and can interact with other agents. Is it an integer? A floating-point number? A string? It isn’t really any of these. What we want to do is to be able to define our own data structure, our own type.</p>
+<p>For example, suppose that we can represent a speaker’s grammar as an integer (on the assumption that we index all grammars with the natural numbers). Suppose, moreover, that we are interested in a speaker’s age as well as its social class. Then we might want a data type such as the following, called a <strong>composite type</strong> in Julia:</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> Speaker</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  grammar<span class="op">::</span><span class="dt">Int</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  age<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  class<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this definition, we introduce a composite type consisting of three primitive type inside it: a <code>grammar</code>, an <code>age</code>, and a (social) <code>class</code>. The first is declared to be an integer, the second a floating-point number with 64 bits of precision, and the third a string.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The keyword <code>mutable</code> is important in the type’s definition. If we leave it out, any objects created with this type will be immutable, and cannot be changed once they’ve been created. We will see examples of this in the main chapters of these lecture notes.</p>
+</div>
+</div>
+<p>Think of a composite type such as this as a <em>template</em>. We can use and reuse the same template to create multiple instances, or <strong>objects</strong>, of that template. For example:</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>alice <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="fl">22.5</span>, <span class="st">"middle"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>bob <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">2</span>, <span class="fl">40.0</span>, <span class="st">"lower"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create two <code>Speaker</code> objects and store them in the variables <code>alice</code> and <code>bob</code>. The first instance has a grammar of type <code>1</code> (we haven’t really specified yet what that means—but we will in the main chapters of these notes), the second a grammar of type <code>2</code>. The first has an age of <code>22.5</code> (which we might interpret as years), the second an age of <code>40.0</code>. Finally, the first speaker is defined to be middle-class, the second, lower-class.</p>
+</section>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
+<p>The actual functionality of composite objects will be defined by <strong>functions</strong>, which manipulate those objects.</p>
+<p>For example, suppose we want to implement a function that changes a speaker’s grammar to <code>i</code> (from whichever value it happens to have at the moment), where <code>i</code> is some integer. This we can achieve with the following function. The function takes two <strong>arguments</strong>: a <code>Speaker</code> object, and <code>i</code>. It then modifies the speaker’s <code>grammar</code> field to read <code>i</code>. (Fields are accessed using the <code>.</code> notation.)</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">change_grammar!</span>(x<span class="op">::</span><span class="dt">Speaker</span>, i<span class="op">::</span><span class="dt">Int</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  x.grammar <span class="op">=</span> i</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s a function that increments a speaker’s age by one year:</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">grow!</span>(x<span class="op">::</span><span class="dt">Speaker</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  x.age <span class="op">=</span> x.age <span class="op">+</span> <span class="fl">1</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By convention, functions which modify things are appended with a <code>!</code> in their name in Julia. This is not mandatory, but is good practice, since looking at the function name immediately tells you whether the function modifies an object or not.</p>
+</div>
+</div>
+<p>Functions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sum3</span>(x<span class="op">::</span><span class="dt">Int</span>, y<span class="op">::</span><span class="dt">Int</span>, z<span class="op">::</span><span class="dt">Int</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y <span class="op">+</span> z</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then call the function like this:</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>firstnumber <span class="op">=</span> <span class="fl">4</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>secondnumber <span class="op">=</span> <span class="fl">3</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>thirdnumber <span class="op">=</span> <span class="fl">3</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum3</span>(firstnumber, secondnumber, thirdnumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>Functions need not have return values—indeed, our <code>change_grammar!</code> function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string <code>"Hello, world!"</code> to the screen:</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sayhello</span>()</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Hello, world!"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sayhello</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello, world!</code></pre>
+</div>
+</div>
+</section>
+<section id="constructors" class="level2">
+<h2 class="anchored" data-anchor-id="constructors">Constructors</h2>
+<p><strong>Constructors</strong> are special functions used to create objects from composite types. Recall that, above, we created a speaker like this:</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alice <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="fl">22.5</span>, <span class="st">"middle"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What if we want each speaker to have age 0 when they are created? This is easy to do with a constructor that supplies this default value. The constructor will have to have the same name as the composite type.</p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Speaker</span>(grammar<span class="op">::</span><span class="dt">Int</span>, class<span class="op">::</span><span class="dt">String</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Speaker</span>(grammar, <span class="fl">0.0</span>, class)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What this constructor function does is to simply call the default constructor (which takes three values), supplying <code>0.0</code> as the new speaker’s age.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is a shorter and possibly more intuitive way of definining this constructor:</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Speaker</span>(grammar<span class="op">::</span><span class="dt">Int</span>, class<span class="op">::</span><span class="dt">String</span>) <span class="op">=</span> <span class="fu">Speaker</span>(grammar, <span class="fl">0.0</span>, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Defining a new constructor does not remove the default constructor. Hence we can “birth” a speaker at age 10, for example, if we want to:</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>baby <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="st">"middle"</span>) <span class="co"># 0 years old</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>child <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="fl">10.0</span>, <span class="st">"middle"</span>) <span class="co"># 10 years old</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="control-flow" class="level2">
+<h2 class="anchored" data-anchor-id="control-flow">Control flow</h2>
+<p>Programs often need to check whether some condition is fulfilled or not, and continue one way or another depending on that check’s outcome. For example, suppose we want to implement a <code>class_trip</code> function that takes a speaker from their social class to the one immediately higher class. We could write something like the following:</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">classtrip!</span>(x<span class="op">::</span><span class="dt">Speaker</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x.class <span class="op">==</span> <span class="st">"lower"</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    x.class <span class="op">=</span> <span class="st">"middle"</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> x.class <span class="op">==</span> <span class="st">"middle"</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    x.class <span class="op">=</span> <span class="st">"upper"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> x.class <span class="op">==</span> <span class="st">"upper"</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"Cannot take a class trip - class already upper!"</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"Speaker is of unknown class."</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the very crucial difference between <code>==</code> and <code>=</code>. The double equals sign is used for comparisons, the single one for assignments. Confusing these two is a very common source of beginner errors.</p>
+</div>
+</div>
+</section>
+<section id="loops" class="level2">
+<h2 class="anchored" data-anchor-id="loops">Loops</h2>
+<p>Programs also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of <em>arbitrary</em> length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a <code>for</code> loop. (Note that <code>Array{Float64}</code> specifies that we expect, as input, an array of floating-point numbers, and that <code>length</code> is a function that returns the number of elements in an array.)</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">average</span>(x<span class="op">::</span><span class="dt">Array{Float64}</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  S <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> S <span class="op">+</span> x[i]</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> S<span class="op">/</span><span class="fu">length</span>(x)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># try it out</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="fl">20.0</span>, <span class="fl">43.0</span>, <span class="fl">20.3</span>, <span class="fl">30.3</span>]</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="fu">average</span>(numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<pre><code>28.4</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This example is a bit silly, since Julia (of course) already has a ready-made function that takes sums over arrays: <code>sum</code>. But it serves to illustrate how <code>for</code> loops operate.</p>
+</div>
+</div>
+<p>Another use case for a <code>for</code> loop might be the following. Suppose we have collected a number of <code>Speaker</code> objects in an array, and wish to print out the age of each speaker. This is easy to do:</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>alice <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="fl">22.5</span>, <span class="st">"middle"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>bob <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">2</span>, <span class="fl">40.0</span>, <span class="st">"lower"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>caroline <span class="op">=</span> <span class="fu">Speaker</span>(<span class="fl">1</span>, <span class="fl">80.8</span>, <span class="st">"lower"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>speakers <span class="op">=</span> [alice, bob, caroline]</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(speakers)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(speakers[i].age)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>22.5
+40.0
+80.8</code></pre>
+</div>
+</div>
+<p>However, there is an even better (a more “Julian”, i.e.&nbsp;more idiomatic) solution. We first write a function that returns a speaker’s age:</p>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">get_age</span>(x<span class="op">::</span><span class="dt">Speaker</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x.age</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or using the shorter syntax:</p>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_age</span>(x<span class="op">::</span><span class="dt">Speaker</span>) <span class="op">=</span> x.age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then use the <code>.</code> affix to apply this function to each speaker in our array:</p>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_age</span>.(speakers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<pre><code>3-element Vector{Float64}:
+ 22.5
+ 40.0
+ 80.8</code></pre>
+</div>
+</div>
+<p>This returns a three-element vector containing the speakers’ ages, but does not print it to the terminal. If we want the latter too, we just call <code>println</code>, broadcast over the array:</p>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>.(<span class="fu">get_age</span>.(speakers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="array-comprehensions" class="level2">
+<h2 class="anchored" data-anchor-id="array-comprehensions">Array comprehensions</h2>
+<p>Another powerful feature of the Julia language are <strong>array comprehensions</strong>. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain <span class="math inline">\(0^2 = 0\)</span>, <span class="math inline">\(1^2 = 1\)</span>, <span class="math inline">\(2^2 = 4\)</span> and so on).</p>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>[i<span class="op">^</span><span class="fl">2</span> for i <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">99</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>100-element Vector{Int64}:
+    0
+    1
+    4
+    9
+   16
+   25
+   36
+   49
+   64
+   81
+  100
+  121
+  144
+    ⋮
+ 7744
+ 7921
+ 8100
+ 8281
+ 8464
+ 8649
+ 8836
+ 9025
+ 9216
+ 9409
+ 9604
+ 9801</code></pre>
+</div>
+</div>
+<p>The expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker <code>alice</code> fifty times. We could accomplish this with the following array comprehension:</p>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>[<span class="fu">get_age</span>(alice) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>50-element Vector{Float64}:
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+  ⋮
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5
+ 22.5</code></pre>
+</div>
+</div>
+<p>You will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example.</p>
+</section>
+<section id="preparing-for-the-future" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-for-the-future">Preparing for the future</h2>
+<p>Go ahead and install the following packages, which we will rely on later. <em>Plots</em> is used to draw figures, and <em>Agents</em> gives some useful functionality for agent-based models.</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Plots"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Agents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+<p><span class="myfooter">© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
