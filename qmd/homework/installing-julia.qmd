@@ -1,6 +1,8 @@
 ---
 title: "Installing Julia"
 date: 04/09/2024
+categories:
+  - homework
 ---
 
 In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as "add-ons" to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.

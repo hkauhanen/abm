@@ -1,7 +1,9 @@
 ---
 title: "Intro to ABMs"
 date: 04/09/2024
-Reading: "@Gilbert2020, chapter 1"
+description: "What are ABMs; what are their benefits; what are the challenges involved; examples of ABMs; bounded rationality"
+categories:
+  - lecture
 format:
   revealjs:
     output-file: intro-slides.html

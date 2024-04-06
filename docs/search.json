@@ -1,124 +1,5 @@
 [
   {
-    "objectID": "lectures.html",
-    "href": "lectures.html",
-    "title": "Lectures",
-    "section": "",
-    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/intro.html",
-    "href": "lectures/intro.html",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/intro.html#first-example-language-change-in-a-pool-of-speakers",
-    "href": "lectures/intro.html#first-example-language-change-in-a-pool-of-speakers",
-    "title": "Intro to ABMs",
-    "section": "First example: language change in a pool of speakers",
-    "text": "First example: language change in a pool of speakers\nWe can produce a very simple model of language change with a population of speakers, following these assumptions:\n\neach speaker is like a switch – at any given point in time, either in state A or in state B (these states correspond to two competing grammatical options)\nspeakers meet completely at random\nwhenever two speakers meet, the following happens:\n\nif A and A meet, nothing happens\nif B and B meet, nothing happens\nif A and B meet, A-speaker becomes B with probability \\(\\beta\\), B-speaker becomes A with probability \\(\\alpha\\)\n\n\nSuppose initially"
-  },
-  {
-    "objectID": "lectures/intro.html#second-example",
-    "href": "lectures/intro.html#second-example",
-    "title": "Intro to ABMs",
-    "section": "second example",
-    "text": "second example\nblih"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#first-example-language-change-in-a-pool-of-speakers",
-    "href": "lectures/intro-slides.html#first-example-language-change-in-a-pool-of-speakers",
-    "title": "Intro to ABMs",
-    "section": "First example: language change in a pool of speakers",
-    "text": "First example: language change in a pool of speakers\nWe can produce a very simple model of language change with a population of speakers, following these assumptions:\n\neach speaker is like a switch – at any given point in time, either in state A or in state B (these states correspond to two competing grammatical options)\nspeakers meet completely at random\nwhenever two speakers meet, the following happens:\n\nif A and A meet, nothing happens\nif B and B meet, nothing happens\nif A and B meet, A-speaker becomes B with probability \\(\\beta\\), B-speaker becomes A with probability \\(\\alpha\\)\n\n\nSuppose initially"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#second-example",
-    "href": "lectures/intro-slides.html#second-example",
-    "title": "Intro to ABMs",
-    "section": "second example",
-    "text": "second example\nblih\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Agent-based modelling",
-    "section": "",
-    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/basics.html#getting-started-with-julia",
-    "href": "lectures/basics.html#getting-started-with-julia",
-    "title": "2. Programming basics",
-    "section": "",
-    "text": "Programming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. Julia is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.\nTo get started, visit https://julialang.org/ to download and install Julia on your system. Make sure to download version 1.9.3 or newer. See here for platform-specific installation instructions.\n\n\n\n\n\n\nNote\n\n\n\nIf you already speak another programming language, it is useful to refer to this document that details some noteworthy differences between Julia and common languages such as R, Python and C.\n\n\nNext, launch Julia. How this is done depends on your operating system—you may find the program in a “Start” menu or similar, or you may have to launch it from the command line by typing julia.\nHaving successfully launched Julia, you should see a screen like the one depicted in Figure 1.\n\n\n\nFigure 1: The Julia REPL.\n\n\nThis is called the Julia REPL (which stands for the read-eval-print-loop). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:\n\n2+3\n\n5\n\n\nOr you can store a couple of strings in variables and print them:\n\nfirstname = \"John\"\nlastname = \"Doe\"\nprintln(\"My full name is $firstname $lastname.\")\n\nMy full name is John Doe.\n\n\nIn principle, it is possible to do all your Julia programming using the REPL and external files, so-called scripts. Often, however, it is useful to carry out program development in a dedicated programming environment (also sometimes known as IDEs, for “integrated development environment”). In Julia, one such environment is called Pluto. We will now install Pluto and launch it.\nPackages are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called Pkg. To use Pkg, we first need to tell Julia that we want to use it:\n\nusing Pkg\n\nNext, we use the Pkg.add function to install Pluto:\n\nPkg.add(\"Pluto\")\n\nYou can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at https://juliapackages.com/.\n\n\n\n\n\n\nNote\n\n\n\nInstalling a package may take a while; this is often because packages have interrelationships—dependencies—between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.\n\n\nHaving successfully installed Pluto, we instruct Julia that we want to use it, and call the Pluto.run() function. This will start Pluto in a browser window.\n\nusing Pluto\nPluto.run()\n\nYou should see something like the screen in ?@fig-Pluto.\nClick on Create a new notebook. A notebook will open up, and you will be able type in code in a so-called code cell. Try typing up our little addition example from above:\n\n2+3\n\nUnlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.\nNext, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:\n\nfirstname = \"John\"\nlastname = \"Doe\"\nprintln(\"My full name is $firstname $lastname.\")\n\nPluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a begin ... end block. Fortunately, this is very easy to do. Simply click on “Wrap all code in a begin … end block”, or add the begin and end keywords manually:\n\nbegin\n  firstname = \"John\"\n  lastname = \"Doe\"\n  println(\"My full name is $firstname $lastname.\")\nend\n\nAnd voilà—we have all we need!\nThe following sections will consist of a very brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official Julia Documentation."
-  },
-  {
-    "objectID": "lectures/basics.html#fundamental-types",
-    "href": "lectures/basics.html#fundamental-types",
-    "title": "2. Programming basics",
-    "section": "Fundamental types",
-    "text": "Fundamental types\nMost programming languages make available a number of different types of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).\nWe have already seen integers and strings. These can be stored in variables. For instance, above we stored the strings \"John\" and \"Doe\" in the variables firstname and lastname. Think of variables as “boxes” that hold data. The contents of these boxes can be changed. For example, we reuse the firstname variable if we want to change our name:\n\nfirstname = \"Jane\"\n\nNow the variable firstname will hold the string \"Jane\" instead of the string \"John\".\nWe can even do something like the following, whereby the variable’s type changes from string to integer:\n\nfirstname = 2\n\n\n\n\n\n\n\nNote\n\n\n\nIn Pluto, if a variable is changed in one code cell, then its value also changes in all other cells that make use of the same variable.\n\n\nSo-called floating-point numbers, which represent real numbers up to some precision which is determined by both the programming language and the computer’s architecture, are easy to create: just make sure that there is a decimal point in the number:\n\nsmallnumber = 2.5\nevensmallernumber = 2.0\nlargenumber = 49812093.30\n\nMost mathematical operations are self-explanatory:\n\nsmallnumber = 2.5 + 4.0 # equals 6.5\nanothernumber = evensmallernumber * 2 # equals 4.0\ndivided = anothernumber/4.0 # equals 1.0\n\n\n\n\n\n\n\nNote\n\n\n\nAnything written after a hash sign (#) on a line in Julia constitutes a comment. Comments are not executed by the compiler; it does not “see” them. They can (and should!) be used to add explanations to source code that aid the programmer or someone else who might read the code later. For example, when defining custom types or functions (see below), it is good practice to add some lines of comments before the type or function definition, explaining what the type contains or what the function does, what the arguments to the function are, and what (if anything) the function returns."
-  },
-  {
-    "objectID": "lectures/basics.html#arrays-and-broadcasting",
-    "href": "lectures/basics.html#arrays-and-broadcasting",
-    "title": "2. Programming basics",
-    "section": "Arrays and broadcasting",
-    "text": "Arrays and broadcasting\nTo represent a tuple (or vector) of numbers, we can make an array:\n\nmanynumbers = [1, 4, 6, 2, 20]\n\nThe contents of an array can be fetched one by one, if necessary, or subsetted:\n\nmanynumbers[2] # equals 4\nmanynumbers[2:3] # equals [4, 6]\n\nThe special keyword end fetches the last item in an array:\n\nmanynumbers[end] # equals 20\n\nOperations and functions (we’ll talk about functions below) in Julia can be broadcast, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, manynumbers. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:\n\nmanynumbers + 1 # will throw an error\n\nThe following will work, but is cumbersome to write:\n\nmanynumbers + [1, 1, 1, 1, 1]\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nInstead of this, we can use the special . prefix to apply the sum operation elementwise:\n\nmanynumbers .+ 1\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nNote how the output is exactly the same."
-  },
-  {
-    "objectID": "lectures/basics.html#custom-types",
-    "href": "lectures/basics.html#custom-types",
-    "title": "2. Programming basics",
-    "section": "Custom types",
-    "text": "Custom types\nSometimes basic types aren’t quite enough. For example, suppose we want to simulate the behaviour of a speaker–listener, i.e. an agent that has some representation of language and can interact with other agents. Is it an integer? A floating-point number? A string? It isn’t really any of these. What we want to do is to be able to define our own data structure, our own type.\nFor example, suppose that we can represent a speaker’s grammar as an integer (on the assumption that we index all grammars with the natural numbers). Suppose, moreover, that we are interested in a speaker’s age as well as its social class. Then we might want a data type such as the following, called a composite type in Julia:\n\nmutable struct Speaker\n  grammar::Int\n  age::Float64\n  class::String\nend\n\nIn this definition, we introduce a composite type consisting of three primitive type inside it: a grammar, an age, and a (social) class. The first is declared to be an integer, the second a floating-point number with 64 bits of precision, and the third a string.\n\n\n\n\n\n\nNote\n\n\n\nThe keyword mutable is important in the type’s definition. If we leave it out, any objects created with this type will be immutable, and cannot be changed once they’ve been created. We will see examples of this in the main chapters of these lecture notes.\n\n\nThink of a composite type such as this as a template. We can use and reuse the same template to create multiple instances, or objects, of that template. For example:\n\nalice = Speaker(1, 22.5, \"middle\")\nbob = Speaker(2, 40.0, \"lower\")\n\nThis will create two Speaker objects and store them in the variables alice and bob. The first instance has a grammar of type 1 (we haven’t really specified yet what that means—but we will in the main chapters of these notes), the second a grammar of type 2. The first has an age of 22.5 (which we might interpret as years), the second an age of 40.0. Finally, the first speaker is defined to be middle-class, the second, lower-class."
-  },
-  {
-    "objectID": "lectures/basics.html#functions",
-    "href": "lectures/basics.html#functions",
-    "title": "2. Programming basics",
-    "section": "Functions",
-    "text": "Functions\nThe actual functionality of composite objects will be defined by functions, which manipulate those objects.\nFor example, suppose we want to implement a function that changes a speaker’s grammar to i (from whichever value it happens to have at the moment), where i is some integer. This we can achieve with the following function. The function takes two arguments: a Speaker object, and i. It then modifies the speaker’s grammar field to read i. (Fields are accessed using the . notation.)\n\nfunction change_grammar!(x::Speaker, i::Int)\n  x.grammar = i\nend\n\nHere’s a function that increments a speaker’s age by one year:\n\nfunction grow!(x::Speaker)\n  x.age = x.age + 1\nend\n\n\n\n\n\n\n\nNote\n\n\n\nBy convention, functions which modify things are appended with a ! in their name in Julia. This is not mandatory, but is good practice, since looking at the function name immediately tells you whether the function modifies an object or not.\n\n\nFunctions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:\n\nfunction sum3(x::Int, y::Int, z::Int)\n  return x + y + z\nend\n\nWe can then call the function like this:\n\nfirstnumber = 4\nsecondnumber = 3\nthirdnumber = 3\nsum3(firstnumber, secondnumber, thirdnumber)\n\n10\n\n\nFunctions need not have return values—indeed, our change_grammar! function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string \"Hello, world!\" to the screen:\n\nfunction sayhello()\n  println(\"Hello, world!\")\nend\n\nsayhello()\n\nHello, world!"
-  },
-  {
-    "objectID": "lectures/basics.html#constructors",
-    "href": "lectures/basics.html#constructors",
-    "title": "2. Programming basics",
-    "section": "Constructors",
-    "text": "Constructors\nConstructors are special functions used to create objects from composite types. Recall that, above, we created a speaker like this:\n\nalice = Speaker(1, 22.5, \"middle\")\n\nWhat if we want each speaker to have age 0 when they are created? This is easy to do with a constructor that supplies this default value. The constructor will have to have the same name as the composite type.\n\nfunction Speaker(grammar::Int, class::String)\n  Speaker(grammar, 0.0, class)\nend\n\nWhat this constructor function does is to simply call the default constructor (which takes three values), supplying 0.0 as the new speaker’s age.\n\n\n\n\n\n\nNote\n\n\n\nThere is a shorter and possibly more intuitive way of definining this constructor:\n\nSpeaker(grammar::Int, class::String) = Speaker(grammar, 0.0, class)\n\n\n\nDefining a new constructor does not remove the default constructor. Hence we can “birth” a speaker at age 10, for example, if we want to:\n\nbaby = Speaker(1, \"middle\") # 0 years old\nchild = Speaker(1, 10.0, \"middle\") # 10 years old"
-  },
-  {
-    "objectID": "lectures/basics.html#control-flow",
-    "href": "lectures/basics.html#control-flow",
-    "title": "2. Programming basics",
-    "section": "Control flow",
-    "text": "Control flow\nPrograms often need to check whether some condition is fulfilled or not, and continue one way or another depending on that check’s outcome. For example, suppose we want to implement a class_trip function that takes a speaker from their social class to the one immediately higher class. We could write something like the following:\n\nfunction classtrip!(x::Speaker)\n  if x.class == \"lower\"\n    x.class = \"middle\"\n  elseif x.class == \"middle\"\n    x.class = \"upper\"\n  elseif x.class == \"upper\"\n    println(\"Cannot take a class trip - class already upper!\")\n  else\n    println(\"Speaker is of unknown class.\")\n  end\nend\n\n\n\n\n\n\n\nNote\n\n\n\nNote the very crucial difference between == and =. The double equals sign is used for comparisons, the single one for assignments. Confusing these two is a very common source of beginner errors."
-  },
-  {
-    "objectID": "lectures/basics.html#loops",
-    "href": "lectures/basics.html#loops",
-    "title": "2. Programming basics",
-    "section": "Loops",
-    "text": "Loops\nPrograms also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of arbitrary length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a for loop. (Note that Array{Float64} specifies that we expect, as input, an array of floating-point numbers, and that length is a function that returns the number of elements in an array.)\n\nfunction average(x::Array{Float64})\n  S = 0\n\n  for i in 1:length(x)\n    S = S + x[i]\n  end\n\n  return S/length(x)\nend\n\n# try it out\nnumbers = [20.0, 43.0, 20.3, 30.3]\naverage(numbers)\n\n28.4\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis example is a bit silly, since Julia (of course) already has a ready-made function that takes sums over arrays: sum. But it serves to illustrate how for loops operate.\n\n\nAnother use case for a for loop might be the following. Suppose we have collected a number of Speaker objects in an array, and wish to print out the age of each speaker. This is easy to do:\n\nalice = Speaker(1, 22.5, \"middle\")\nbob = Speaker(2, 40.0, \"lower\")\ncaroline = Speaker(1, 80.8, \"lower\")\n\nspeakers = [alice, bob, caroline]\n\nfor i in 1:length(speakers)\n  println(speakers[i].age)\nend\n\n22.5\n40.0\n80.8\n\n\nHowever, there is an even better (a more “Julian”, i.e. more idiomatic) solution. We first write a function that returns a speaker’s age:\n\nfunction get_age(x::Speaker)\n  return x.age\nend\n\nOr using the shorter syntax:\n\nget_age(x::Speaker) = x.age\n\nWe can then use the . affix to apply this function to each speaker in our array:\n\nget_age.(speakers)\n\n3-element Vector{Float64}:\n 22.5\n 40.0\n 80.8\n\n\nThis returns a three-element vector containing the speakers’ ages, but does not print it to the terminal. If we want the latter too, we just call println, broadcast over the array:\n\nprintln.(get_age.(speakers))"
-  },
-  {
-    "objectID": "lectures/basics.html#array-comprehensions",
-    "href": "lectures/basics.html#array-comprehensions",
-    "title": "2. Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\nAnother powerful feature of the Julia language are array comprehensions. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain \\(0^2 = 0\\), \\(1^2 = 1\\), \\(2^2 = 4\\) and so on).\n\n[i^2 for i in 0:99]\n\n100-element Vector{Int64}:\n    0\n    1\n    4\n    9\n   16\n   25\n   36\n   49\n   64\n   81\n  100\n  121\n  144\n    ⋮\n 7744\n 7921\n 8100\n 8281\n 8464\n 8649\n 8836\n 9025\n 9216\n 9409\n 9604\n 9801\n\n\nThe expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker alice fifty times. We could accomplish this with the following array comprehension:\n\n[get_age(alice) for i in 1:50]\n\n50-element Vector{Float64}:\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n  ⋮\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n\n\nYou will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example."
-  },
-  {
-    "objectID": "lectures/basics.html#preparing-for-the-future",
-    "href": "lectures/basics.html#preparing-for-the-future",
-    "title": "2. Programming basics",
-    "section": "Preparing for the future",
-    "text": "Preparing for the future\nGo ahead and install the following packages, which we will rely on later. Plots is used to draw figures, and Agents gives some useful functionality for agent-based models.\n\nPkg.add(\"Plots\")\nPkg.add(\"Agents\")"
-  },
-  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -126,88 +7,18 @@
     "text": "Note\n\n\n\nThe syllabus is tentative – topics may get rearranged as the course proceeds.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "lectures/basics.html",
-    "href": "lectures/basics.html",
-    "title": "2. Programming basics",
-    "section": "",
-    "text": "Programming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. Julia is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.\nTo get started, visit https://julialang.org/ to download and install Julia on your system. Make sure to download version 1.9.3 or newer. See here for platform-specific installation instructions.\n\n\n\n\n\n\nNote\n\n\n\nIf you already speak another programming language, it is useful to refer to this document that details some noteworthy differences between Julia and common languages such as R, Python and C.\n\n\nNext, launch Julia. How this is done depends on your operating system—you may find the program in a “Start” menu or similar, or you may have to launch it from the command line by typing julia.\nHaving successfully launched Julia, you should see a screen like the one depicted in Figure 1.\n\n\n\nFigure 1: The Julia REPL.\n\n\nThis is called the Julia REPL (which stands for the read-eval-print-loop). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:\n\n2+3\n\n5\n\n\nOr you can store a couple of strings in variables and print them:\n\nfirstname = \"John\"\nlastname = \"Doe\"\nprintln(\"My full name is $firstname $lastname.\")\n\nMy full name is John Doe.\n\n\nIn principle, it is possible to do all your Julia programming using the REPL and external files, so-called scripts. Often, however, it is useful to carry out program development in a dedicated programming environment (also sometimes known as IDEs, for “integrated development environment”). In Julia, one such environment is called Pluto. We will now install Pluto and launch it.\nPackages are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called Pkg. To use Pkg, we first need to tell Julia that we want to use it:\n\nusing Pkg\n\nNext, we use the Pkg.add function to install Pluto:\n\nPkg.add(\"Pluto\")\n\nYou can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at https://juliapackages.com/.\n\n\n\n\n\n\nNote\n\n\n\nInstalling a package may take a while; this is often because packages have interrelationships—dependencies—between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.\n\n\nHaving successfully installed Pluto, we instruct Julia that we want to use it, and call the Pluto.run() function. This will start Pluto in a browser window.\n\nusing Pluto\nPluto.run()\n\nYou should see something like the screen in ?@fig-Pluto.\nClick on Create a new notebook. A notebook will open up, and you will be able type in code in a so-called code cell. Try typing up our little addition example from above:\n\n2+3\n\nUnlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.\nNext, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:\n\nfirstname = \"John\"\nlastname = \"Doe\"\nprintln(\"My full name is $firstname $lastname.\")\n\nPluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a begin ... end block. Fortunately, this is very easy to do. Simply click on “Wrap all code in a begin … end block”, or add the begin and end keywords manually:\n\nbegin\n  firstname = \"John\"\n  lastname = \"Doe\"\n  println(\"My full name is $firstname $lastname.\")\nend\n\nAnd voilà—we have all we need!\nThe following sections will consist of a very brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official Julia Documentation.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "objectID": "syllabus.html#timetable",
+    "href": "syllabus.html#timetable",
+    "title": "Syllabus",
+    "section": "Timetable",
+    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\n\n\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
   },
   {
-    "objectID": "lectures/basics-slides.html#getting-started-with-julia",
-    "href": "lectures/basics-slides.html#getting-started-with-julia",
-    "title": "Programming basics",
-    "section": "Getting started with Julia",
-    "text": "Getting started with Julia\nProgramming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. Julia is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.\nTo get started, visit https://julialang.org/ to download and install Julia on your system. Make sure to download version 1.9.3 or newer. See here for platform-specific installation instructions.\n\n\n\n\n\n\nNote\n\n\nIf you already speak another programming language, it is useful to refer to this document that details some noteworthy differences between Julia and common languages such as R, Python and C.\n\n\n\nNext, launch Julia. How this is done depends on your operating system—you may find the program in a “Start” menu or similar, or you may have to launch it from the command line by typing julia.\nHaving successfully launched Julia, you should see a screen like the one depicted in Figure 1.\n\nFigure 1: The Julia REPL.This is called the Julia REPL (which stands for the read-eval-print-loop). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:\n\n\n5\n\n\nOr you can store a couple of strings in variables and print them:\n\n\nMy full name is John Doe.\n\n\nIn principle, it is possible to do all your Julia programming using the REPL and external files, so-called scripts. Often, however, it is useful to carry out program development in a dedicated programming environment (also sometimes known as IDEs, for “integrated development environment”). In Julia, one such environment is called Pluto. We will now install Pluto and launch it.\nPackages are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called Pkg. To use Pkg, we first need to tell Julia that we want to use it:\nNext, we use the Pkg.add function to install Pluto:\nYou can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at https://juliapackages.com/.\n\n\n\n\n\n\nNote\n\n\nInstalling a package may take a while; this is often because packages have interrelationships—dependencies—between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.\n\n\n\nHaving successfully installed Pluto, we instruct Julia that we want to use it, and call the Pluto.run() function. This will start Pluto in a browser window.\nYou should see something like the screen in ?@fig-Pluto.\nClick on Create a new notebook. A notebook will open up, and you will be able type in code in a so-called code cell. Try typing up our little addition example from above:\nUnlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.\nNext, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:\nPluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a begin ... end block. Fortunately, this is very easy to do. Simply click on “Wrap all code in a begin … end block”, or add the begin and end keywords manually:\nAnd voilà—we have all we need!\nThe following sections will consist of a very brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official Julia Documentation."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#fundamental-types",
-    "href": "lectures/basics-slides.html#fundamental-types",
-    "title": "Programming basics",
-    "section": "Fundamental types",
-    "text": "Fundamental types\nMost programming languages make available a number of different types of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).\nWe have already seen integers and strings. These can be stored in variables. For instance, above we stored the strings \"John\" and \"Doe\" in the variables firstname and lastname. Think of variables as “boxes” that hold data. The contents of these boxes can be changed. For example, we reuse the firstname variable if we want to change our name:\nNow the variable firstname will hold the string \"Jane\" instead of the string \"John\".\nWe can even do something like the following, whereby the variable’s type changes from string to integer:\n\n\n\n\n\n\nNote\n\n\nIn Pluto, if a variable is changed in one code cell, then its value also changes in all other cells that make use of the same variable.\n\n\n\nSo-called floating-point numbers, which represent real numbers up to some precision which is determined by both the programming language and the computer’s architecture, are easy to create: just make sure that there is a decimal point in the number:\nMost mathematical operations are self-explanatory:\n\n\n\n\n\n\nNote\n\n\nAnything written after a hash sign (#) on a line in Julia constitutes a comment. Comments are not executed by the compiler; it does not “see” them. They can (and should!) be used to add explanations to source code that aid the programmer or someone else who might read the code later. For example, when defining custom types or functions (see below), it is good practice to add some lines of comments before the type or function definition, explaining what the type contains or what the function does, what the arguments to the function are, and what (if anything) the function returns."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#arrays-and-broadcasting",
-    "href": "lectures/basics-slides.html#arrays-and-broadcasting",
-    "title": "Programming basics",
-    "section": "Arrays and broadcasting",
-    "text": "Arrays and broadcasting\nTo represent a tuple (or vector) of numbers, we can make an array:\nThe contents of an array can be fetched one by one, if necessary, or subsetted:\nThe special keyword end fetches the last item in an array:\nOperations and functions (we’ll talk about functions below) in Julia can be broadcast, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, manynumbers. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:\nThe following will work, but is cumbersome to write:\n\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nInstead of this, we can use the special . prefix to apply the sum operation elementwise:\n\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nNote how the output is exactly the same."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types",
-    "href": "lectures/basics-slides.html#custom-types",
-    "title": "Programming basics",
-    "section": "Custom types",
-    "text": "Custom types\nSometimes basic types aren’t quite enough. For example, suppose we want to simulate the behaviour of a speaker–listener, i.e. an agent that has some representation of language and can interact with other agents. Is it an integer? A floating-point number? A string? It isn’t really any of these. What we want to do is to be able to define our own data structure, our own type.\nFor example, suppose that we can represent a speaker’s grammar as an integer (on the assumption that we index all grammars with the natural numbers). Suppose, moreover, that we are interested in a speaker’s age as well as its social class. Then we might want a data type such as the following, called a composite type in Julia:\nIn this definition, we introduce a composite type consisting of three primitive type inside it: a grammar, an age, and a (social) class. The first is declared to be an integer, the second a floating-point number with 64 bits of precision, and the third a string.\n\n\n\n\n\n\nNote\n\n\nThe keyword mutable is important in the type’s definition. If we leave it out, any objects created with this type will be immutable, and cannot be changed once they’ve been created. We will see examples of this in the main chapters of these lecture notes.\n\n\n\nThink of a composite type such as this as a template. We can use and reuse the same template to create multiple instances, or objects, of that template. For example:\nThis will create two Speaker objects and store them in the variables alice and bob. The first instance has a grammar of type 1 (we haven’t really specified yet what that means—but we will in the main chapters of these notes), the second a grammar of type 2. The first has an age of 22.5 (which we might interpret as years), the second an age of 40.0. Finally, the first speaker is defined to be middle-class, the second, lower-class."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions",
-    "href": "lectures/basics-slides.html#functions",
-    "title": "Programming basics",
-    "section": "Functions",
-    "text": "Functions\nThe actual functionality of composite objects will be defined by functions, which manipulate those objects.\nFor example, suppose we want to implement a function that changes a speaker’s grammar to i (from whichever value it happens to have at the moment), where i is some integer. This we can achieve with the following function. The function takes two arguments: a Speaker object, and i. It then modifies the speaker’s grammar field to read i. (Fields are accessed using the . notation.)\nHere’s a function that increments a speaker’s age by one year:\n\n\n\n\n\n\nNote\n\n\nBy convention, functions which modify things are appended with a ! in their name in Julia. This is not mandatory, but is good practice, since looking at the function name immediately tells you whether the function modifies an object or not.\n\n\n\nFunctions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:\nWe can then call the function like this:\n\n\n10\n\n\nFunctions need not have return values—indeed, our change_grammar! function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string \"Hello, world!\" to the screen:\n\n\nHello, world!"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#constructors",
-    "href": "lectures/basics-slides.html#constructors",
-    "title": "Programming basics",
-    "section": "Constructors",
-    "text": "Constructors\nConstructors are special functions used to create objects from composite types. Recall that, above, we created a speaker like this:\nWhat if we want each speaker to have age 0 when they are created? This is easy to do with a constructor that supplies this default value. The constructor will have to have the same name as the composite type.\nWhat this constructor function does is to simply call the default constructor (which takes three values), supplying 0.0 as the new speaker’s age.\n\n\n\n\n\n\nNote\n\n\nThere is a shorter and possibly more intuitive way of definining this constructor:\n\n\n\nDefining a new constructor does not remove the default constructor. Hence we can “birth” a speaker at age 10, for example, if we want to:"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#control-flow",
-    "href": "lectures/basics-slides.html#control-flow",
-    "title": "Programming basics",
-    "section": "Control flow",
-    "text": "Control flow\nPrograms often need to check whether some condition is fulfilled or not, and continue one way or another depending on that check’s outcome. For example, suppose we want to implement a class_trip function that takes a speaker from their social class to the one immediately higher class. We could write something like the following:\n\n\n\n\n\n\nNote\n\n\nNote the very crucial difference between == and =. The double equals sign is used for comparisons, the single one for assignments. Confusing these two is a very common source of beginner errors."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#loops",
-    "href": "lectures/basics-slides.html#loops",
-    "title": "Programming basics",
-    "section": "Loops",
-    "text": "Loops\nPrograms also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of arbitrary length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a for loop. (Note that Array{Float64} specifies that we expect, as input, an array of floating-point numbers, and that length is a function that returns the number of elements in an array.)\n\n\n28.4\n\n\n\n\n\n\n\n\nNote\n\n\nThis example is a bit silly, since Julia (of course) already has a ready-made function that takes sums over arrays: sum. But it serves to illustrate how for loops operate.\n\n\n\nAnother use case for a for loop might be the following. Suppose we have collected a number of Speaker objects in an array, and wish to print out the age of each speaker. This is easy to do:\n\n\n22.5\n40.0\n80.8\n\n\nHowever, there is an even better (a more “Julian”, i.e. more idiomatic) solution. We first write a function that returns a speaker’s age:\nOr using the shorter syntax:\nWe can then use the . affix to apply this function to each speaker in our array:\n\n\n3-element Vector{Float64}:\n 22.5\n 40.0\n 80.8\n\n\nThis returns a three-element vector containing the speakers’ ages, but does not print it to the terminal. If we want the latter too, we just call println, broadcast over the array:"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehensions",
-    "href": "lectures/basics-slides.html#array-comprehensions",
-    "title": "Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\nAnother powerful feature of the Julia language are array comprehensions. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain \\(0^2 = 0\\), \\(1^2 = 1\\), \\(2^2 = 4\\) and so on).\n\n\n100-element Vector{Int64}:\n    0\n    1\n    4\n    9\n   16\n   25\n   36\n   49\n   64\n   81\n  100\n  121\n  144\n    ⋮\n 7744\n 7921\n 8100\n 8281\n 8464\n 8649\n 8836\n 9025\n 9216\n 9409\n 9604\n 9801\n\n\nThe expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker alice fifty times. We could accomplish this with the following array comprehension:\n\n\n50-element Vector{Float64}:\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n  ⋮\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n\n\nYou will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#preparing-for-the-future",
-    "href": "lectures/basics-slides.html#preparing-for-the-future",
-    "title": "Programming basics",
-    "section": "Preparing for the future",
-    "text": "Preparing for the future\nGo ahead and install the following packages, which we will rely on later. Plots is used to draw figures, and Agents gives some useful functionality for agent-based models.\n\n\n\n\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE."
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+    "objectID": "syllabus.html#course-requirements",
+    "href": "syllabus.html#course-requirements",
+    "title": "Syllabus",
+    "section": "Course requirements",
+    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
   },
   {
     "objectID": "lectures/intro-slides.html#what-is-an-agent-based-model-abm",
@@ -217,25 +28,11 @@
     "text": "What is an agent-based model (ABM)?\n\nNo rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\nEng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
     "objectID": "lectures/intro-slides.html#what-is-the-benefit-of-abms",
     "href": "lectures/intro-slides.html#what-is-the-benefit-of-abms",
     "title": "Intro to ABMs",
     "section": "What is the benefit of ABMs?",
     "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous” (Gilbert 2020, xii, my emphasis)\n\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms",
-    "href": "lectures/intro.html#what-is-the-benefit-of-abms",
-    "title": "Intro to ABMs",
-    "section": "What is the benefit of ABMs?",
-    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous” (Gilbert 2020, xii, my emphasis)\n\n. . .\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
   },
   {
     "objectID": "lectures/intro-slides.html#what-is-the-benefit-of-abms-1",
@@ -245,18 +42,88 @@
     "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
   },
   {
-    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
-    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "objectID": "lectures/intro-slides.html#examples",
+    "href": "lectures/intro-slides.html#examples",
     "title": "Intro to ABMs",
-    "section": "What is the benefit of ABMs?",
-    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
+    "section": "Examples",
+    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!1\nThe examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
   },
   {
-    "objectID": "lectures/intro-slides.html#examples-go-here",
-    "href": "lectures/intro-slides.html#examples-go-here",
+    "objectID": "lectures/intro-slides.html#example-1-conways-game-of-life",
+    "href": "lectures/intro-slides.html#example-1-conways-game-of-life",
     "title": "Intro to ABMs",
-    "section": "examples go here…",
-    "text": "examples go here…"
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
+    "href": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
+    "title": "Intro to ABMs",
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#question",
+    "href": "lectures/intro-slides.html#question",
+    "title": "Intro to ABMs",
+    "section": "Question",
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\n\n\nAnswer\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
+  },
+  {
+    "objectID": "lectures/intro-slides.html#exercise",
+    "href": "lectures/intro-slides.html#exercise",
+    "title": "Intro to ABMs",
+    "section": "Exercise",
+    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#answer",
+    "href": "lectures/intro-slides.html#answer",
+    "title": "Intro to ABMs",
+    "section": "Answer",
+    "text": "Answer\n\n\n\n\n\n\n\nAnswer\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#species",
+    "href": "lectures/intro-slides.html#species",
+    "title": "Intro to ABMs",
+    "section": "Species",
+    "text": "Species\nThe game supports many life forms (“species”), categorized into:1\n\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g.  \n\n\n\nImages of Game of Life species from Wikimedia Commons (public domain)."
+  },
+  {
+    "objectID": "lectures/intro-slides.html#emergence",
+    "href": "lectures/intro-slides.html#emergence",
+    "title": "Intro to ABMs",
+    "section": "Emergence",
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#example-2-flocking",
+    "href": "lectures/intro-slides.html#example-2-flocking",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#example-2-flocking-1",
+    "href": "lectures/intro-slides.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#example-3-social-distancing",
+    "href": "lectures/intro-slides.html#example-3-social-distancing",
+    "title": "Intro to ABMs",
+    "section": "Example 3: Social Distancing",
+    "text": "Example 3: Social Distancing"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#bounded-rationality-locality",
+    "href": "lectures/intro-slides.html#bounded-rationality-locality",
+    "title": "Intro to ABMs",
+    "section": "Bounded rationality / Locality",
+    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
   },
   {
     "objectID": "lectures/intro-slides.html#challenges-in-abm",
@@ -266,11 +133,11 @@
     "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
   },
   {
-    "objectID": "lectures/intro-slides.html#challenges-in-computational-implementation",
-    "href": "lectures/intro-slides.html#challenges-in-computational-implementation",
+    "objectID": "lectures/intro-slides.html#challenges-of-computational-implementation",
+    "href": "lectures/intro-slides.html#challenges-of-computational-implementation",
     "title": "Intro to ABMs",
-    "section": "Challenges in computational implementation",
-    "text": "Challenges in computational implementation\n\nSpeed: we want simulations to be fast\nCleanliness: we want our code to be understandable to others\nRandomness: when our code calls for random numbers, we want them to be really random!\nReproducibility: when others run our code, they should get the same results we do"
+    "section": "Challenges of computational implementation",
+    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
   },
   {
     "objectID": "lectures/intro-slides.html#why-is-speed-an-issue",
@@ -278,6 +145,20 @@
     "title": "Intro to ABMs",
     "section": "Why is speed an issue?",
     "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#speed-issues-an-example",
+    "href": "lectures/intro-slides.html#speed-issues-an-example",
+    "title": "Intro to ABMs",
+    "section": "Speed issues: an example",
+    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#how-to-deal-with-issues-of-speed",
+    "href": "lectures/intro-slides.html#how-to-deal-with-issues-of-speed",
+    "title": "Intro to ABMs",
+    "section": "How to deal with issues of speed",
+    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
   },
   {
     "objectID": "lectures/intro-slides.html#why-is-randomness-needed",
@@ -301,11 +182,130 @@
     "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers1\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\nWe’ll see later that this is by no means a crazy requirement!"
   },
   {
-    "objectID": "lectures/intro.html#examples-go-here",
-    "href": "lectures/intro.html#examples-go-here",
+    "objectID": "lectures/intro-slides.html#summary",
+    "href": "lectures/intro-slides.html#summary",
     "title": "Intro to ABMs",
-    "section": "examples go here…",
-    "text": "examples go here…"
+    "section": "Summary",
+    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#the-scientific-community",
+    "href": "lectures/intro-slides.html#the-scientific-community",
+    "title": "Intro to ABMs",
+    "section": "The scientific community",
+    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#homework",
+    "href": "lectures/intro-slides.html#homework",
+    "title": "Intro to ABMs",
+    "section": "Homework",
+    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework “Installing Julia” on the course website."
+  },
+  {
+    "objectID": "lectures/intro-slides.html#references",
+    "href": "lectures/intro-slides.html#references",
+    "title": "Intro to ABMs",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE."
+  },
+  {
+    "objectID": "lectures/intro.html",
+    "href": "lectures/intro.html",
+    "title": "Intro to ABMs",
+    "section": "",
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "title": "Intro to ABMs",
+    "section": "",
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+  },
+  {
+    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "title": "Intro to ABMs",
+    "section": "What is the benefit of ABMs?",
+    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
+  },
+  {
+    "objectID": "lectures/intro.html#examples",
+    "href": "lectures/intro.html#examples",
+    "title": "Intro to ABMs",
+    "section": "Examples",
+    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!2\n2 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
+  },
+  {
+    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
+    "href": "lectures/intro.html#example-1-conways-game-of-life",
+    "title": "Intro to ABMs",
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
+  },
+  {
+    "objectID": "lectures/intro.html#example-1-conways-game-of-life-1",
+    "href": "lectures/intro.html#example-1-conways-game-of-life-1",
+    "title": "Intro to ABMs",
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life"
+  },
+  {
+    "objectID": "lectures/intro.html#question",
+    "href": "lectures/intro.html#question",
+    "title": "Intro to ABMs",
+    "section": "Question",
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
+  },
+  {
+    "objectID": "lectures/intro.html#exercise",
+    "href": "lectures/intro.html#exercise",
+    "title": "Intro to ABMs",
+    "section": "Exercise",
+    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
+  },
+  {
+    "objectID": "lectures/intro.html#species",
+    "href": "lectures/intro.html#species",
+    "title": "Intro to ABMs",
+    "section": "Species",
+    "text": "Species\nThe game supports many life forms (“species”), categorized into:3\n3 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
+  },
+  {
+    "objectID": "lectures/intro.html#emergence",
+    "href": "lectures/intro.html#emergence",
+    "title": "Intro to ABMs",
+    "section": "Emergence",
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking",
+    "href": "lectures/intro.html#example-2-flocking",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking-1",
+    "href": "lectures/intro.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro.html#example-3-social-distancing",
+    "href": "lectures/intro.html#example-3-social-distancing",
+    "title": "Intro to ABMs",
+    "section": "Example 3: Social Distancing",
+    "text": "Example 3: Social Distancing"
+  },
+  {
+    "objectID": "lectures/intro.html#bounded-rationality-locality",
+    "href": "lectures/intro.html#bounded-rationality-locality",
+    "title": "Intro to ABMs",
+    "section": "Bounded rationality / Locality",
+    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
   },
   {
     "objectID": "lectures/intro.html#challenges-in-abm",
@@ -315,11 +315,11 @@
     "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
   },
   {
-    "objectID": "lectures/intro.html#challenges-in-computational-implementation",
-    "href": "lectures/intro.html#challenges-in-computational-implementation",
+    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
+    "href": "lectures/intro.html#challenges-of-computational-implementation",
     "title": "Intro to ABMs",
-    "section": "Challenges in computational implementation",
-    "text": "Challenges in computational implementation\n\nSpeed: we want simulations to be fast\nCleanliness: we want our code to be understandable to others\nRandomness: when our code calls for random numbers, we want them to be really random!\nReproducibility: when others run our code, they should get the same results we do"
+    "section": "Challenges of computational implementation",
+    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
   },
   {
     "objectID": "lectures/intro.html#why-is-speed-an-issue",
@@ -327,6 +327,20 @@
     "title": "Intro to ABMs",
     "section": "Why is speed an issue?",
     "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
+  },
+  {
+    "objectID": "lectures/intro.html#speed-issues-an-example",
+    "href": "lectures/intro.html#speed-issues-an-example",
+    "title": "Intro to ABMs",
+    "section": "Speed issues: an example",
+    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
+  },
+  {
+    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "title": "Intro to ABMs",
+    "section": "How to deal with issues of speed",
+    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
   },
   {
     "objectID": "lectures/intro.html#why-is-randomness-needed",
@@ -350,46 +364,25 @@
     "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers4\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n4 We’ll see later that this is by no means a crazy requirement!"
   },
   {
-    "objectID": "lectures/intro-slides.html#challenges-of-computational-implementation",
-    "href": "lectures/intro-slides.html#challenges-of-computational-implementation",
+    "objectID": "lectures/intro.html#summary",
+    "href": "lectures/intro.html#summary",
     "title": "Intro to ABMs",
-    "section": "Challenges of computational implementation",
-    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
+    "section": "Summary",
+    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
   },
   {
-    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
-    "href": "lectures/intro.html#challenges-of-computational-implementation",
+    "objectID": "lectures/intro.html#the-scientific-community",
+    "href": "lectures/intro.html#the-scientific-community",
     "title": "Intro to ABMs",
-    "section": "Challenges of computational implementation",
-    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
+    "section": "The scientific community",
+    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
   },
   {
-    "objectID": "lectures/intro-slides.html#how-to-deal-with-issues-of-speed",
-    "href": "lectures/intro-slides.html#how-to-deal-with-issues-of-speed",
+    "objectID": "lectures/intro.html#homework",
+    "href": "lectures/intro.html#homework",
     "title": "Intro to ABMs",
-    "section": "How to deal with issues of speed",
-    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
-  },
-  {
-    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "title": "Intro to ABMs",
-    "section": "How to deal with issues of speed",
-    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#speed-issues-an-example",
-    "href": "lectures/intro-slides.html#speed-issues-an-example",
-    "title": "Intro to ABMs",
-    "section": "Speed issues: an example",
-    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
-  },
-  {
-    "objectID": "lectures/intro.html#speed-issues-an-example",
-    "href": "lectures/intro.html#speed-issues-an-example",
-    "title": "Intro to ABMs",
-    "section": "Speed issues: an example",
-    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
+    "section": "Homework",
+    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework Installing Julia."
   },
   {
     "objectID": "homework.html",
@@ -406,332 +399,17 @@
     "text": "In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as “add-ons” to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.\n\nNavigate to https://julialang.org, download the proper installation files for your operating system, and install Julia. Make sure to download version 1.10.2 or newer. (Older versions may not be fully compatible with the code we will be working with in this course.)\nWith installation complete, launch Julia. You should be greeted by a screen such as this:\n\nThis is known as the Julia REPL, which stands for read-eval(uate)-print loop. Here, you can give Julia commands, it will execute them, and you get the output back. For example, try the following commands:\n2+2\nsqrt(2)\n[1, 2, 3, 4]\nsum([1, 2, 3, 4])\nThe REPL can also be used to install packages i.e. extensions. We will now install two packages, Agents and CairoMakie, along with all their dependencies (i.e. further packages required to run those two packages). To do this, execute the following commands in the REPL:\nusing Pkg\nPkg.add(\"Agents\")\nPkg.add(\"CairoMakie\")\nThis will take a long while, as the two packages have many dependencies. Wait patiently. When everything is complete, you may exit the REPL:\nexit()\nIt would be very inconvenient to do all our coding in the REPL. It is much better to use a text editor or an IDE (integrated development environment). Here, you are free to make your own choice, if you already have a favourite editor for coding. For the purposes of this course, however, I recommend Visual Studio Code – this is the editor I will be using in the lectures, and so if you choose to use the same editor, things will be a bit smoother. To get started with VS Code, navigate to https://code.visualstudio.com/download, download the version for your operating system, and follow the instructions to install it.\nOnce VS Code has been successfully installed, we need to install a Julia extension for it. This will allow the editor to interface with your Julia installation, so that you will be able to execute code directly from the editor. Follow the instructions here, in bullet point number 3, to do this.\n\nIf all went well, you now have an up-to-date, working Julia installation, with a number of packages installed, plus a source code editor that interfaces seamlessly with that installation.\nIf something went wrong, try again. Google your problem to see if other users have already run into the same problem and have a solution. If it still refuses to work, bring your problem to the next lecture – we will discuss how to solve it and get you a working system.\n\nBonus\nIf you are already familiar with another programming language such as Python, I recommend you to watch this short video from IBM Technology detailing some of the major differences between Python and Julia. It does go into some technical details which may seem obscure for now (“dynamic typing”, “multiple dispatch”), but worry not – I will explain those concepts next week.\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "homework/installing-julia.html#what-is-an-agent-based-model-abm",
-    "href": "homework/installing-julia.html#what-is-an-agent-based-model-abm",
-    "title": "Installing Julia",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Agent-based modelling",
     "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "homework/installing-julia.html#what-is-the-benefit-of-abms-1",
-    "href": "homework/installing-julia.html#what-is-the-benefit-of-abms-1",
-    "title": "Installing Julia",
-    "section": "What is the benefit of ABMs?",
-    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE.\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
-  },
-  {
-    "objectID": "homework/installing-julia.html#examples-go-here",
-    "href": "homework/installing-julia.html#examples-go-here",
-    "title": "Installing Julia",
-    "section": "examples go here…",
-    "text": "examples go here…"
-  },
-  {
-    "objectID": "homework/installing-julia.html#challenges-in-abm",
-    "href": "homework/installing-julia.html#challenges-in-abm",
-    "title": "Installing Julia",
-    "section": "Challenges in ABM",
-    "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
-  },
-  {
-    "objectID": "homework/installing-julia.html#challenges-of-computational-implementation",
-    "href": "homework/installing-julia.html#challenges-of-computational-implementation",
-    "title": "Installing Julia",
-    "section": "Challenges of computational implementation",
-    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
-  },
-  {
-    "objectID": "homework/installing-julia.html#why-is-speed-an-issue",
-    "href": "homework/installing-julia.html#why-is-speed-an-issue",
-    "title": "Installing Julia",
-    "section": "Why is speed an issue?",
-    "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
-  },
-  {
-    "objectID": "homework/installing-julia.html#speed-issues-an-example",
-    "href": "homework/installing-julia.html#speed-issues-an-example",
-    "title": "Installing Julia",
-    "section": "Speed issues: an example",
-    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
-  },
-  {
-    "objectID": "homework/installing-julia.html#how-to-deal-with-issues-of-speed",
-    "href": "homework/installing-julia.html#how-to-deal-with-issues-of-speed",
-    "title": "Installing Julia",
-    "section": "How to deal with issues of speed",
-    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
-  },
-  {
-    "objectID": "homework/installing-julia.html#why-is-randomness-needed",
-    "href": "homework/installing-julia.html#why-is-randomness-needed",
-    "title": "Installing Julia",
-    "section": "Why is randomness needed?",
-    "text": "Why is randomness needed?\n\nQuite simple: real-world processes are complex, and to model such complex processes we resort to stochastic processes\nA stochastic process is a sequence of random variables\nFor example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a random number.\nOr consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are deterministic (which does not seem particularly sensible), we need some way of selecting interlocutors at random."
-  },
-  {
-    "objectID": "homework/installing-julia.html#why-is-randomness-an-issue",
-    "href": "homework/installing-julia.html#why-is-randomness-an-issue",
-    "title": "Installing Julia",
-    "section": "Why is randomness an issue?",
-    "text": "Why is randomness an issue?\n\nConventional computers are deterministic devices\nSo, if we need, say, a random number between 0 and 1, how is that accomplished?\nThe answer is a pseudorandom number generator (PRNG)\n\nThis is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the appearance of being random\nThe sequence is generated from a seed number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).\nHowever, there are significant issues…"
-  },
-  {
-    "objectID": "homework/installing-julia.html#issues-with-prngs",
-    "href": "homework/installing-julia.html#issues-with-prngs",
-    "title": "Installing Julia",
-    "section": "Issues with PRNGs",
-    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers2\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n2 We’ll see later that this is by no means a crazy requirement!"
-  },
-  {
-    "objectID": "homework/installing-julia.html#first-example-language-change-in-a-pool-of-speakers",
-    "href": "homework/installing-julia.html#first-example-language-change-in-a-pool-of-speakers",
-    "title": "Installing Julia",
-    "section": "First example: language change in a pool of speakers",
-    "text": "First example: language change in a pool of speakers\nWe can produce a very simple model of language change with a population of speakers, following these assumptions:\n\neach speaker is like a switch – at any given point in time, either in state A or in state B (these states correspond to two competing grammatical options)\nspeakers meet completely at random\nwhenever two speakers meet, the following happens:\n\nif A and A meet, nothing happens\nif B and B meet, nothing happens\nif A and B meet, A-speaker becomes B with probability \\(\\beta\\), B-speaker becomes A with probability \\(\\alpha\\)\n\n\nSuppose initially"
-  },
-  {
-    "objectID": "homework/installing-julia.html#second-example",
-    "href": "homework/installing-julia.html#second-example",
-    "title": "Installing Julia",
-    "section": "second example",
-    "text": "second example\nblih"
-  },
-  {
-    "objectID": "syllabus.html#timetable",
-    "href": "syllabus.html#timetable",
-    "title": "Syllabus",
-    "section": "Timetable",
-    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\n\n\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
-  },
-  {
-    "objectID": "syllabus.html#course-requirements",
-    "href": "syllabus.html#course-requirements",
-    "title": "Syllabus",
-    "section": "Course requirements",
-    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-1-conways-game-of-life",
-    "href": "lectures/intro-slides.html#example-1-conways-game-of-life",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
-  },
-  {
-    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
-    "href": "lectures/intro.html#example-1-conways-game-of-life",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#question",
-    "href": "lectures/intro-slides.html#question",
-    "title": "Intro to ABMs",
-    "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\n\nAnswer\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
-  },
-  {
-    "objectID": "lectures/intro.html#question",
-    "href": "lectures/intro.html#question",
-    "title": "Intro to ABMs",
-    "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-2-flocking",
-    "href": "lectures/intro-slides.html#example-2-flocking",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-3-social-distancing",
-    "href": "lectures/intro-slides.html#example-3-social-distancing",
-    "title": "Intro to ABMs",
-    "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-4-language-change",
-    "href": "lectures/intro-slides.html#example-4-language-change",
-    "title": "Intro to ABMs",
-    "section": "Example 4: Language change",
-    "text": "Example 4: Language change"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking",
-    "href": "lectures/intro.html#example-2-flocking",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
-  },
-  {
-    "objectID": "lectures/intro.html#example-3-social-distancing",
-    "href": "lectures/intro.html#example-3-social-distancing",
-    "title": "Intro to ABMs",
-    "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing"
-  },
-  {
-    "objectID": "lectures/intro.html#example-4-language-change",
-    "href": "lectures/intro.html#example-4-language-change",
-    "title": "Intro to ABMs",
-    "section": "Example 4: Language change",
-    "text": "Example 4: Language change"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
-    "href": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life"
-  },
-  {
-    "objectID": "lectures/intro.html#example-1-conways-game-of-life-1",
-    "href": "lectures/intro.html#example-1-conways-game-of-life-1",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#species",
-    "href": "lectures/intro-slides.html#species",
-    "title": "Intro to ABMs",
-    "section": "Species",
-    "text": "Species\nThe game supports many life forms (“species”), categorized into:1\n\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g.  \n\n\n\nImages of Game of Life species from Wikimedia Commons (public domain)."
-  },
-  {
-    "objectID": "lectures/intro-slides.html#emergence",
-    "href": "lectures/intro-slides.html#emergence",
-    "title": "Intro to ABMs",
-    "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
-  },
-  {
-    "objectID": "lectures/intro.html#species",
-    "href": "lectures/intro.html#species",
-    "title": "Intro to ABMs",
-    "section": "Species",
-    "text": "Species\nThe game supports many life forms (“species”), categorized into:33 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
-  },
-  {
-    "objectID": "lectures/intro.html#emergence",
-    "href": "lectures/intro.html#emergence",
-    "title": "Intro to ABMs",
-    "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#exercise",
-    "href": "lectures/intro-slides.html#exercise",
-    "title": "Intro to ABMs",
-    "section": "Exercise",
-    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB"
-  },
-  {
-    "objectID": "lectures/intro.html#exercise",
-    "href": "lectures/intro.html#exercise",
-    "title": "Intro to ABMs",
-    "section": "Exercise",
-    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#answer",
-    "href": "lectures/intro-slides.html#answer",
-    "title": "Intro to ABMs",
-    "section": "Answer",
-    "text": "Answer\n\n\n\n\n\n\nAnswer\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#examples",
-    "href": "lectures/intro-slides.html#examples",
-    "title": "Intro to ABMs",
-    "section": "Examples",
-    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!1\nThe examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-2-flocking-1",
-    "href": "lectures/intro-slides.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
-  },
-  {
-    "objectID": "lectures/intro.html#examples",
-    "href": "lectures/intro.html#examples",
-    "title": "Intro to ABMs",
-    "section": "Examples",
-    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!22 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking-1",
-    "href": "lectures/intro.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#homework",
-    "href": "lectures/intro-slides.html#homework",
-    "title": "Intro to ABMs",
-    "section": "Homework",
-    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework “Installing Julia” on the course website."
-  },
-  {
-    "objectID": "lectures/intro.html#homework",
-    "href": "lectures/intro.html#homework",
-    "title": "Intro to ABMs",
-    "section": "Homework",
-    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework Installing Julia."
-  },
-  {
-    "objectID": "lectures/intro-slides.html#bounded-rationality-locality",
-    "href": "lectures/intro-slides.html#bounded-rationality-locality",
-    "title": "Intro to ABMs",
-    "section": "Bounded rationality / Locality",
-    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#summary",
-    "href": "lectures/intro-slides.html#summary",
-    "title": "Intro to ABMs",
-    "section": "Summary",
-    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#the-scientific-community",
-    "href": "lectures/intro-slides.html#the-scientific-community",
-    "title": "Intro to ABMs",
-    "section": "The scientific community",
-    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
-  },
-  {
-    "objectID": "lectures/intro.html#bounded-rationality-locality",
-    "href": "lectures/intro.html#bounded-rationality-locality",
-    "title": "Intro to ABMs",
-    "section": "Bounded rationality / Locality",
-    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
-  },
-  {
-    "objectID": "lectures/intro.html#summary",
-    "href": "lectures/intro.html#summary",
-    "title": "Intro to ABMs",
-    "section": "Summary",
-    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
-  },
-  {
-    "objectID": "lectures/intro.html#the-scientific-community",
-    "href": "lectures/intro.html#the-scientific-community",
-    "title": "Intro to ABMs",
-    "section": "The scientific community",
-    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#references",
-    "href": "lectures/intro-slides.html#references",
-    "title": "Intro to ABMs",
-    "section": "References",
-    "text": "References\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE."
+    "objectID": "lectures.html",
+    "href": "lectures.html",
+    "title": "Lectures",
+    "section": "",
+    "text": "Intro to ABMs\n\n\nWhat are ABMs; what are their benefits; what are the challenges involved; examples of ABMs; bounded rationality\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   }
 ]
