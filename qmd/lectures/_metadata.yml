@@ -3,6 +3,3 @@ format:
   pdf: default
   revealjs:
     theme: [default, ../custom-slides.scss]
-comments:
-  utterances:
-    repo: hkauhanen/abm
