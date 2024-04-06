@@ -18,7 +18,7 @@ Finally, if you notice any errors or typos in the course materials, would you be
 -- Henri
 
 
-## Acknowledgements
-
-These materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of [https://julialang.org](Julia) as well as to developers and contributors of the [https://juliadynamics.github.io/Agents.jl](Agents.jl) framework. [https://quarto.org](Quarto) made typesetting the materials easy -- and fun.
+::: {.callout-note collapse=true title="Acknowledgements"}
+These materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of [https://julialang.org](Julia) as well as to developers and contributors of the [https://juliadynamics.github.io/Agents.jl](Agents.jl) framework. [https://quarto.org](Quarto) made typesetting the materials a breeze-- and fun.
+:::
 
