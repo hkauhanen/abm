@@ -90,6 +90,6 @@ figure
 abmvideo(
     "../videos/flocking.mp4", model;
     agent_marker = bird_marker,
-    framerate = 20, frames = 150,
+    framerate = 20, frames = 1000,
     title = "Flocking"
 )

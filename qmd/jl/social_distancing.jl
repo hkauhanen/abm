@@ -34,6 +34,7 @@ model = ball_model()
 
 using CairoMakie
 
+#=
 abmvideo(
     "socialdist2.mp4",
     model;
@@ -42,6 +43,7 @@ abmvideo(
     spf = 2,
     framerate = 25,
 )
+=#
 
 model2 = ball_model()
 
@@ -51,6 +53,7 @@ for id in 1:400
     agent.vel = (0.0, 0.0)
 end
 
+#=
 abmvideo(
     "socialdist3.mp4",
     model2;
@@ -59,6 +62,7 @@ abmvideo(
     spf = 2,
     framerate = 25,
 )
+=#
 
 @agent struct PoorSoul(ContinuousAgent{2, Float64})
     mass::Float64
@@ -79,7 +83,7 @@ function sir_initiation(;
     dt = 1.0,
     speed = 0.002,
     death_rate = 0.044, # from website of WHO
-    N = 1000,
+    N = 300,
     initial_infected = 5,
     seed = 42,
     βmin = 0.4,
@@ -165,6 +169,7 @@ fig # display figure
 
 sir_model = sir_initiation()
 
+#=
 abmvideo(
     "socialdist4.mp4",
     sir_model;
@@ -175,6 +180,7 @@ abmvideo(
     spf = 1,
     framerate = 20,
 )
+=#
 
 infected(x) = count(i == :I for i in x)
 recovered(x) = count(i == :R for i in x)
@@ -203,6 +209,7 @@ figure[1, 2][1,1] =
     Legend(figure, [l1, l2, l3], ["r=$r1, beta=$β1", "r=$r2, beta=$β1", "r=$r1, beta=$β2"])
 figure
 
+#=
 sir_model = sir_initiation(isolated = 0.8)
 abmvideo(
     "socialdist5.mp4",
@@ -213,6 +220,31 @@ abmvideo(
     ac = sir_colors,
     framerate = 20,
 )
+=#
+
+sir_model = sir_initiation(isolated = 0.0)
+abmvideo(
+    "../videos/epidemic_noisolation.mp4",
+    sir_model;
+    title = "Epidemic Model without Social Distancing",
+    frames = 1000,
+    spf = 2,
+    ac = sir_colors,
+    framerate = 50,
+)
+
+sir_model = sir_initiation(isolated = 0.8)
+abmvideo(
+    "../videos/epidemic_isolation.mp4",
+    sir_model;
+    title = "Epidemic Model with Social Distancing",
+    frames = 1000,
+    spf = 2,
+    ac = sir_colors,
+    framerate = 50,
+)
+
+
 
 r4 = 0.04
 sir_model4 = sir_initiation(reinfection_probability = r4, βmin = β1, isolated = 0.8)
@@ -225,6 +257,6 @@ figure[1, 2][2,1] = Legend(
     [l4],
     ["r=$r4, social distancing"],
 )
-figure
+#figure
 
 

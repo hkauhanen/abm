@@ -25,7 +25,7 @@
     "href": "lectures/intro-slides.html#what-is-an-agent-based-model-abm",
     "title": "Intro to ABMs",
     "section": "What is an agent-based model (ABM)?",
-    "text": "What is an agent-based model (ABM)?\n\nNo rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\nEng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+    "text": "What is an agent-based model (ABM)?\n\nNo rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\nEng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
   },
   {
     "objectID": "lectures/intro-slides.html#what-is-the-benefit-of-abms",
@@ -53,21 +53,14 @@
     "href": "lectures/intro-slides.html#example-1-conways-game-of-life",
     "title": "Intro to ABMs",
     "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
-    "href": "lectures/intro-slides.html#example-1-conways-game-of-life-1",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life"
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nSurrounded by\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
   },
   {
     "objectID": "lectures/intro-slides.html#question",
     "href": "lectures/intro-slides.html#question",
     "title": "Intro to ABMs",
     "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\n\n\nAnswer\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\n\n\nAnswer\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously."
   },
   {
     "objectID": "lectures/intro-slides.html#exercise",
@@ -102,21 +95,14 @@
     "href": "lectures/intro-slides.html#example-2-flocking",
     "title": "Intro to ABMs",
     "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
-  },
-  {
-    "objectID": "lectures/intro-slides.html#example-2-flocking-1",
-    "href": "lectures/intro-slides.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
   },
   {
     "objectID": "lectures/intro-slides.html#example-3-social-distancing",
     "href": "lectures/intro-slides.html#example-3-social-distancing",
     "title": "Intro to ABMs",
     "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing"
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual"
   },
   {
     "objectID": "lectures/intro-slides.html#bounded-rationality-locality",
@@ -200,7 +186,7 @@
     "href": "lectures/intro-slides.html#homework",
     "title": "Intro to ABMs",
     "section": "Homework",
-    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework “Installing Julia” on the course website."
+    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework “Installing Julia” on the course website."
   },
   {
     "objectID": "lectures/intro-slides.html#references",
@@ -214,14 +200,14 @@
     "href": "lectures/intro.html",
     "title": "Intro to ABMs",
     "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
     "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
     "title": "Intro to ABMs",
     "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
   },
   {
     "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
@@ -242,21 +228,14 @@
     "href": "lectures/intro.html#example-1-conways-game-of-life",
     "title": "Intro to ABMs",
     "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (subclass of ABMs) (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\nUnderpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies\nSustenance: if a L cell is surrounded by two or three L neighbours, it continues to live\nOverpopulation: If a L cell is surrounded by more than three L neighbours, it dies\nReproduction: If a D cell is surrounded by three L neighbours, it becomes L"
-  },
-  {
-    "objectID": "lectures/intro.html#example-1-conways-game-of-life-1",
-    "href": "lectures/intro.html#example-1-conways-game-of-life-1",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life"
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nSurrounded by\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
   },
   {
     "objectID": "lectures/intro.html#question",
     "href": "lectures/intro.html#question",
     "title": "Intro to ABMs",
     "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? Synchronously."
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously."
   },
   {
     "objectID": "lectures/intro.html#exercise",
@@ -284,21 +263,14 @@
     "href": "lectures/intro.html#example-2-flocking",
     "title": "Intro to ABMs",
     "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, namely flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking-1",
-    "href": "lectures/intro.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
   },
   {
     "objectID": "lectures/intro.html#example-3-social-distancing",
     "href": "lectures/intro.html#example-3-social-distancing",
     "title": "Intro to ABMs",
     "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing"
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual"
   },
   {
     "objectID": "lectures/intro.html#bounded-rationality-locality",
@@ -382,7 +354,7 @@
     "href": "lectures/intro.html#homework",
     "title": "Intro to ABMs",
     "section": "Homework",
-    "text": "Homework\nNext week, we will start programming. To prepare your computer for this, complete the homework Installing Julia."
+    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework Installing Julia."
   },
   {
     "objectID": "homework.html",
@@ -410,6 +382,6 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Intro to ABMs\n\n\nWhat are ABMs; what are their benefits; what are the challenges involved; examples of ABMs; bounded rationality\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   }
 ]

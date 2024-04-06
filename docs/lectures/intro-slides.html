@@ -7,9 +7,7 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="dcterms.date" content="2024-04-09">
@@ -363,6 +361,7 @@
 <ol type="1">
 <li><strong>entities</strong> (the agents)…</li>
 <li>…which <strong>act</strong><sup>1</sup> upon each other…</li>
+<li>…in some kind of <strong>environment</strong>…</li>
 <li>…to create some <strong>emergent</strong> outcome</li>
 </ol></li>
 <li>“Emergent” = collective is more than the sum of its parts</li>
@@ -401,20 +400,49 @@
 <section id="example-1-conways-game-of-life" class="slide level2">
 <h2>Example 1: Conway’s Game of Life</h2>
 <ul>
-<li>Early example of a <strong>cellular automaton</strong> (subclass of ABMs) <span class="citation" data-cites="Gardner1970">(<a href="#/references" role="doc-biblioref" onclick="">Gardner 1970</a>)</span></li>
+<li>Early example of a <strong>cellular automaton</strong> <span class="citation" data-cites="Gardner1970">(<a href="#/references" role="doc-biblioref" onclick="">Gardner 1970</a>)</span></li>
 <li>Lattice; each cell either “live” (L) or “dead” (D)</li>
-<li>Rules:
-<ol type="1">
-<li>Underpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies</li>
-<li>Sustenance: if a L cell is surrounded by two or three L neighbours, it continues to live</li>
-<li>Overpopulation: If a L cell is surrounded by more than three L neighbours, it dies</li>
-<li>Reproduction: If a D cell is surrounded by three L neighbours, it becomes L</li>
-</ol></li>
+<li>Rules:</li>
 </ul>
+<table>
+<thead>
+<tr class="header">
+<th>Rule</th>
+<th>Cell</th>
+<th>Surrounded by</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“underpopulation”</td>
+<td>L</td>
+<td>&lt; 2 L cells</td>
+<td>L <span class="math inline">\(\to\)</span> D</td>
+</tr>
+<tr class="even">
+<td>“sustenance”</td>
+<td>L</td>
+<td>2 or 3 L cells</td>
+<td>L <span class="math inline">\(\to\)</span> L</td>
+</tr>
+<tr class="odd">
+<td>“overpopulation”</td>
+<td>L</td>
+<td>&gt; 3 L cells</td>
+<td>L <span class="math inline">\(\to\)</span> D</td>
+</tr>
+<tr class="even">
+<td>“reproduction”</td>
+<td>D</td>
+<td>3 L cells</td>
+<td>D <span class="math inline">\(\to\)</span> L</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="example-1-conways-game-of-life-1" class="slide level2">
-<h2>Example 1: Conway’s Game of Life</h2>
-<video id="video_shortcode_videojs_video1" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="../videos/game_of_life.mp4"></video>
+<section id="section" class="slide level2" data-background-video="../videos/game_of_life.mp4" data-background-size="contain">
+<h2></h2>
 </section>
 <section id="question" class="slide level2">
 <h2>Question</h2>
@@ -433,8 +461,8 @@
 <div class="callout-content">
 <p>Two very important things:</p>
 <ol type="1">
-<li>Is the lattice <strong>finite</strong> or <strong>infinite</strong>? If finite, then what happens at the boundaries? <em>It is infinite.</em></li>
-<li>Are the agents (the cells) updated <strong>synchronously</strong> (all at once) or <strong>asynchronously</strong>? <em>Synchronously.</em></li>
+<li>Is the lattice <strong>finite</strong> or <strong>infinite</strong>? If finite, then what happens at the boundaries? <em>– It is infinite.</em></li>
+<li>Are the agents (the cells) updated <strong>synchronously</strong> (all at once) or <strong>asynchronously</strong>? <em>– Synchronously.</em></li>
 </ol>
 </div>
 </div>
@@ -505,28 +533,43 @@
 <h2>Emergence</h2>
 <ul>
 <li>The game has simple rules, complex behaviour</li>
-<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!</li>
+<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, <em>we can prove that it impossible to prove</em> whether O will ever be reached from S!</li>
 <li>New facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)</li>
 </ul>
 </section>
 <section id="example-2-flocking" class="slide level2">
 <h2>Example 2: Flocking</h2>
 <ul>
-<li>A simple model of the emergence of collective behaviour, namely flocking in birds</li>
+<li>A simple model of the emergence of collective behaviour, flocking in birds</li>
 <li>Birds follow three rules:
-<ul>
+<ol type="1">
 <li>Collision avoidance: maintain a minimum distance to other birds</li>
 <li>Tracking: fly towards the average position of neighbouring birds</li>
 <li>Navigation: fly in the average direction of your neighbours</li>
-</ul></li>
+</ol></li>
 </ul>
 </section>
-<section id="example-2-flocking-1" class="slide level2">
-<h2>Example 2: Flocking</h2>
-<video id="video_shortcode_videojs_video2" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="../videos/flocking.mp4"></video>
+<section id="section-1" class="slide level2" data-background-video="../videos/flocking.mp4" data-background-size="contain">
+<h2></h2>
 </section>
 <section id="example-3-social-distancing" class="slide level2">
 <h2>Example 3: Social Distancing</h2>
+<ul>
+<li>SIR (susceptible-infected-recovered) models are used to model epidemics, e.g.&nbsp;the spread of viruses</li>
+<li>Such models can be extended with aspects such as social distancing – implemented here as agents which remain stationary</li>
+<li>In the following animations,
+<ul>
+<li>black dot = susceptible (healthy) individual</li>
+<li>red dot = infected individual</li>
+<li>green dot = recovered individual</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-2" class="slide level2" data-background-video="../videos/epidemic_noisolation.mp4" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="section-3" class="slide level2" data-background-video="../videos/epidemic_isolation.mp4" data-background-size="contain">
+<h2></h2>
 </section>
 <section id="bounded-rationality-locality" class="slide level2">
 <h2>Bounded rationality / Locality</h2>
@@ -648,7 +691,7 @@
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>
-<p>Next week, we will start programming. To prepare your computer for this, complete the homework <strong>“Installing Julia”</strong> on the course website.</p>
+<p>Next week, we will begin programming. To prepare your computer for this, complete the homework <strong>“Installing Julia”</strong> on the course website.</p>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
@@ -719,7 +762,7 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -787,7 +830,7 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
         showNotes: false,
 
         // Global override for autoplaying embedded media (null/true/false)
-        autoPlayMedia: null,
+        autoPlayMedia: true,
 
         // Global override for preloading lazy-loaded iframes (null/true/false)
         preloadIframes: null,
@@ -1054,8 +1097,6 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
       }
     });
     </script>
-    <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>videojs(video_shortcode_videojs_video2);</script>
     
 
 </body></html>

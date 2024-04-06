@@ -76,6 +76,6 @@ abmvideo(
     model;
     title = "Game of Life",
     framerate = 10,
-    frames = 60,
+    frames = 1000,
     plotkwargs...,
 )

@@ -1,6 +1,7 @@
 ---
 title: "Intro to ABMs"
 date: 04/09/2024
+image: "../img/intro-image.png"
 description: "What are ABMs; what are their benefits; what are the challenges involved; examples of ABMs; bounded rationality"
 categories:
   - lecture
@@ -15,6 +16,7 @@ format:
 - But: can characterize as a model consisting of
   1. **entities** (the agents)...
   1. ...which **act**^[Eng. *agent* < Lat. *agens*, pres. part. of *ago* 'act'] upon each other...
+  1. ...in some kind of **environment**...
   1. ...to create some **emergent** outcome
 - "Emergent" = collective is more than the sum of its parts
 - Implemented computationally, sometimes also analysed mathematically
@@ -51,18 +53,24 @@ These concepts are best explained through the use of examples...
 
 ## Example 1: Conway's Game of Life
 
-- Early example of a **cellular automaton** (subclass of ABMs) [@Gardner1970]
+- Early example of a **cellular automaton** [@Gardner1970]
 - Lattice; each cell either "live" (L) or "dead" (D)
 - Rules:
-    1. Underpopulation: if a L cell is surrounded by fewer than two L neighbours, it dies
-    1. Sustenance: if a L cell is surrounded by two or three L neighbours, it continues to live
-    1. Overpopulation: If a L cell is surrounded by more than three L neighbours, it dies
-    1. Reproduction: If a D cell is surrounded by three L neighbours, it becomes L
 
+| Rule | Cell | Surrounded by | Result |
+|------|------|---------------|--------|
+| "underpopulation" | L    | < 2 L cells   | L $\to$ D |
+| "sustenance" | L    | 2 or 3 L cells | L $\to$ L |
+| "overpopulation" | L    | > 3 L cells | L $\to$ D |
+| "reproduction" | D    | 3 L cells | D $\to$ L |
 
-## Example 1: Conway's Game of Life
+::: {.content-visible when-format="revealjs"}
+## {background-video="../videos/game_of_life.mp4" background-size="contain"}
+:::
 
-{{< video ../videos/game_of_life.mp4 height="500" >}}
+::: {.content-visible unless-format="revealjs"}
+{{< video ../videos/game_of_life.mp4 >}}
+:::
 
 
 ## Question
@@ -78,8 +86,8 @@ Earlier we said ABMs are complete, consistent and unambiguous.
 ::: {.callout-tip collapse=true title="Answer"}
 Two very important things:
 
-1. Is the lattice **finite** or **infinite**? If finite, then what happens at the boundaries? *It is infinite.*
-1. Are the agents (the cells) updated **synchronously** (all at once) or **asynchronously**? *Synchronously.*
+1. Is the lattice **finite** or **infinite**? If finite, then what happens at the boundaries? *-- It is infinite.*
+1. Are the agents (the cells) updated **synchronously** (all at once) or **asynchronously**? *-- Synchronously.*
 :::
 
 
@@ -157,26 +165,47 @@ The game supports many life forms ("species"), categorized into:^[Images of Game
 ## Emergence
 
 - The game has simple rules, complex behaviour
-- It is **undecidable**: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!
+- It is **undecidable**: given a starting state S and a proposed other state O, *we can prove that it impossible to prove* whether O will ever be reached from S!
 - New facts about the game are still being discovered: 2018 discovery of "knightships" (spaceships that move like the knight in chess)
 
 
 ## Example 2: Flocking
 
-- A simple model of the emergence of collective behaviour, namely flocking in birds
+- A simple model of the emergence of collective behaviour, flocking in birds
 - Birds follow three rules:
-  - Collision avoidance: maintain a minimum distance to other birds
-  - Tracking: fly towards the average position of neighbouring birds
-  - Navigation: fly in the average direction of your neighbours
+    1. Collision avoidance: maintain a minimum distance to other birds
+    1. Tracking: fly towards the average position of neighbouring birds
+    1. Navigation: fly in the average direction of your neighbours
 
 
-## Example 2: Flocking
+::: {.content-visible when-format="revealjs"}
+## {background-video="../videos/flocking.mp4" background-size="contain"}
+:::
 
-{{< video ../videos/flocking.mp4 height="500" >}}
+::: {.content-visible unless-format="revealjs"}
+{{< video ../videos/flocking.mp4 >}}
+:::
 
 
 ## Example 3: Social Distancing
 
+- SIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses
+- Such models can be extended with aspects such as social distancing -- implemented here as agents which remain stationary
+- In the following animations,
+  - black dot = susceptible (healthy) individual
+  - red dot = infected individual
+  - green dot = recovered individual
+
+
+::: {.content-visible when-format="revealjs"}
+## {background-video="../videos/epidemic_noisolation.mp4" background-size="contain"}
+## {background-video="../videos/epidemic_isolation.mp4" background-size="contain"}
+:::
+
+::: {.content-visible unless-format="revealjs"}
+{{< video ../videos/epidemic_noisolation.mp4 >}}
+{{< video ../videos/epidemic_isolation.mp4 >}}
+:::
 
 ## Bounded rationality / Locality
 
@@ -279,11 +308,11 @@ The game supports many life forms ("species"), categorized into:^[Images of Game
 ## Homework
 
 ::: {.content-visible when-format="revealjs"}
-Next week, we will start programming. To prepare your computer for this, complete the homework **"Installing Julia"** on the course website.
+Next week, we will begin programming. To prepare your computer for this, complete the homework **"Installing Julia"** on the course website.
 :::
 
 ::: {.content-hidden when-format="revealjs"}
-Next week, we will start programming. To prepare your computer for this, complete the homework [Installing Julia](../homework/installing-julia.qmd).
+Next week, we will begin programming. To prepare your computer for this, complete the homework [Installing Julia](../homework/installing-julia.qmd).
 :::
 
 

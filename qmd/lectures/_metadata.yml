@@ -3,3 +3,5 @@ format:
   pdf: default
   revealjs:
     theme: [default, ../custom-slides.scss]
+    auto-play-media: true
+    slide-number: c

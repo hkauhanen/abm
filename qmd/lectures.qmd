@@ -3,7 +3,7 @@ title: "Lectures"
 listing:
   contents: lectures
   type: grid
-  fields: [date, title, description]
+  fields: [date, title, image]
   sort: date
   sort-ui: false
   filter-ui: false
