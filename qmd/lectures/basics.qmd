@@ -3,9 +3,9 @@ title: "Programming basics"
 date: 04/16/2024
 categories:
   - lecture
-#format:
-#  revealjs:
-#    output-file: basics-slides.html
+format:
+  revealjs:
+    output-file: basics-slides.html
 ---
 
 
@@ -59,7 +59,7 @@ my_number + my_number
 - Arithmetic operations are mostly self-explanatory. For example:
 
 ```{julia}
-#| eval: true
+#| echo: true
 number1 = 15
 number2 = 20
 number3 = 10*(number1 + number2) - number1/number2
@@ -72,7 +72,7 @@ number3
 - Julia overloads the `*` operator for strings too:
 
 ```{julia}
-#| eval: true
+#| echo: true
 string1 = "This "
 string2 = "is a"
 string3 = " sentence"
@@ -87,7 +87,7 @@ string1 * string2 * string3 * "!"
 - Usually we work with arrays of numbers. They are easy to create:
 
 ```{julia}
-#| eval: true
+#| echo: true
 my_array = [10, 20, 30, 40]
 ```
 
@@ -97,7 +97,7 @@ my_array = [10, 20, 30, 40]
 - The elements of an array can be accessed one-by-one by referencing their location or **index** in the array:
 
 ```{julia}
-#| eval: true
+#| echo: true
 my_array = [10, 20, 30, 40]
 my_array[1]
 ```
@@ -105,7 +105,7 @@ my_array[1]
 or
 
 ```{julia}
-#| eval: true
+#| echo: true
 my_array[2]
 ```
 
@@ -116,14 +116,14 @@ my_array[2]
 - The special keyword `end` fetches the last element:
 
 ```{julia}
-#|eval: true
+#|echo: true
 my_array[end]
 ```
 
 - Arrays can also be subsetted:
 
 ```{julia}
-#|eval: true
+#|echo: true
 my_array[2:3]
 ```
 
@@ -134,7 +134,7 @@ my_array[2:3]
 - The following will **not** work:
 
 ```{julia}
-#|eval: true
+#|echo: true
 #|error: true
 my_array + 1
 ```
@@ -147,7 +147,7 @@ my_array + 1
 - To apply an operator **elementwise** to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called **broadcasting**.
 
 ```{julia}
-#|eval: true
+#|echo: true
 my_array .+ 1
 ```
 
@@ -157,7 +157,7 @@ my_array .+ 1
 - Why does the following not work?
 
 ```{julia}
-#|eval: true
+#|echo: true
 #|error: true
 my_string = "My shoe size is: "
 my_number = 41
@@ -171,7 +171,7 @@ my_string * my_number
 - To make it work, we need to explicitly **convert** the integer into a string:
 
 ```{julia}
-#|eval: true
+#|echo: true
 my_string * string(my_number)
 ```
 
@@ -190,7 +190,7 @@ my_string * string(my_number)
 - I'm calling the function `add_elementwise`
 
 ```{julia}
-#|eval: true
+#|echo: true
 function add_elementwise(array, scalar)
   result = array .+ scalar
   return result
@@ -204,7 +204,7 @@ end
 - We can now **call** the function on particular arrays and numbers:
 
 ```{julia}
-#|eval: true
+#|echo: true
 my_array = [10, 20, 30, 40]
 add_elementwise(my_array, 1)
 ```
@@ -214,12 +214,12 @@ add_elementwise(my_array, 1)
 :::
 
 ```{julia}
-#|eval: true
+#|echo: true
 add_elementwise(my_array, -23.5)
 ```
 
 
-## Exercise
+## Exercise {.ex-slide}
 
 Write a function with the following properties:
 
@@ -228,14 +228,14 @@ Write a function with the following properties:
 - The function's return value is a string which announces the person's age in this format: `"John is 40 years old"`
 
 ::: {.content-visible when-format="revealjs"}
-## Exercise
+## Exercise {.ex-slide}
 :::
 
 ::: {.callout-tip collapse=true title="Answer"}
 Here is the function definition:
 
 ```{julia}
-#|eval: true
+#|echo: true
 function announce_age(name, age)
   return name * " is " * string(age) * " years old"
 end
@@ -244,7 +244,7 @@ end
 Let's test it:
 
 ```{julia}
-#|eval: true
+#|echo: true
 announce_age("John", 40)
 ```
 :::
@@ -265,7 +265,7 @@ announce_age("John", 40)
 - Since these fields (at least age) need to be modifiable, we use a `mutable struct`:
 
 ```{julia}
-#|eval: true
+#|echo: true
 mutable struct Person
   name::String
   age::Int
@@ -273,13 +273,257 @@ mutable struct Person
 end
 ```
 
+::: {.content-visible when-format="revealjs"}
+## Custom types: example
+
+```{julia}
+#|echo: true
+mutable struct Person
+  name::String
+  age::Int
+  shoesize::Float64
+end
+```
+:::
+
+- Here,
+  - `name::String` means the field called `name` is of type string, etc.
+  - `Int` is an integer
+  - in `Float64`, the number specifies the precision of the floating-point number (related to how many decimals it can store)
+
+::: {.content-visible when-format="revealjs"}
+## Custom types: example
+:::
+
+- We can now **construct** an instance of the `Person` custom type, a `Person` object, and store it in a variable:
+
+```{julia}
+#| echo: true
+jane = Person("Jane", 35, 39.5)
+```
+
+- To **access** the fields of an object, we use the following dot syntax:
+
+```{julia}
+#| echo: true
+jane.name
+```
 
 
+## Exercise {.ex-slide}
+
+Write three functions:
+
+1. A function that takes a `Person` object as argument and returns their shoe size
+1. A function that takes a `Person` object and a string as argument, and sets the person's name to be the string supplied as argument
+1. A function that increments a `Person` object's age by one
+ 
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex-slide}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+```{julia}
+#|echo: true
+#|output: false
+function get_shoesize(x)
+  return x.shoesize
+end
+
+function set_name(x, y)
+  x.name = y
+end
+
+function become_older(x)
+  x.age = x.age + 1
+end
+```
+:::
 
 
+## Explicit type specifications
+
+Note that it is possible (and often good practice) to explicitly set the types of function arguments:
+
+```{julia}
+#|echo: true
+#|output: false
+function get_shoesize(x::Person)
+  return x.shoesize
+end
+
+function set_name(x::Person, y::String)
+  x.name = y
+end
+
+function become_older(x::Person)
+  x.age = x.age + 1
+end
+```
 
 
+## Getters and setters
 
+- Functions that return an object's field are sometimes known as **getters**. Functions that set a field are known as **setters**.
+- In Julia, it is customary to append an exclamation point to the name of every setter function. This is to warn users of the function that the function modifies something in the object.
+- Thus, we would rather write:
+
+```{julia}
+#|echo: true
+#|output: false
+function set_name!(x::Person, y::String)
+  x.name = y
+end
+```
+
+
+## Array comprehensions
+
+- What if we wanted to create 3 `Person`s? Easy:
+ 
+```{julia}
+person1 = Person("Jane", 35, 39.5)
+person2 = Person("John", 44, 43.0)
+person3 = Person("Bob", 65, 42.33)
+```
+
+- What if we wanted to create 1000 `Person`s?
+
+::: {.content-visible when-format="revealjs"}
+## Array comprehensions
+:::
+
+- Here we can use a powerful feature known as an **array comprehension**. The following creates 1000 persons, each with the same default fields (we'll later see how to modify this), and places them in an array. The array is returned and stored in the `population` variable:
+
+```{julia}
+#| echo: true
+#| output: false
+population = [Person("M. Musterperson", 0, 0.0) for i in 1:1000]
+```
+
+- The `i` variable is a dummy variable that only exists for the duration of the array comprehension.
+
+::: {.content-visible when-format="revealjs"}
+## Array comprehensions
+:::
+
+- We can now access individual persons by indexing them from the array:
+
+```{julia}
+#| echo: true
+population[1]
+```
+
+- We can also access their fields:
+
+```{julia}
+#| echo: true
+population[1].name
+```
+
+- And we can set them:
+```{julia}
+#| echo: true
+set_name(population[1], "Bob the Builder")
+population[1].name
+```
+
+
+## Random numbers
+
+- To get a (pseudo)random number from between 0 and 1, simply call:
+
+```{julia}
+#| echo: true
+rand()
+```
+
+
+## Exercise {.ex-slide}
+
+How can you obtain a random number from between 0 and 50?
+
+How about between 50 and 100?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex-slide}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+Random number from between 0 and 50:
+
+```{julia}
+#| echo: true
+50*rand()
+```
+
+Random number from between 50 and 100:
+
+```{julia}
+#| echo: true
+50 + 50*rand()
+```
+:::
+
+
+## FIXME
+
+control flow -- conditionals and loops?
+
+or is this too much infooos for one session?
+
+
+## Comments
+
+- To improve code readability, we insert comments (these are ignored by the compiler)
+- Single-line comment:
+
+```{julia}
+#|echo: true
+#|output: false
+# the following variable stores my shoe size
+shoesize = 41.5
+```
+
+- Multi-line comment:
+```{julia}
+#|echo: true
+#|output: false
+#=
+The following variable
+stores my shoe size
+=#
+shoesize = 41.5
+```
+
+
+## Packages
+
+- Basic Julia functionality is extended by **packages**
+- These are installed through a package manager called **Pkg**
+- E.g. to install the *Agents* package (and all its dependencies), we issue these commands:
+
+```{julia}
+#|echo: true
+#|eval: false
+#|output: false
+using Pkg
+Pkg.add("Agents")
+```
+
+- Once the package has been installed, we can load it by:
+
+```{julia}
+#|echo: true
+#|eval: false
+#|output: false
+using Agents
+```
+
+
+## Homework
+
+FIXME
 
 
 

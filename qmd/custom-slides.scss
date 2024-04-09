@@ -2,6 +2,10 @@
 
 /*-- scss:rules --*/
 
+.ex-slide h2::before {
+	content: "🤔 ";
+}
+
 table {
 	font-size: 80%;
 }

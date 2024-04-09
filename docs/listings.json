@@ -8,7 +8,8 @@
   {
     "listing": "/lectures.html",
     "items": [
-      "/lectures/intro.html"
+      "/lectures/intro.html",
+      "/lectures/basics.html"
     ]
   }
 ]

@@ -398,6 +398,21 @@
 
   <p class="date">2024-04-16</p>
 </section>
+<section id="tudú" class="slide level2">
+<h2>TUDÚ</h2>
+<ul>
+<li>comments</li>
+<li>packages</li>
+<li>functions vs methods (multiple dispatch)</li>
+<li>meaning of dynamic typing</li>
+<li>custom types</li>
+<li>broadcasting of functions</li>
+<li>array comprehensions</li>
+<li>explicit type declarations for custom types and function arguments</li>
+<li>conditionals</li>
+<li>loops</li>
+</ul>
+</section>
 <section id="variables-and-assignments" class="slide level2">
 <h2>Variables and assignments</h2>
 <ul>
@@ -405,15 +420,15 @@
 <li>The data is <strong>assigned</strong> to the variable using the <code>=</code> operator</li>
 <li>Here, we assign the number 5 to a variable named <code>my_number</code>:</li>
 </ul>
-<div id="173cb6e2" class="cell" data-execution_count="1">
+<div id="f1e3f6c2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a>my_number <span class="op">=</span> <span class="fl">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>We can now do things such as:</li>
 </ul>
-<div id="5346f29b" class="cell" data-execution_count="2">
+<div id="3518e77d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a>my_number <span class="op">+</span> my_number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>10</code></pre>
 </div>
 </div>
@@ -432,40 +447,566 @@
 </ul></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>Most programming languages make available a number of different <strong>types</strong> of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).</p>
-<p>We have already seen integers and strings. These can be stored in <strong>variables</strong>. For instance, above we stored the strings <code>"John"</code> and <code>"Doe"</code> in the variables <code>firstname</code> and <code>lastname</code>. Think of variables as “boxes” that hold data. The contents of these boxes can be changed. For example, we reuse the <code>firstname</code> variable if we want to change our name:</p>
-<p>Now the variable <code>firstname</code> will hold the string <code>"Jane"</code> instead of the string <code>"John"</code>.</p>
-<p>We can even do something like the following, whereby the variable’s type changes from string to integer:</p>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="arithmetic-operations" class="slide level2">
+<h2>Arithmetic operations</h2>
+<ul>
+<li>Arithmetic operations are mostly self-explanatory. For example:</li>
+</ul>
+<div id="2b01c1d0" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a>number1 <span class="op">=</span> <span class="fl">15</span></span>
+<span id="cb4-2"><a></a>number2 <span class="op">=</span> <span class="fl">20</span></span>
+<span id="cb4-3"><a></a>number3 <span class="op">=</span> <span class="fl">10</span><span class="fu">*</span>(number1 <span class="op">+</span> number2) <span class="op">-</span> number1<span class="op">/</span>number2</span>
+<span id="cb4-4"><a></a>number3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>349.25</code></pre>
+</div>
+</div>
+</section>
+<section id="string-concatenation" class="slide level2">
+<h2>String concatenation</h2>
+<ul>
+<li>Julia overloads the <code>*</code> operator for strings too:</li>
+</ul>
+<div id="8ce720e4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a>string1 <span class="op">=</span> <span class="st">"This "</span></span>
+<span id="cb6-2"><a></a>string2 <span class="op">=</span> <span class="st">"is a"</span></span>
+<span id="cb6-3"><a></a>string3 <span class="op">=</span> <span class="st">" sentence"</span></span>
+<span id="cb6-4"><a></a>string1 <span class="op">*</span> string2 <span class="op">*</span> string3 <span class="op">*</span> <span class="st">"!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>"This is a sentence!"</code></pre>
+</div>
+</div>
+</section>
+<section id="arrays" class="slide level2">
+<h2>Arrays</h2>
+<ul>
+<li>An array is a (possibly multidimensional) collection of objects
+<ul>
+<li>A one-dimensional array is a vector, a two-dimensional array is a matrix, and so on</li>
+</ul></li>
+<li>Usually we work with arrays of numbers. They are easy to create:</li>
+</ul>
+<div id="dc4b52b6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a>my_array <span class="op">=</span> [<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>4-element Vector{Int64}:
+ 10
+ 20
+ 30
+ 40</code></pre>
+</div>
+</div>
+</section>
+<section id="accessing-array-contents" class="slide level2">
+<h2>Accessing array contents</h2>
+<ul>
+<li>The elements of an array can be accessed one-by-one by referencing their location or <strong>index</strong> in the array:</li>
+</ul>
+<div id="c0f1e70c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a>my_array <span class="op">=</span> [<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>]</span>
+<span id="cb10-2"><a></a>my_array[<span class="fl">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>or</p>
+<div id="ec5e3bda" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a></a>my_array[<span class="fl">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>20</code></pre>
+</div>
+</div>
+</section>
+<section id="accessing-array-contents-1" class="slide level2">
+<h2>Accessing array contents</h2>
+<ul>
+<li>The special keyword <code>end</code> fetches the last element:</li>
+</ul>
+<div id="fde6781a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a></a>my_array[<span class="kw">end</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>40</code></pre>
+</div>
+</div>
+<ul>
+<li>Arrays can also be subsetted:</li>
+</ul>
+<div id="3f3f28a5" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a></a>my_array[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>2-element Vector{Int64}:
+ 20
+ 30</code></pre>
+</div>
+</div>
+</section>
+<section id="broadcasting" class="slide level2">
+<h2>Broadcasting</h2>
+<ul>
+<li>Suppose I want to add <code>1</code> to each number in <code>my_array</code></li>
+<li>The following will <strong>not</strong> work:</li>
+</ul>
+<div id="0669658a" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a></a>my_array <span class="op">+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre>MethodError: no method matching +(::Vector{Int64}, ::Int64)
+For element-wise addition, use broadcasting with dot syntax: array .+ scalar
+
+Closest candidates are:
+  +(::Any, ::Any, <span class="ansi-bright-red-fg">::Any</span>, <span class="ansi-bright-red-fg">::Any...</span>)
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-bright-black-fg">Base</span> <span style="text-decoration:underline" class="ansi-bright-black-fg">operators.jl:587</span>
+  +(<span class="ansi-bright-red-fg">::Missing</span>, ::Number)
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-bright-black-fg">Base</span> <span style="text-decoration:underline" class="ansi-bright-black-fg">missing.jl:123</span>
+  +(<span class="ansi-bright-red-fg">::P</span>, ::S) where {S&lt;:Number, T, X, P&lt;:Polynomials.FactoredPolynomial{T, X}}
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-magenta-fg">Polynomials</span> <span class="ansi-bright-black-fg">~/.julia/packages/Polynomials/5ZhzG/src/polynomials/</span><span style="text-decoration:underline" class="ansi-bright-black-fg">factored_polynomial.jl:257</span>
+  ...
+</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="broadcasting-1" class="slide level2">
+<h2>Broadcasting</h2>
+<ul>
+<li>Why? Because mathematically the operation “add a scalar into a vector” is undefined</li>
+<li>To apply an operator <strong>elementwise</strong> to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called <strong>broadcasting</strong>.</li>
+</ul>
+<div id="da5f2bd8" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a></a>my_array <span class="op">.+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>4-element Vector{Int64}:
+ 11
+ 21
+ 31
+ 41</code></pre>
+</div>
+</div>
+</section>
+<section id="type-mismatch" class="slide level2">
+<h2>Type mismatch</h2>
+<ul>
+<li>Why does the following not work?</li>
+</ul>
+<div id="58b5bef6" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a></a>my_string <span class="op">=</span> <span class="st">"My shoe size is: "</span></span>
+<span id="cb21-2"><a></a>my_number <span class="op">=</span> <span class="fl">41</span></span>
+<span id="cb21-3"><a></a>my_string <span class="op">*</span> my_number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre>MethodError: no method matching *(::String, ::Int64)
+
+Closest candidates are:
+  *(::Any, ::Any, <span class="ansi-bright-red-fg">::Any</span>, <span class="ansi-bright-red-fg">::Any...</span>)
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-bright-black-fg">Base</span> <span style="text-decoration:underline" class="ansi-bright-black-fg">operators.jl:587</span>
+  *(<span class="ansi-bright-red-fg">::Missing</span>, ::Number)
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-bright-black-fg">Base</span> <span style="text-decoration:underline" class="ansi-bright-black-fg">missing.jl:123</span>
+  *(<span class="ansi-bright-red-fg">::Polynomials.AbstractPolynomial</span>, ::Union{Number, Matrix})
+<span class="ansi-bright-black-fg">   @</span> <span class="ansi-magenta-fg">Polynomials</span> <span class="ansi-bright-black-fg">~/.julia/packages/Polynomials/5ZhzG/src/</span><span style="text-decoration:underline" class="ansi-bright-black-fg">common.jl:1041</span>
+  ...
+</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="type-conversion" class="slide level2">
+<h2>Type conversion</h2>
+<ul>
+<li>To make it work, we need to explicitly <strong>convert</strong> the integer into a string:</li>
+</ul>
+<div id="8eda3d91" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a></a>my_string <span class="op">*</span> <span class="fu">string</span>(my_number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>"My shoe size is: 41"</code></pre>
+</div>
+</div>
+</section>
+<section id="functions" class="slide level2">
+<h2>Functions</h2>
+<ul>
+<li>A <strong>function</strong>, sometimes also known as a <strong>subroutine</strong>, is a <strong>reusable</strong> piece of code that performs, well, some function…</li>
+<li>We define it once and then can use it as many times as we like</li>
+<li>A function can (but need not) take inputs – these are known as the function’s <strong>arguments</strong></li>
+<li>A function can (but need not) give an output – this is known as the function’s <strong>return value</strong></li>
+</ul>
+</section>
+<section id="functions-example" class="slide level2">
+<h2>Functions: example</h2>
+<ul>
+<li>Here is a function that takes two arguments, an array and a scalar number, and adds the scalar to each element of the array</li>
+<li>I’m calling the function <code>add_elementwise</code></li>
+</ul>
+<div id="c83738b3" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a></a><span class="kw">function</span> <span class="fu">add_elementwise</span>(array, scalar)</span>
+<span id="cb24-2"><a></a>  result <span class="op">=</span> array <span class="op">.+</span> scalar</span>
+<span id="cb24-3"><a></a>  <span class="cf">return</span> result</span>
+<span id="cb24-4"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>add_elementwise (generic function with 1 method)</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-example-1" class="slide level2">
+<h2>Functions: example</h2>
+<ul>
+<li>We can now <strong>call</strong> the function on particular arrays and numbers:</li>
+</ul>
+<div id="1c253fa5" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a></a>my_array <span class="op">=</span> [<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>]</span>
+<span id="cb26-2"><a></a><span class="fu">add_elementwise</span>(my_array, <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>4-element Vector{Int64}:
+ 11
+ 21
+ 31
+ 41</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-example-2" class="slide level2">
+<h2>Functions: example</h2>
+<div id="053f4b27" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a></a><span class="fu">add_elementwise</span>(my_array, <span class="op">-</span><span class="fl">23.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>4-element Vector{Float64}:
+ -13.5
+  -3.5
+   6.5
+  16.5</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<p>Write a function with the following properties:</p>
+<ul>
+<li>The function’s name is <code>announce_age</code></li>
+<li>The function takes two arguments, the first a person’s name, the second a number that is that person’s age</li>
+<li>The function’s return value is a string which announces the person’s age in this format: <code>"John is 40 years old"</code></li>
+</ul>
+</section>
+<section id="exercise-1" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Answer</strong></p>
 </div>
 <div class="callout-content">
-<p>In Pluto, if a variable is changed in one code cell, then its value also changes in all other cells that make use of the same variable.</p>
+<p>Here is the function definition:</p>
+<div id="57db9ba7" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a></a><span class="kw">function</span> <span class="fu">announce_age</span>(name, age)</span>
+<span id="cb30-2"><a></a>  <span class="cf">return</span> name <span class="op">*</span> <span class="st">" is "</span> <span class="op">*</span> <span class="fu">string</span>(age) <span class="op">*</span> <span class="st">" years old"</span></span>
+<span id="cb30-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>announce_age (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Let’s test it:</p>
+<div id="e2531e6f" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a></a><span class="fu">announce_age</span>(<span class="st">"John"</span>, <span class="fl">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>"John is 40 years old"</code></pre>
 </div>
 </div>
 </div>
-<p>So-called <strong>floating-point numbers</strong>, which represent real numbers up to some precision which is determined by both the programming language and the computer’s architecture, are easy to create: just make sure that there is a decimal point in the number:</p>
-<p>Most mathematical operations are self-explanatory:</p>
-<div class="callout callout-note callout-titled callout-style-default">
+</div>
+</div>
+</div>
+</section>
+<section id="custom-types-classes-and-objects" class="slide level2">
+<h2>Custom types (“classes” and “objects”)</h2>
+<ul>
+<li>Idea of <strong>object-oriented programming</strong> (OOP): we can make custom types (<strong>classes</strong>) which are instantiated as <strong>objects</strong>
+<ul>
+<li>Programming ABMs in a language that does not support this would be very cumbersome</li>
+</ul></li>
+<li>In Julia, custom types are defined by way of a special keyword, <code>struct</code></li>
+<li>A custom type is effectively a combination of variables called the type’s <strong>fields</strong></li>
+<li>If the fields need to be modifiable later in the program, we use <code>mutable struct</code> instead of <code>struct</code></li>
+</ul>
+</section>
+<section id="custom-types-example" class="slide level2">
+<h2>Custom types: example</h2>
+<ul>
+<li>Suppose we want to represent a person by way of their name, their age and their shoe size</li>
+<li>Since these fields (at least age) need to be modifiable, we use a <code>mutable struct</code>:</li>
+</ul>
+<div id="7fb4f20d" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a></a><span class="kw">mutable struct</span> Person</span>
+<span id="cb34-2"><a></a>  name<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb34-3"><a></a>  age<span class="op">::</span><span class="dt">Int</span></span>
+<span id="cb34-4"><a></a>  shoesize<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb34-5"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="custom-types-example-1" class="slide level2">
+<h2>Custom types: example</h2>
+<div id="e8a8ec02" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a></a><span class="kw">mutable struct</span> Person</span>
+<span id="cb35-2"><a></a>  name<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb35-3"><a></a>  age<span class="op">::</span><span class="dt">Int</span></span>
+<span id="cb35-4"><a></a>  shoesize<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb35-5"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Here,
+<ul>
+<li><code>name::String</code> means the field called <code>name</code> is of type string, etc.</li>
+<li><code>Int</code> is an integer</li>
+<li>in <code>Float64</code>, the number specifies the precision of the floating-point number (related to how many decimals it can store)</li>
+</ul></li>
+</ul>
+</section>
+<section id="custom-types-example-2" class="slide level2">
+<h2>Custom types: example</h2>
+<ul>
+<li>We can now <strong>construct</strong> an instance of the <code>Person</code> custom type, a <code>Person</code> object, and store it in a variable:</li>
+</ul>
+<div id="eb65ebe9" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a></a>jane <span class="op">=</span> <span class="fu">Person</span>(<span class="st">"Jane"</span>, <span class="fl">35</span>, <span class="fl">39.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>Person("Jane", 35, 39.5)</code></pre>
+</div>
+</div>
+<ul>
+<li>To <strong>access</strong> the fields of an object, we use the following dot syntax:</li>
+</ul>
+<div id="b491eed9" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a></a>jane.name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>"Jane"</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<p>Write three functions:</p>
+<ol type="1">
+<li>A function that takes a <code>Person</code> object as argument and returns their shoe size</li>
+<li>A function that takes a <code>Person</code> object and a string as argument, and sets the person’s name to be the string supplied as argument</li>
+<li>A function that increments a <code>Person</code> object’s age by one</li>
+</ol>
+</section>
+<section id="exercise-3" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Answer</strong></p>
 </div>
 <div class="callout-content">
-<p>Anything written after a hash sign (<code>#</code>) on a line in Julia constitutes a <strong>comment</strong>. Comments are not executed by the compiler; it does not “see” them. They can (and should!) be used to add explanations to source code that aid the programmer or someone else who might read the code later. For example, when defining custom types or functions (see below), it is good practice to add some lines of comments before the type or function definition, explaining what the type contains or what the function does, what the arguments to the function are, and what (if anything) the function returns.</p>
+<div id="8bbb2ae3" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a></a><span class="kw">function</span> <span class="fu">get_shoesize</span>(x)</span>
+<span id="cb40-2"><a></a>  <span class="cf">return</span> x.shoesize</span>
+<span id="cb40-3"><a></a><span class="kw">end</span></span>
+<span id="cb40-4"><a></a></span>
+<span id="cb40-5"><a></a><span class="kw">function</span> <span class="fu">set_name</span>(x, y)</span>
+<span id="cb40-6"><a></a>  x.name <span class="op">=</span> y</span>
+<span id="cb40-7"><a></a><span class="kw">end</span></span>
+<span id="cb40-8"><a></a></span>
+<span id="cb40-9"><a></a><span class="kw">function</span> <span class="fu">become_older</span>(x)</span>
+<span id="cb40-10"><a></a>  x.age <span class="op">=</span> x.age <span class="op">+</span> <span class="fl">1</span></span>
+<span id="cb40-11"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="explicit-type-specifications" class="slide level2">
+<h2>Explicit type specifications</h2>
+<p>Note that it is possible (and often good practice) to explicitly set the types of function arguments:</p>
+<div id="513a34ce" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb41-1"><a></a><span class="kw">function</span> <span class="fu">get_shoesize</span>(x<span class="op">::</span><span class="dt">Person</span>)</span>
+<span id="cb41-2"><a></a>  <span class="cf">return</span> x.shoesize</span>
+<span id="cb41-3"><a></a><span class="kw">end</span></span>
+<span id="cb41-4"><a></a></span>
+<span id="cb41-5"><a></a><span class="kw">function</span> <span class="fu">set_name</span>(x<span class="op">::</span><span class="dt">Person</span>, y<span class="op">::</span><span class="dt">String</span>)</span>
+<span id="cb41-6"><a></a>  x.name <span class="op">=</span> y</span>
+<span id="cb41-7"><a></a><span class="kw">end</span></span>
+<span id="cb41-8"><a></a></span>
+<span id="cb41-9"><a></a><span class="kw">function</span> <span class="fu">become_older</span>(x<span class="op">::</span><span class="dt">Person</span>)</span>
+<span id="cb41-10"><a></a>  x.age <span class="op">=</span> x.age <span class="op">+</span> <span class="fl">1</span></span>
+<span id="cb41-11"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="getters-and-setters" class="slide level2">
+<h2>Getters and setters</h2>
+<ul>
+<li>Functions that return an object’s field are sometimes known as <strong>getters</strong>. Functions that set a field are known as <strong>setters</strong>.</li>
+<li>In Julia, it is customary to append an exclamation point to the name of every setter function. This is to warn users of the function that the function modifies something in the object.</li>
+<li>Thus, we would rather write:</li>
+</ul>
+<div id="739b6dc9" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a></a><span class="kw">function</span> <span class="fu">set_name!</span>(x<span class="op">::</span><span class="dt">Person</span>, y<span class="op">::</span><span class="dt">String</span>)</span>
+<span id="cb42-2"><a></a>  x.name <span class="op">=</span> y</span>
+<span id="cb42-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="array-comprehensions" class="slide level2">
+<h2>Array comprehensions</h2>
+<ul>
+<li>What if we wanted to create 3 <code>Person</code>s? Easy:</li>
+</ul>
+<div id="42fa6624" class="cell" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>Person("Bob", 65, 42.33)</code></pre>
+</div>
+</div>
+<ul>
+<li>What if we wanted to create 1000 <code>Person</code>s?</li>
+</ul>
+</section>
+<section id="array-comprehensions-1" class="slide level2">
+<h2>Array comprehensions</h2>
+<ul>
+<li>Here we can use a powerful feature known as an <strong>array comprehension</strong>. The following creates 1000 persons, each with the same default fields (we’ll later see how to modify this), and places them in an array. The array is returned and stored in the <code>population</code> variable:</li>
+</ul>
+<div id="a45a60b7" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a></a>population <span class="op">=</span> [<span class="fu">Person</span>(<span class="st">"M. Musterperson"</span>, <span class="fl">0</span>, <span class="fl">0.0</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The <code>i</code> variable is a dummy variable that only exists for the duration of the array comprehension.</li>
+</ul>
+</section>
+<section id="array-comprehensions-2" class="slide level2">
+<h2>Array comprehensions</h2>
+<ul>
+<li>We can now access individual persons by indexing them from the array:</li>
+</ul>
+<div id="d250fc69" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a></a>population[<span class="fl">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>Person("M. Musterperson", 0, 0.0)</code></pre>
+</div>
+</div>
+<ul>
+<li>We can also access their fields:</li>
+</ul>
+<div id="86fff054" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb47-1"><a></a>population[<span class="fl">1</span>].name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>"M. Musterperson"</code></pre>
+</div>
+</div>
+<ul>
+<li>And we can set them:</li>
+</ul>
+<div id="faf3ce45" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb49-1"><a></a><span class="fu">set_name</span>(population[<span class="fl">1</span>], <span class="st">"Bob the Builder"</span>)</span>
+<span id="cb49-2"><a></a>population[<span class="fl">1</span>].name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>"Bob the Builder"</code></pre>
+</div>
+</div>
+</section>
+<section id="random-numbers" class="slide level2">
+<h2>Random numbers</h2>
+<ul>
+<li>To get a (pseudo)random number from between 0 and 1, simply call:</li>
+</ul>
+<div id="a0367dd3" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb51-1"><a></a><span class="fu">rand</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>0.795012825129003</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<p>How can you obtain a random number from between 0 and 50?</p>
+<p>How about between 50 and 100?</p>
+</section>
+<section id="exercise-5" class="slide level2 ex-slide">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<p>Random number from between 0 and 50:</p>
+<div id="884e1e44" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb53-1"><a></a><span class="fl">50</span><span class="fu">*rand</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>11.696687353151724</code></pre>
+</div>
+</div>
+<p>Random number from between 50 and 100:</p>
+<div id="6f3cb0c6" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb55-1"><a></a><span class="fl">50</span> <span class="op">+</span> <span class="fl">50</span><span class="fu">*rand</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>51.24486651050538</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fixme" class="slide level2">
+<h2>FIXME</h2>
+<p>control flow – conditionals and loops?</p>
+<p>or is this too much infooos for one session?</p>
+</section>
+<section id="comments" class="slide level2">
+<h2>Comments</h2>
+<ul>
+<li>To improve code readability, we insert comments (these are ignored by the compiler)</li>
+<li>Single-line comment:</li>
+</ul>
+<div id="4d7b30fc" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb57-1"><a></a><span class="co"># the following variable stores my shoe size</span></span>
+<span id="cb57-2"><a></a>shoesize <span class="op">=</span> <span class="fl">41.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Multi-line comment:</li>
+</ul>
+<div id="533239bc" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb58-1"><a></a><span class="co">#=</span></span>
+<span id="cb58-2"><a></a><span class="co">The following variable</span></span>
+<span id="cb58-3"><a></a><span class="co">stores my shoe size</span></span>
+<span id="cb58-4"><a></a><span class="co">=#</span></span>
+<span id="cb58-5"><a></a>shoesize <span class="op">=</span> <span class="fl">41.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="packages" class="slide level2">
+<h2>Packages</h2>
+<ul>
+<li>Basic Julia functionality is extended by <strong>packages</strong></li>
+<li>These are installed through a package manager called <strong>Pkg</strong></li>
+<li>E.g. to install the <em>Agents</em> package (and all its dependencies), we issue these commands:</li>
+</ul>
+<div id="d4f5276e" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb59-1"><a></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb59-2"><a></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Agents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Once the package has been installed, we can load it by:</li>
+</ul>
+<div id="e339d316" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb60-1"><a></a><span class="im">using</span> <span class="bu">Agents</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="homework" class="slide level2">
+<h2>Homework</h2>
+<p>FIXME</p>
+</section>
+<section id="old" class="slide level2">
+<h2>OLD</h2>
 </section>
 <section id="arrays-and-broadcasting" class="slide level2">
 <h2>Arrays and broadcasting</h2>
@@ -474,8 +1015,8 @@
 <p>The special keyword <code>end</code> fetches the last item in an array:</p>
 <p>Operations and functions (we’ll talk about functions below) in Julia can be <strong>broadcast</strong>, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, <code>manynumbers</code>. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:</p>
 <p>The following <em>will</em> work, but is cumbersome to write:</p>
-<div id="ac51ff41" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="29b950bf" class="cell" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>5-element Vector{Int64}:
   2
   5
@@ -485,8 +1026,8 @@
 </div>
 </div>
 <p>Instead of this, we can use the special <code>.</code> prefix to apply the sum operation elementwise:</p>
-<div id="8cc48e0b" class="cell" data-execution_count="12">
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="4bada3e0" class="cell" data-execution_count="43">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>5-element Vector{Int64}:
   2
   5
@@ -518,7 +1059,7 @@
 <p>Think of a composite type such as this as a <em>template</em>. We can use and reuse the same template to create multiple instances, or <strong>objects</strong>, of that template. For example:</p>
 <p>This will create two <code>Speaker</code> objects and store them in the variables <code>alice</code> and <code>bob</code>. The first instance has a grammar of type <code>1</code> (we haven’t really specified yet what that means—but we will in the main chapters of these notes), the second a grammar of type <code>2</code>. The first has an age of <code>22.5</code> (which we might interpret as years), the second an age of <code>40.0</code>. Finally, the first speaker is defined to be middle-class, the second, lower-class.</p>
 </section>
-<section id="functions" class="slide level2">
+<section id="functions-1" class="slide level2">
 <h2>Functions</h2>
 <p>The actual functionality of composite objects will be defined by <strong>functions</strong>, which manipulate those objects.</p>
 <p>For example, suppose we want to implement a function that changes a speaker’s grammar to <code>i</code> (from whichever value it happens to have at the moment), where <code>i</code> is some integer. This we can achieve with the following function. The function takes two <strong>arguments</strong>: a <code>Speaker</code> object, and <code>i</code>. It then modifies the speaker’s <code>grammar</code> field to read <code>i</code>. (Fields are accessed using the <code>.</code> notation.)</p>
@@ -538,13 +1079,13 @@
 </div>
 <p>Functions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:</p>
 <p>We can then call the function like this:</p>
-<div id="9af3c609" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div id="7c9ae325" class="cell" data-execution_count="49">
+<div class="cell-output cell-output-display" data-execution_count="47">
 <pre><code>10</code></pre>
 </div>
 </div>
 <p>Functions need not have return values—indeed, our <code>change_grammar!</code> function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string <code>"Hello, world!"</code> to the screen:</p>
-<div id="92e2e863" class="cell" data-execution_count="19">
+<div id="e0ac8877" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello, world!</code></pre>
 </div>
@@ -590,8 +1131,8 @@
 <section id="loops" class="slide level2">
 <h2>Loops</h2>
 <p>Programs also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of <em>arbitrary</em> length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a <code>for</code> loop. (Note that <code>Array{Float64}</code> specifies that we expect, as input, an array of floating-point numbers, and that <code>length</code> is a function that returns the number of elements in an array.)</p>
-<div id="81931380" class="cell" data-execution_count="25">
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div id="a06434ec" class="cell" data-execution_count="56">
+<div class="cell-output cell-output-display" data-execution_count="54">
 <pre><code>28.4</code></pre>
 </div>
 </div>
@@ -609,7 +1150,7 @@
 </div>
 </div>
 <p>Another use case for a <code>for</code> loop might be the following. Suppose we have collected a number of <code>Speaker</code> objects in an array, and wish to print out the age of each speaker. This is easy to do:</p>
-<div id="30c7c5e9" class="cell" data-execution_count="26">
+<div id="14154705" class="cell" data-execution_count="57">
 <div class="cell-output cell-output-stdout">
 <pre><code>22.5
 40.0
@@ -619,8 +1160,8 @@
 <p>However, there is an even better (a more “Julian”, i.e.&nbsp;more idiomatic) solution. We first write a function that returns a speaker’s age:</p>
 <p>Or using the shorter syntax:</p>
 <p>We can then use the <code>.</code> affix to apply this function to each speaker in our array:</p>
-<div id="617641ab" class="cell" data-execution_count="29">
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div id="8c41eba8" class="cell" data-execution_count="60">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>3-element Vector{Float64}:
  22.5
  40.0
@@ -629,11 +1170,11 @@
 </div>
 <p>This returns a three-element vector containing the speakers’ ages, but does not print it to the terminal. If we want the latter too, we just call <code>println</code>, broadcast over the array:</p>
 </section>
-<section id="array-comprehensions" class="slide level2">
+<section id="array-comprehensions-3" class="slide level2">
 <h2>Array comprehensions</h2>
 <p>Another powerful feature of the Julia language are <strong>array comprehensions</strong>. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain <span class="math inline">\(0^2 = 0\)</span>, <span class="math inline">\(1^2 = 1\)</span>, <span class="math inline">\(2^2 = 4\)</span> and so on).</p>
-<div id="ab4b7d04" class="cell" data-execution_count="31">
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div id="946858b2" class="cell" data-execution_count="62">
+<div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>100-element Vector{Int64}:
     0
     1
@@ -664,8 +1205,8 @@
 </div>
 </div>
 <p>The expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker <code>alice</code> fifty times. We could accomplish this with the following array comprehension:</p>
-<div id="ad92c552" class="cell" data-execution_count="32">
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div id="a5e9500b" class="cell" data-execution_count="63">
+<div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>50-element Vector{Float64}:
  22.5
  22.5
@@ -758,7 +1299,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -826,7 +1367,7 @@
         showNotes: false,
 
         // Global override for autoplaying embedded media (null/true/false)
-        autoPlayMedia: null,
+        autoPlayMedia: true,
 
         // Global override for preloading lazy-loaded iframes (null/true/false)
         preloadIframes: null,
