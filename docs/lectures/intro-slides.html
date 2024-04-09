@@ -409,7 +409,7 @@
 <tr class="header">
 <th>Rule</th>
 <th>Cell</th>
-<th>Surrounded by</th>
+<th>Neighbourhood</th>
 <th>Result</th>
 </tr>
 </thead>
@@ -448,7 +448,9 @@
 <h2>Question</h2>
 <p>Earlier we said ABMs are complete, consistent and unambiguous.</p>
 <p><strong>What have I left out of the definition of Conway’s Game of Life?</strong> (I.e. why is my description so far incomplete?)</p>
-<div class="fragment">
+</section>
+<section id="question-1" class="slide level2">
+<h2>Question</h2>
 <div title="Answer">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -459,12 +461,12 @@
 <p><strong>Answer</strong></p>
 </div>
 <div class="callout-content">
-<p>Two very important things:</p>
+<p>Three very important things (at least):</p>
 <ol type="1">
 <li>Is the lattice <strong>finite</strong> or <strong>infinite</strong>? If finite, then what happens at the boundaries? <em>– It is infinite.</em></li>
 <li>Are the agents (the cells) updated <strong>synchronously</strong> (all at once) or <strong>asynchronously</strong>? <em>– Synchronously.</em></li>
+<li>How are a cell’s <strong>neighbours</strong> defined? <em>– It’s the 8 cells surrounding it.</em></li>
 </ol>
-</div>
 </div>
 </div>
 </div>
@@ -483,8 +485,8 @@
 </div>
 </div>
 </section>
-<section id="answer" class="slide level2">
-<h2>Answer</h2>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
 <div title="Answer">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -533,14 +535,18 @@
 <h2>Emergence</h2>
 <ul>
 <li>The game has simple rules, complex behaviour</li>
-<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, <em>we can prove that it impossible to prove</em> whether O will ever be reached from S!</li>
+<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, <em>we can prove that it is impossible to prove</em> whether O will ever be reached from S!</li>
 <li>New facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)</li>
 </ul>
 </section>
 <section id="example-2-flocking" class="slide level2">
 <h2>Example 2: Flocking</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/dedVszDI9aE?si=D-L4ccVFdIUnN658?start=97" width="800" height="450" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="example-2-flocking-1" class="slide level2">
+<h2>Example 2: Flocking</h2>
 <ul>
-<li>A simple model of the emergence of collective behaviour, flocking in birds</li>
+<li>A simple model of the emergence of collective behaviour, flocking in birds<sup>1</sup></li>
 <li>Birds follow three rules:
 <ol type="1">
 <li>Collision avoidance: maintain a minimum distance to other birds</li>
@@ -548,14 +554,14 @@
 <li>Navigation: fly in the average direction of your neighbours</li>
 </ol></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn4"><p><span class="citation" data-cites="Reynolds1987">Reynolds (<a href="#/references" role="doc-biblioref" onclick="">1987</a>)</span>, and much research thereafter, importantly <span class="citation" data-cites="VicsekEtAl1995">Vicsek et al. (<a href="#/references" role="doc-biblioref" onclick="">1995</a>)</span> and subsequent.</p></li></ol></aside></section>
 <section id="section-1" class="slide level2" data-background-video="../videos/flocking.mp4" data-background-size="contain">
 <h2></h2>
 </section>
 <section id="example-3-social-distancing" class="slide level2">
 <h2>Example 3: Social Distancing</h2>
 <ul>
-<li>SIR (susceptible-infected-recovered) models are used to model epidemics, e.g.&nbsp;the spread of viruses</li>
+<li>SIR (susceptible-infected-recovered) models are used to model epidemics, e.g.&nbsp;the spread of viruses<sup>1</sup></li>
 <li>Such models can be extended with aspects such as social distancing – implemented here as agents which remain stationary</li>
 <li>In the following animations,
 <ul>
@@ -564,7 +570,7 @@
 <li>green dot = recovered individual</li>
 </ul></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>See <span class="citation" data-cites="VynnyckyWhite2010">Vynnycky and White (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span> for an overview.</p></li></ol></aside></section>
 <section id="section-2" class="slide level2" data-background-video="../videos/epidemic_noisolation.mp4" data-background-size="contain">
 <h2></h2>
 </section>
@@ -608,20 +614,34 @@
 <li>However, with ABMs, computational requirements may be significant, and may not <strong>scale</strong> nicely</li>
 </ul>
 </section>
-<section id="speed-issues-an-example" class="slide level2">
-<h2>Speed issues: an example</h2>
+<section id="exampleexercise" class="slide level2">
+<h2>Example/Exercise</h2>
 <ul>
-<li>You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.
+<li>Assume:
 <ul>
-<li>Suppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.</li>
-<li>Suppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.</li>
-<li>Then you’re looking at a total of 1 million runs.</li>
+<li>You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.</li>
+<li>Your model has 2 parameters, each of which can assume 100 different values.</li>
+<li>You want to replicate the simulation for each parameter combination 100 times for statistical reasons.</li>
 </ul></li>
+<li>How long will it take for your entire simulation to complete?</li>
 </ul>
-<div class="fragment">
-<ul>
-<li>With 1 minute / run, we’re looking at <strong>2 years</strong> to get the results!</li>
-</ul>
+</section>
+<section id="exampleexercise-1" class="slide level2">
+<h2>Example/Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<p>2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly <strong>2 years</strong>!</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="how-to-deal-with-issues-of-speed" class="slide level2">
@@ -666,7 +686,7 @@
 <li>This means that different parts of your simulation are <strong>not</strong> independent of each other – a major problem!</li>
 <li>Further issues can arise when we look at parallel processing… but more on that later!</li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn4"><p>We’ll see later that this is by no means a crazy requirement!</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn6"><p>We’ll see later that this is by no means a crazy requirement!</p></li></ol></aside></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
@@ -707,6 +727,15 @@ Gardner, Martin. 1970. <span>“The Fantastic Combinations of <span class="nocas
 </div>
 <div id="ref-Gilbert2020" class="csl-entry" role="listitem">
 Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
+</div>
+<div id="ref-Reynolds1987" class="csl-entry" role="listitem">
+Reynolds, Craig W. 1987. <span>“Flocks, Herds and Schools: A Distributed Behavioral Model.”</span> <em>ACM SIGRAPH Computer Graphics</em> 21 (4): 25–34. <a href="https://doi.org/10.1145/37402.37406">https://doi.org/10.1145/37402.37406</a>.
+</div>
+<div id="ref-VicsekEtAl1995" class="csl-entry" role="listitem">
+Vicsek, Tamás, András Czirók, Eshel Ben-Jacob, Inon Cohen, and Ofer Shochet. 1995. <span>“Novel Type of Phase Transition in a System of Self-Driven Particles.”</span> <em>Physical Review Letters</em> 75: 1226–29. <a href="https://doi.org/10.1103/PhysRevLett.75.1226">https://doi.org/10.1103/PhysRevLett.75.1226</a>.
+</div>
+<div id="ref-VynnyckyWhite2010" class="csl-entry" role="listitem">
+Vynnycky, Emilia, and Richard G. White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. Oxford: Oxford University Press.
 </div>
 </div>
 </section>

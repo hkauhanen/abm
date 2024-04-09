@@ -244,7 +244,7 @@ window.Quarto = {
 <tr class="header">
 <th>Rule</th>
 <th>Cell</th>
-<th>Surrounded by</th>
+<th>Neighbourhood</th>
 <th>Result</th>
 </tr>
 </thead>
@@ -293,10 +293,11 @@ Answer
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Two very important things:</p>
+<p>Three very important things (at least):</p>
 <ol type="1">
 <li>Is the lattice <strong>finite</strong> or <strong>infinite</strong>? If finite, then what happens at the boundaries? <em>– It is infinite.</em></li>
 <li>Are the agents (the cells) updated <strong>synchronously</strong> (all at once) or <strong>asynchronously</strong>? <em>– Synchronously.</em></li>
+<li>How are a cell’s <strong>neighbours</strong> defined? <em>– It’s the 8 cells surrounding it.</em></li>
 </ol>
 </div>
 </div>
@@ -363,14 +364,18 @@ Answer
 <h2 class="anchored" data-anchor-id="emergence">Emergence</h2>
 <ul>
 <li>The game has simple rules, complex behaviour</li>
-<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, <em>we can prove that it impossible to prove</em> whether O will ever be reached from S!</li>
+<li>It is <strong>undecidable</strong>: given a starting state S and a proposed other state O, <em>we can prove that it is impossible to prove</em> whether O will ever be reached from S!</li>
 <li>New facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)</li>
 </ul>
 </section>
 <section id="example-2-flocking" class="level2">
 <h2 class="anchored" data-anchor-id="example-2-flocking">Example 2: Flocking</h2>
+<div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/dedVszDI9aE?si=D-L4ccVFdIUnN658?start=97" width="800" height="450" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="example-2-flocking-1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example-2-flocking-1">Example 2: Flocking</h2>
 <ul>
-<li>A simple model of the emergence of collective behaviour, flocking in birds</li>
+<li>A simple model of the emergence of collective behaviour, flocking in birds<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
 <li>Birds follow three rules:
 <ol type="1">
 <li>Collision avoidance: maintain a minimum distance to other birds</li>
@@ -378,12 +383,12 @@ Answer
 <li>Navigation: fly in the average direction of your neighbours</li>
 </ol></li>
 </ul>
-<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../videos/flocking.mp4"></video></div>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;<span class="citation" data-cites="Reynolds1987">Reynolds (<a href="#ref-Reynolds1987" role="doc-biblioref">1987</a>)</span>, and much research thereafter, importantly <span class="citation" data-cites="VicsekEtAl1995">Vicsek et al. (<a href="#ref-VicsekEtAl1995" role="doc-biblioref">1995</a>)</span> and subsequent.</p></div></div><div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../videos/flocking.mp4"></video></div>
 </section>
-<section id="example-3-social-distancing" class="level2">
+<section id="example-3-social-distancing" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example-3-social-distancing">Example 3: Social Distancing</h2>
 <ul>
-<li>SIR (susceptible-infected-recovered) models are used to model epidemics, e.g.&nbsp;the spread of viruses</li>
+<li>SIR (susceptible-infected-recovered) models are used to model epidemics, e.g.&nbsp;the spread of viruses<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
 <li>Such models can be extended with aspects such as social distancing – implemented here as agents which remain stationary</li>
 <li>In the following animations,
 <ul>
@@ -392,7 +397,7 @@ Answer
 <li>green dot = recovered individual</li>
 </ul></li>
 </ul>
-<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../videos/epidemic_noisolation.mp4"></video></div>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;See <span class="citation" data-cites="VynnyckyWhite2010">Vynnycky and White (<a href="#ref-VynnyckyWhite2010" role="doc-biblioref">2010</a>)</span> for an overview.</p></div></div><div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../videos/epidemic_noisolation.mp4"></video></div>
 <div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../videos/epidemic_isolation.mp4"></video></div>
 </section>
 <section id="bounded-rationality-locality" class="level2">
@@ -432,19 +437,33 @@ Answer
 <li>However, with ABMs, computational requirements may be significant, and may not <strong>scale</strong> nicely</li>
 </ul>
 </section>
-<section id="speed-issues-an-example" class="level2">
-<h2 class="anchored" data-anchor-id="speed-issues-an-example">Speed issues: an example</h2>
+<section id="exampleexercise" class="level2">
+<h2 class="anchored" data-anchor-id="exampleexercise">Example/Exercise</h2>
 <ul>
-<li>You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.
+<li>Assume:
 <ul>
-<li>Suppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.</li>
-<li>Suppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.</li>
-<li>Then you’re looking at a total of 1 million runs.</li>
+<li>You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.</li>
+<li>Your model has 2 parameters, each of which can assume 100 different values.</li>
+<li>You want to replicate the simulation for each parameter combination 100 times for statistical reasons.</li>
 </ul></li>
+<li>How long will it take for your entire simulation to complete?</li>
 </ul>
-<ul>
-<li>With 1 minute / run, we’re looking at <strong>2 years</strong> to get the results!</li>
-</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly <strong>2 years</strong>!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="how-to-deal-with-issues-of-speed" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-deal-with-issues-of-speed">How to deal with issues of speed</h2>
@@ -483,12 +502,12 @@ Answer
 <h2 class="anchored" data-anchor-id="issues-with-prngs">Issues with PRNGs</h2>
 <ul>
 <li>Suppose your PRNG generates a sequence of 1M numbers…</li>
-<li>…but in your simulation you need to generate 10M random numbers<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>…but in your simulation you need to generate 10M random numbers<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></li>
 <li>Then your “random” numbers will repeat 10 times</li>
 <li>This means that different parts of your simulation are <strong>not</strong> independent of each other – a major problem!</li>
 <li>Further issues can arise when we look at parallel processing… but more on that later!</li>
 </ul>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;We’ll see later that this is by no means a crazy requirement!</p></div></div></section>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;We’ll see later that this is by no means a crazy requirement!</p></div></div></section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
@@ -529,6 +548,15 @@ Gardner, Martin. 1970. <span>“The Fantastic Combinations of <span class="nocas
 </div>
 <div id="ref-Gilbert2020" class="csl-entry" role="listitem">
 Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
+</div>
+<div id="ref-Reynolds1987" class="csl-entry" role="listitem">
+Reynolds, Craig W. 1987. <span>“Flocks, Herds and Schools: A Distributed Behavioral Model.”</span> <em>ACM SIGRAPH Computer Graphics</em> 21 (4): 25–34. <a href="https://doi.org/10.1145/37402.37406">https://doi.org/10.1145/37402.37406</a>.
+</div>
+<div id="ref-VicsekEtAl1995" class="csl-entry" role="listitem">
+Vicsek, Tamás, András Czirók, Eshel Ben-Jacob, Inon Cohen, and Ofer Shochet. 1995. <span>“Novel Type of Phase Transition in a System of Self-Driven Particles.”</span> <em>Physical Review Letters</em> 75: 1226–29. <a href="https://doi.org/10.1103/PhysRevLett.75.1226">https://doi.org/10.1103/PhysRevLett.75.1226</a>.
+</div>
+<div id="ref-VynnyckyWhite2010" class="csl-entry" role="listitem">
+Vynnycky, Emilia, and Richard G. White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. Oxford: Oxford University Press.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

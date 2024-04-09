@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="dcterms.date" content="2024-04-16">
   <title>Programming basics</title>
@@ -29,26 +29,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
     }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -175,7 +221,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -351,66 +398,42 @@
 
   <p class="date">2024-04-16</p>
 </section>
-<section id="getting-started-with-julia" class="slide level2">
-<h2>Getting started with Julia</h2>
-<p>Programming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. <strong>Julia</strong> is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.</p>
-<p>To get started, visit <a href="https://julialang.org/">https://julialang.org/</a> to download and install Julia on your system. Make sure to download <strong>version 1.9.3</strong> or newer. See <a href="https://julialang.org/downloads/platform/">here</a> for platform-specific installation instructions.</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="variables-and-assignments" class="slide level2">
+<h2>Variables and assignments</h2>
+<ul>
+<li>In programming, a <strong>variable</strong> is a “storage box” that stores data for later use</li>
+<li>The data is <strong>assigned</strong> to the variable using the <code>=</code> operator</li>
+<li>Here, we assign the number 5 to a variable named <code>my_number</code>:</li>
+</ul>
+<div id="173cb6e2" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a>my_number <span class="op">=</span> <span class="fl">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>If you already speak another programming language, it is useful to refer to <a href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/">this document</a> that details some noteworthy differences between Julia and common languages such as R, Python and C.</p>
-</div>
-</div>
-</div>
-<p>Next, launch Julia. How this is done depends on your operating system—you may find the program in a “Start” menu or similar, or you may have to launch it from the command line by typing <code>julia</code>.</p>
-<p>Having successfully launched Julia, you should see a screen like the one depicted in <a href="#/fig-julia-REPL">Figure&nbsp;1</a>.</p>
-
-<img data-src="img/julia_REPL.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: The Julia REPL.</p><p>This is called the Julia REPL (which stands for the <em>read-eval-print-loop</em>). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:</p>
-<div class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>5</code></pre>
+<ul>
+<li>We can now do things such as:</li>
+</ul>
+<div id="5346f29b" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a>my_number <span class="op">+</span> my_number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>10</code></pre>
 </div>
 </div>
-<p>Or you can store a couple of strings in variables and print them:</p>
-<div class="cell" data-execution_count="2">
-<div class="cell-output cell-output-stdout">
-<pre><code>My full name is John Doe.</code></pre>
-</div>
-</div>
-<p>In principle, it is possible to do all your Julia programming using the REPL and external files, so-called <strong>scripts</strong>. Often, however, it is useful to carry out program development in a dedicated <strong>programming environment</strong> (also sometimes known as IDEs, for “integrated development environment”). In Julia, one such environment is called <em>Pluto</em>. We will now install Pluto and launch it.</p>
-<p><strong>Packages</strong> are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called <em>Pkg</em>. To use Pkg, we first need to tell Julia that we want to use it:</p>
-<p>Next, we use the <code>Pkg.add</code> function to install Pluto:</p>
-<p>You can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at <a href="https://juliapackages.com/">https://juliapackages.com/</a>.</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Installing a package may take a while; this is often because packages have interrelationships—dependencies—between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.</p>
-</div>
-</div>
-</div>
-<p>Having successfully installed Pluto, we instruct Julia that we want to use it, and call the <code>Pluto.run()</code> function. This will start Pluto in a browser window.</p>
-<p>You should see something like the screen in <strong>?@fig-Pluto</strong>.</p>
-<p>Click on <em>Create a new notebook</em>. A notebook will open up, and you will be able type in code in a so-called code <strong>cell</strong>. Try typing up our little addition example from above:</p>
-<p>Unlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.</p>
-<p>Next, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:</p>
-<p>Pluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a <code>begin ... end</code> block. Fortunately, this is very easy to do. Simply click on “Wrap all code in a <em>begin … end</em> block”, or add the <code>begin</code> and <code>end</code> keywords manually:</p>
-<p>And voilà—we have all we need!</p>
-<p>The following sections will consist of a <em>very</em> brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official <a href="https://docs.julialang.org/">Julia Documentation</a>.</p>
 </section>
 <section id="fundamental-types" class="slide level2">
 <h2>Fundamental types</h2>
+<ul>
+<li>Variables can store different <strong>types</strong> of data:
+<ul>
+<li>Integers: <code>1</code>, <code>2</code>, <code>-100</code>, …</li>
+<li>Floating-point numbers (“floats”): <code>3.14</code>, <code>pi</code>, <code>1.0</code>, …</li>
+<li>Booleans: <code>true</code>, <code>false</code></li>
+<li>Strings: <code>"John"</code>, <code>"Mary"</code></li>
+<li>Arrays: <code>[1, 2, 3, 4]</code>, <code>[1 2 3 4]</code></li>
+<li>And some others… we’ll meet them later</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>Most programming languages make available a number of different <strong>types</strong> of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).</p>
 <p>We have already seen integers and strings. These can be stored in <strong>variables</strong>. For instance, above we stored the strings <code>"John"</code> and <code>"Doe"</code> in the variables <code>firstname</code> and <code>lastname</code>. Think of variables as “boxes” that hold data. The contents of these boxes can be changed. For example, we reuse the <code>firstname</code> variable if we want to change our name:</p>
 <p>Now the variable <code>firstname</code> will hold the string <code>"Jane"</code> instead of the string <code>"John"</code>.</p>
@@ -451,8 +474,8 @@
 <p>The special keyword <code>end</code> fetches the last item in an array:</p>
 <p>Operations and functions (we’ll talk about functions below) in Julia can be <strong>broadcast</strong>, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, <code>manynumbers</code>. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:</p>
 <p>The following <em>will</em> work, but is cumbersome to write:</p>
-<div class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="ac51ff41" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>5-element Vector{Int64}:
   2
   5
@@ -462,8 +485,8 @@
 </div>
 </div>
 <p>Instead of this, we can use the special <code>.</code> prefix to apply the sum operation elementwise:</p>
-<div class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="8cc48e0b" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>5-element Vector{Int64}:
   2
   5
@@ -515,13 +538,13 @@
 </div>
 <p>Functions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:</p>
 <p>We can then call the function like this:</p>
-<div class="cell" data-execution_count="24">
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="9af3c609" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>10</code></pre>
 </div>
 </div>
 <p>Functions need not have return values—indeed, our <code>change_grammar!</code> function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string <code>"Hello, world!"</code> to the screen:</p>
-<div class="cell" data-execution_count="25">
+<div id="92e2e863" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello, world!</code></pre>
 </div>
@@ -567,8 +590,8 @@
 <section id="loops" class="slide level2">
 <h2>Loops</h2>
 <p>Programs also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of <em>arbitrary</em> length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a <code>for</code> loop. (Note that <code>Array{Float64}</code> specifies that we expect, as input, an array of floating-point numbers, and that <code>length</code> is a function that returns the number of elements in an array.)</p>
-<div class="cell" data-execution_count="31">
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div id="81931380" class="cell" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>28.4</code></pre>
 </div>
 </div>
@@ -586,7 +609,7 @@
 </div>
 </div>
 <p>Another use case for a <code>for</code> loop might be the following. Suppose we have collected a number of <code>Speaker</code> objects in an array, and wish to print out the age of each speaker. This is easy to do:</p>
-<div class="cell" data-execution_count="32">
+<div id="30c7c5e9" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-stdout">
 <pre><code>22.5
 40.0
@@ -596,8 +619,8 @@
 <p>However, there is an even better (a more “Julian”, i.e.&nbsp;more idiomatic) solution. We first write a function that returns a speaker’s age:</p>
 <p>Or using the shorter syntax:</p>
 <p>We can then use the <code>.</code> affix to apply this function to each speaker in our array:</p>
-<div class="cell" data-execution_count="35">
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div id="617641ab" class="cell" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>3-element Vector{Float64}:
  22.5
  40.0
@@ -609,8 +632,8 @@
 <section id="array-comprehensions" class="slide level2">
 <h2>Array comprehensions</h2>
 <p>Another powerful feature of the Julia language are <strong>array comprehensions</strong>. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain <span class="math inline">\(0^2 = 0\)</span>, <span class="math inline">\(1^2 = 1\)</span>, <span class="math inline">\(2^2 = 4\)</span> and so on).</p>
-<div class="cell" data-execution_count="37">
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div id="ab4b7d04" class="cell" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>100-element Vector{Int64}:
     0
     1
@@ -641,8 +664,8 @@
 </div>
 </div>
 <p>The expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker <code>alice</code> fifty times. We could accomplish this with the following array comprehension:</p>
-<div class="cell" data-execution_count="38">
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div id="ad92c552" class="cell" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>50-element Vector{Float64}:
  22.5
  22.5
@@ -674,16 +697,13 @@
 </div>
 <p>You will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example.</p>
 </section>
-<section id="preparing-for-the-future" class="slide level2 smaller scrollable">
+<section id="preparing-for-the-future" class="slide level2">
 <h2>Preparing for the future</h2>
 <p>Go ahead and install the following packages, which we will rely on later. <em>Plots</em> is used to draw figures, and <em>Agents</em> gives some useful functionality for agent-based models.</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Gilbert2020" class="csl-entry" role="listitem">
-Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
 </div>
 </div>
 </section>
@@ -713,7 +733,6 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -974,10 +993,27 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -987,8 +1023,17 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1002,7 +1047,11 @@ Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

@@ -1,157 +1,289 @@
 ---
 title: "Programming basics"
 date: 04/16/2024
-Reading: "@Gilbert2020, chapter 2"
-format:
-  revealjs:
-    output-file: basics-slides.html
+categories:
+  - lecture
+#format:
+#  revealjs:
+#    output-file: basics-slides.html
 ---
 
 
-## Getting started with Julia
+## TUDÚ
 
-Programming languages come in many forms and flavours. Some (such as C) produce code that is quick to run but difficult to write; others (such as Python and R) do much the opposite. **Julia** is a fairly recent language that tries to combine the best of both worlds: it tries to give you both speed and a convenient syntax. Julia is extremely well suited for simulation work, and this is the reason we will be using it in this course.
+- comments
+- packages
+- functions vs methods (multiple dispatch)
+- meaning of dynamic typing
+- custom types
+- broadcasting of functions
+- array comprehensions
+- explicit type declarations for custom types and function arguments
+- conditionals
+- loops
 
-To get started, visit [https://julialang.org/](https://julialang.org/) to download and install Julia on your system. Make sure to download **version 1.9.3** or newer. See [here](https://julialang.org/downloads/platform/) for platform-specific installation instructions.
 
-::: {.callout-note}
-If you already speak another programming language, it is useful to refer to [this document](https://docs.julialang.org/en/v1/manual/noteworthy-differences/) that details some noteworthy differences between Julia and common languages such as R, Python and C.
-:::
+## Variables and assignments
 
-Next, launch Julia. How this is done depends on your operating system---you may find the program in a "Start" menu or similar, or you may have to launch it from the command line by typing `julia`.
-
-Having successfully launched Julia, you should see a screen like the one depicted in @fig-julia-REPL. 
-
-![The Julia REPL.](img/julia_REPL.png){#fig-julia-REPL}
-
-This is called the Julia REPL (which stands for the *read-eval-print-loop*). Here you can type in commands and Julia will execute them for you. For example, try the following, which will simply add together the two numbers 2 and 3 and return the result:
-
-```{julia}
-2+3
-```
-
-Or you can store a couple of strings in variables and print them:
+- In programming, a **variable** is a "storage box" that stores data for later use
+- The data is **assigned** to the variable using the `=` operator
+- Here, we assign the number 5 to a variable named `my_number`:
 
 ```{julia}
-firstname = "John"
-lastname = "Doe"
-println("My full name is $firstname $lastname.")
+#| echo: true
+#| output: false
+my_number = 5
 ```
 
-In principle, it is possible to do all your Julia programming using the REPL and external files, so-called **scripts**. Often, however, it is useful to carry out program development in a dedicated **programming environment** (also sometimes known as IDEs, for "integrated development environment"). In Julia, one such environment is called *Pluto*. We will now install Pluto and launch it.
-
-**Packages** are additional program libraries that extend the capabilities of the base system. In Julia, they are easy to install using a package manager, which is called *Pkg*. To use Pkg, we first need to tell Julia that we want to use it:
+- We can now do things such as:
 
 ```{julia}
-#| eval: false
-using Pkg
+#| echo: true
+my_number + my_number
 ```
-
-Next, we use the `Pkg.add` function to install Pluto:
-
-```{julia}
-#| eval: false
-Pkg.add("Pluto")
-```
-
-You can use this same logic to install whichever Julia package you may happen to need. Available packages are listed at [https://juliapackages.com/](https://juliapackages.com/).
-
-::: {.callout-note}
-Installing a package may take a while; this is often because packages have interrelationships---dependencies---between them. When you ask Julia to install Pluto, for example, Pkg will install for you all packages that Pluto depends on but that might not already be present on your system. Wait patiently for the installation to finish.
-:::
-
-Having successfully installed Pluto, we instruct Julia that we want to use it, and call the `Pluto.run()` function. This will start Pluto in a browser window.
-
-```{julia}
-#| eval: false
-using Pluto
-Pluto.run()
-```
-
-You should see something like the screen in @fig-Pluto.
-
-
-Click on *Create a new notebook*. A notebook will open up, and you will be able type in code in a so-called code **cell**. Try typing up our little addition example from above:
-
-```{julia}
-#| eval: false
-2+3
-```
-
-Unlike in the REPL, where pressing Enter executes the code, in a Pluto notebook cell Enter makes a new line. Use the combination Shift+Enter to execute the code instead. This will display the result above the code cell.
-
-Next, create another cell by clicking on the small plus (+) sign. Type in our second example and try executing it with Shift+Enter:
-
-```{julia}
-#| eval: false
-firstname = "John"
-lastname = "Doe"
-println("My full name is $firstname $lastname.")
-```
-
-Pluto will throw an error! Why is this? Essentially, we are dealing with a design choice made by the Pluto developers, which requires multi-expression cells to be surrounded in a `begin ... end` block. Fortunately, this is very easy to do. Simply click on "Wrap all code in a *begin ... end* block", or add the `begin` and `end` keywords manually:
-
-```{julia}
-#| eval: false
-begin
-  firstname = "John"
-  lastname = "Doe"
-  println("My full name is $firstname $lastname.")
-end
-```
-
-And voilà---we have all we need!
-
-
-The following sections will consist of a *very* brief introduction to some key aspects of Julia that we will need to conduct our model simulations. Naturally, this introduction is nowhere near comprehensive. For full details, refer to the official [Julia Documentation](https://docs.julialang.org/).
 
 
 ## Fundamental types
 
-Most programming languages make available a number of different **types** of data. Fundamental types in many modern programming languages include integers (used to represent integers), floating-point numbers (used to represent real numbers), Booleans (used to represent truth values), strings (character sequences), various types of arrays (used to represent tuples, vectors, matrices etc.), as well as lists (collections of objects).
+- Variables can store different **types** of data:
+  - Integers: `1`, `2`, `-100`, ...
+  - Floating-point numbers ("floats"): `3.14`, `pi`, `1.0`, ...
+  - Booleans: `true`, `false`
+  - Strings: `"John"`, `"Mary"`
+  - Arrays: `[1, 2, 3, 4]`, `[1 2 3 4]`
+  - And some others... we'll meet them later
 
-We have already seen integers and strings. These can be stored in **variables**. For instance, above we stored the strings `"John"` and `"Doe"` in the variables `firstname` and `lastname`. Think of variables as "boxes" that hold data. The contents of these boxes can be changed. For example, we reuse the `firstname` variable if we want to change our name:
+
+## Arithmetic operations
+
+- Arithmetic operations are mostly self-explanatory. For example:
 
 ```{julia}
-#| output: false
-firstname = "Jane"
+#| eval: true
+number1 = 15
+number2 = 20
+number3 = 10*(number1 + number2) - number1/number2
+number3
 ```
 
-Now the variable `firstname` will hold the string `"Jane"` instead of the string `"John"`.
 
-We can even do something like the following, whereby the variable's type changes from string to integer:
+## String concatenation
+
+- Julia overloads the `*` operator for strings too:
 
 ```{julia}
-#| output: false
-firstname = 2
+#| eval: true
+string1 = "This "
+string2 = "is a"
+string3 = " sentence"
+string1 * string2 * string3 * "!"
 ```
 
-::: {.callout-note}
-In Pluto, if a variable is changed in one code cell, then its value also changes in all other cells that make use of the same variable.
+
+## Arrays
+
+- An array is a (possibly multidimensional) collection of objects
+  - A one-dimensional array is a vector, a two-dimensional array is a matrix, and so on
+- Usually we work with arrays of numbers. They are easy to create:
+
+```{julia}
+#| eval: true
+my_array = [10, 20, 30, 40]
+```
+
+
+## Accessing array contents
+
+- The elements of an array can be accessed one-by-one by referencing their location or **index** in the array:
+
+```{julia}
+#| eval: true
+my_array = [10, 20, 30, 40]
+my_array[1]
+```
+
+or
+
+```{julia}
+#| eval: true
+my_array[2]
+```
+
+::: {.content-visible when-format="revealjs"}
+## Accessing array contents
 :::
 
-So-called **floating-point numbers**, which represent real numbers up to some precision which is determined by both the programming language and the computer's architecture, are easy to create: just make sure that there is a decimal point in the number:
+- The special keyword `end` fetches the last element:
 
 ```{julia}
-#| output: false
-smallnumber = 2.5
-evensmallernumber = 2.0
-largenumber = 49812093.30
+#|eval: true
+my_array[end]
 ```
 
-Most mathematical operations are self-explanatory:
+- Arrays can also be subsetted:
 
 ```{julia}
-#| output: false
-smallnumber = 2.5 + 4.0 # equals 6.5
-anothernumber = evensmallernumber * 2 # equals 4.0
-divided = anothernumber/4.0 # equals 1.0
+#|eval: true
+my_array[2:3]
 ```
 
-::: {.callout-note}
-Anything written after a hash sign (`#`) on a line in Julia constitutes a **comment**. Comments are not executed by the compiler; it does not "see" them. They can (and should!) be used to add explanations to source code that aid the programmer or someone else who might read the code later. For example, when defining custom types or functions (see below), it is good practice to add some lines of comments before the type or function definition, explaining what the type contains or what the function does, what the arguments to the function are, and what (if anything) the function returns.
+
+## Broadcasting
+
+- Suppose I want to add `1` to each number in `my_array`
+- The following will **not** work:
+
+```{julia}
+#|eval: true
+#|error: true
+my_array + 1
+```
+
+::: {.content-visible when-format="revealjs"}
+## Broadcasting
 :::
 
+- Why? Because mathematically the operation "add a scalar into a vector" is undefined
+- To apply an operator **elementwise** to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called **broadcasting**.
+
+```{julia}
+#|eval: true
+my_array .+ 1
+```
+
+
+## Type mismatch
+
+- Why does the following not work?
+
+```{julia}
+#|eval: true
+#|error: true
+my_string = "My shoe size is: "
+my_number = 41
+my_string * my_number
+```
+
+::: {.content-visible when-format="revealjs"}
+## Type conversion
+:::
+
+- To make it work, we need to explicitly **convert** the integer into a string:
+
+```{julia}
+#|eval: true
+my_string * string(my_number)
+```
+
+
+## Functions
+
+- A **function**, sometimes also known as a **subroutine**, is a **reusable** piece of code that performs, well, some function...
+- We define it once and then can use it as many times as we like
+- A function can (but need not) take inputs -- these are known as the function's **arguments**
+- A function can (but need not) give an output -- this is known as the function's **return value**
+
+
+## Functions: example
+
+- Here is a function that takes two arguments, an array and a scalar number, and adds the scalar to each element of the array
+- I'm calling the function `add_elementwise`
+
+```{julia}
+#|eval: true
+function add_elementwise(array, scalar)
+  result = array .+ scalar
+  return result
+end
+```
+
+::: {.content-visible when-format="revealjs"}
+## Functions: example
+:::
+
+- We can now **call** the function on particular arrays and numbers:
+
+```{julia}
+#|eval: true
+my_array = [10, 20, 30, 40]
+add_elementwise(my_array, 1)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Functions: example
+:::
+
+```{julia}
+#|eval: true
+add_elementwise(my_array, -23.5)
+```
+
+
+## Exercise
+
+Write a function with the following properties:
+
+- The function's name is `announce_age`
+- The function takes two arguments, the first a person's name, the second a number that is that person's age
+- The function's return value is a string which announces the person's age in this format: `"John is 40 years old"`
+
+::: {.content-visible when-format="revealjs"}
+## Exercise
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+Here is the function definition:
+
+```{julia}
+#|eval: true
+function announce_age(name, age)
+  return name * " is " * string(age) * " years old"
+end
+```
+
+Let's test it:
+
+```{julia}
+#|eval: true
+announce_age("John", 40)
+```
+:::
+
+
+## Custom types ("classes" and "objects")
+
+- Idea of **object-oriented programming** (OOP): we can make custom types (**classes**) which are instantiated as **objects**
+  - Programming ABMs in a language that does not support this would be very cumbersome
+- In Julia, custom types are defined by way of a special keyword, `struct`
+- A custom type is effectively a combination of variables called the type's **fields**
+- If the fields need to be modifiable later in the program, we use `mutable struct` instead of `struct`
+
+
+## Custom types: example
+
+- Suppose we want to represent a person by way of their name, their age and their shoe size
+- Since these fields (at least age) need to be modifiable, we use a `mutable struct`:
+
+```{julia}
+#|eval: true
+mutable struct Person
+  name::String
+  age::Int
+  shoesize::Float64
+end
+```
+
+
+
+
+
+
+
+
+
+
+
+## OLD
 
 ## Arrays and broadcasting
 

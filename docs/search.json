@@ -53,14 +53,21 @@
     "href": "lectures/intro-slides.html#example-1-conways-game-of-life",
     "title": "Intro to ABMs",
     "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nSurrounded by\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
   },
   {
     "objectID": "lectures/intro-slides.html#question",
     "href": "lectures/intro-slides.html#question",
     "title": "Intro to ABMs",
     "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\n\n\nAnswer\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously."
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#question-1",
+    "href": "lectures/intro-slides.html#question-1",
+    "title": "Intro to ABMs",
+    "section": "Question",
+    "text": "Question\n\n\n\n\n\n\n\nAnswer\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
   },
   {
     "objectID": "lectures/intro-slides.html#exercise",
@@ -70,11 +77,11 @@
     "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB"
   },
   {
-    "objectID": "lectures/intro-slides.html#answer",
-    "href": "lectures/intro-slides.html#answer",
+    "objectID": "lectures/intro-slides.html#exercise-1",
+    "href": "lectures/intro-slides.html#exercise-1",
     "title": "Intro to ABMs",
-    "section": "Answer",
-    "text": "Answer\n\n\n\n\n\n\n\nAnswer\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
   },
   {
     "objectID": "lectures/intro-slides.html#species",
@@ -88,21 +95,28 @@
     "href": "lectures/intro-slides.html#emergence",
     "title": "Intro to ABMs",
     "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
   },
   {
     "objectID": "lectures/intro-slides.html#example-2-flocking",
     "href": "lectures/intro-slides.html#example-2-flocking",
     "title": "Intro to ABMs",
     "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#example-2-flocking-1",
+    "href": "lectures/intro-slides.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds1\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\nReynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
   },
   {
     "objectID": "lectures/intro-slides.html#example-3-social-distancing",
     "href": "lectures/intro-slides.html#example-3-social-distancing",
     "title": "Intro to ABMs",
     "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual"
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses1\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\nSee Vynnycky and White (2010) for an overview."
   },
   {
     "objectID": "lectures/intro-slides.html#bounded-rationality-locality",
@@ -133,11 +147,18 @@
     "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
   },
   {
-    "objectID": "lectures/intro-slides.html#speed-issues-an-example",
-    "href": "lectures/intro-slides.html#speed-issues-an-example",
+    "objectID": "lectures/intro-slides.html#exampleexercise",
+    "href": "lectures/intro-slides.html#exampleexercise",
     "title": "Intro to ABMs",
-    "section": "Speed issues: an example",
-    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
+    "section": "Example/Exercise",
+    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?"
+  },
+  {
+    "objectID": "lectures/intro-slides.html#exampleexercise-1",
+    "href": "lectures/intro-slides.html#exampleexercise-1",
+    "title": "Intro to ABMs",
+    "section": "Example/Exercise",
+    "text": "Example/Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
   },
   {
     "objectID": "lectures/intro-slides.html#how-to-deal-with-issues-of-speed",
@@ -193,7 +214,7 @@
     "href": "lectures/intro-slides.html#references",
     "title": "Intro to ABMs",
     "section": "References",
-    "text": "References\n\n\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE."
+    "text": "References\n\n\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE.\n\n\nReynolds, Craig W. 1987. “Flocks, Herds and Schools: A Distributed Behavioral Model.” ACM SIGRAPH Computer Graphics 21 (4): 25–34. https://doi.org/10.1145/37402.37406.\n\n\nVicsek, Tamás, András Czirók, Eshel Ben-Jacob, Inon Cohen, and Ofer Shochet. 1995. “Novel Type of Phase Transition in a System of Self-Driven Particles.” Physical Review Letters 75: 1226–29. https://doi.org/10.1103/PhysRevLett.75.1226.\n\n\nVynnycky, Emilia, and Richard G. White. 2010. An Introduction to Infectious Disease Modelling. Oxford: Oxford University Press."
   },
   {
     "objectID": "lectures/intro.html",
@@ -228,14 +249,14 @@
     "href": "lectures/intro.html#example-1-conways-game-of-life",
     "title": "Intro to ABMs",
     "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nSurrounded by\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
   },
   {
     "objectID": "lectures/intro.html#question",
     "href": "lectures/intro.html#question",
     "title": "Intro to ABMs",
     "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nTwo very important things:\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously."
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
   },
   {
     "objectID": "lectures/intro.html#exercise",
@@ -256,21 +277,28 @@
     "href": "lectures/intro.html#emergence",
     "title": "Intro to ABMs",
     "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
   },
   {
     "objectID": "lectures/intro.html#example-2-flocking",
     "href": "lectures/intro.html#example-2-flocking",
     "title": "Intro to ABMs",
     "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours"
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking-1",
+    "href": "lectures/intro.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds4\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\n4 Reynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
   },
   {
     "objectID": "lectures/intro.html#example-3-social-distancing",
     "href": "lectures/intro.html#example-3-social-distancing",
     "title": "Intro to ABMs",
     "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual"
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses5\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\n5 See Vynnycky and White (2010) for an overview."
   },
   {
     "objectID": "lectures/intro.html#bounded-rationality-locality",
@@ -301,11 +329,11 @@
     "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
   },
   {
-    "objectID": "lectures/intro.html#speed-issues-an-example",
-    "href": "lectures/intro.html#speed-issues-an-example",
+    "objectID": "lectures/intro.html#exampleexercise",
+    "href": "lectures/intro.html#exampleexercise",
     "title": "Intro to ABMs",
-    "section": "Speed issues: an example",
-    "text": "Speed issues: an example\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\n\nSuppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.\nSuppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.\nThen you’re looking at a total of 1 million runs.\n\n\n\nWith 1 minute / run, we’re looking at 2 years to get the results!"
+    "section": "Example/Exercise",
+    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
   },
   {
     "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
@@ -333,7 +361,7 @@
     "href": "lectures/intro.html#issues-with-prngs",
     "title": "Intro to ABMs",
     "section": "Issues with PRNGs",
-    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers4\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n4 We’ll see later that this is by no means a crazy requirement!"
+    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers6\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n6 We’ll see later that this is by no means a crazy requirement!"
   },
   {
     "objectID": "lectures/intro.html#summary",
@@ -375,7 +403,7 @@
     "href": "index.html",
     "title": "Agent-based modelling",
     "section": "",
-    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "lectures.html",

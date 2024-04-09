@@ -1,1 +1,1 @@
-{"entries":[{"key":"fig-julia-REPL","caption":"The Julia REPL.","order":{"section":[0,1,0,0,0,0,0],"number":1}}],"headings":["getting-started-with-julia","fundamental-types","arrays-and-broadcasting","custom-types","functions","constructors","control-flow","loops","array-comprehensions","preparing-for-the-future"]}
+{"entries":[],"headings":["variables-and-assignments","fundamental-types","section","arrays-and-broadcasting","custom-types","functions","constructors","control-flow","loops","array-comprehensions","preparing-for-the-future"]}

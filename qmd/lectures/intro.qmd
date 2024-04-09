@@ -57,7 +57,7 @@ These concepts are best explained through the use of examples...
 - Lattice; each cell either "live" (L) or "dead" (D)
 - Rules:
 
-| Rule | Cell | Surrounded by | Result |
+| Rule | Cell | Neighbourhood | Result |
 |------|------|---------------|--------|
 | "underpopulation" | L    | < 2 L cells   | L $\to$ D |
 | "sustenance" | L    | 2 or 3 L cells | L $\to$ L |
@@ -80,14 +80,15 @@ Earlier we said ABMs are complete, consistent and unambiguous.
 **What have I left out of the definition of Conway's Game of Life?** (I.e. why is my description so far incomplete?)
 
 ::: {.content-visible when-format="revealjs"}
-. . . 
+## Question
 :::
 
 ::: {.callout-tip collapse=true title="Answer"}
-Two very important things:
+Three very important things (at least):
 
 1. Is the lattice **finite** or **infinite**? If finite, then what happens at the boundaries? *-- It is infinite.*
 1. Are the agents (the cells) updated **synchronously** (all at once) or **asynchronously**? *-- Synchronously.*
+1. How are a cell's **neighbours** defined? *-- It's the 8 cells surrounding it.*
 :::
 
 
@@ -115,7 +116,7 @@ What happens to the cells in A? What happens to those in B? (Black = live, white
 ::: {.content-visible unless-format="pdf"}
 
 ::: {.content-visible when-format="revealjs"}
-## Answer
+## Exercise
 :::
 
 ::: {.callout-tip collapse=true title="Answer"}
@@ -165,13 +166,18 @@ The game supports many life forms ("species"), categorized into:^[Images of Game
 ## Emergence
 
 - The game has simple rules, complex behaviour
-- It is **undecidable**: given a starting state S and a proposed other state O, *we can prove that it impossible to prove* whether O will ever be reached from S!
+- It is **undecidable**: given a starting state S and a proposed other state O, *we can prove that it is impossible to prove* whether O will ever be reached from S!
 - New facts about the game are still being discovered: 2018 discovery of "knightships" (spaceships that move like the knight in chess)
 
 
 ## Example 2: Flocking
 
-- A simple model of the emergence of collective behaviour, flocking in birds
+{{< video https://youtu.be/dedVszDI9aE?si=D-L4ccVFdIUnN658 start="97" height="450" width="800" >}}
+
+
+## Example 2: Flocking
+
+- A simple model of the emergence of collective behaviour, flocking in birds^[@Reynolds1987, and much research thereafter, importantly @VicsekEtAl1995 and subsequent.]
 - Birds follow three rules:
     1. Collision avoidance: maintain a minimum distance to other birds
     1. Tracking: fly towards the average position of neighbouring birds
@@ -189,7 +195,7 @@ The game supports many life forms ("species"), categorized into:^[Images of Game
 
 ## Example 3: Social Distancing
 
-- SIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses
+- SIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses^[See @VynnyckyWhite2010 for an overview.]
 - Such models can be extended with aspects such as social distancing -- implemented here as agents which remain stationary
 - In the following animations,
   - black dot = susceptible (healthy) individual
@@ -238,18 +244,21 @@ The game supports many life forms ("species"), categorized into:^[Images of Game
 - However, with ABMs, computational requirements may be significant, and may not **scale** nicely
 
 
-## Speed issues: an example
+## Example/Exercise
 
-- You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.
-  - Suppose your model has 2 parameters, each of which can assume 100 different values. This means a total of 100 x 100 = 10,000 parameter combinations.
-  - Suppose you want to replicate the simulation for each parameter combination 100 times for statistical reasons.
-  - Then you're looking at a total of 1 million runs.
+- Assume:
+  - You have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.
+  - Your model has 2 parameters, each of which can assume 100 different values.
+  - You want to replicate the simulation for each parameter combination 100 times for statistical reasons.
+- How long will it take for your entire simulation to complete?
 
 ::: {.content-visible when-format="revealjs"}
-. . . 
+## Example/Exercise
 :::
 
-- With 1 minute / run, we're looking at **2 years** to get the results!
+::: {.callout-tip collapse=true title="Answer"}
+2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly **2 years**!
+:::
 
 
 ## How to deal with issues of speed
