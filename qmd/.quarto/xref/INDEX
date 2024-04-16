@@ -46,5 +46,13 @@
   "homework/installing-julia.qmd": {
     "installing-julia.html": "04d3ccad",
     "installing-julia.tex": "5ca4b104"
+  },
+  "homework/basics.qmd": {
+    "basics.html": "e9cc03c2",
+    "basics.tex": "97c37d8d"
+  },
+  "homework/fly.qmd": {
+    "fly.html": "e1f4de3b",
+    "fly.tex": "85f4a3fd"
   }
 }

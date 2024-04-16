@@ -1,6 +1,7 @@
 ---
 title: "Programming basics"
 date: 04/16/2024
+image: "../img/basics-image.png"
 categories:
   - lecture
 format:
@@ -8,19 +9,21 @@ format:
     output-file: basics-slides.html
 ---
 
+## Programming in Julia
 
-## TUDÚ
+- We will now dive straight into programming in Julia, starting with simple examples and concepts, progressing step-by-step to more complicated topics
+- To follow this lecture, you need to have a working Julia installation: see the homework on [Installing Julia](../homework/installing-julia.qmd)
+- For today, don't worry too much about whether what we do is useful -- what we are doing is establishing a *foundation* for later for the actually useful stuff...
 
-- comments
-- packages
-- functions vs methods (multiple dispatch)
-- meaning of dynamic typing
-- custom types
-- broadcasting of functions
-- array comprehensions
-- explicit type declarations for custom types and function arguments
-- conditionals
-- loops
+
+## Plan
+
+1. Variables and types
+1. Arrays and broadcasting
+1. Functions
+1. Custom types
+1. First look at random numbers
+1. Interpreted vs. compiled languages
 
 
 ## Variables and assignments
@@ -135,7 +138,9 @@ my_array[2:3]
 
 ```{julia}
 #|echo: true
+#|eval: false
 #|error: true
+#|output: false
 my_array + 1
 ```
 
@@ -159,6 +164,7 @@ my_array .+ 1
 ```{julia}
 #|echo: true
 #|error: true
+#|eval: false
 my_string = "My shoe size is: "
 my_number = 41
 my_string * my_number
@@ -172,6 +178,8 @@ my_string * my_number
 
 ```{julia}
 #|echo: true
+my_string = "My shoe size is: "
+my_number = 41
 my_string * string(my_number)
 ```
 
@@ -382,6 +390,8 @@ end
 - What if we wanted to create 3 `Person`s? Easy:
  
 ```{julia}
+#| echo: true
+#| output: false
 person1 = Person("Jane", 35, 39.5)
 person2 = Person("John", 44, 43.0)
 person3 = Person("Bob", 65, 42.33)
@@ -429,6 +439,23 @@ population[1].name
 ```
 
 
+## Broadcasting functions
+
+- Earlier, we saw how operators such as `+` can be broadcast over arrays
+- The same can be done with functions, for example:
+
+```{julia}
+#|echo: true
+alice = Person("Alice", 25, 40.0)
+bob = Person("Robert", 55, 45.0)
+carly = Person("Carly", 55, 39.0)
+
+speakers = [alice, bob, carly]
+
+get_shoesize.(speakers)
+```
+
+
 ## Random numbers
 
 - To get a (pseudo)random number from between 0 and 1, simply call:
@@ -464,13 +491,6 @@ Random number from between 50 and 100:
 50 + 50*rand()
 ```
 :::
-
-
-## FIXME
-
-control flow -- conditionals and loops?
-
-or is this too much infooos for one session?
 
 
 ## Comments
@@ -521,302 +541,88 @@ using Agents
 ```
 
 
-## Homework
+## Why is Julia sometimes slow?
 
-FIXME
-
-
-
-## OLD
-
-## Arrays and broadcasting
-
-To represent a tuple (or vector) of numbers, we can make an **array**:
-
-```{julia}
-#| output: false
-manynumbers = [1, 4, 6, 2, 20]
-```
-
-The contents of an array can be fetched one by one, if necessary, or subsetted:
-
-```{julia}
-#| output: false
-manynumbers[2] # equals 4
-manynumbers[2:3] # equals [4, 6]
-```
-
-The special keyword `end` fetches the last item in an array:
-
-```{julia}
-#| output: false
-manynumbers[end] # equals 20
-```
-
-Operations and functions (we'll talk about functions below) in Julia can be **broadcast**, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, `manynumbers`. The following won't do, because we'd be trying to add a scalar to a vector, something that isn't mathematically defined:
-
-```{julia}
-#| eval: false
-manynumbers + 1 # will throw an error
-```
-
-The following *will* work, but is cumbersome to write:
-
-```{julia}
-manynumbers + [1, 1, 1, 1, 1]
-```
-
-Instead of this, we can use the special `.` prefix to apply the sum operation elementwise:
-
-```{julia}
-manynumbers .+ 1
-```
-
-Note how the output is exactly the same.
-
-
-## Custom types
-
-Sometimes basic types aren't quite enough. For example, suppose we want to simulate the behaviour of a speaker--listener, i.e. an agent that has some representation of language and can interact with other agents. Is it an integer? A floating-point number? A string? It isn't really any of these. What we want to do is to be able to define our own data structure, our own type.
-
-For example, suppose that we can represent a speaker's grammar as an integer (on the assumption that we index all grammars with the natural numbers). Suppose, moreover, that we are interested in a speaker's age as well as its social class. Then we might want a data type such as the following, called a **composite type** in Julia:
-
-```{julia}
-mutable struct Speaker
-  grammar::Int
-  age::Float64
-  class::String
-end
-```
-
-In this definition, we introduce a composite type consisting of three primitive type inside it: a `grammar`, an `age`, and a (social) `class`. The first is declared to be an integer, the second a floating-point number with 64 bits of precision, and the third a string.
-
-::: {.callout-note}
-The keyword `mutable` is important in the type's definition. If we leave it out, any objects created with this type will be immutable, and cannot be changed once they've been created. We will see examples of this in the main chapters of these lecture notes.
+::::: {.content-visible when-format="revealjs"}
+:::: {.columns}
+::: {.column width="60%"}
+![](../img/first-transistor.jpg){height=450px}
 :::
-
-Think of a composite type such as this as a *template*. We can use and reuse the same template to create multiple instances, or **objects**, of that template. For example:
-
-```{julia}
-#| output: false
-alice = Speaker(1, 22.5, "middle")
-bob = Speaker(2, 40.0, "lower")
-```
-
-This will create two `Speaker` objects and store them in the variables `alice` and `bob`. The first instance has a grammar of type `1` (we haven't really specified yet what that means---but we will in the main chapters of these notes), the second a grammar of type `2`. The first has an age of `22.5` (which we might interpret as years), the second an age of `40.0`. Finally, the first speaker is defined to be middle-class, the second, lower-class.
-
-
-## Functions
-
-The actual functionality of composite objects will be defined by **functions**, which manipulate those objects.
-
-For example, suppose we want to implement a function that changes a speaker's grammar to `i` (from whichever value it happens to have at the moment), where `i` is some integer. This we can achieve with the following function. The function takes two **arguments**: a `Speaker` object, and `i`. It then modifies the speaker's `grammar` field to read `i`. (Fields are accessed using the `.` notation.)
-
-```{julia}
-#| output: false
-function change_grammar!(x::Speaker, i::Int)
-  x.grammar = i
-end
-```
-
-Here's a function that increments a speaker's age by one year:
-
-```{julia}
-#| output: false
-function grow!(x::Speaker)
-  x.age = x.age + 1
-end
-```
-
-::: {.callout-note}
-By convention, functions which modify things are appended with a `!` in their name in Julia. This is not mandatory, but is good practice, since looking at the function name immediately tells you whether the function modifies an object or not.
+::: {.column width="40%"}
+- CPUs and computer memory consist of binary devices, they are either "on" or "off"^[Photo of replica of the first transistor from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Replica-of-first-transistor.jpg). Public domain.]
 :::
-
-Functions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:
-
-```{julia}
-#| output: false
-function sum3(x::Int, y::Int, z::Int)
-  return x + y + z
-end
-```
-
-We can then call the function like this:
-
-```{julia}
-firstnumber = 4
-secondnumber = 3
-thirdnumber = 3
-sum3(firstnumber, secondnumber, thirdnumber)
-```
-
-Functions need not have return values---indeed, our `change_grammar!` function doesn't have one. Some functions also have no arguments, like the following function which simply prints the string `"Hello, world!"` to the screen:
-
-```{julia}
-function sayhello()
-  println("Hello, world!")
-end
-
-sayhello()
-```
+::::
 
 
-## Constructors
+## Why is Julia sometimes slow?
 
-**Constructors** are special functions used to create objects from composite types. Recall that, above, we created a speaker like this:
-
-```{julia}
-#| output: false
-alice = Speaker(1, 22.5, "middle")
-```
-
-What if we want each speaker to have age 0 when they are created? This is easy to do with a constructor that supplies this default value. The constructor will have to have the same name as the composite type.
-
-```{julia}
-#| output: false
-function Speaker(grammar::Int, class::String)
-  Speaker(grammar, 0.0, class)
-end
-```
-
-What this constructor function does is to simply call the default constructor (which takes three values), supplying `0.0` as the new speaker's age.
-
-::: {.callout-note}
-There is a shorter and possibly more intuitive way of definining this constructor:
-
-```{julia}
-#| output: false
-Speaker(grammar::Int, class::String) = Speaker(grammar, 0.0, class)
-```
+:::: {.columns}
+::: {.column width="40%"}
+- But humans write source code which is understandable to humans (well, mostly anyway...)^[Cartoon from [geek & poke](https://geek-and-poke.com/geekandpoke/2015/10/9/simply-explained). CC-BY-3.0.]
 :::
-
-Defining a new constructor does not remove the default constructor. Hence we can "birth" a speaker at age 10, for example, if we want to:
-
-```{julia}
-#| output: false
-baby = Speaker(1, "middle") # 0 years old
-child = Speaker(1, 10.0, "middle") # 10 years old
-```
-
-
-## Control flow
-
-Programs often need to check whether some condition is fulfilled or not, and continue one way or another depending on that check's outcome. For example, suppose we want to implement a `class_trip` function that takes a speaker from their social class to the one immediately higher class. We could write something like the following:
-
-```{julia}
-#| output: false
-function classtrip!(x::Speaker)
-  if x.class == "lower"
-    x.class = "middle"
-  elseif x.class == "middle"
-    x.class = "upper"
-  elseif x.class == "upper"
-    println("Cannot take a class trip - class already upper!")
-  else
-    println("Speaker is of unknown class.")
-  end
-end
-```
-
-::: {.callout-note}
-Note the very crucial difference between `==` and `=`. The double equals sign is used for comparisons, the single one for assignments. Confusing these two is a very common source of beginner errors.
+::: {.column width="60%"}
+![](../img/geekpoke.png){height=600px}
 :::
+::::
 
 
-## Loops
+## Why is Julia sometimes slow?
 
-Programs also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of *arbitrary* length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a `for` loop. (Note that `Array{Float64}` specifies that we expect, as input, an array of floating-point numbers, and that `length` is a function that returns the number of elements in an array.)
+- So translation is needed.
+- Imagine you need to translate cooking recipes (algorithms) from English (source code) to Spanish (machine code). You have roughly two options:
+  - Every time a particular instruction is called for, you translate it anew (**interpreted languages**)
+  - You translate the entire recipe and give it to the cook (the CPU) (**compiled languages**)
+:::::
 
-```{julia}
-function average(x::Array{Float64})
-  S = 0
+::::: {.content-visible unless-format="revealjs"}
 
-  for i in 1:length(x)
-    S = S + x[i]
-  end
+- CPUs and computer memory consist of binary devices, they are either "on" or "off"^[Photo of replica of the first transistor from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Replica-of-first-transistor.jpg). Public domain.]
 
-  return S/length(x)
-end
+![](../img/first-transistor.jpg){height=450px}
 
-# try it out
-numbers = [20.0, 43.0, 20.3, 30.3]
-average(numbers)
-```
+- But humans write source code which is understandable to humans (well, mostly anyway...)^[Cartoon from [geek & poke](https://geek-and-poke.com/geekandpoke/2015/10/9/simply-explained). CC-BY-3.0.]
 
-::: {.callout-note}
-This example is a bit silly, since Julia (of course) already has a ready-made function that takes sums over arrays: `sum`. But it serves to illustrate how `for` loops operate.
-:::
+![](../img/geekpoke.png){height=600px}
 
-Another use case for a `for` loop might be the following. Suppose we have collected a number of `Speaker` objects in an array, and wish to print out the age of each speaker. This is easy to do:
-
-```{julia}
-alice = Speaker(1, 22.5, "middle")
-bob = Speaker(2, 40.0, "lower")
-caroline = Speaker(1, 80.8, "lower")
-
-speakers = [alice, bob, caroline]
-
-for i in 1:length(speakers)
-  println(speakers[i].age)
-end
-```
-
-However, there is an even better (a more "Julian", i.e. more idiomatic) solution. We first write a function that returns a speaker's age:
-
-```{julia}
-#| output: false
-function get_age(x::Speaker)
-  return x.age
-end
-```
-
-Or using the shorter syntax:
-
-```{julia}
-#| output: false
-get_age(x::Speaker) = x.age
-```
-
-We can then use the `.` affix to apply this function to each speaker in our array:
-
-```{julia}
-get_age.(speakers)
-```
-
-This returns a three-element vector containing the speakers' ages, but does not print it to the terminal. If we want the latter too, we just call `println`, broadcast over the array:
-
-```{julia}
-#| output: false
-println.(get_age.(speakers))
-```
+- So translation is needed.
+- Imagine you need to translate cooking recipes (algorithms) from English (source code) to Spanish (machine code). You have roughly two options:
+  - Every time a particular instruction is called for, you translate it anew (**interpreted languages**)
+  - You translate the entire recipe and give it to the cook (the CPU) (**compiled languages**)
+:::::
 
 
-## Array comprehensions
+## Why is Julia sometimes slow?
 
-Another powerful feature of the Julia language are **array comprehensions**. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain $0^2 = 0$, $1^2 = 1$, $2^2 = 4$ and so on).
-
-```{julia}
-[i^2 for i in 0:99]
-```
-
-The expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker `alice` fifty times. We could accomplish this with the following array comprehension:
-
-```{julia}
-[get_age(alice) for i in 1:50]
-```
-
-You will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example.
+- Julia is a **just-in-time (JIT) compiled language**
+- Meaning roughly: code blocks are compiled as they are encountered
+- Compiled code is stored for later use
+- Initial compilation takes time
 
 
-## Preparing for the future
+## Why is Julia sometimes fast?
 
-Go ahead and install the following packages, which we will rely on later. *Plots* is used to draw figures, and *Agents* gives some useful functionality for agent-based models.
+- However, all subsequent executions are fast!
+- This is because the translations have already been made and stored
+- Furthermore, code can be optimized during the initial compilation
+  - Since your Spanish cook (the CPU) knows that "cdta." stands for "cucharadita" (teaspoon), the compiler can use the shorter translation instead of the long one
 
-```{julia}
-#| eval: false
-Pkg.add("Plots")
-Pkg.add("Agents")
-```
+
+## Speed in practice
+
+- In practice, these differences mean that:
+  - Running a function once may be quicker in Python
+  - Running the same function 1000 times will be quicker in Julia
+- A lot of the attractiveness of Julia for ABM comes from this fact -- that it compiles into fast machine code on many different processor architectures
+
+![](../img/fight.png){height=200px}
+
+
+## Summary
+
+- Here you've learned some of the basics of the Julia language
+- There is much more... we will learn it as we go along
+- We will make heavy use of array comprehensions, functions and custom types, so make sure you understand these concepts
+- You get to practice them in this week's [homework](../homework/fly.qmd)
 
 
 

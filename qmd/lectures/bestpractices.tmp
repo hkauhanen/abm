@@ -1,0 +1,14 @@
+---
+title: "7. Programming best practices"
+---
+
+
+- git
+- parallel processing
+
+other things not yet covered in basics lecture (that needs to be covered in some of the "substantive" lectures):
+
+- functions vs methods (multiple dispatch)
+- inheritance
+- conditionals
+- loops

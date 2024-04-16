@@ -1,0 +1,61 @@
+---
+title: "Making birds fly"
+date: 04/16/2024
+categories:
+  - homework
+---
+
+::: {.callout-note}
+In addition to a working [Julia installation](installing-julia.qmd), you will need the [Plots](https://docs.juliaplots.org/) package in order to complete this homework. Run the following commands to install and load it:
+
+```{julia}
+#|eval: false
+#|echo: true
+#|output: false
+using Pkg
+Pkg.add("Plots")
+using Plots
+```
+:::
+
+In this week's [lecture](../lectures/basics.qmd), you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.
+
+Specifically, we will implement a version of the artificial birds that we saw in first week's lecture's [flocking example](../lectures/intro.qmd#example-2-flocking-1). For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds "fly".
+
+Your task is to:
+
+1. Write a custom type called `Bird` which has the following fields, each of them of type `Float64`:
+    - `x`, the bird's location coordinate in the horizontal dimension
+    - `y`, the bird's location coordinate in the vertical dimension
+    - `dir_x`, the bird's direction (where its beak is pointing) in the horizontal dimension
+    - `dir_y`, the birds' direction in the vertical dimension
+1. Use an array comprehension to make a population of `Bird` objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named `population`.
+1. Download [this file](../jl/plot_birds.jl) and save it with the filename `plot_birds.jl`. Then run the following in Julia:
+   ```{julia}
+   #|eval: false
+   #|echo: true
+   #|output: false
+   include("plot_birds.jl")
+   ```
+   (You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)
+
+   ::: {.callout-tip}
+   If the above fails, you can also simply copy-paste the contents of `plot_birds.jl` into your own file.
+   :::
+
+1. Run the following command:
+   ```{julia}
+   #|eval: false
+   #|echo: true
+   #|output: false
+   plot(population)
+   ```
+   This will draw the bird's positions and directions in a graphical plot.
+1. Write a function called `fly!` which takes one argument -- a `Bird` object -- and makes this bird fly. In this context, to fly means to move `x` in the direction of `dir_x` by a little amount -- let's call that little amount `delta` -- and to likewise move `y` in the direction of `dir_y` by the same amount. (You can make `delta` an argument of `fly!` if you want.)
+
+   ::: {.callout-tip}
+   Use pen and paper to visually figure out how to update the `x` and `y` values of the `Bird` object. Use your imagination. Also note that there is no single "correct" answer as to how this function ought to be implemented. We will look at a few different possibilities in next week's lecture.
+   :::
+
+1. Test your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds' positions change as you'd expect?
+
