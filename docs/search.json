@@ -11,7 +11,7 @@
     "href": "syllabus.html#timetable",
     "title": "Syllabus",
     "section": "Timetable",
-    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\n\n\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
+    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
   },
   {
     "objectID": "syllabus.html#course-requirements",
@@ -19,6 +19,713 @@
     "title": "Syllabus",
     "section": "Course requirements",
     "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
+  },
+  {
+    "objectID": "lectures/basics-slides.html#programming-in-julia",
+    "href": "lectures/basics-slides.html#programming-in-julia",
+    "title": "Programming basics",
+    "section": "Programming in Julia",
+    "text": "Programming in Julia\n\nWe will now dive straight into programming in Julia, starting with simple examples and concepts, progressing step-by-step to more complicated topics\nTo follow this lecture, you need to have a working Julia installation: see the homework on Installing Julia\nFor today, don’t worry too much about whether what we do is useful – what we are doing is establishing a foundation for later for the actually useful stuff…"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#plan",
+    "href": "lectures/basics-slides.html#plan",
+    "title": "Programming basics",
+    "section": "Plan",
+    "text": "Plan\n\nVariables and types\nArrays and broadcasting\nFunctions\nCustom types\nFirst look at random numbers\nInterpreted vs. compiled languages"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#variables-and-assignments",
+    "href": "lectures/basics-slides.html#variables-and-assignments",
+    "title": "Programming basics",
+    "section": "Variables and assignments",
+    "text": "Variables and assignments\n\nIn programming, a variable is a “storage box” that stores data for later use\nThe data is assigned to the variable using the = operator\nHere, we assign the number 5 to a variable named my_number:\n\n\nmy_number = 5\n\n\nWe can now do things such as:\n\n\nmy_number + my_number\n\n10"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#fundamental-types",
+    "href": "lectures/basics-slides.html#fundamental-types",
+    "title": "Programming basics",
+    "section": "Fundamental types",
+    "text": "Fundamental types\n\nVariables can store different types of data:\n\nIntegers: 1, 2, -100, …\nFloating-point numbers (“floats”): 3.14, pi, 1.0, …\nBooleans: true, false\nStrings: \"John\", \"Mary\"\nArrays: [1, 2, 3, 4], [1 2 3 4]\nAnd some others… we’ll meet them later"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#arithmetic-operations",
+    "href": "lectures/basics-slides.html#arithmetic-operations",
+    "title": "Programming basics",
+    "section": "Arithmetic operations",
+    "text": "Arithmetic operations\n\nArithmetic operations are mostly self-explanatory. For example:\n\n\nnumber1 = 15\nnumber2 = 20\nnumber3 = 10*(number1 + number2) - number1/number2\nnumber3\n\n349.25"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#string-concatenation",
+    "href": "lectures/basics-slides.html#string-concatenation",
+    "title": "Programming basics",
+    "section": "String concatenation",
+    "text": "String concatenation\n\nJulia overloads the * operator for strings too:\n\n\nstring1 = \"This \"\nstring2 = \"is a\"\nstring3 = \" sentence\"\nstring1 * string2 * string3 * \"!\"\n\n\"This is a sentence!\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#arrays",
+    "href": "lectures/basics-slides.html#arrays",
+    "title": "Programming basics",
+    "section": "Arrays",
+    "text": "Arrays\n\nAn array is a (possibly multidimensional) collection of objects\n\nA one-dimensional array is a vector, a two-dimensional array is a matrix, and so on\n\nUsually we work with arrays of numbers. They are easy to create:\n\n\nmy_array = [10, 20, 30, 40]\n\n4-element Vector{Int64}:\n 10\n 20\n 30\n 40"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#accessing-array-contents",
+    "href": "lectures/basics-slides.html#accessing-array-contents",
+    "title": "Programming basics",
+    "section": "Accessing array contents",
+    "text": "Accessing array contents\n\nThe elements of an array can be accessed one-by-one by referencing their location or index in the array:\n\n\nmy_array = [10, 20, 30, 40]\nmy_array[1]\n\n10\n\n\nor\n\nmy_array[2]\n\n20"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#accessing-array-contents-1",
+    "href": "lectures/basics-slides.html#accessing-array-contents-1",
+    "title": "Programming basics",
+    "section": "Accessing array contents",
+    "text": "Accessing array contents\n\nThe special keyword end fetches the last element:\n\n\nmy_array[end]\n\n40\n\n\n\nArrays can also be subsetted:\n\n\nmy_array[2:3]\n\n2-element Vector{Int64}:\n 20\n 30"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#broadcasting",
+    "href": "lectures/basics-slides.html#broadcasting",
+    "title": "Programming basics",
+    "section": "Broadcasting",
+    "text": "Broadcasting\n\nSuppose I want to add 1 to each number in my_array\nThe following will not work:\n\n\nmy_array + 1"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#broadcasting-1",
+    "href": "lectures/basics-slides.html#broadcasting-1",
+    "title": "Programming basics",
+    "section": "Broadcasting",
+    "text": "Broadcasting\n\nWhy? Because mathematically the operation “add a scalar into a vector” is undefined\nTo apply an operator elementwise to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called broadcasting.\n\n\nmy_array .+ 1\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#type-mismatch",
+    "href": "lectures/basics-slides.html#type-mismatch",
+    "title": "Programming basics",
+    "section": "Type mismatch",
+    "text": "Type mismatch\n\nWhy does the following not work?\n\n\nmy_string = \"My shoe size is: \"\nmy_number = 41\nmy_string * my_number"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#type-conversion",
+    "href": "lectures/basics-slides.html#type-conversion",
+    "title": "Programming basics",
+    "section": "Type conversion",
+    "text": "Type conversion\n\nTo make it work, we need to explicitly convert the integer into a string:\n\n\nmy_string = \"My shoe size is: \"\nmy_number = 41\nmy_string * string(my_number)\n\n\"My shoe size is: 41\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#functions",
+    "href": "lectures/basics-slides.html#functions",
+    "title": "Programming basics",
+    "section": "Functions",
+    "text": "Functions\n\nA function, sometimes also known as a subroutine, is a reusable piece of code that performs, well, some function…\nWe define it once and then can use it as many times as we like\nA function can (but need not) take inputs – these are known as the function’s arguments\nA function can (but need not) give an output – this is known as the function’s return value"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#functions-example",
+    "href": "lectures/basics-slides.html#functions-example",
+    "title": "Programming basics",
+    "section": "Functions: example",
+    "text": "Functions: example\n\nHere is a function that takes two arguments, an array and a scalar number, and adds the scalar to each element of the array\nI’m calling the function add_elementwise\n\n\nfunction add_elementwise(array, scalar)\n  result = array .+ scalar\n  return result\nend\n\nadd_elementwise (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#functions-example-1",
+    "href": "lectures/basics-slides.html#functions-example-1",
+    "title": "Programming basics",
+    "section": "Functions: example",
+    "text": "Functions: example\n\nWe can now call the function on particular arrays and numbers:\n\n\nmy_array = [10, 20, 30, 40]\nadd_elementwise(my_array, 1)\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#functions-example-2",
+    "href": "lectures/basics-slides.html#functions-example-2",
+    "title": "Programming basics",
+    "section": "Functions: example",
+    "text": "Functions: example\n\nadd_elementwise(my_array, -23.5)\n\n4-element Vector{Float64}:\n -13.5\n  -3.5\n   6.5\n  16.5"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise",
+    "href": "lectures/basics-slides.html#exercise",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nWrite a function with the following properties:\n\nThe function’s name is announce_age\nThe function takes two arguments, the first a person’s name, the second a number that is that person’s age\nThe function’s return value is a string which announces the person’s age in this format: \"John is 40 years old\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise-1",
+    "href": "lectures/basics-slides.html#exercise-1",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nHere is the function definition:\n\nfunction announce_age(name, age)\n  return name * \" is \" * string(age) * \" years old\"\nend\n\nannounce_age (generic function with 1 method)\n\n\nLet’s test it:\n\nannounce_age(\"John\", 40)\n\n\"John is 40 years old\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#custom-types-classes-and-objects",
+    "href": "lectures/basics-slides.html#custom-types-classes-and-objects",
+    "title": "Programming basics",
+    "section": "Custom types (“classes” and “objects”)",
+    "text": "Custom types (“classes” and “objects”)\n\nIdea of object-oriented programming (OOP): we can make custom types (classes) which are instantiated as objects\n\nProgramming ABMs in a language that does not support this would be very cumbersome\n\nIn Julia, custom types are defined by way of a special keyword, struct\nA custom type is effectively a combination of variables called the type’s fields\nIf the fields need to be modifiable later in the program, we use mutable struct instead of struct"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#custom-types-example",
+    "href": "lectures/basics-slides.html#custom-types-example",
+    "title": "Programming basics",
+    "section": "Custom types: example",
+    "text": "Custom types: example\n\nSuppose we want to represent a person by way of their name, their age and their shoe size\nSince these fields (at least age) need to be modifiable, we use a mutable struct:\n\n\nmutable struct Person\n  name::String\n  age::Int\n  shoesize::Float64\nend"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#custom-types-example-1",
+    "href": "lectures/basics-slides.html#custom-types-example-1",
+    "title": "Programming basics",
+    "section": "Custom types: example",
+    "text": "Custom types: example\n\nmutable struct Person\n  name::String\n  age::Int\n  shoesize::Float64\nend\n\n\nHere,\n\nname::String means the field called name is of type string, etc.\nInt is an integer\nin Float64, the number specifies the precision of the floating-point number (related to how many decimals it can store)"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#custom-types-example-2",
+    "href": "lectures/basics-slides.html#custom-types-example-2",
+    "title": "Programming basics",
+    "section": "Custom types: example",
+    "text": "Custom types: example\n\nWe can now construct an instance of the Person custom type, a Person object, and store it in a variable:\n\n\njane = Person(\"Jane\", 35, 39.5)\n\nPerson(\"Jane\", 35, 39.5)\n\n\n\nTo access the fields of an object, we use the following dot syntax:\n\n\njane.name\n\n\"Jane\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise-2",
+    "href": "lectures/basics-slides.html#exercise-2",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nWrite three functions:\n\nA function that takes a Person object as argument and returns their shoe size\nA function that takes a Person object and a string as argument, and sets the person’s name to be the string supplied as argument\nA function that increments a Person object’s age by one"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise-3",
+    "href": "lectures/basics-slides.html#exercise-3",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n\nfunction get_shoesize(x)\n  return x.shoesize\nend\n\nfunction set_name(x, y)\n  x.name = y\nend\n\nfunction become_older(x)\n  x.age = x.age + 1\nend"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#explicit-type-specifications",
+    "href": "lectures/basics-slides.html#explicit-type-specifications",
+    "title": "Programming basics",
+    "section": "Explicit type specifications",
+    "text": "Explicit type specifications\nNote that it is possible (and often good practice) to explicitly set the types of function arguments:\n\nfunction get_shoesize(x::Person)\n  return x.shoesize\nend\n\nfunction set_name(x::Person, y::String)\n  x.name = y\nend\n\nfunction become_older(x::Person)\n  x.age = x.age + 1\nend"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#getters-and-setters",
+    "href": "lectures/basics-slides.html#getters-and-setters",
+    "title": "Programming basics",
+    "section": "Getters and setters",
+    "text": "Getters and setters\n\nFunctions that return an object’s field are sometimes known as getters. Functions that set a field are known as setters.\nIn Julia, it is customary to append an exclamation point to the name of every setter function. This is to warn users of the function that the function modifies something in the object.\nThus, we would rather write:\n\n\nfunction set_name!(x::Person, y::String)\n  x.name = y\nend"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#array-comprehensions",
+    "href": "lectures/basics-slides.html#array-comprehensions",
+    "title": "Programming basics",
+    "section": "Array comprehensions",
+    "text": "Array comprehensions\n\nWhat if we wanted to create 3 Persons? Easy:\n\n\nperson1 = Person(\"Jane\", 35, 39.5)\nperson2 = Person(\"John\", 44, 43.0)\nperson3 = Person(\"Bob\", 65, 42.33)\n\n\nWhat if we wanted to create 1000 Persons?"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#array-comprehensions-1",
+    "href": "lectures/basics-slides.html#array-comprehensions-1",
+    "title": "Programming basics",
+    "section": "Array comprehensions",
+    "text": "Array comprehensions\n\nHere we can use a powerful feature known as an array comprehension. The following creates 1000 persons, each with the same default fields (we’ll later see how to modify this), and places them in an array. The array is returned and stored in the population variable:\n\n\npopulation = [Person(\"M. Musterperson\", 0, 0.0) for i in 1:1000]\n\n\nThe i variable is a dummy variable that only exists for the duration of the array comprehension."
+  },
+  {
+    "objectID": "lectures/basics-slides.html#array-comprehensions-2",
+    "href": "lectures/basics-slides.html#array-comprehensions-2",
+    "title": "Programming basics",
+    "section": "Array comprehensions",
+    "text": "Array comprehensions\n\nWe can now access individual persons by indexing them from the array:\n\n\npopulation[1]\n\nPerson(\"M. Musterperson\", 0, 0.0)\n\n\n\nWe can also access their fields:\n\n\npopulation[1].name\n\n\"M. Musterperson\"\n\n\n\nAnd we can set them:\n\n\nset_name(population[1], \"Bob the Builder\")\npopulation[1].name\n\n\"Bob the Builder\""
+  },
+  {
+    "objectID": "lectures/basics-slides.html#broadcasting-functions",
+    "href": "lectures/basics-slides.html#broadcasting-functions",
+    "title": "Programming basics",
+    "section": "Broadcasting functions",
+    "text": "Broadcasting functions\n\nEarlier, we saw how operators such as + can be broadcast over arrays\nThe same can be done with functions, for example:\n\n\nalice = Person(\"Alice\", 25, 40.0)\nbob = Person(\"Robert\", 55, 45.0)\ncarly = Person(\"Carly\", 55, 39.0)\n\nspeakers = [alice, bob, carly]\n\nget_shoesize.(speakers)\n\n3-element Vector{Float64}:\n 40.0\n 45.0\n 39.0"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#random-numbers",
+    "href": "lectures/basics-slides.html#random-numbers",
+    "title": "Programming basics",
+    "section": "Random numbers",
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.3366029090782652"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise-4",
+    "href": "lectures/basics-slides.html#exercise-4",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#exercise-5",
+    "href": "lectures/basics-slides.html#exercise-5",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.062600109641487\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n94.3711381462752"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#comments",
+    "href": "lectures/basics-slides.html#comments",
+    "title": "Programming basics",
+    "section": "Comments",
+    "text": "Comments\n\nTo improve code readability, we insert comments (these are ignored by the compiler)\nSingle-line comment:\n\n\n# the following variable stores my shoe size\nshoesize = 41.5\n\n\nMulti-line comment:\n\n\n#=\nThe following variable\nstores my shoe size\n=#\nshoesize = 41.5"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#packages",
+    "href": "lectures/basics-slides.html#packages",
+    "title": "Programming basics",
+    "section": "Packages",
+    "text": "Packages\n\nBasic Julia functionality is extended by packages\nThese are installed through a package manager called Pkg\nE.g. to install the Agents package (and all its dependencies), we issue these commands:\n\n\nusing Pkg\nPkg.add(\"Agents\")\n\n\nOnce the package has been installed, we can load it by:\n\n\nusing Agents"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#why-is-julia-sometimes-slow",
+    "href": "lectures/basics-slides.html#why-is-julia-sometimes-slow",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\n\n\n\n\nCPUs and computer memory consist of binary devices, they are either “on” or “off”1\n\n\n\nPhoto of replica of the first transistor from Wikimedia Commons. Public domain."
+  },
+  {
+    "objectID": "lectures/basics-slides.html#why-is-julia-sometimes-slow-1",
+    "href": "lectures/basics-slides.html#why-is-julia-sometimes-slow-1",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\n\n\nBut humans write source code which is understandable to humans (well, mostly anyway…)1\n\n\n\n\n\nCartoon from geek & poke. CC-BY-3.0."
+  },
+  {
+    "objectID": "lectures/basics-slides.html#why-is-julia-sometimes-slow-2",
+    "href": "lectures/basics-slides.html#why-is-julia-sometimes-slow-2",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\nSo translation is needed.\nImagine you need to translate cooking recipes (algorithms) from English (source code) to Spanish (machine code). You have roughly two options:\n\nEvery time a particular instruction is called for, you translate it anew (interpreted languages)\nYou translate the entire recipe and give it to the cook (the CPU) (compiled languages)"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#why-is-julia-sometimes-slow-3",
+    "href": "lectures/basics-slides.html#why-is-julia-sometimes-slow-3",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\nJulia is a just-in-time (JIT) compiled language\nMeaning roughly: code blocks are compiled as they are encountered\nCompiled code is stored for later use\nInitial compilation takes time"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#why-is-julia-sometimes-fast",
+    "href": "lectures/basics-slides.html#why-is-julia-sometimes-fast",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes fast?",
+    "text": "Why is Julia sometimes fast?\n\nHowever, all subsequent executions are fast!\nThis is because the translations have already been made and stored\nFurthermore, code can be optimized during the initial compilation\n\nSince your Spanish cook (the CPU) knows that “cdta.” stands for “cucharadita” (teaspoon), the compiler can use the shorter translation instead of the long one"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#speed-in-practice",
+    "href": "lectures/basics-slides.html#speed-in-practice",
+    "title": "Programming basics",
+    "section": "Speed in practice",
+    "text": "Speed in practice\n\nIn practice, these differences mean that:\n\nRunning a function once may be quicker in Python\nRunning the same function 1000 times will be quicker in Julia\n\nA lot of the attractiveness of Julia for ABM comes from this fact – that it compiles into fast machine code on many different processor architectures"
+  },
+  {
+    "objectID": "lectures/basics-slides.html#summary",
+    "href": "lectures/basics-slides.html#summary",
+    "title": "Programming basics",
+    "section": "Summary",
+    "text": "Summary\n\nHere you’ve learned some of the basics of the Julia language\nThere is much more… we will learn it as we go along\nWe will make heavy use of array comprehensions, functions and custom types, so make sure you understand these concepts\nYou get to practice them in this week’s homework"
+  },
+  {
+    "objectID": "lectures/basics.html",
+    "href": "lectures/basics.html",
+    "title": "Programming basics",
+    "section": "",
+    "text": "We will now dive straight into programming in Julia, starting with simple examples and concepts, progressing step-by-step to more complicated topics\nTo follow this lecture, you need to have a working Julia installation: see the homework on Installing Julia\nFor today, don’t worry too much about whether what we do is useful – what we are doing is establishing a foundation for later for the actually useful stuff…\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/basics.html#programming-in-julia",
+    "href": "lectures/basics.html#programming-in-julia",
+    "title": "Programming basics",
+    "section": "",
+    "text": "We will now dive straight into programming in Julia, starting with simple examples and concepts, progressing step-by-step to more complicated topics\nTo follow this lecture, you need to have a working Julia installation: see the homework on Installing Julia\nFor today, don’t worry too much about whether what we do is useful – what we are doing is establishing a foundation for later for the actually useful stuff…"
+  },
+  {
+    "objectID": "lectures/basics.html#plan",
+    "href": "lectures/basics.html#plan",
+    "title": "Programming basics",
+    "section": "Plan",
+    "text": "Plan\n\nVariables and types\nArrays and broadcasting\nFunctions\nCustom types\nFirst look at random numbers\nInterpreted vs. compiled languages"
+  },
+  {
+    "objectID": "lectures/basics.html#variables-and-assignments",
+    "href": "lectures/basics.html#variables-and-assignments",
+    "title": "Programming basics",
+    "section": "Variables and assignments",
+    "text": "Variables and assignments\n\nIn programming, a variable is a “storage box” that stores data for later use\nThe data is assigned to the variable using the = operator\nHere, we assign the number 5 to a variable named my_number:\n\n\nmy_number = 5\n\n\nWe can now do things such as:\n\n\nmy_number + my_number\n\n10"
+  },
+  {
+    "objectID": "lectures/basics.html#fundamental-types",
+    "href": "lectures/basics.html#fundamental-types",
+    "title": "Programming basics",
+    "section": "Fundamental types",
+    "text": "Fundamental types\n\nVariables can store different types of data:\n\nIntegers: 1, 2, -100, …\nFloating-point numbers (“floats”): 3.14, pi, 1.0, …\nBooleans: true, false\nStrings: \"John\", \"Mary\"\nArrays: [1, 2, 3, 4], [1 2 3 4]\nAnd some others… we’ll meet them later"
+  },
+  {
+    "objectID": "lectures/basics.html#arithmetic-operations",
+    "href": "lectures/basics.html#arithmetic-operations",
+    "title": "Programming basics",
+    "section": "Arithmetic operations",
+    "text": "Arithmetic operations\n\nArithmetic operations are mostly self-explanatory. For example:\n\n\nnumber1 = 15\nnumber2 = 20\nnumber3 = 10*(number1 + number2) - number1/number2\nnumber3\n\n349.25"
+  },
+  {
+    "objectID": "lectures/basics.html#string-concatenation",
+    "href": "lectures/basics.html#string-concatenation",
+    "title": "Programming basics",
+    "section": "String concatenation",
+    "text": "String concatenation\n\nJulia overloads the * operator for strings too:\n\n\nstring1 = \"This \"\nstring2 = \"is a\"\nstring3 = \" sentence\"\nstring1 * string2 * string3 * \"!\"\n\n\"This is a sentence!\""
+  },
+  {
+    "objectID": "lectures/basics.html#arrays",
+    "href": "lectures/basics.html#arrays",
+    "title": "Programming basics",
+    "section": "Arrays",
+    "text": "Arrays\n\nAn array is a (possibly multidimensional) collection of objects\n\nA one-dimensional array is a vector, a two-dimensional array is a matrix, and so on\n\nUsually we work with arrays of numbers. They are easy to create:\n\n\nmy_array = [10, 20, 30, 40]\n\n4-element Vector{Int64}:\n 10\n 20\n 30\n 40"
+  },
+  {
+    "objectID": "lectures/basics.html#accessing-array-contents",
+    "href": "lectures/basics.html#accessing-array-contents",
+    "title": "Programming basics",
+    "section": "Accessing array contents",
+    "text": "Accessing array contents\n\nThe elements of an array can be accessed one-by-one by referencing their location or index in the array:\n\n\nmy_array = [10, 20, 30, 40]\nmy_array[1]\n\n10\n\n\nor\n\nmy_array[2]\n\n20\n\n\n\nThe special keyword end fetches the last element:\n\n\nmy_array[end]\n\n40\n\n\n\nArrays can also be subsetted:\n\n\nmy_array[2:3]\n\n2-element Vector{Int64}:\n 20\n 30"
+  },
+  {
+    "objectID": "lectures/basics.html#broadcasting",
+    "href": "lectures/basics.html#broadcasting",
+    "title": "Programming basics",
+    "section": "Broadcasting",
+    "text": "Broadcasting\n\nSuppose I want to add 1 to each number in my_array\nThe following will not work:\n\n\nmy_array + 1\n\n\nWhy? Because mathematically the operation “add a scalar into a vector” is undefined\nTo apply an operator elementwise to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called broadcasting.\n\n\nmy_array .+ 1\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41"
+  },
+  {
+    "objectID": "lectures/basics.html#type-mismatch",
+    "href": "lectures/basics.html#type-mismatch",
+    "title": "Programming basics",
+    "section": "Type mismatch",
+    "text": "Type mismatch\n\nWhy does the following not work?\n\n\nmy_string = \"My shoe size is: \"\nmy_number = 41\nmy_string * my_number\n\n\nTo make it work, we need to explicitly convert the integer into a string:\n\n\nmy_string = \"My shoe size is: \"\nmy_number = 41\nmy_string * string(my_number)\n\n\"My shoe size is: 41\""
+  },
+  {
+    "objectID": "lectures/basics.html#functions",
+    "href": "lectures/basics.html#functions",
+    "title": "Programming basics",
+    "section": "Functions",
+    "text": "Functions\n\nA function, sometimes also known as a subroutine, is a reusable piece of code that performs, well, some function…\nWe define it once and then can use it as many times as we like\nA function can (but need not) take inputs – these are known as the function’s arguments\nA function can (but need not) give an output – this is known as the function’s return value"
+  },
+  {
+    "objectID": "lectures/basics.html#functions-example",
+    "href": "lectures/basics.html#functions-example",
+    "title": "Programming basics",
+    "section": "Functions: example",
+    "text": "Functions: example\n\nHere is a function that takes two arguments, an array and a scalar number, and adds the scalar to each element of the array\nI’m calling the function add_elementwise\n\n\nfunction add_elementwise(array, scalar)\n  result = array .+ scalar\n  return result\nend\n\nadd_elementwise (generic function with 1 method)\n\n\n\nWe can now call the function on particular arrays and numbers:\n\n\nmy_array = [10, 20, 30, 40]\nadd_elementwise(my_array, 1)\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41\n\n\n\nadd_elementwise(my_array, -23.5)\n\n4-element Vector{Float64}:\n -13.5\n  -3.5\n   6.5\n  16.5"
+  },
+  {
+    "objectID": "lectures/basics.html#exercise",
+    "href": "lectures/basics.html#exercise",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nWrite a function with the following properties:\n\nThe function’s name is announce_age\nThe function takes two arguments, the first a person’s name, the second a number that is that person’s age\nThe function’s return value is a string which announces the person’s age in this format: \"John is 40 years old\"\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nHere is the function definition:\n\nfunction announce_age(name, age)\n  return name * \" is \" * string(age) * \" years old\"\nend\n\nannounce_age (generic function with 1 method)\n\n\nLet’s test it:\n\nannounce_age(\"John\", 40)\n\n\"John is 40 years old\""
+  },
+  {
+    "objectID": "lectures/basics.html#custom-types-classes-and-objects",
+    "href": "lectures/basics.html#custom-types-classes-and-objects",
+    "title": "Programming basics",
+    "section": "Custom types (“classes” and “objects”)",
+    "text": "Custom types (“classes” and “objects”)\n\nIdea of object-oriented programming (OOP): we can make custom types (classes) which are instantiated as objects\n\nProgramming ABMs in a language that does not support this would be very cumbersome\n\nIn Julia, custom types are defined by way of a special keyword, struct\nA custom type is effectively a combination of variables called the type’s fields\nIf the fields need to be modifiable later in the program, we use mutable struct instead of struct"
+  },
+  {
+    "objectID": "lectures/basics.html#custom-types-example",
+    "href": "lectures/basics.html#custom-types-example",
+    "title": "Programming basics",
+    "section": "Custom types: example",
+    "text": "Custom types: example\n\nSuppose we want to represent a person by way of their name, their age and their shoe size\nSince these fields (at least age) need to be modifiable, we use a mutable struct:\n\n\nmutable struct Person\n  name::String\n  age::Int\n  shoesize::Float64\nend\n\n\nHere,\n\nname::String means the field called name is of type string, etc.\nInt is an integer\nin Float64, the number specifies the precision of the floating-point number (related to how many decimals it can store)\n\n\n\nWe can now construct an instance of the Person custom type, a Person object, and store it in a variable:\n\n\njane = Person(\"Jane\", 35, 39.5)\n\nPerson(\"Jane\", 35, 39.5)\n\n\n\nTo access the fields of an object, we use the following dot syntax:\n\n\njane.name\n\n\"Jane\""
+  },
+  {
+    "objectID": "lectures/basics.html#exercise-2",
+    "href": "lectures/basics.html#exercise-2",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nWrite three functions:\n\nA function that takes a Person object as argument and returns their shoe size\nA function that takes a Person object and a string as argument, and sets the person’s name to be the string supplied as argument\nA function that increments a Person object’s age by one\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n\nfunction get_shoesize(x)\n  return x.shoesize\nend\n\nfunction set_name(x, y)\n  x.name = y\nend\n\nfunction become_older(x)\n  x.age = x.age + 1\nend"
+  },
+  {
+    "objectID": "lectures/basics.html#explicit-type-specifications",
+    "href": "lectures/basics.html#explicit-type-specifications",
+    "title": "Programming basics",
+    "section": "Explicit type specifications",
+    "text": "Explicit type specifications\nNote that it is possible (and often good practice) to explicitly set the types of function arguments:\n\nfunction get_shoesize(x::Person)\n  return x.shoesize\nend\n\nfunction set_name(x::Person, y::String)\n  x.name = y\nend\n\nfunction become_older(x::Person)\n  x.age = x.age + 1\nend"
+  },
+  {
+    "objectID": "lectures/basics.html#getters-and-setters",
+    "href": "lectures/basics.html#getters-and-setters",
+    "title": "Programming basics",
+    "section": "Getters and setters",
+    "text": "Getters and setters\n\nFunctions that return an object’s field are sometimes known as getters. Functions that set a field are known as setters.\nIn Julia, it is customary to append an exclamation point to the name of every setter function. This is to warn users of the function that the function modifies something in the object.\nThus, we would rather write:\n\n\nfunction set_name!(x::Person, y::String)\n  x.name = y\nend"
+  },
+  {
+    "objectID": "lectures/basics.html#array-comprehensions",
+    "href": "lectures/basics.html#array-comprehensions",
+    "title": "Programming basics",
+    "section": "Array comprehensions",
+    "text": "Array comprehensions\n\nWhat if we wanted to create 3 Persons? Easy:\n\n\nperson1 = Person(\"Jane\", 35, 39.5)\nperson2 = Person(\"John\", 44, 43.0)\nperson3 = Person(\"Bob\", 65, 42.33)\n\n\nWhat if we wanted to create 1000 Persons?\n\n\nHere we can use a powerful feature known as an array comprehension. The following creates 1000 persons, each with the same default fields (we’ll later see how to modify this), and places them in an array. The array is returned and stored in the population variable:\n\n\npopulation = [Person(\"M. Musterperson\", 0, 0.0) for i in 1:1000]\n\n\nThe i variable is a dummy variable that only exists for the duration of the array comprehension.\n\n\nWe can now access individual persons by indexing them from the array:\n\n\npopulation[1]\n\nPerson(\"M. Musterperson\", 0, 0.0)\n\n\n\nWe can also access their fields:\n\n\npopulation[1].name\n\n\"M. Musterperson\"\n\n\n\nAnd we can set them:\n\n\nset_name(population[1], \"Bob the Builder\")\npopulation[1].name\n\n\"Bob the Builder\""
+  },
+  {
+    "objectID": "lectures/basics.html#broadcasting-functions",
+    "href": "lectures/basics.html#broadcasting-functions",
+    "title": "Programming basics",
+    "section": "Broadcasting functions",
+    "text": "Broadcasting functions\n\nEarlier, we saw how operators such as + can be broadcast over arrays\nThe same can be done with functions, for example:\n\n\nalice = Person(\"Alice\", 25, 40.0)\nbob = Person(\"Robert\", 55, 45.0)\ncarly = Person(\"Carly\", 55, 39.0)\n\nspeakers = [alice, bob, carly]\n\nget_shoesize.(speakers)\n\n3-element Vector{Float64}:\n 40.0\n 45.0\n 39.0"
+  },
+  {
+    "objectID": "lectures/basics.html#random-numbers",
+    "href": "lectures/basics.html#random-numbers",
+    "title": "Programming basics",
+    "section": "Random numbers",
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.43710753497759125"
+  },
+  {
+    "objectID": "lectures/basics.html#exercise-4",
+    "href": "lectures/basics.html#exercise-4",
+    "title": "Programming basics",
+    "section": "Exercise",
+    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.709303451563073\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n70.63955457696973"
+  },
+  {
+    "objectID": "lectures/basics.html#comments",
+    "href": "lectures/basics.html#comments",
+    "title": "Programming basics",
+    "section": "Comments",
+    "text": "Comments\n\nTo improve code readability, we insert comments (these are ignored by the compiler)\nSingle-line comment:\n\n\n# the following variable stores my shoe size\nshoesize = 41.5\n\n\nMulti-line comment:\n\n\n#=\nThe following variable\nstores my shoe size\n=#\nshoesize = 41.5"
+  },
+  {
+    "objectID": "lectures/basics.html#packages",
+    "href": "lectures/basics.html#packages",
+    "title": "Programming basics",
+    "section": "Packages",
+    "text": "Packages\n\nBasic Julia functionality is extended by packages\nThese are installed through a package manager called Pkg\nE.g. to install the Agents package (and all its dependencies), we issue these commands:\n\n\nusing Pkg\nPkg.add(\"Agents\")\n\n\nOnce the package has been installed, we can load it by:\n\n\nusing Agents"
+  },
+  {
+    "objectID": "lectures/basics.html#why-is-julia-sometimes-slow",
+    "href": "lectures/basics.html#why-is-julia-sometimes-slow",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\nCPUs and computer memory consist of binary devices, they are either “on” or “off”1\n\n1 Photo of replica of the first transistor from Wikimedia Commons. Public domain.\n\nBut humans write source code which is understandable to humans (well, mostly anyway…)2\n\n2 Cartoon from geek & poke. CC-BY-3.0.\n\nSo translation is needed.\nImagine you need to translate cooking recipes (algorithms) from English (source code) to Spanish (machine code). You have roughly two options:\n\nEvery time a particular instruction is called for, you translate it anew (interpreted languages)\nYou translate the entire recipe and give it to the cook (the CPU) (compiled languages)"
+  },
+  {
+    "objectID": "lectures/basics.html#why-is-julia-sometimes-slow-3",
+    "href": "lectures/basics.html#why-is-julia-sometimes-slow-3",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes slow?",
+    "text": "Why is Julia sometimes slow?\n\nJulia is a just-in-time (JIT) compiled language\nMeaning roughly: code blocks are compiled as they are encountered\nCompiled code is stored for later use\nInitial compilation takes time"
+  },
+  {
+    "objectID": "lectures/basics.html#why-is-julia-sometimes-fast",
+    "href": "lectures/basics.html#why-is-julia-sometimes-fast",
+    "title": "Programming basics",
+    "section": "Why is Julia sometimes fast?",
+    "text": "Why is Julia sometimes fast?\n\nHowever, all subsequent executions are fast!\nThis is because the translations have already been made and stored\nFurthermore, code can be optimized during the initial compilation\n\nSince your Spanish cook (the CPU) knows that “cdta.” stands for “cucharadita” (teaspoon), the compiler can use the shorter translation instead of the long one"
+  },
+  {
+    "objectID": "lectures/basics.html#speed-in-practice",
+    "href": "lectures/basics.html#speed-in-practice",
+    "title": "Programming basics",
+    "section": "Speed in practice",
+    "text": "Speed in practice\n\nIn practice, these differences mean that:\n\nRunning a function once may be quicker in Python\nRunning the same function 1000 times will be quicker in Julia\n\nA lot of the attractiveness of Julia for ABM comes from this fact – that it compiles into fast machine code on many different processor architectures"
+  },
+  {
+    "objectID": "lectures/basics.html#summary",
+    "href": "lectures/basics.html#summary",
+    "title": "Programming basics",
+    "section": "Summary",
+    "text": "Summary\n\nHere you’ve learned some of the basics of the Julia language\nThere is much more… we will learn it as we go along\nWe will make heavy use of array comprehensions, functions and custom types, so make sure you understand these concepts\nYou get to practice them in this week’s homework"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Agent-based modelling",
+    "section": "",
+    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework/fly.html",
+    "href": "homework/fly.html",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Note\n\n\n\nIn addition to a working Julia installation, you will need the Plots package in order to complete this homework. Run the following commands to install and load it:\n\nusing Pkg\nPkg.add(\"Plots\")\nusing Plots\n\n\n\nIn this week’s lecture, you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.\nSpecifically, we will implement a version of the artificial birds that we saw in first week’s lecture’s flocking example. For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds “fly”.\nYour task is to:\n\nWrite a custom type called Bird which has the following fields, each of them of type Float64:\n\nx, the bird’s location coordinate in the horizontal dimension\ny, the bird’s location coordinate in the vertical dimension\ndir_x, the bird’s direction (where its beak is pointing) in the horizontal dimension\ndir_y, the birds’ direction in the vertical dimension\n\nUse an array comprehension to make a population of Bird objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named population.\nDownload this file and save it with the filename plot_birds.jl. Then run the following in Julia:\n\ninclude(\"plot_birds.jl\")\n\n(You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)\n\n\n\n\n\n\nTip\n\n\n\nIf the above fails, you can also simply copy-paste the contents of plot_birds.jl into your own file.\n\n\nRun the following command:\n\nplot(population)\n\nThis will draw the bird’s positions and directions in a graphical plot.\nWrite a function called fly! which takes one argument – a Bird object – and makes this bird fly. In this context, to fly means to move x in the direction of dir_x by a little amount – let’s call that little amount delta – and to likewise move y in the direction of dir_y by the same amount. (You can make delta an argument of fly! if you want.)\n\n\n\n\n\n\nTip\n\n\n\nUse pen and paper to visually figure out how to update the x and y values of the Bird object. Use your imagination. Also note that there is no single “correct” answer as to how this function ought to be implemented. We will look at a few different possibilities in next week’s lecture.\n\n\nTest your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds’ positions change as you’d expect?\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework/installing-julia.html",
+    "href": "homework/installing-julia.html",
+    "title": "Installing Julia",
+    "section": "",
+    "text": "In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as “add-ons” to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.\n\nNavigate to https://julialang.org, download the proper installation files for your operating system, and install Julia. Make sure to download version 1.10.2 or newer. (Older versions may not be fully compatible with the code we will be working with in this course.)\nWith installation complete, launch Julia. You should be greeted by a screen such as this:\n\nThis is known as the Julia REPL, which stands for read-eval(uate)-print loop. Here, you can give Julia commands, it will execute them, and you get the output back. For example, try the following commands:\n2+2\nsqrt(2)\n[1, 2, 3, 4]\nsum([1, 2, 3, 4])\nThe REPL can also be used to install packages i.e. extensions. We will now install two packages, Agents and CairoMakie, along with all their dependencies (i.e. further packages required to run those two packages). To do this, execute the following commands in the REPL:\nusing Pkg\nPkg.add(\"Agents\")\nPkg.add(\"CairoMakie\")\nThis will take a long while, as the two packages have many dependencies. Wait patiently. When everything is complete, you may exit the REPL:\nexit()\nIt would be very inconvenient to do all our coding in the REPL. It is much better to use a text editor or an IDE (integrated development environment). Here, you are free to make your own choice, if you already have a favourite editor for coding. For the purposes of this course, however, I recommend Visual Studio Code – this is the editor I will be using in the lectures, and so if you choose to use the same editor, things will be a bit smoother. To get started with VS Code, navigate to https://code.visualstudio.com/download, download the version for your operating system, and follow the instructions to install it.\nOnce VS Code has been successfully installed, we need to install a Julia extension for it. This will allow the editor to interface with your Julia installation, so that you will be able to execute code directly from the editor. Follow the instructions here, in bullet point number 3, to do this.\n\nIf all went well, you now have an up-to-date, working Julia installation, with a number of packages installed, plus a source code editor that interfaces seamlessly with that installation.\nIf something went wrong, try again. Google your problem to see if other users have already run into the same problem and have a solution. If it still refuses to work, bring your problem to the next lecture – we will discuss how to solve it and get you a working system.\n\nBonus\nIf you are already familiar with another programming language such as Python, I recommend you to watch this short video from IBM Technology detailing some of the major differences between Python and Julia. It does go into some technical details which may seem obscure for now (“dynamic typing”, “multiple dispatch”), but worry not – I will explain those concepts next week.\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Installing Julia\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\nMaking birds fly\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/intro.html",
+    "href": "lectures/intro.html",
+    "title": "Intro to ABMs",
+    "section": "",
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "title": "Intro to ABMs",
+    "section": "",
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+  },
+  {
+    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "title": "Intro to ABMs",
+    "section": "What is the benefit of ABMs?",
+    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
+  },
+  {
+    "objectID": "lectures/intro.html#examples",
+    "href": "lectures/intro.html#examples",
+    "title": "Intro to ABMs",
+    "section": "Examples",
+    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!2\n2 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
+  },
+  {
+    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
+    "href": "lectures/intro.html#example-1-conways-game-of-life",
+    "title": "Intro to ABMs",
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
+  },
+  {
+    "objectID": "lectures/intro.html#question",
+    "href": "lectures/intro.html#question",
+    "title": "Intro to ABMs",
+    "section": "Question",
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
+  },
+  {
+    "objectID": "lectures/intro.html#exercise",
+    "href": "lectures/intro.html#exercise",
+    "title": "Intro to ABMs",
+    "section": "Exercise",
+    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
+  },
+  {
+    "objectID": "lectures/intro.html#species",
+    "href": "lectures/intro.html#species",
+    "title": "Intro to ABMs",
+    "section": "Species",
+    "text": "Species\nThe game supports many life forms (“species”), categorized into:3\n3 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
+  },
+  {
+    "objectID": "lectures/intro.html#emergence",
+    "href": "lectures/intro.html#emergence",
+    "title": "Intro to ABMs",
+    "section": "Emergence",
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking",
+    "href": "lectures/intro.html#example-2-flocking",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking-1",
+    "href": "lectures/intro.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds4\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\n4 Reynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
+  },
+  {
+    "objectID": "lectures/intro.html#example-3-social-distancing",
+    "href": "lectures/intro.html#example-3-social-distancing",
+    "title": "Intro to ABMs",
+    "section": "Example 3: Social Distancing",
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses5\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\n5 See Vynnycky and White (2010) for an overview."
+  },
+  {
+    "objectID": "lectures/intro.html#bounded-rationality-locality",
+    "href": "lectures/intro.html#bounded-rationality-locality",
+    "title": "Intro to ABMs",
+    "section": "Bounded rationality / Locality",
+    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
+  },
+  {
+    "objectID": "lectures/intro.html#challenges-in-abm",
+    "href": "lectures/intro.html#challenges-in-abm",
+    "title": "Intro to ABMs",
+    "section": "Challenges in ABM",
+    "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
+  },
+  {
+    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
+    "href": "lectures/intro.html#challenges-of-computational-implementation",
+    "title": "Intro to ABMs",
+    "section": "Challenges of computational implementation",
+    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-speed-an-issue",
+    "href": "lectures/intro.html#why-is-speed-an-issue",
+    "title": "Intro to ABMs",
+    "section": "Why is speed an issue?",
+    "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
+  },
+  {
+    "objectID": "lectures/intro.html#exampleexercise",
+    "href": "lectures/intro.html#exampleexercise",
+    "title": "Intro to ABMs",
+    "section": "Example/Exercise",
+    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
+  },
+  {
+    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "title": "Intro to ABMs",
+    "section": "How to deal with issues of speed",
+    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-randomness-needed",
+    "href": "lectures/intro.html#why-is-randomness-needed",
+    "title": "Intro to ABMs",
+    "section": "Why is randomness needed?",
+    "text": "Why is randomness needed?\n\nQuite simple: real-world processes are complex, and to model such complex processes we resort to stochastic processes\nA stochastic process is a sequence of random variables\nFor example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a random number.\nOr consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are deterministic (which does not seem particularly sensible), we need some way of selecting interlocutors at random."
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-randomness-an-issue",
+    "href": "lectures/intro.html#why-is-randomness-an-issue",
+    "title": "Intro to ABMs",
+    "section": "Why is randomness an issue?",
+    "text": "Why is randomness an issue?\n\nConventional computers are deterministic devices\nSo, if we need, say, a random number between 0 and 1, how is that accomplished?\nThe answer is a pseudorandom number generator (PRNG)\n\nThis is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the appearance of being random\nThe sequence is generated from a seed number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).\nHowever, there are significant issues…"
+  },
+  {
+    "objectID": "lectures/intro.html#issues-with-prngs",
+    "href": "lectures/intro.html#issues-with-prngs",
+    "title": "Intro to ABMs",
+    "section": "Issues with PRNGs",
+    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers6\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n6 We’ll see later that this is by no means a crazy requirement!"
+  },
+  {
+    "objectID": "lectures/intro.html#summary",
+    "href": "lectures/intro.html#summary",
+    "title": "Intro to ABMs",
+    "section": "Summary",
+    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
+  },
+  {
+    "objectID": "lectures/intro.html#the-scientific-community",
+    "href": "lectures/intro.html#the-scientific-community",
+    "title": "Intro to ABMs",
+    "section": "The scientific community",
+    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
+  },
+  {
+    "objectID": "lectures/intro.html#homework",
+    "href": "lectures/intro.html#homework",
+    "title": "Intro to ABMs",
+    "section": "Homework",
+    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework Installing Julia."
   },
   {
     "objectID": "lectures/intro-slides.html#what-is-an-agent-based-model-abm",
@@ -217,521 +924,10 @@
     "text": "References\n\n\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE.\n\n\nReynolds, Craig W. 1987. “Flocks, Herds and Schools: A Distributed Behavioral Model.” ACM SIGRAPH Computer Graphics 21 (4): 25–34. https://doi.org/10.1145/37402.37406.\n\n\nVicsek, Tamás, András Czirók, Eshel Ben-Jacob, Inon Cohen, and Ofer Shochet. 1995. “Novel Type of Phase Transition in a System of Self-Driven Particles.” Physical Review Letters 75: 1226–29. https://doi.org/10.1103/PhysRevLett.75.1226.\n\n\nVynnycky, Emilia, and Richard G. White. 2010. An Introduction to Infectious Disease Modelling. Oxford: Oxford University Press."
   },
   {
-    "objectID": "lectures/intro.html",
-    "href": "lectures/intro.html",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
-    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
-    "title": "Intro to ABMs",
-    "section": "What is the benefit of ABMs?",
-    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
-  },
-  {
-    "objectID": "lectures/intro.html#examples",
-    "href": "lectures/intro.html#examples",
-    "title": "Intro to ABMs",
-    "section": "Examples",
-    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!2\n2 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
-  },
-  {
-    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
-    "href": "lectures/intro.html#example-1-conways-game-of-life",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
-  },
-  {
-    "objectID": "lectures/intro.html#question",
-    "href": "lectures/intro.html#question",
-    "title": "Intro to ABMs",
-    "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
-  },
-  {
-    "objectID": "lectures/intro.html#exercise",
-    "href": "lectures/intro.html#exercise",
-    "title": "Intro to ABMs",
-    "section": "Exercise",
-    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
-  },
-  {
-    "objectID": "lectures/intro.html#species",
-    "href": "lectures/intro.html#species",
-    "title": "Intro to ABMs",
-    "section": "Species",
-    "text": "Species\nThe game supports many life forms (“species”), categorized into:3\n3 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
-  },
-  {
-    "objectID": "lectures/intro.html#emergence",
-    "href": "lectures/intro.html#emergence",
-    "title": "Intro to ABMs",
-    "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking",
-    "href": "lectures/intro.html#example-2-flocking",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking-1",
-    "href": "lectures/intro.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds4\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\n4 Reynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
-  },
-  {
-    "objectID": "lectures/intro.html#example-3-social-distancing",
-    "href": "lectures/intro.html#example-3-social-distancing",
-    "title": "Intro to ABMs",
-    "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses5\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\n5 See Vynnycky and White (2010) for an overview."
-  },
-  {
-    "objectID": "lectures/intro.html#bounded-rationality-locality",
-    "href": "lectures/intro.html#bounded-rationality-locality",
-    "title": "Intro to ABMs",
-    "section": "Bounded rationality / Locality",
-    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
-  },
-  {
-    "objectID": "lectures/intro.html#challenges-in-abm",
-    "href": "lectures/intro.html#challenges-in-abm",
-    "title": "Intro to ABMs",
-    "section": "Challenges in ABM",
-    "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
-  },
-  {
-    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
-    "href": "lectures/intro.html#challenges-of-computational-implementation",
-    "title": "Intro to ABMs",
-    "section": "Challenges of computational implementation",
-    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-speed-an-issue",
-    "href": "lectures/intro.html#why-is-speed-an-issue",
-    "title": "Intro to ABMs",
-    "section": "Why is speed an issue?",
-    "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
-  },
-  {
-    "objectID": "lectures/intro.html#exampleexercise",
-    "href": "lectures/intro.html#exampleexercise",
-    "title": "Intro to ABMs",
-    "section": "Example/Exercise",
-    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
-  },
-  {
-    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "title": "Intro to ABMs",
-    "section": "How to deal with issues of speed",
-    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-randomness-needed",
-    "href": "lectures/intro.html#why-is-randomness-needed",
-    "title": "Intro to ABMs",
-    "section": "Why is randomness needed?",
-    "text": "Why is randomness needed?\n\nQuite simple: real-world processes are complex, and to model such complex processes we resort to stochastic processes\nA stochastic process is a sequence of random variables\nFor example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a random number.\nOr consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are deterministic (which does not seem particularly sensible), we need some way of selecting interlocutors at random."
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-randomness-an-issue",
-    "href": "lectures/intro.html#why-is-randomness-an-issue",
-    "title": "Intro to ABMs",
-    "section": "Why is randomness an issue?",
-    "text": "Why is randomness an issue?\n\nConventional computers are deterministic devices\nSo, if we need, say, a random number between 0 and 1, how is that accomplished?\nThe answer is a pseudorandom number generator (PRNG)\n\nThis is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the appearance of being random\nThe sequence is generated from a seed number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).\nHowever, there are significant issues…"
-  },
-  {
-    "objectID": "lectures/intro.html#issues-with-prngs",
-    "href": "lectures/intro.html#issues-with-prngs",
-    "title": "Intro to ABMs",
-    "section": "Issues with PRNGs",
-    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers6\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n6 We’ll see later that this is by no means a crazy requirement!"
-  },
-  {
-    "objectID": "lectures/intro.html#summary",
-    "href": "lectures/intro.html#summary",
-    "title": "Intro to ABMs",
-    "section": "Summary",
-    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
-  },
-  {
-    "objectID": "lectures/intro.html#the-scientific-community",
-    "href": "lectures/intro.html#the-scientific-community",
-    "title": "Intro to ABMs",
-    "section": "The scientific community",
-    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
-  },
-  {
-    "objectID": "lectures/intro.html#homework",
-    "href": "lectures/intro.html#homework",
-    "title": "Intro to ABMs",
-    "section": "Homework",
-    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework Installing Julia."
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Installing Julia\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "homework/installing-julia.html",
-    "href": "homework/installing-julia.html",
-    "title": "Installing Julia",
-    "section": "",
-    "text": "In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as “add-ons” to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.\n\nNavigate to https://julialang.org, download the proper installation files for your operating system, and install Julia. Make sure to download version 1.10.2 or newer. (Older versions may not be fully compatible with the code we will be working with in this course.)\nWith installation complete, launch Julia. You should be greeted by a screen such as this:\n\nThis is known as the Julia REPL, which stands for read-eval(uate)-print loop. Here, you can give Julia commands, it will execute them, and you get the output back. For example, try the following commands:\n2+2\nsqrt(2)\n[1, 2, 3, 4]\nsum([1, 2, 3, 4])\nThe REPL can also be used to install packages i.e. extensions. We will now install two packages, Agents and CairoMakie, along with all their dependencies (i.e. further packages required to run those two packages). To do this, execute the following commands in the REPL:\nusing Pkg\nPkg.add(\"Agents\")\nPkg.add(\"CairoMakie\")\nThis will take a long while, as the two packages have many dependencies. Wait patiently. When everything is complete, you may exit the REPL:\nexit()\nIt would be very inconvenient to do all our coding in the REPL. It is much better to use a text editor or an IDE (integrated development environment). Here, you are free to make your own choice, if you already have a favourite editor for coding. For the purposes of this course, however, I recommend Visual Studio Code – this is the editor I will be using in the lectures, and so if you choose to use the same editor, things will be a bit smoother. To get started with VS Code, navigate to https://code.visualstudio.com/download, download the version for your operating system, and follow the instructions to install it.\nOnce VS Code has been successfully installed, we need to install a Julia extension for it. This will allow the editor to interface with your Julia installation, so that you will be able to execute code directly from the editor. Follow the instructions here, in bullet point number 3, to do this.\n\nIf all went well, you now have an up-to-date, working Julia installation, with a number of packages installed, plus a source code editor that interfaces seamlessly with that installation.\nIf something went wrong, try again. Google your problem to see if other users have already run into the same problem and have a solution. If it still refuses to work, bring your problem to the next lecture – we will discuss how to solve it and get you a working system.\n\nBonus\nIf you are already familiar with another programming language such as Python, I recommend you to watch this short video from IBM Technology detailing some of the major differences between Python and Julia. It does go into some technical details which may seem obscure for now (“dynamic typing”, “multiple dispatch”), but worry not – I will explain those concepts next week.\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Agent-based modelling",
-    "section": "",
-    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
     "objectID": "lectures.html",
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#tudú",
-    "href": "lectures/basics-slides.html#tudú",
-    "title": "Programming basics",
-    "section": "TUDÚ",
-    "text": "TUDÚ\n\ncomments\npackages\nfunctions vs methods (multiple dispatch)\nmeaning of dynamic typing\ncustom types\nbroadcasting of functions\narray comprehensions\nexplicit type declarations for custom types and function arguments\nconditionals\nloops"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#variables-and-assignments",
-    "href": "lectures/basics-slides.html#variables-and-assignments",
-    "title": "Programming basics",
-    "section": "Variables and assignments",
-    "text": "Variables and assignments\n\nIn programming, a variable is a “storage box” that stores data for later use\nThe data is assigned to the variable using the = operator\nHere, we assign the number 5 to a variable named my_number:\n\n\nmy_number = 5\n\n\nWe can now do things such as:\n\n\nmy_number + my_number\n\n10"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#fundamental-types",
-    "href": "lectures/basics-slides.html#fundamental-types",
-    "title": "Programming basics",
-    "section": "Fundamental types",
-    "text": "Fundamental types\n\nVariables can store different types of data:\n\nIntegers: 1, 2, -100, …\nFloating-point numbers (“floats”): 3.14, pi, 1.0, …\nBooleans: true, false\nStrings: \"John\", \"Mary\"\nArrays: [1, 2, 3, 4], [1 2 3 4]\nAnd some others… we’ll meet them later"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#arithmetic-operations",
-    "href": "lectures/basics-slides.html#arithmetic-operations",
-    "title": "Programming basics",
-    "section": "Arithmetic operations",
-    "text": "Arithmetic operations\n\nArithmetic operations are mostly self-explanatory. For example:\n\n\nnumber1 = 15\nnumber2 = 20\nnumber3 = 10*(number1 + number2) - number1/number2\nnumber3\n\n349.25"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#string-concatenation",
-    "href": "lectures/basics-slides.html#string-concatenation",
-    "title": "Programming basics",
-    "section": "String concatenation",
-    "text": "String concatenation\n\nJulia overloads the * operator for strings too:\n\n\nstring1 = \"This \"\nstring2 = \"is a\"\nstring3 = \" sentence\"\nstring1 * string2 * string3 * \"!\"\n\n\"This is a sentence!\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#arrays",
-    "href": "lectures/basics-slides.html#arrays",
-    "title": "Programming basics",
-    "section": "Arrays",
-    "text": "Arrays\n\nAn array is a (possibly multidimensional) collection of objects\n\nA one-dimensional array is a vector, a two-dimensional array is a matrix, and so on\n\nUsually we work with arrays of numbers. They are easy to create:\n\n\nmy_array = [10, 20, 30, 40]\n\n4-element Vector{Int64}:\n 10\n 20\n 30\n 40"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#accessing-array-contents",
-    "href": "lectures/basics-slides.html#accessing-array-contents",
-    "title": "Programming basics",
-    "section": "Accessing array contents",
-    "text": "Accessing array contents\n\nThe elements of an array can be accessed one-by-one by referencing their location or index in the array:\n\n\nmy_array = [10, 20, 30, 40]\nmy_array[1]\n\n10\n\n\nor\n\nmy_array[2]\n\n20"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#accessing-array-contents-1",
-    "href": "lectures/basics-slides.html#accessing-array-contents-1",
-    "title": "Programming basics",
-    "section": "Accessing array contents",
-    "text": "Accessing array contents\n\nThe special keyword end fetches the last element:\n\n\nmy_array[end]\n\n40\n\n\n\nArrays can also be subsetted:\n\n\nmy_array[2:3]\n\n2-element Vector{Int64}:\n 20\n 30"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#broadcasting",
-    "href": "lectures/basics-slides.html#broadcasting",
-    "title": "Programming basics",
-    "section": "Broadcasting",
-    "text": "Broadcasting\n\nSuppose I want to add 1 to each number in my_array\nThe following will not work:\n\n\nmy_array + 1\n\n\nMethodError: no method matching +(::Vector{Int64}, ::Int64)\nFor element-wise addition, use broadcasting with dot syntax: array .+ scalar\n\nClosest candidates are:\n  +(::Any, ::Any, ::Any, ::Any...)\n   @ Base operators.jl:587\n  +(::Missing, ::Number)\n   @ Base missing.jl:123\n  +(::P, ::S) where {S&lt;:Number, T, X, P&lt;:Polynomials.FactoredPolynomial{T, X}}\n   @ Polynomials ~/.julia/packages/Polynomials/5ZhzG/src/polynomials/factored_polynomial.jl:257\n  ..."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#broadcasting-1",
-    "href": "lectures/basics-slides.html#broadcasting-1",
-    "title": "Programming basics",
-    "section": "Broadcasting",
-    "text": "Broadcasting\n\nWhy? Because mathematically the operation “add a scalar into a vector” is undefined\nTo apply an operator elementwise to each element in an array, we can prefix the operator with a period. In Julia-speak, this is called broadcasting.\n\n\nmy_array .+ 1\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#type-mismatch",
-    "href": "lectures/basics-slides.html#type-mismatch",
-    "title": "Programming basics",
-    "section": "Type mismatch",
-    "text": "Type mismatch\n\nWhy does the following not work?\n\n\nmy_string = \"My shoe size is: \"\nmy_number = 41\nmy_string * my_number\n\n\nMethodError: no method matching *(::String, ::Int64)\n\nClosest candidates are:\n  *(::Any, ::Any, ::Any, ::Any...)\n   @ Base operators.jl:587\n  *(::Missing, ::Number)\n   @ Base missing.jl:123\n  *(::Polynomials.AbstractPolynomial, ::Union{Number, Matrix})\n   @ Polynomials ~/.julia/packages/Polynomials/5ZhzG/src/common.jl:1041\n  ..."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#type-conversion",
-    "href": "lectures/basics-slides.html#type-conversion",
-    "title": "Programming basics",
-    "section": "Type conversion",
-    "text": "Type conversion\n\nTo make it work, we need to explicitly convert the integer into a string:\n\n\nmy_string * string(my_number)\n\n\"My shoe size is: 41\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions",
-    "href": "lectures/basics-slides.html#functions",
-    "title": "Programming basics",
-    "section": "Functions",
-    "text": "Functions\n\nA function, sometimes also known as a subroutine, is a reusable piece of code that performs, well, some function…\nWe define it once and then can use it as many times as we like\nA function can (but need not) take inputs – these are known as the function’s arguments\nA function can (but need not) give an output – this is known as the function’s return value"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions-example",
-    "href": "lectures/basics-slides.html#functions-example",
-    "title": "Programming basics",
-    "section": "Functions: example",
-    "text": "Functions: example\n\nHere is a function that takes two arguments, an array and a scalar number, and adds the scalar to each element of the array\nI’m calling the function add_elementwise\n\n\nfunction add_elementwise(array, scalar)\n  result = array .+ scalar\n  return result\nend\n\nadd_elementwise (generic function with 1 method)"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions-example-1",
-    "href": "lectures/basics-slides.html#functions-example-1",
-    "title": "Programming basics",
-    "section": "Functions: example",
-    "text": "Functions: example\n\nWe can now call the function on particular arrays and numbers:\n\n\nmy_array = [10, 20, 30, 40]\nadd_elementwise(my_array, 1)\n\n4-element Vector{Int64}:\n 11\n 21\n 31\n 41"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions-example-2",
-    "href": "lectures/basics-slides.html#functions-example-2",
-    "title": "Programming basics",
-    "section": "Functions: example",
-    "text": "Functions: example\n\nadd_elementwise(my_array, -23.5)\n\n4-element Vector{Float64}:\n -13.5\n  -3.5\n   6.5\n  16.5"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise",
-    "href": "lectures/basics-slides.html#exercise",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\nWrite a function with the following properties:\n\nThe function’s name is announce_age\nThe function takes two arguments, the first a person’s name, the second a number that is that person’s age\nThe function’s return value is a string which announces the person’s age in this format: \"John is 40 years old\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise-1",
-    "href": "lectures/basics-slides.html#exercise-1",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nHere is the function definition:\n\nfunction announce_age(name, age)\n  return name * \" is \" * string(age) * \" years old\"\nend\n\nannounce_age (generic function with 1 method)\n\n\nLet’s test it:\n\nannounce_age(\"John\", 40)\n\n\"John is 40 years old\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types-classes-and-objects",
-    "href": "lectures/basics-slides.html#custom-types-classes-and-objects",
-    "title": "Programming basics",
-    "section": "Custom types (“classes” and “objects”)",
-    "text": "Custom types (“classes” and “objects”)\n\nIdea of object-oriented programming (OOP): we can make custom types (classes) which are instantiated as objects\n\nProgramming ABMs in a language that does not support this would be very cumbersome\n\nIn Julia, custom types are defined by way of a special keyword, struct\nA custom type is effectively a combination of variables called the type’s fields\nIf the fields need to be modifiable later in the program, we use mutable struct instead of struct"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types-example",
-    "href": "lectures/basics-slides.html#custom-types-example",
-    "title": "Programming basics",
-    "section": "Custom types: example",
-    "text": "Custom types: example\n\nSuppose we want to represent a person by way of their name, their age and their shoe size\nSince these fields (at least age) need to be modifiable, we use a mutable struct:\n\n\nmutable struct Person\n  name::String\n  age::Int\n  shoesize::Float64\nend"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#old",
-    "href": "lectures/basics-slides.html#old",
-    "title": "Programming basics",
-    "section": "OLD",
-    "text": "OLD"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#arrays-and-broadcasting",
-    "href": "lectures/basics-slides.html#arrays-and-broadcasting",
-    "title": "Programming basics",
-    "section": "Arrays and broadcasting",
-    "text": "Arrays and broadcasting\nTo represent a tuple (or vector) of numbers, we can make an array:\nThe contents of an array can be fetched one by one, if necessary, or subsetted:\nThe special keyword end fetches the last item in an array:\nOperations and functions (we’ll talk about functions below) in Julia can be broadcast, meaning that they are applied elementwise to all elements in an array. To take a simple example, suppose we want to add 1 to each element in our array of integers, manynumbers. The following won’t do, because we’d be trying to add a scalar to a vector, something that isn’t mathematically defined:\nThe following will work, but is cumbersome to write:\n\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nInstead of this, we can use the special . prefix to apply the sum operation elementwise:\n\n\n5-element Vector{Int64}:\n  2\n  5\n  7\n  3\n 21\n\n\nNote how the output is exactly the same."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types",
-    "href": "lectures/basics-slides.html#custom-types",
-    "title": "Programming basics",
-    "section": "Custom types",
-    "text": "Custom types\nSometimes basic types aren’t quite enough. For example, suppose we want to simulate the behaviour of a speaker–listener, i.e. an agent that has some representation of language and can interact with other agents. Is it an integer? A floating-point number? A string? It isn’t really any of these. What we want to do is to be able to define our own data structure, our own type.\nFor example, suppose that we can represent a speaker’s grammar as an integer (on the assumption that we index all grammars with the natural numbers). Suppose, moreover, that we are interested in a speaker’s age as well as its social class. Then we might want a data type such as the following, called a composite type in Julia:\nIn this definition, we introduce a composite type consisting of three primitive type inside it: a grammar, an age, and a (social) class. The first is declared to be an integer, the second a floating-point number with 64 bits of precision, and the third a string.\n\n\n\n\n\n\nNote\n\n\nThe keyword mutable is important in the type’s definition. If we leave it out, any objects created with this type will be immutable, and cannot be changed once they’ve been created. We will see examples of this in the main chapters of these lecture notes.\n\n\n\nThink of a composite type such as this as a template. We can use and reuse the same template to create multiple instances, or objects, of that template. For example:\nThis will create two Speaker objects and store them in the variables alice and bob. The first instance has a grammar of type 1 (we haven’t really specified yet what that means—but we will in the main chapters of these notes), the second a grammar of type 2. The first has an age of 22.5 (which we might interpret as years), the second an age of 40.0. Finally, the first speaker is defined to be middle-class, the second, lower-class."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#functions-1",
-    "href": "lectures/basics-slides.html#functions-1",
-    "title": "Programming basics",
-    "section": "Functions",
-    "text": "Functions\nThe actual functionality of composite objects will be defined by functions, which manipulate those objects.\nFor example, suppose we want to implement a function that changes a speaker’s grammar to i (from whichever value it happens to have at the moment), where i is some integer. This we can achieve with the following function. The function takes two arguments: a Speaker object, and i. It then modifies the speaker’s grammar field to read i. (Fields are accessed using the . notation.)\nHere’s a function that increments a speaker’s age by one year:\n\n\n\n\n\n\nNote\n\n\nBy convention, functions which modify things are appended with a ! in their name in Julia. This is not mandatory, but is good practice, since looking at the function name immediately tells you whether the function modifies an object or not.\n\n\n\nFunctions do not need to manipulate objects created from composite types: they can do many other things, too. For example, the following function takes three integers and returns their sum:\nWe can then call the function like this:\n\n\n10\n\n\nFunctions need not have return values—indeed, our change_grammar! function doesn’t have one. Some functions also have no arguments, like the following function which simply prints the string \"Hello, world!\" to the screen:\n\n\nHello, world!"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#constructors",
-    "href": "lectures/basics-slides.html#constructors",
-    "title": "Programming basics",
-    "section": "Constructors",
-    "text": "Constructors\nConstructors are special functions used to create objects from composite types. Recall that, above, we created a speaker like this:\nWhat if we want each speaker to have age 0 when they are created? This is easy to do with a constructor that supplies this default value. The constructor will have to have the same name as the composite type.\nWhat this constructor function does is to simply call the default constructor (which takes three values), supplying 0.0 as the new speaker’s age.\n\n\n\n\n\n\nNote\n\n\nThere is a shorter and possibly more intuitive way of definining this constructor:\n\n\n\nDefining a new constructor does not remove the default constructor. Hence we can “birth” a speaker at age 10, for example, if we want to:"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#control-flow",
-    "href": "lectures/basics-slides.html#control-flow",
-    "title": "Programming basics",
-    "section": "Control flow",
-    "text": "Control flow\nPrograms often need to check whether some condition is fulfilled or not, and continue one way or another depending on that check’s outcome. For example, suppose we want to implement a class_trip function that takes a speaker from their social class to the one immediately higher class. We could write something like the following:\n\n\n\n\n\n\nNote\n\n\nNote the very crucial difference between == and =. The double equals sign is used for comparisons, the single one for assignments. Confusing these two is a very common source of beginner errors."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#loops",
-    "href": "lectures/basics-slides.html#loops",
-    "title": "Programming basics",
-    "section": "Loops",
-    "text": "Loops\nPrograms also often need to carry out some action repetitively. For example, suppose we wish to define a function that takes an array of numbers of arbitrary length and returns the mean of the numbers in that array. Our function will need to take the sum over the entire array, then divide by the length of the array. One way of doing this is by using a for loop. (Note that Array{Float64} specifies that we expect, as input, an array of floating-point numbers, and that length is a function that returns the number of elements in an array.)\n\n\n28.4\n\n\n\n\n\n\n\n\nNote\n\n\nThis example is a bit silly, since Julia (of course) already has a ready-made function that takes sums over arrays: sum. But it serves to illustrate how for loops operate.\n\n\n\nAnother use case for a for loop might be the following. Suppose we have collected a number of Speaker objects in an array, and wish to print out the age of each speaker. This is easy to do:\n\n\n22.5\n40.0\n80.8\n\n\nHowever, there is an even better (a more “Julian”, i.e. more idiomatic) solution. We first write a function that returns a speaker’s age:\nOr using the shorter syntax:\nWe can then use the . affix to apply this function to each speaker in our array:\n\n\n3-element Vector{Float64}:\n 22.5\n 40.0\n 80.8\n\n\nThis returns a three-element vector containing the speakers’ ages, but does not print it to the terminal. If we want the latter too, we just call println, broadcast over the array:"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehensions",
-    "href": "lectures/basics-slides.html#array-comprehensions",
-    "title": "Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\n\nWhat if we wanted to create 3 Persons? Easy:\n\n\n\nPerson(\"Bob\", 65, 42.33)\n\n\n\nWhat if we wanted to create 1000 Persons?"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#preparing-for-the-future",
-    "href": "lectures/basics-slides.html#preparing-for-the-future",
-    "title": "Programming basics",
-    "section": "Preparing for the future",
-    "text": "Preparing for the future\nGo ahead and install the following packages, which we will rely on later. Plots is used to draw figures, and Agents gives some useful functionality for agent-based models."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types-example-1",
-    "href": "lectures/basics-slides.html#custom-types-example-1",
-    "title": "Programming basics",
-    "section": "Custom types: example",
-    "text": "Custom types: example\n\nmutable struct Person\n  name::String\n  age::Int\n  shoesize::Float64\nend\n\n\nHere,\n\nname::String means the field called name is of type string, etc.\nInt is an integer\nin Float64, the number specifies the precision of the floating-point number (related to how many decimals it can store)"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#custom-types-example-2",
-    "href": "lectures/basics-slides.html#custom-types-example-2",
-    "title": "Programming basics",
-    "section": "Custom types: example",
-    "text": "Custom types: example\n\nWe can now construct an instance of the Person custom type, a Person object, and store it in a variable:\n\n\njane = Person(\"Jane\", 35, 39.5)\n\nPerson(\"Jane\", 35, 39.5)\n\n\n\nTo access the fields of an object, we use the following dot syntax:\n\n\njane.name\n\n\"Jane\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise-2",
-    "href": "lectures/basics-slides.html#exercise-2",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\nWrite three functions:\n\nA function that takes a Person object as argument and returns their shoe size\nA function that takes a Person object and a string as argument, and sets the person’s name to be the string supplied as argument\nA function that increments a Person object’s age by one"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise-3",
-    "href": "lectures/basics-slides.html#exercise-3",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n\nfunction get_shoesize(x)\n  return x.shoesize\nend\n\nfunction set_name(x, y)\n  x.name = y\nend\n\nfunction become_older(x)\n  x.age = x.age + 1\nend"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#explicit-type-specifications",
-    "href": "lectures/basics-slides.html#explicit-type-specifications",
-    "title": "Programming basics",
-    "section": "Explicit type specifications",
-    "text": "Explicit type specifications\nNote that it is possible (and often good practice) to explicitly set the types of function arguments:\n\nfunction get_shoesize(x::Person)\n  return x.shoesize\nend\n\nfunction set_name(x::Person, y::String)\n  x.name = y\nend\n\nfunction become_older(x::Person)\n  x.age = x.age + 1\nend"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#getters-and-setters",
-    "href": "lectures/basics-slides.html#getters-and-setters",
-    "title": "Programming basics",
-    "section": "Getters and setters",
-    "text": "Getters and setters\n\nFunctions that return an object’s field are sometimes known as getters. Functions that set a field are known as setters.\nIn Julia, it is customary to append an exclamation point to the name of every setter function. This is to warn users of the function that the function modifies something in the object.\nThus, we would rather write:\n\n\nfunction set_name!(x::Person, y::String)\n  x.name = y\nend"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehensions-1",
-    "href": "lectures/basics-slides.html#array-comprehensions-1",
-    "title": "Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\n\nHere we can use a powerful feature known as an array comprehension. The following creates 1000 persons, each with the same default fields (we’ll later see how to modify this), and places them in an array. The array is returned and stored in the population variable:\n\n\npopulation = [Person(\"M. Musterperson\", 0, 0.0) for i in 1:1000]\n\n\nThe i variable is a dummy variable that only exists for the duration of the array comprehension."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehensions-2",
-    "href": "lectures/basics-slides.html#array-comprehensions-2",
-    "title": "Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\n\nWe can now access individual persons by indexing them from the array:\n\n\npopulation[1]\n\nPerson(\"M. Musterperson\", 0, 0.0)\n\n\n\nWe can also access their fields:\n\n\npopulation[1].name\n\n\"M. Musterperson\"\n\n\n\nAnd we can set them:\n\n\nset_name(population[1], \"Bob the Builder\")\npopulation[1].name\n\n\"Bob the Builder\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehesions",
-    "href": "lectures/basics-slides.html#array-comprehesions",
-    "title": "Programming basics",
-    "section": "Array comprehesions",
-    "text": "Array comprehesions\n\nWe can now access individual persons by indexing them from the array:\n\n\npopulation[1]\n\nPerson(\"M. Musterperson\", 0, 0.0)\n\n\n\nWe can also access their fields:\n\n\npopulation[1].name\n\n\"M. Musterperson\"\n\n\n\nAnd we can set them:\n\n\nset_name(population[1], \"Bob the Builder\")\npopulation[1].name\n\n\"Bob the Builder\""
-  },
-  {
-    "objectID": "lectures/basics-slides.html#array-comprehensions-3",
-    "href": "lectures/basics-slides.html#array-comprehensions-3",
-    "title": "Programming basics",
-    "section": "Array comprehensions",
-    "text": "Array comprehensions\nAnother powerful feature of the Julia language are array comprehensions. An array comprehension is used to create an array by repeatedly executing a desired expression. For example, suppose we want to generate an array that consists of the squares of the first 100 natural numbers, including zero (so the array needs to contain \\(0^2 = 0\\), \\(1^2 = 1\\), \\(2^2 = 4\\) and so on).\n\n\n100-element Vector{Int64}:\n    0\n    1\n    4\n    9\n   16\n   25\n   36\n   49\n   64\n   81\n  100\n  121\n  144\n    ⋮\n 7744\n 7921\n 8100\n 8281\n 8464\n 8649\n 8836\n 9025\n 9216\n 9409\n 9604\n 9801\n\n\nThe expression to be evaluated in an array comprehension can be arbitrarily complex; for example, it can be a function. Suppose we wanted (for whatever reason) to create an array that repeats the age of our speaker alice fifty times. We could accomplish this with the following array comprehension:\n\n\n50-element Vector{Float64}:\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n  ⋮\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n 22.5\n\n\nYou will find more useful applications of array comprehensions in the main chapters; they are often the most elegant way of creating trajectories over entire populations of speakers, for example."
-  },
-  {
-    "objectID": "lectures/basics-slides.html#fixme",
-    "href": "lectures/basics-slides.html#fixme",
-    "title": "Programming basics",
-    "section": "FIXME",
-    "text": "FIXME\ncontrol flow – conditionals and loops?\nor is this too much infooos for one session?"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#comments",
-    "href": "lectures/basics-slides.html#comments",
-    "title": "Programming basics",
-    "section": "Comments",
-    "text": "Comments\n\nTo improve code readability, we insert comments (these are ignored by the compiler)\nSingle-line comment:\n\n\n# the following variable stores my shoe size\nshoesize = 41.5\n\n\nMulti-line comment:\n\n\n#=\nThe following variable\nstores my shoe size\n=#\nshoesize = 41.5"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#packages",
-    "href": "lectures/basics-slides.html#packages",
-    "title": "Programming basics",
-    "section": "Packages",
-    "text": "Packages\n\nBasic Julia functionality is extended by packages\nThese are installed through a package manager called Pkg\nE.g. to install the Agents package (and all its dependencies), we issue these commands:\n\n\nusing Pkg\nPkg.add(\"Agents\")\n\n\nOnce the package has been installed, we can load it by:\n\n\nusing Agents"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#homework",
-    "href": "lectures/basics-slides.html#homework",
-    "title": "Programming basics",
-    "section": "Homework",
-    "text": "Homework\nFIXME"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#random-numbers",
-    "href": "lectures/basics-slides.html#random-numbers",
-    "title": "Programming basics",
-    "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.795012825129003"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise-4",
-    "href": "lectures/basics-slides.html#exercise-4",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?"
-  },
-  {
-    "objectID": "lectures/basics-slides.html#exercise-5",
-    "href": "lectures/basics-slides.html#exercise-5",
-    "title": "Programming basics",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n11.696687353151724\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n51.24486651050538"
+    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   }
 ]

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-04-16">
 
-<title>Syllabus</title>
+<title>Making birds fly</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,45 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,7 +105,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -103,19 +118,19 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./syllabus.html" aria-current="page"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./lectures.html"> 
+    <a class="nav-link" href="../lectures.html"> 
 <span class="menu-text">Lectures</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./homework.html"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
 </ul>
@@ -129,20 +144,31 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="basics.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Syllabus</h1>
-</div>
+<h1 class="title">Making birds fly</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">homework</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Date</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">16 April 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -162,138 +188,69 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The syllabus is tentative – topics may get rearranged as the course proceeds.</p>
+<p>To complete this (and subsequent) homework, you need a working Julia installation. Refer to the homework <a href="../homework/installing-julia.html">Installing Julia</a> for details.</p>
 </div>
 </div>
-<section id="timetable" class="level2">
-<h2 class="anchored" data-anchor-id="timetable">Timetable</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Topic</th>
-<th>Homework</th>
-<th>Reading</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>9.4.</td>
-<td>Welcome + <a href="./lectures/intro.html">Intro to ABMs</a></td>
-<td><a href="./homework/installing-julia.html">Installing julia</a></td>
-<td><span class="citation" data-cites="Gilbert2020">Gilbert (<a href="#ref-Gilbert2020" role="doc-biblioref">2020</a>)</span>, chapter 1</td>
-</tr>
-<tr class="even">
-<td>16.4.</td>
-<td><a href="./lectures/basics.html">Programming basics</a></td>
-<td><a href="./homework/fly.html">Making birds fly</a></td>
-<td><span class="citation" data-cites="Gilbert2020">Gilbert (<a href="#ref-Gilbert2020" role="doc-biblioref">2020</a>)</span>, chapter 2</td>
-</tr>
-<tr class="odd">
-<td>23.4.</td>
-<td>A model of language learning</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>30.4.</td>
-<td>Two models of language change</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>7.5.</td>
-<td>Social networks</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>14.5.</td>
-<td>Spatial typology</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>21.5.</td>
-<td>Programming best practices</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><del>28.5.</del></td>
-<td><em>No lecture (Vorlesungsfreie Zeit)</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><del>4.6.</del></td>
-<td><em>No lecture (Vertiefungswoche)</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>11.6.</td>
-<td>Exemplar dynamics</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>18.6.</td>
-<td>Conformity</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>25.6.</td>
-<td>Roaming in space</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>2.7.</td>
-<td>Presentations 1</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>9.7.</td>
-<td>Presentations 2</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>16.7.</td>
-<td>Exam</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="course-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="course-requirements">Course requirements</h2>
-<p>To pass this course, you will need to satisfactorily complete both:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In addition to a Julia installation, you will also need the <a href="https://docs.juliaplots.org/">Plots</a> package. Run the following commands to install and load it:</p>
+<div id="889a0047" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Plots"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>In this week’s <a href="../lectures/basics.html">lecture</a>, you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.</p>
+<p>Specifically, we will implement a version of the artificial birds that we saw in first week’s lecture’s <a href="../lectures/intro.html#example-2-flocking-1">flocking example</a>. For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds “fly”.</p>
+<p>Your task is to:</p>
 <ol type="1">
-<li>The final exam</li>
-<li>Small programming project + in-class presentation + written report, either solo or in small group (depending on your preference)</li>
-</ol>
-<p>The examination will be based on the following materials:</p>
-<ol type="1">
-<li>Lectures and associated lecture notes (on this website)</li>
-<li>Homework contents (on this website)</li>
-<li>Readings (on <a href="https://ilias.uni-konstanz.de/goto_ILIASKONSTANZ_crs_1712980.html">ILIAS</a>)</li>
-</ol>
-<p>Programming project topics need to be decided before the <em>Vorlesungsfreie Zeit</em>. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible.</p>
-
-
-
-</section>
-
-<p><span class="myfooter">© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Gilbert2020" class="csl-entry" role="listitem">
-Gilbert, Nigel. 2020. <em>Agent-Based Models</em>. Second edition. London: SAGE.
+<li><p>Write a custom type called <code>Bird</code> which has the following fields, each of them of type <code>Float64</code>:</p>
+<ul>
+<li><code>x</code>, the bird’s location coordinate in the horizontal dimension</li>
+<li><code>y</code>, the bird’s location coordinate in the vertical dimension</li>
+<li><code>dir_x</code>, the bird’s direction in the horizontal dimension</li>
+<li><code>dir_y</code>, the birds’ direction in the vertical dimension</li>
+</ul></li>
+<li><p>Use an array comprehension to make a population of <code>Bird</code> objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named <code>population</code>.</p></li>
+<li><p>Download <a href="plot_birds.jl">this file</a> and save it with the filename <code>plot_birds.jl</code>. Then run the following in Julia:</p>
+<div id="f0d19d8c" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"plot_birds.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div></section></div></main> <!-- /main -->
+<p>(You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)</p></li>
+<li><p>Run the following command:</p>
+<div id="252ae91e" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will draw the bird’s positions and directions in a graphical plot.</p></li>
+<li><p>Write a function called <code>fly!</code> which takes one argument – a <code>Bird</code> object – and makes this bird fly. In this context, to fly means to move <code>x</code> in the direction of <code>dir_x</code> by a little amount – let’s call that little amount <code>delta</code> – and to likewise move <code>y</code> in the direction of <code>dir_y</code> by the same amount. (You can make <code>delta</code> an argument of <code>fly!</code> if you want.)</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use pen and paper to visually figure out how to update the <code>x</code> and <code>y</code> values of the <code>Bird</code> object. Use your imagination. Also note that there is no single “correct” answer as to how this function ought to be implemented. We will look at a few different possibilities in next week’s lecture.</p>
+</div>
+</div></li>
+<li><p>Test your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds’ positions change as you’d expect?</p></li>
+</ol>
+
+
+
+<p><span class="myfooter">© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
