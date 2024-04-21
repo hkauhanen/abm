@@ -1,6 +1,7 @@
 ---
 title: "Installing Julia"
 date: 04/09/2024
+Solution: "N/A"
 categories:
   - homework
 ---

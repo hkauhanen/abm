@@ -1,0 +1,202 @@
+---
+title: "Making birds fly"
+date: 04/22/2024
+categories:
+  - solution
+---
+
+```{julia}
+#|echo: false
+#|output: false
+using Random
+Random.seed!(123)
+```
+
+
+## 1. The `Bird` object
+
+Our blueprint for `Bird`s looks like this. Notice that we declare it to be `mutable` -- when a `Bird` flies, its position coordinates must change.
+
+```{julia}
+#|echo: true
+mutable struct Bird
+  x::Float64
+  y::Float64
+  dir_x::Float64
+  dir_y::Float64
+end
+```
+
+
+## 2. The population
+
+To create a population of `Bird`s, it is easiest to use an array comprehension. Notice how we use the `rand()` function to give each bird a random position and random direction. (The number of birds in the population wasn't specified in the homework assignment -- my mistake. Here, I've decided to create 10 birds.)
+
+```{julia}
+#|echo: true
+population = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]
+```
+
+
+## 3. Sourcing the plotting code
+
+We now include the source code in the file `plot_birds.jl` which allows us to plot the population. (I store my scripts in a folder named `jl` in the parent directory of the current working directory, hence the `../jl/` construction before the filename.) Since this code requires the presence of the *Plots* package, we also first load that package using `using`.
+
+```{julia}
+#|echo: true
+using Plots
+include("../jl/plot_birds.jl")
+```
+
+
+## 4. Plotting the population
+
+We can now plot:
+
+```{julia}
+#|echo: true
+plot(population)
+```
+
+Why are all our birds pointing in more or less the same direction? Recall that we used `rand()` to initialize the birds' positions and directions, and recall that `rand()` returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:
+
+```{julia}
+#|echo: true
+[2*rand() - 1 for i in 1:10]
+```
+
+With this idea in mind, let's re-initialize our population:
+
+```{julia}
+#|echo: true
+population = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]
+```
+
+And plot it:
+
+```{julia}
+#|echo: true
+plot(population)
+```
+
+::: {.callout-note}
+Clearly my plotting code has a bug in it: look at the four birds which have arrows pointing *to* them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions... important lesson to be learned here: **when deploying code, especially code for other people to use, always test it under all imaginable circumstances!**) We'll ignore this little problem for now. A patched version of the plotting code is provided at the end of this solution.
+:::
+
+
+## 5. The `fly!` function
+
+We now get to the meat of the exercise: making these birds fly. The instruction was to
+   
+> move `x` in the direction of `dir_x` by a little amount -- let's call that little amount `delta` -- and [...] move `y` in the direction of `dir_y` by the same amount.
+
+How do we do this?
+
+One way is to imagine that `dir_x` and `dir_y` define a local coordinate system -- local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if `dir_x` is 0 and `dir_y` is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird's position as a vector, an arrow from the origin `(0,0)` to `(x,y)`, and you can similarly think of the birds's direction as a vector, an arrow from `(x,y)` to `(dir_x, dir_y)`; see this illustration:
+
+FIXME hand-drawn illustration
+
+To make the bird move from `(x,y)` for `(dir_x, dir_y)`, we perform vector summation: we set the new value of `x` to be `x + dir_x` and the new value of `y` to be `y + dir_y`.
+
+FIXME hand-drawn illustration
+
+The only thing that remains is that "little amount `delta`". If we replace the direction vector `(dir_x, dir_y)` with `(delta*dir_x, delta*dir_y)`, then we are effectively scaling it down (assuming `delta` has a value between 0 and 1):
+
+FIXME hand-drawn illustration
+
+Putting all of the above together, we can now define our function for flying a bird:
+
+```{julia}
+#|echo: true
+function fly!(b::Bird, delta::Float64)
+  b.x = b.x + delta*b.dir_x
+  b.y = b.y + delta*b.dir_y
+end
+```
+
+Simple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first...)
+
+
+## 6. Testing
+
+Let's now finally test the `fly!` function. This is what our population looked like initially:
+
+```{julia}
+#|echo: true
+plot(population)
+```
+
+Let's now apply `fly!` to the first bird in the population a few times. (I'm choosing a very large value for `delta` so that we see the effects more clearly.)
+
+```{julia}
+#|echo: true
+delta = 0.9
+fly!(population[1], delta)
+fly!(population[1], delta)
+fly!(population[1], delta)
+```
+
+::: {.callout-note}
+What is this number that is returned? Recall that Julia functions automatically return the results of the last expression evaluated inside a function body, in this case, the value of `b.y`. If you want to disable this, add `return nothing` as the last line of your function definition, like this:
+
+```{julia}
+#|echo: true
+#|eval: false
+function fly!(b::Bird, delta::Float64)
+  b.x = b.x + delta*b.dir_x
+  b.y = b.y + delta*b.dir_y
+  return nothing
+end
+```
+:::
+
+Let's see what happened:
+
+```{julia}
+#|echo: true
+plot(population)
+```
+
+One bird is flying away from the population, in the direction of its direction arrow, exactly as expected.
+
+
+## Bonus: making the entire population fly
+
+Recall that in Julia, functions can be *broadcast* over arrays, meaning the function gets applied elementwise to each element of the array. Since our population of birds is an array, we can now very easily make each bird fly:
+
+```{julia}
+#|echo: true
+fly!.(population, 0.9)
+plot(population)
+```
+
+Furthermore, we can use an array comprehension to make each bird fly some specified number of times. For example here 20 times:
+
+```{julia}
+#|echo: true
+[fly!.(population, 0.1) for t in 1:20]
+plot(population)
+```
+
+
+## Updated plotting code
+
+There are really three problems with the code in `plot_birds.jl`:
+
+1. Sometimes the direction arrow points towards the bird rather than away from it, as expected.
+1. When the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).
+1. Finally, I forgot to include a line in the code that specifies that the presence of the *Plots* package is required, leading to error messages in case the end-user hasn't loaded *Plots* before attempting to use the code.
+
+I have fixed these problems in an updated `plot_birds_fixed.jl` script which you can [download here](../jl/plot_birds_fixed.jl).
+
+Applied to our population's current state, the bug-fixed plotting code now gives:
+
+```{julia}
+#|echo: true
+include("../jl/plot_birds_fixed.jl")
+plot(population)
+```
+
+Looks much better, doesn't it?
+
+

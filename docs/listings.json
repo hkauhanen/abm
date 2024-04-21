@@ -12,5 +12,11 @@
       "/lectures/intro.html",
       "/lectures/basics.html"
     ]
+  },
+  {
+    "listing": "/solutions.html",
+    "items": [
+      "/solutions/fly.html"
+    ]
   }
 ]

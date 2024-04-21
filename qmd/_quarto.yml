@@ -20,6 +20,10 @@ website:
         file: lectures.qmd
       - text: "Homework"
         file: homework.qmd
+      - text: "Solutions"
+        file: solutions.qmd
+      - text: "Bric-a-brac"
+        file: bric-a-brac.qmd
 
 bibliography: references.bib
 

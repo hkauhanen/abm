@@ -5,6 +5,9 @@
     ],
     "lectures.qmd": [
       "lectures"
+    ],
+    "solutions.qmd": [
+      "solutions"
     ]
   }
 }

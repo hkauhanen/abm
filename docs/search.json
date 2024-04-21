@@ -11,7 +11,7 @@
     "href": "syllabus.html#timetable",
     "title": "Syllabus",
     "section": "Timetable",
-    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
+    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling Julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
   },
   {
     "objectID": "syllabus.html#course-requirements",
@@ -242,7 +242,7 @@
     "href": "lectures/basics-slides.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.3366029090782652"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.43710753497759125"
   },
   {
     "objectID": "lectures/basics-slides.html#exercise-4",
@@ -256,7 +256,7 @@
     "href": "lectures/basics-slides.html#exercise-5",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.062600109641487\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n94.3711381462752"
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.709303451563073\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n70.63955457696973"
   },
   {
     "objectID": "lectures/basics-slides.html#comments",
@@ -557,7 +557,7 @@
     "href": "homework.html",
     "title": "Homework",
     "section": "",
-    "text": "Installing Julia\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\nMaking birds fly\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Date\n\n\nTitle\n\n\nSolution\n\n\n\n\n\n\n9 April 2024\n\n\nInstalling Julia\n\n\nN/A\n\n\n\n\n16 April 2024\n\n\nMaking birds fly\n\n\nHere\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "lectures/intro.html",
@@ -929,5 +929,117 @@
     "title": "Lectures",
     "section": "",
     "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "solutions/fly.html",
+    "href": "solutions/fly.html",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "solutions.html",
+    "href": "solutions.html",
+    "title": "Solutions to homework",
+    "section": "",
+    "text": "Date\n\n\nTitle\n\n\n\n\n\n\n22 April 2024\n\n\nMaking birds fly\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "solutions/fly.html#section",
+    "href": "solutions/fly.html#section",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend\n\n\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)\n\n\n\nWe now include the source code in the file plot_birds.jl which allows us to plot the population. (I store my scripts in a folder named jl in the parent directory of the current working directory, hence the ../jl/ construction before the filename.) Since this code requires the presence of the Plots package, we also first load that package using using.\n\n\nusing Plots\ninclude(\"../jl/plot_birds.jl\")\n\n\nWe can now plot:\n\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy are all our birds pointing in more or less the same direction? Recall that we used rand() to initialize the birds’ positions and directions, and recall that rand() returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:\n\n[2*rand() - 1 for i in 1:10]\n\n10-element Vector{Float64}:\n -0.22525187549286851\n  0.5438327116895545\n -0.24523348113449273\n  0.7511099991192371\n -0.4708637192761387\n  0.8037546490608298\n  0.7293861840623399\n  0.4644763024359402\n -0.7936063069983399\n  0.1751698724177022\n\n\nWith this idea in mind, let’s re-initialize our population:\n\npopulation = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.618865511882924, -0.5523183945589438, 0.7170489219693619, -0.24916615259097208)\n Bird(0.3534141180790922, 0.8417688482534209, 0.4129222831361803, 0.3919753816200593)\n Bird(0.7579538838754145, -0.16543176889487166, -0.12700639607293884, -0.6063073498246891)\n Bird(0.17059453226859533, 0.12660681452801836, -0.07117384268707516, 0.6495748680565732)\n Bird(0.1591833330768717, 0.6077337180274938, 0.08377142581999197, 0.5523786724183681)\n Bird(-0.8566393842375593, 0.8653672763283604, 0.6817832906156263, 0.590731985726523)\n Bird(0.5890138703978984, 0.280887894872357, -0.10813826831817863, -0.9059532971107356)\n Bird(0.2775156760816275, 0.41475391462741396, 0.9860955611224076, -0.6907174051634926)\n Bird(-0.7656879482170376, -0.8057846770570476, -0.8824796694661512, 0.24197793679586144)\n Bird(0.3464419510792771, -0.4091392851668356, 0.2423652677929784, -0.33347994991774543)\n\n\nAnd plot it:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nClearly my plotting code has a bug in it: look at the four birds which have arrows pointing to them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions… important lesson to be learned here: when deploying code, especially code for other people to use, always test it under all imaginable circumstances!) We’ll ignore this little problem for now. An updated, bug-free version of the plotting code is provided at the end of this solution.\n\n\n\nWe now get to the meat of the exercise: making these birds fly. The instruction was to\n\nmove x in the direction of dir_x by a little amount – let’s call that little amount delta – and […] move y in the direction of dir_y by the same amount.\n\nHow do we do this?\nOne way is to imagine that dir_x and dir_y define a local coordinate system – local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if dir_x is 0 and dir_y is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird’s position as a vector, an arrow from the origin (0,0) to (x,y), and you can similarly think of the birds’s direction as a vector, an arrow from (x,y) to (dir_x, dir_y); see this illustration:\nFIXME hand-drawn illustration\nTo make the bird move from (x,y) for (dir_x, dir_y), we perform vector summation: we set the new value of x to be x + dir_x and the new value of y to be y + dir_y.\nFIXME hand-drawn illustration\nThe only thing that remains is that “little amount delta”. If we replace the direction vector (dir_x, dir_y) with (delta*dir_x, delta*dir_y), then we are effectively scaling it down (assuming delta has a value between 0 and 1):\nFIXME hand-drawn illustration\nPutting all of the above together, we can now define our function for flying a bird:\n\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\nend\n\nfly! (generic function with 1 method)\n\n\nSimple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first…)\n\nLet’s now finally test the fly! function."
+  },
+  {
+    "objectID": "solutions/fly.html#the-bird-object",
+    "href": "solutions/fly.html#the-bird-object",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend"
+  },
+  {
+    "objectID": "solutions/fly.html#population",
+    "href": "solutions/fly.html#population",
+    "title": "Making birds fly",
+    "section": "2. Population",
+    "text": "2. Population\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)"
+  },
+  {
+    "objectID": "solutions/fly.html#sourcing-the-plotting-code",
+    "href": "solutions/fly.html#sourcing-the-plotting-code",
+    "title": "Making birds fly",
+    "section": "3. Sourcing the plotting code",
+    "text": "3. Sourcing the plotting code\nWe now include the source code in the file plot_birds.jl which allows us to plot the population. (I store my scripts in a folder named jl in the parent directory of the current working directory, hence the ../jl/ construction before the filename.) Since this code requires the presence of the Plots package, we also first load that package using using.\n\nusing Plots\ninclude(\"../jl/plot_birds.jl\")"
+  },
+  {
+    "objectID": "solutions/fly.html#plotting-the-population",
+    "href": "solutions/fly.html#plotting-the-population",
+    "title": "Making birds fly",
+    "section": "4. Plotting the population",
+    "text": "4. Plotting the population\nWe can now plot:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy are all our birds pointing in more or less the same direction? Recall that we used rand() to initialize the birds’ positions and directions, and recall that rand() returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:\n\n[2*rand() - 1 for i in 1:10]\n\n10-element Vector{Float64}:\n -0.22525187549286851\n  0.5438327116895545\n -0.24523348113449273\n  0.7511099991192371\n -0.4708637192761387\n  0.8037546490608298\n  0.7293861840623399\n  0.4644763024359402\n -0.7936063069983399\n  0.1751698724177022\n\n\nWith this idea in mind, let’s re-initialize our population:\n\npopulation = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.618865511882924, -0.5523183945589438, 0.7170489219693619, -0.24916615259097208)\n Bird(0.3534141180790922, 0.8417688482534209, 0.4129222831361803, 0.3919753816200593)\n Bird(0.7579538838754145, -0.16543176889487166, -0.12700639607293884, -0.6063073498246891)\n Bird(0.17059453226859533, 0.12660681452801836, -0.07117384268707516, 0.6495748680565732)\n Bird(0.1591833330768717, 0.6077337180274938, 0.08377142581999197, 0.5523786724183681)\n Bird(-0.8566393842375593, 0.8653672763283604, 0.6817832906156263, 0.590731985726523)\n Bird(0.5890138703978984, 0.280887894872357, -0.10813826831817863, -0.9059532971107356)\n Bird(0.2775156760816275, 0.41475391462741396, 0.9860955611224076, -0.6907174051634926)\n Bird(-0.7656879482170376, -0.8057846770570476, -0.8824796694661512, 0.24197793679586144)\n Bird(0.3464419510792771, -0.4091392851668356, 0.2423652677929784, -0.33347994991774543)\n\n\nAnd plot it:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nClearly my plotting code has a bug in it: look at the four birds which have arrows pointing to them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions… important lesson to be learned here: when deploying code, especially code for other people to use, always test it under all imaginable circumstances!) We’ll ignore this little problem for now. A patched version of the plotting code is provided at the end of this solution."
+  },
+  {
+    "objectID": "solutions/fly.html#the-fly-function",
+    "href": "solutions/fly.html#the-fly-function",
+    "title": "Making birds fly",
+    "section": "5. The fly! function",
+    "text": "5. The fly! function\nWe now get to the meat of the exercise: making these birds fly. The instruction was to\n\nmove x in the direction of dir_x by a little amount – let’s call that little amount delta – and […] move y in the direction of dir_y by the same amount.\n\nHow do we do this?\nOne way is to imagine that dir_x and dir_y define a local coordinate system – local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if dir_x is 0 and dir_y is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird’s position as a vector, an arrow from the origin (0,0) to (x,y), and you can similarly think of the birds’s direction as a vector, an arrow from (x,y) to (dir_x, dir_y); see this illustration:\nFIXME hand-drawn illustration\nTo make the bird move from (x,y) for (dir_x, dir_y), we perform vector summation: we set the new value of x to be x + dir_x and the new value of y to be y + dir_y.\nFIXME hand-drawn illustration\nThe only thing that remains is that “little amount delta”. If we replace the direction vector (dir_x, dir_y) with (delta*dir_x, delta*dir_y), then we are effectively scaling it down (assuming delta has a value between 0 and 1):\nFIXME hand-drawn illustration\nPutting all of the above together, we can now define our function for flying a bird:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\nend\n\nfly! (generic function with 1 method)\n\n\nSimple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first…)"
+  },
+  {
+    "objectID": "solutions/fly.html#testing",
+    "href": "solutions/fly.html#testing",
+    "title": "Making birds fly",
+    "section": "6. Testing",
+    "text": "6. Testing\nLet’s now finally test the fly! function. This is what our population looked like initially:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s now apply fly! to the first bird in the population a few times. (I’m choosing a very large value for delta so that we see the effects more clearly.)\n\ndelta = 0.9\nfly!(population[1], delta)\nfly!(population[1], delta)\nfly!(population[1], delta)\n\n-1.2250670065545686\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhat is this number that is returned? Recall that Julia functions automatically return the results of the last expression evaluated inside a function body, in this case, the value of b.y. If you want to disable this, add return nothing as the last line of your function definition, like this:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\n  return nothing\nend\n\n\n\nLet’s see what happened:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne bird is flying away from the population, in the direction of its direction arrow, exactly as expected."
+  },
+  {
+    "objectID": "solutions/fly.html#bonus-an-updated-plot_birds.jl",
+    "href": "solutions/fly.html#bonus-an-updated-plot_birds.jl",
+    "title": "Making birds fly",
+    "section": "Bonus: an updated plot_birds.jl",
+    "text": "Bonus: an updated plot_birds.jl\nThere are really two problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\n\nI have fixed both problems in an updated plot_birds_fixed.jl script which you can download here."
+  },
+  {
+    "objectID": "solutions/fly.html#the-population",
+    "href": "solutions/fly.html#the-population",
+    "title": "Making birds fly",
+    "section": "2. The population",
+    "text": "2. The population\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)"
+  },
+  {
+    "objectID": "solutions/fly.html#bonus",
+    "href": "solutions/fly.html#bonus",
+    "title": "Making birds fly",
+    "section": "Bonus",
+    "text": "Bonus\n\nfly!.(population, 0.9)\nplot(population)"
+  },
+  {
+    "objectID": "solutions/fly.html#bonus-making-the-entire-population-fly",
+    "href": "solutions/fly.html#bonus-making-the-entire-population-fly",
+    "title": "Making birds fly",
+    "section": "Bonus: making the entire population fly",
+    "text": "Bonus: making the entire population fly\nRecall that in Julia, functions can be broadcast over arrays, meaning the function gets applied elementwise to each element of the array. Since our population of birds is an array, we can now very easily make each bird fly:\n\nfly!.(population, 0.9)\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFurthermore, we can use an array comprehension to make each bird fly some specified number of times. For example here 20 times:\n\n[fly!.(population, 0.1) for t in 1:20]\nplot(population)"
+  },
+  {
+    "objectID": "solutions/fly.html#a-bug-fixed-plot_birds.jl",
+    "href": "solutions/fly.html#a-bug-fixed-plot_birds.jl",
+    "title": "Making birds fly",
+    "section": "A bug-fixed plot_birds.jl",
+    "text": "A bug-fixed plot_birds.jl\nThere are really three problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\nFinally, I forgot to include a line in the code that specifies that the presence of the Plots package is required, leading to error messages in case the end-user hasn’t loaded Plots before attempting to use the code.\n\nI have fixed these problems in an updated plot_birds_fixed.jl script which you can download here.\nApplied to our population’s current state, the bug-fixed plotting code now gives:\n\ninclude(\"../jl/plot_birds_fixed.jl\")\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLooks much better, doesn’t it?"
+  },
+  {
+    "objectID": "solutions/fly.html#updated-plotting-code",
+    "href": "solutions/fly.html#updated-plotting-code",
+    "title": "Making birds fly",
+    "section": "Updated plotting code",
+    "text": "Updated plotting code\nThere are really three problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\nFinally, I forgot to include a line in the code that specifies that the presence of the Plots package is required, leading to error messages in case the end-user hasn’t loaded Plots before attempting to use the code.\n\nI have fixed these problems in an updated plot_birds_fixed.jl script which you can download here.\nApplied to our population’s current state, the bug-fixed plotting code now gives:\n\ninclude(\"../jl/plot_birds_fixed.jl\")\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLooks much better, doesn’t it?"
+  },
+  {
+    "objectID": "bric-a-brac.html",
+    "href": "bric-a-brac.html",
+    "title": "Bric-a-brac",
+    "section": "",
+    "text": "A collection of sundry miscellanea.\n\nplot_birds_fixed.jl – A Julia Plots recipe, used to plot birds in the homework Making birds fly\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   }
 ]

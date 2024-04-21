@@ -54,5 +54,15 @@
   "homework/fly.qmd": {
     "fly.html": "e1f4de3b",
     "fly.tex": "85f4a3fd"
+  },
+  "solutions.qmd": {
+    "solutions.html": "c9a0dd1c"
+  },
+  "solutions/fly.qmd": {
+    "fly.html": "61f9d257",
+    "fly.tex": "45152a43"
+  },
+  "bric-a-brac.qmd": {
+    "bric-a-brac.html": "643afd9b"
   }
 }

@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-Solution',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -158,6 +158,14 @@ window.Quarto = {
     <a class="nav-link active" href="./homework.html" aria-current="page"> 
 <span class="menu-text">Homework</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./solutions.html"> 
+<span class="menu-text">Solutions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bric-a-brac.html"> 
+<span class="menu-text">Bric-a-brac</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -196,41 +204,46 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="homework" data-listing-date-sort="1712613600000" data-listing-file-modified-sort="1712401816998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="563">
-<a href="./homework/installing-julia.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Installing Julia
-</h5>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-9 April 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="homework" data-listing-date-sort="1713218400000" data-listing-file-modified-sort="1713260670047" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="499">
-<a href="./homework/fly.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Making birds fly
-</h5>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-16 April 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Date
+</th>
+<th>
+Title
+</th>
+<th>
+Solution
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="homework" data-listing-date-sort="1712613600000" data-listing-file-modified-sort="1713709004029" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="563" data-listing-title-sort="Installing Julia" data-listing-filename-sort="installing-julia.qmd">
+<td>
+<span class="listing-date">9 April 2024</span>
+</td>
+<td>
+<a href="./homework/installing-julia.html" class="title listing-title">Installing Julia</a>
+</td>
+<td>
+<span class="listing-Solution">N/A</span>
+</td>
+</tr>
+<tr data-index="1" data-categories="homework" data-listing-date-sort="1713218400000" data-listing-file-modified-sort="1713708926209" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="499" data-listing-title-sort="Making birds fly" data-listing-filename-sort="fly.qmd">
+<td>
+<span class="listing-date">16 April 2024</span>
+</td>
+<td>
+<a href="./homework/fly.html" class="title listing-title">Making birds fly</a>
+</td>
+<td>
+<span class="listing-Solution"><a href="./solutions/fly.html">Here</a></span>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

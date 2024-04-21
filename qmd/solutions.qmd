@@ -1,9 +1,9 @@
 ---
-title: "Homework"
+title: "Solutions to homework"
 listing:
-  contents: homework
+  contents: solutions
   type: table
-  fields: [date, title, Solution]
+  fields: [date, title]
   sort: date
   sort-ui: false
   filter-ui: false

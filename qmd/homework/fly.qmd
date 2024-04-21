@@ -1,6 +1,7 @@
 ---
 title: "Making birds fly"
 date: 04/16/2024
+Solution: "[Here](solutions/fly.qmd)"
 categories:
   - homework
 ---
