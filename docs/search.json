@@ -1,24 +1,73 @@
 [
   {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
+    "objectID": "bric-a-brac.html",
+    "href": "bric-a-brac.html",
+    "title": "Bric-a-brac",
     "section": "",
-    "text": "Note\n\n\n\nThe syllabus is tentative – topics may get rearranged as the course proceeds.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "A compendium of sundry miscellanea.\n\nplot_birds_fixed.jl – A Julia Plots recipe, used to plot birds in the homework Making birds fly\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "syllabus.html#timetable",
-    "href": "syllabus.html#timetable",
-    "title": "Syllabus",
-    "section": "Timetable",
-    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling Julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\n\n\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
+    "objectID": "solutions/fly.html",
+    "href": "solutions/fly.html",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "syllabus.html#course-requirements",
-    "href": "syllabus.html#course-requirements",
-    "title": "Syllabus",
-    "section": "Course requirements",
-    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
+    "objectID": "solutions/fly.html#the-bird-object",
+    "href": "solutions/fly.html#the-bird-object",
+    "title": "Making birds fly",
+    "section": "",
+    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend"
+  },
+  {
+    "objectID": "solutions/fly.html#the-population",
+    "href": "solutions/fly.html#the-population",
+    "title": "Making birds fly",
+    "section": "2. The population",
+    "text": "2. The population\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)"
+  },
+  {
+    "objectID": "solutions/fly.html#sourcing-the-plotting-code",
+    "href": "solutions/fly.html#sourcing-the-plotting-code",
+    "title": "Making birds fly",
+    "section": "3. Sourcing the plotting code",
+    "text": "3. Sourcing the plotting code\nWe now include the source code in the file plot_birds.jl which allows us to plot the population. (I store my scripts in a folder named jl in the parent directory of the current working directory, hence the ../jl/ construction before the filename.) Since this code requires the presence of the Plots package, we also first load that package using using.\n\nusing Plots\ninclude(\"../jl/plot_birds.jl\")"
+  },
+  {
+    "objectID": "solutions/fly.html#plotting-the-population",
+    "href": "solutions/fly.html#plotting-the-population",
+    "title": "Making birds fly",
+    "section": "4. Plotting the population",
+    "text": "4. Plotting the population\nWe can now plot:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy are all our birds pointing in more or less the same direction? Recall that we used rand() to initialize the birds’ positions and directions, and recall that rand() returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:\n\n[2*rand() - 1 for i in 1:10]\n\n10-element Vector{Float64}:\n -0.22525187549286851\n  0.5438327116895545\n -0.24523348113449273\n  0.7511099991192371\n -0.4708637192761387\n  0.8037546490608298\n  0.7293861840623399\n  0.4644763024359402\n -0.7936063069983399\n  0.1751698724177022\n\n\nWith this idea in mind, let’s re-initialize our population:\n\npopulation = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.618865511882924, -0.5523183945589438, 0.7170489219693619, -0.24916615259097208)\n Bird(0.3534141180790922, 0.8417688482534209, 0.4129222831361803, 0.3919753816200593)\n Bird(0.7579538838754145, -0.16543176889487166, -0.12700639607293884, -0.6063073498246891)\n Bird(0.17059453226859533, 0.12660681452801836, -0.07117384268707516, 0.6495748680565732)\n Bird(0.1591833330768717, 0.6077337180274938, 0.08377142581999197, 0.5523786724183681)\n Bird(-0.8566393842375593, 0.8653672763283604, 0.6817832906156263, 0.590731985726523)\n Bird(0.5890138703978984, 0.280887894872357, -0.10813826831817863, -0.9059532971107356)\n Bird(0.2775156760816275, 0.41475391462741396, 0.9860955611224076, -0.6907174051634926)\n Bird(-0.7656879482170376, -0.8057846770570476, -0.8824796694661512, 0.24197793679586144)\n Bird(0.3464419510792771, -0.4091392851668356, 0.2423652677929784, -0.33347994991774543)\n\n\nAnd plot it:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nClearly my plotting code has a bug in it: look at the four birds which have arrows pointing to them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions… important lesson to be learned here: when deploying code, especially code for other people to use, always test it under all imaginable circumstances!) We’ll ignore this little problem for now. A patched version of the plotting code is provided at the end of this solution."
+  },
+  {
+    "objectID": "solutions/fly.html#the-fly-function",
+    "href": "solutions/fly.html#the-fly-function",
+    "title": "Making birds fly",
+    "section": "5. The fly! function",
+    "text": "5. The fly! function\nWe now get to the meat of the exercise: making these birds fly. The instruction was to\n\nmove x in the direction of dir_x by a little amount – let’s call that little amount delta – and […] move y in the direction of dir_y by the same amount.\n\nHow do we do this?\nOne way is to imagine that dir_x and dir_y define a local coordinate system – local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if dir_x is 0 and dir_y is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird’s position as a vector, an arrow from the origin (0,0) to (x,y), and you can similarly think of the birds’s direction as a vector, an arrow from (x,y) to (dir_x, dir_y); see this illustration:\n\nTo make the bird move from (x,y) for (dir_x, dir_y), we perform vector summation: we set the new value of x to be x + dir_x and the new value of y to be y + dir_y.\n\nThe only thing that remains is that “little amount delta”. If we replace the direction vector (dir_x, dir_y) with (delta*dir_x, delta*dir_y), then we are effectively scaling it down (assuming delta has a value between 0 and 1):\n\nPutting all of the above together, we can now define our function for flying a bird:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\nend\n\nfly! (generic function with 1 method)\n\n\nSimple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first…)"
+  },
+  {
+    "objectID": "solutions/fly.html#testing",
+    "href": "solutions/fly.html#testing",
+    "title": "Making birds fly",
+    "section": "6. Testing",
+    "text": "6. Testing\nLet’s now finally test the fly! function. This is what our population looked like initially:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s now apply fly! to the first bird in the population a few times. (I’m choosing a very large value for delta so that we see the effects more clearly.)\n\ndelta = 0.9\nfly!(population[1], delta)\nfly!(population[1], delta)\nfly!(population[1], delta)\n\n-1.2250670065545686\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhat is this number that is returned? Recall that Julia functions automatically return the results of the last expression evaluated inside a function body, in this case, the value of b.y. If you want to disable this, add return nothing as the last line of your function definition, like this:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\n  return nothing\nend\n\n\n\nLet’s see what happened:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne bird is flying away from the population, in the direction of its direction arrow, exactly as expected."
+  },
+  {
+    "objectID": "solutions/fly.html#bonus-making-the-entire-population-fly",
+    "href": "solutions/fly.html#bonus-making-the-entire-population-fly",
+    "title": "Making birds fly",
+    "section": "Bonus: making the entire population fly",
+    "text": "Bonus: making the entire population fly\nRecall that in Julia, functions can be broadcast over arrays, meaning the function gets applied elementwise to each element of the array. Since our population of birds is an array, we can now very easily make each bird fly:\n\nfly!.(population, 0.9)\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFurthermore, we can use an array comprehension to make each bird fly some specified number of times. For example here 20 times:\n\n[fly!.(population, 0.1) for t in 1:20]\nplot(population)"
+  },
+  {
+    "objectID": "solutions/fly.html#updated-plotting-code",
+    "href": "solutions/fly.html#updated-plotting-code",
+    "title": "Making birds fly",
+    "section": "Updated plotting code",
+    "text": "Updated plotting code\nThere are really three problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\nFinally, I forgot to include a line in the code that specifies that the presence of the Plots package is required, leading to error messages in case the end-user hasn’t loaded Plots before attempting to use the code.\n\nI have fixed these problems in an updated plot_birds_fixed.jl script which you can download here.\nApplied to our population’s current state, the bug-fixed plotting code now gives:\n\ninclude(\"../jl/plot_birds_fixed.jl\")\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLooks much better, doesn’t it?"
   },
   {
     "objectID": "lectures/basics-slides.html#programming-in-julia",
@@ -242,7 +291,7 @@
     "href": "lectures/basics-slides.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.43710753497759125"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.40960858534876765"
   },
   {
     "objectID": "lectures/basics-slides.html#exercise-4",
@@ -256,7 +305,7 @@
     "href": "lectures/basics-slides.html#exercise-5",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.709303451563073\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n70.63955457696973"
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n5.919711491018143\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n77.58168851904074"
   },
   {
     "objectID": "lectures/basics-slides.html#comments",
@@ -473,14 +522,14 @@
     "href": "lectures/basics.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.43710753497759125"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.26364904634965325"
   },
   {
     "objectID": "lectures/basics.html#exercise-4",
     "href": "lectures/basics.html#exercise-4",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n18.709303451563073\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n70.63955457696973"
+    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n2.9335147107841077\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n67.1711787618834"
   },
   {
     "objectID": "lectures/basics.html#comments",
@@ -530,202 +579,6 @@
     "title": "Programming basics",
     "section": "Summary",
     "text": "Summary\n\nHere you’ve learned some of the basics of the Julia language\nThere is much more… we will learn it as we go along\nWe will make heavy use of array comprehensions, functions and custom types, so make sure you understand these concepts\nYou get to practice them in this week’s homework"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Agent-based modelling",
-    "section": "",
-    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "homework/fly.html",
-    "href": "homework/fly.html",
-    "title": "Making birds fly",
-    "section": "",
-    "text": "Note\n\n\n\nIn addition to a working Julia installation, you will need the Plots package in order to complete this homework. Run the following commands to install and load it:\n\nusing Pkg\nPkg.add(\"Plots\")\nusing Plots\n\n\n\nIn this week’s lecture, you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.\nSpecifically, we will implement a version of the artificial birds that we saw in first week’s lecture’s flocking example. For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds “fly”.\nYour task is to:\n\nWrite a custom type called Bird which has the following fields, each of them of type Float64:\n\nx, the bird’s location coordinate in the horizontal dimension\ny, the bird’s location coordinate in the vertical dimension\ndir_x, the bird’s direction (where its beak is pointing) in the horizontal dimension\ndir_y, the birds’ direction in the vertical dimension\n\nUse an array comprehension to make a population of Bird objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named population.\nDownload this file and save it with the filename plot_birds.jl. Then run the following in Julia:\n\ninclude(\"plot_birds.jl\")\n\n(You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)\n\n\n\n\n\n\nTip\n\n\n\nIf the above fails, you can also simply copy-paste the contents of plot_birds.jl into your own file.\n\n\nRun the following command:\n\nplot(population)\n\nThis will draw the bird’s positions and directions in a graphical plot.\nWrite a function called fly! which takes one argument – a Bird object – and makes this bird fly. In this context, to fly means to move x in the direction of dir_x by a little amount – let’s call that little amount delta – and to likewise move y in the direction of dir_y by the same amount. (You can make delta an argument of fly! if you want.)\n\n\n\n\n\n\nTip\n\n\n\nUse pen and paper to visually figure out how to update the x and y values of the Bird object. Use your imagination. Also note that there is no single “correct” answer as to how this function ought to be implemented. We will look at a few different possibilities in next week’s lecture.\n\n\nTest your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds’ positions change as you’d expect?\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "homework/installing-julia.html",
-    "href": "homework/installing-julia.html",
-    "title": "Installing Julia",
-    "section": "",
-    "text": "In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as “add-ons” to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.\n\nNavigate to https://julialang.org, download the proper installation files for your operating system, and install Julia. Make sure to download version 1.10.2 or newer. (Older versions may not be fully compatible with the code we will be working with in this course.)\nWith installation complete, launch Julia. You should be greeted by a screen such as this:\n\nThis is known as the Julia REPL, which stands for read-eval(uate)-print loop. Here, you can give Julia commands, it will execute them, and you get the output back. For example, try the following commands:\n2+2\nsqrt(2)\n[1, 2, 3, 4]\nsum([1, 2, 3, 4])\nThe REPL can also be used to install packages i.e. extensions. We will now install two packages, Agents and CairoMakie, along with all their dependencies (i.e. further packages required to run those two packages). To do this, execute the following commands in the REPL:\nusing Pkg\nPkg.add(\"Agents\")\nPkg.add(\"CairoMakie\")\nThis will take a long while, as the two packages have many dependencies. Wait patiently. When everything is complete, you may exit the REPL:\nexit()\nIt would be very inconvenient to do all our coding in the REPL. It is much better to use a text editor or an IDE (integrated development environment). Here, you are free to make your own choice, if you already have a favourite editor for coding. For the purposes of this course, however, I recommend Visual Studio Code – this is the editor I will be using in the lectures, and so if you choose to use the same editor, things will be a bit smoother. To get started with VS Code, navigate to https://code.visualstudio.com/download, download the version for your operating system, and follow the instructions to install it.\nOnce VS Code has been successfully installed, we need to install a Julia extension for it. This will allow the editor to interface with your Julia installation, so that you will be able to execute code directly from the editor. Follow the instructions here, in bullet point number 3, to do this.\n\nIf all went well, you now have an up-to-date, working Julia installation, with a number of packages installed, plus a source code editor that interfaces seamlessly with that installation.\nIf something went wrong, try again. Google your problem to see if other users have already run into the same problem and have a solution. If it still refuses to work, bring your problem to the next lecture – we will discuss how to solve it and get you a working system.\n\nBonus\nIf you are already familiar with another programming language such as Python, I recommend you to watch this short video from IBM Technology detailing some of the major differences between Python and Julia. It does go into some technical details which may seem obscure for now (“dynamic typing”, “multiple dispatch”), but worry not – I will explain those concepts next week.\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Date\n\n\nTitle\n\n\nSolution\n\n\n\n\n\n\n9 April 2024\n\n\nInstalling Julia\n\n\nN/A\n\n\n\n\n16 April 2024\n\n\nMaking birds fly\n\n\nHere\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/intro.html",
-    "href": "lectures/intro.html",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
-    "title": "Intro to ABMs",
-    "section": "",
-    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
-  },
-  {
-    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
-    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
-    "title": "Intro to ABMs",
-    "section": "What is the benefit of ABMs?",
-    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
-  },
-  {
-    "objectID": "lectures/intro.html#examples",
-    "href": "lectures/intro.html#examples",
-    "title": "Intro to ABMs",
-    "section": "Examples",
-    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!2\n2 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
-  },
-  {
-    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
-    "href": "lectures/intro.html#example-1-conways-game-of-life",
-    "title": "Intro to ABMs",
-    "section": "Example 1: Conway’s Game of Life",
-    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
-  },
-  {
-    "objectID": "lectures/intro.html#question",
-    "href": "lectures/intro.html#question",
-    "title": "Intro to ABMs",
-    "section": "Question",
-    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
-  },
-  {
-    "objectID": "lectures/intro.html#exercise",
-    "href": "lectures/intro.html#exercise",
-    "title": "Intro to ABMs",
-    "section": "Exercise",
-    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
-  },
-  {
-    "objectID": "lectures/intro.html#species",
-    "href": "lectures/intro.html#species",
-    "title": "Intro to ABMs",
-    "section": "Species",
-    "text": "Species\nThe game supports many life forms (“species”), categorized into:3\n3 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
-  },
-  {
-    "objectID": "lectures/intro.html#emergence",
-    "href": "lectures/intro.html#emergence",
-    "title": "Intro to ABMs",
-    "section": "Emergence",
-    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking",
-    "href": "lectures/intro.html#example-2-flocking",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking"
-  },
-  {
-    "objectID": "lectures/intro.html#example-2-flocking-1",
-    "href": "lectures/intro.html#example-2-flocking-1",
-    "title": "Intro to ABMs",
-    "section": "Example 2: Flocking",
-    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds4\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\n4 Reynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
-  },
-  {
-    "objectID": "lectures/intro.html#example-3-social-distancing",
-    "href": "lectures/intro.html#example-3-social-distancing",
-    "title": "Intro to ABMs",
-    "section": "Example 3: Social Distancing",
-    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses5\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\n5 See Vynnycky and White (2010) for an overview."
-  },
-  {
-    "objectID": "lectures/intro.html#bounded-rationality-locality",
-    "href": "lectures/intro.html#bounded-rationality-locality",
-    "title": "Intro to ABMs",
-    "section": "Bounded rationality / Locality",
-    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
-  },
-  {
-    "objectID": "lectures/intro.html#challenges-in-abm",
-    "href": "lectures/intro.html#challenges-in-abm",
-    "title": "Intro to ABMs",
-    "section": "Challenges in ABM",
-    "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
-  },
-  {
-    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
-    "href": "lectures/intro.html#challenges-of-computational-implementation",
-    "title": "Intro to ABMs",
-    "section": "Challenges of computational implementation",
-    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-speed-an-issue",
-    "href": "lectures/intro.html#why-is-speed-an-issue",
-    "title": "Intro to ABMs",
-    "section": "Why is speed an issue?",
-    "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
-  },
-  {
-    "objectID": "lectures/intro.html#exampleexercise",
-    "href": "lectures/intro.html#exampleexercise",
-    "title": "Intro to ABMs",
-    "section": "Example/Exercise",
-    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
-  },
-  {
-    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
-    "title": "Intro to ABMs",
-    "section": "How to deal with issues of speed",
-    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-randomness-needed",
-    "href": "lectures/intro.html#why-is-randomness-needed",
-    "title": "Intro to ABMs",
-    "section": "Why is randomness needed?",
-    "text": "Why is randomness needed?\n\nQuite simple: real-world processes are complex, and to model such complex processes we resort to stochastic processes\nA stochastic process is a sequence of random variables\nFor example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a random number.\nOr consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are deterministic (which does not seem particularly sensible), we need some way of selecting interlocutors at random."
-  },
-  {
-    "objectID": "lectures/intro.html#why-is-randomness-an-issue",
-    "href": "lectures/intro.html#why-is-randomness-an-issue",
-    "title": "Intro to ABMs",
-    "section": "Why is randomness an issue?",
-    "text": "Why is randomness an issue?\n\nConventional computers are deterministic devices\nSo, if we need, say, a random number between 0 and 1, how is that accomplished?\nThe answer is a pseudorandom number generator (PRNG)\n\nThis is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the appearance of being random\nThe sequence is generated from a seed number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).\nHowever, there are significant issues…"
-  },
-  {
-    "objectID": "lectures/intro.html#issues-with-prngs",
-    "href": "lectures/intro.html#issues-with-prngs",
-    "title": "Intro to ABMs",
-    "section": "Issues with PRNGs",
-    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers6\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n6 We’ll see later that this is by no means a crazy requirement!"
-  },
-  {
-    "objectID": "lectures/intro.html#summary",
-    "href": "lectures/intro.html#summary",
-    "title": "Intro to ABMs",
-    "section": "Summary",
-    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
-  },
-  {
-    "objectID": "lectures/intro.html#the-scientific-community",
-    "href": "lectures/intro.html#the-scientific-community",
-    "title": "Intro to ABMs",
-    "section": "The scientific community",
-    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
-  },
-  {
-    "objectID": "lectures/intro.html#homework",
-    "href": "lectures/intro.html#homework",
-    "title": "Intro to ABMs",
-    "section": "Homework",
-    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework Installing Julia."
   },
   {
     "objectID": "lectures/intro-slides.html#what-is-an-agent-based-model-abm",
@@ -924,122 +777,640 @@
     "text": "References\n\n\n\n\n\n\n\n\nGardner, Martin. 1970. “The Fantastic Combinations of John Conway’s New Solitaire Game ’Life’.” Scientific American 223 (4): 120–23. https://doi.org/10.1038/scientificamerican1070-120.\n\n\nGilbert, Nigel. 2020. Agent-Based Models. Second edition. London: SAGE.\n\n\nReynolds, Craig W. 1987. “Flocks, Herds and Schools: A Distributed Behavioral Model.” ACM SIGRAPH Computer Graphics 21 (4): 25–34. https://doi.org/10.1145/37402.37406.\n\n\nVicsek, Tamás, András Czirók, Eshel Ben-Jacob, Inon Cohen, and Ofer Shochet. 1995. “Novel Type of Phase Transition in a System of Self-Driven Particles.” Physical Review Letters 75: 1226–29. https://doi.org/10.1103/PhysRevLett.75.1226.\n\n\nVynnycky, Emilia, and Richard G. White. 2010. An Introduction to Infectious Disease Modelling. Oxford: Oxford University Press."
   },
   {
-    "objectID": "lectures.html",
-    "href": "lectures.html",
-    "title": "Lectures",
+    "objectID": "lectures/intro.html",
+    "href": "lectures/intro.html",
+    "title": "Intro to ABMs",
     "section": "",
-    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/fly.html",
-    "href": "solutions/fly.html",
+    "objectID": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "href": "lectures/intro.html#what-is-an-agent-based-model-abm",
+    "title": "Intro to ABMs",
+    "section": "",
+    "text": "No rigorous definition (like most applied science)\nBut: can characterize as a model consisting of\n\nentities (the agents)…\n…which act1 upon each other…\n…in some kind of environment…\n…to create some emergent outcome\n\n“Emergent” = collective is more than the sum of its parts\nImplemented computationally, sometimes also analysed mathematically\n\n1 Eng. agent &lt; Lat. agens, pres. part. of ago ‘act’"
+  },
+  {
+    "objectID": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "href": "lectures/intro.html#what-is-the-benefit-of-abms-1",
+    "title": "Intro to ABMs",
+    "section": "What is the benefit of ABMs?",
+    "text": "What is the benefit of ABMs?\n\n“Like equation-based modeling, but unlike prose, agent-based models must be complete, consistent, and unambiguous if they are to be capable of being executed on a computer” (Gilbert 2020, xii, my emphasis)\n\n\ncomplete: the modeller cannot leave anything out of the model description\nconsistent: no part of the model can logically contradict another part of the same model\nunambiguous: the meaning of every part of the model must be objectively clear"
+  },
+  {
+    "objectID": "lectures/intro.html#examples",
+    "href": "lectures/intro.html#examples",
+    "title": "Intro to ABMs",
+    "section": "Examples",
+    "text": "Examples\nThese concepts are best explained through the use of examples…\n…so let’s look at a few!2\n2 The examples are taken from the Example Zoo of the Agents.jl package (released under the MIT license)."
+  },
+  {
+    "objectID": "lectures/intro.html#example-1-conways-game-of-life",
+    "href": "lectures/intro.html#example-1-conways-game-of-life",
+    "title": "Intro to ABMs",
+    "section": "Example 1: Conway’s Game of Life",
+    "text": "Example 1: Conway’s Game of Life\n\nEarly example of a cellular automaton (Gardner 1970)\nLattice; each cell either “live” (L) or “dead” (D)\nRules:\n\n\n\n\nRule\nCell\nNeighbourhood\nResult\n\n\n\n\n“underpopulation”\nL\n&lt; 2 L cells\nL \\(\\to\\) D\n\n\n“sustenance”\nL\n2 or 3 L cells\nL \\(\\to\\) L\n\n\n“overpopulation”\nL\n&gt; 3 L cells\nL \\(\\to\\) D\n\n\n“reproduction”\nD\n3 L cells\nD \\(\\to\\) L"
+  },
+  {
+    "objectID": "lectures/intro.html#question",
+    "href": "lectures/intro.html#question",
+    "title": "Intro to ABMs",
+    "section": "Question",
+    "text": "Question\nEarlier we said ABMs are complete, consistent and unambiguous.\nWhat have I left out of the definition of Conway’s Game of Life? (I.e. why is my description so far incomplete?)\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nThree very important things (at least):\n\nIs the lattice finite or infinite? If finite, then what happens at the boundaries? – It is infinite.\nAre the agents (the cells) updated synchronously (all at once) or asynchronously? – Synchronously.\nHow are a cell’s neighbours defined? – It’s the 8 cells surrounding it."
+  },
+  {
+    "objectID": "lectures/intro.html#exercise",
+    "href": "lectures/intro.html#exercise",
+    "title": "Intro to ABMs",
+    "section": "Exercise",
+    "text": "Exercise\nWhat happens to the cells in A? What happens to those in B? (Black = live, white = dead)\n\n\nA\n\n\nB\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nA is stable, B oscillates:\n\n\nA\n\n\nB"
+  },
+  {
+    "objectID": "lectures/intro.html#species",
+    "href": "lectures/intro.html#species",
+    "title": "Intro to ABMs",
+    "section": "Species",
+    "text": "Species\nThe game supports many life forms (“species”), categorized into:3\n3 Images of Game of Life species from Wikimedia Commons (public domain).\n\n\nStill lifes, e.g.   \n\n\n\nOscillators, e.g.   \n\n\n\nSpaceships, e.g."
+  },
+  {
+    "objectID": "lectures/intro.html#emergence",
+    "href": "lectures/intro.html#emergence",
+    "title": "Intro to ABMs",
+    "section": "Emergence",
+    "text": "Emergence\n\nThe game has simple rules, complex behaviour\nIt is undecidable: given a starting state S and a proposed other state O, we can prove that it is impossible to prove whether O will ever be reached from S!\nNew facts about the game are still being discovered: 2018 discovery of “knightships” (spaceships that move like the knight in chess)"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking",
+    "href": "lectures/intro.html#example-2-flocking",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking"
+  },
+  {
+    "objectID": "lectures/intro.html#example-2-flocking-1",
+    "href": "lectures/intro.html#example-2-flocking-1",
+    "title": "Intro to ABMs",
+    "section": "Example 2: Flocking",
+    "text": "Example 2: Flocking\n\nA simple model of the emergence of collective behaviour, flocking in birds4\nBirds follow three rules:\n\nCollision avoidance: maintain a minimum distance to other birds\nTracking: fly towards the average position of neighbouring birds\nNavigation: fly in the average direction of your neighbours\n\n\n4 Reynolds (1987), and much research thereafter, importantly Vicsek et al. (1995) and subsequent."
+  },
+  {
+    "objectID": "lectures/intro.html#example-3-social-distancing",
+    "href": "lectures/intro.html#example-3-social-distancing",
+    "title": "Intro to ABMs",
+    "section": "Example 3: Social Distancing",
+    "text": "Example 3: Social Distancing\n\nSIR (susceptible-infected-recovered) models are used to model epidemics, e.g. the spread of viruses5\nSuch models can be extended with aspects such as social distancing – implemented here as agents which remain stationary\nIn the following animations,\n\nblack dot = susceptible (healthy) individual\nred dot = infected individual\ngreen dot = recovered individual\n\n\n5 See Vynnycky and White (2010) for an overview."
+  },
+  {
+    "objectID": "lectures/intro.html#bounded-rationality-locality",
+    "href": "lectures/intro.html#bounded-rationality-locality",
+    "title": "Intro to ABMs",
+    "section": "Bounded rationality / Locality",
+    "text": "Bounded rationality / Locality\n\nCommon to all these examples is the following observation: the agents have bounded rationality\n\nIn Flocking, individual birds follow only three simple rules defined over the bird’s neighbours\nA bird does not know what flocking means, nor does it have a rule to accomplish flocking\nRather, flocking emerges as the collective behaviour of a group of birds\n\nIn other words, global patterns arise from numerous local interactions\nSimilar remarks apply to Game of Life and Social Distancing, indeed to any ABM"
+  },
+  {
+    "objectID": "lectures/intro.html#challenges-in-abm",
+    "href": "lectures/intro.html#challenges-in-abm",
+    "title": "Intro to ABMs",
+    "section": "Challenges in ABM",
+    "text": "Challenges in ABM\n\nHow do we know what to model?\nHow do we test our models against empirical data?\nHow do we implement our models computationally?"
+  },
+  {
+    "objectID": "lectures/intro.html#challenges-of-computational-implementation",
+    "href": "lectures/intro.html#challenges-of-computational-implementation",
+    "title": "Intro to ABMs",
+    "section": "Challenges of computational implementation",
+    "text": "Challenges of computational implementation\n\nSpeed: we want simulations to be fast\nRandomness: when our code calls for random numbers, we want them to be really random!\nCleanliness: we want our code to be understandable to other users\nReproducibility: when others run our code, they should get the same results we do"
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-speed-an-issue",
+    "href": "lectures/intro.html#why-is-speed-an-issue",
+    "title": "Intro to ABMs",
+    "section": "Why is speed an issue?",
+    "text": "Why is speed an issue?\n\nCentral processing units (CPUs) in modern computers carry out billions of instructions each second\nHowever, with ABMs, computational requirements may be significant, and may not scale nicely"
+  },
+  {
+    "objectID": "lectures/intro.html#exampleexercise",
+    "href": "lectures/intro.html#exampleexercise",
+    "title": "Intro to ABMs",
+    "section": "Example/Exercise",
+    "text": "Example/Exercise\n\nAssume:\n\nYou have a model such that one simulation run, with a given set of parameter values, takes 1 minute to complete.\nYour model has 2 parameters, each of which can assume 100 different values.\nYou want to replicate the simulation for each parameter combination 100 times for statistical reasons.\n\nHow long will it take for your entire simulation to complete?\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n2 parameters with 100 values each results in 100 x 100 = 10,000 parameter combinations. Thus, in total, we have 100 x 10,000 = 1 million simulation runs to complete. If each run takes 1 minute, the total is 1 million minutes. This corresponds to roughly 2 years!"
+  },
+  {
+    "objectID": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "href": "lectures/intro.html#how-to-deal-with-issues-of-speed",
+    "title": "Intro to ABMs",
+    "section": "How to deal with issues of speed",
+    "text": "How to deal with issues of speed\n\nChoose a suitable programming language\nWrite performant code\nWhenever possible, parallelize your code\n\nThis means running it simultaneously across many CPUs/computers; we will see later how it’s done"
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-randomness-needed",
+    "href": "lectures/intro.html#why-is-randomness-needed",
+    "title": "Intro to ABMs",
+    "section": "Why is randomness needed?",
+    "text": "Why is randomness needed?\n\nQuite simple: real-world processes are complex, and to model such complex processes we resort to stochastic processes\nA stochastic process is a sequence of random variables\nFor example, consider a “navigating” agent that turns into a random direction whenever it doesn’t know how to proceed otherwise. In this case, the random direction needs to be generated using a random number.\nOr consider a linguistic example: suppose Mary is friends with Bob, Fiona and Charles. Unless we want to claim that Mary’s interactions with the other people are deterministic (which does not seem particularly sensible), we need some way of selecting interlocutors at random."
+  },
+  {
+    "objectID": "lectures/intro.html#why-is-randomness-an-issue",
+    "href": "lectures/intro.html#why-is-randomness-an-issue",
+    "title": "Intro to ABMs",
+    "section": "Why is randomness an issue?",
+    "text": "Why is randomness an issue?\n\nConventional computers are deterministic devices\nSo, if we need, say, a random number between 0 and 1, how is that accomplished?\nThe answer is a pseudorandom number generator (PRNG)\n\nThis is an algorithm that generates a (long, but not infinite!) sequence of numbers which has the appearance of being random\nThe sequence is generated from a seed number. If you give the PRNG the same seed, you will get the same “random” sequence of numbers (this takes care of the reproducibility requirement).\nHowever, there are significant issues…"
+  },
+  {
+    "objectID": "lectures/intro.html#issues-with-prngs",
+    "href": "lectures/intro.html#issues-with-prngs",
+    "title": "Intro to ABMs",
+    "section": "Issues with PRNGs",
+    "text": "Issues with PRNGs\n\nSuppose your PRNG generates a sequence of 1M numbers…\n…but in your simulation you need to generate 10M random numbers6\nThen your “random” numbers will repeat 10 times\nThis means that different parts of your simulation are not independent of each other – a major problem!\nFurther issues can arise when we look at parallel processing… but more on that later!\n\n6 We’ll see later that this is by no means a crazy requirement!"
+  },
+  {
+    "objectID": "lectures/intro.html#summary",
+    "href": "lectures/intro.html#summary",
+    "title": "Intro to ABMs",
+    "section": "Summary",
+    "text": "Summary\n\nABM is a powerful framework for modelling real-world processes\nModels are complete, consistent and unambiguous\nIndividual agents exhibit bounded rationality\nChallenges involve, among other things, simulation speed and proper implementation of randomness"
+  },
+  {
+    "objectID": "lectures/intro.html#the-scientific-community",
+    "href": "lectures/intro.html#the-scientific-community",
+    "title": "Intro to ABMs",
+    "section": "The scientific community",
+    "text": "The scientific community\n\nABMs are created and explored by people in all manners of disciplines from physics and chemistry to linguistics and economics\nExamples of professional organisation in social sciences and linguistics:\n\nEuropean Social Simulation Association\nThe Journal of Artificial Societies and Social Simulation\nThe International Society for Computational Social Science (+IC2S2 conference)\nLanguage Dynamics and Change (journal)"
+  },
+  {
+    "objectID": "lectures/intro.html#homework",
+    "href": "lectures/intro.html#homework",
+    "title": "Intro to ABMs",
+    "section": "Homework",
+    "text": "Homework\nNext week, we will begin programming. To prepare your computer for this, complete the homework Installing Julia."
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Date\n\n\nTitle\n\n\nSolution\n\n\n\n\n\n\n9 April 2024\n\n\nInstalling Julia\n\n\nN/A\n\n\n\n\n16 April 2024\n\n\nMaking birds fly\n\n\nHere\n\n\n\n\n23 April 2024\n\n\nVariational learning\n\n\n \n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework/vl.html",
+    "href": "homework/vl.html",
+    "title": "Variational learning",
+    "section": "",
+    "text": "Simulate five variational learners for 1000 learning steps with learning rate \\(\\gamma = 0.01\\) in a learning environment characterized by the probabilities P1 = 0.4, P12 = 0.5 and P2 = 0.1 (these are the probabilities that were used in the lecture). Plot the five trajectories in the same plot.\n\n\n\n\n\n\nTip\n\n\n\nTo draw into an already existing plot, use plot!() instead of plot().\n\n\nRepeat the above exercise, but this time with five learners with \\(\\gamma = 0.001\\), and then with five learners with \\(\\gamma = 1\\).\nNow repeat both of the above points, but this time in an environment characterized by probablities P1 = 0.1, P12 = 0.5 and P2 = 0.4.\nBased on your observations, what would you say is the effect of\n\nthe learning rate parameter?\nthe probabilities of occurrence of the different types of string?\n\nBy consulting the Plots.jl documentation, modify your trajectory plots so that\n\nthe trajectory is represented by points instead of lines\nthe x-axis is labelled “learning iteration”\nthe y-axis is labelled “probability of G1”\nthe plot title is “A variational learning trajectory”\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework/installing-julia.html",
+    "href": "homework/installing-julia.html",
+    "title": "Installing Julia",
+    "section": "",
+    "text": "In this course, we will conduct all our programming work in the Julia programming language. This homework will guide you through the process of installing Julia on your computer. You will also be installing a few important packages (think of them as “add-ons” to the base Julia installation) that we will need later on. Finally, we will install an editor which will make dealing with source code a bit more convenient compared to just running Julia in a terminal window.\n\nNavigate to https://julialang.org, download the proper installation files for your operating system, and install Julia. Make sure to download version 1.10.2 or newer. (Older versions may not be fully compatible with the code we will be working with in this course.)\nWith installation complete, launch Julia. You should be greeted by a screen such as this:\n\nThis is known as the Julia REPL, which stands for read-eval(uate)-print loop. Here, you can give Julia commands, it will execute them, and you get the output back. For example, try the following commands:\n2+2\nsqrt(2)\n[1, 2, 3, 4]\nsum([1, 2, 3, 4])\nThe REPL can also be used to install packages i.e. extensions. We will now install two packages, Agents and CairoMakie, along with all their dependencies (i.e. further packages required to run those two packages). To do this, execute the following commands in the REPL:\nusing Pkg\nPkg.add(\"Agents\")\nPkg.add(\"CairoMakie\")\nThis will take a long while, as the two packages have many dependencies. Wait patiently. When everything is complete, you may exit the REPL:\nexit()\nIt would be very inconvenient to do all our coding in the REPL. It is much better to use a text editor or an IDE (integrated development environment). Here, you are free to make your own choice, if you already have a favourite editor for coding. For the purposes of this course, however, I recommend Visual Studio Code – this is the editor I will be using in the lectures, and so if you choose to use the same editor, things will be a bit smoother. To get started with VS Code, navigate to https://code.visualstudio.com/download, download the version for your operating system, and follow the instructions to install it.\nOnce VS Code has been successfully installed, we need to install a Julia extension for it. This will allow the editor to interface with your Julia installation, so that you will be able to execute code directly from the editor. Follow the instructions here, in bullet point number 3, to do this.\n\nIf all went well, you now have an up-to-date, working Julia installation, with a number of packages installed, plus a source code editor that interfaces seamlessly with that installation.\nIf something went wrong, try again. Google your problem to see if other users have already run into the same problem and have a solution. If it still refuses to work, bring your problem to the next lecture – we will discuss how to solve it and get you a working system.\n\nBonus\nIf you are already familiar with another programming language such as Python, I recommend you to watch this short video from IBM Technology detailing some of the major differences between Python and Julia. It does go into some technical details which may seem obscure for now (“dynamic typing”, “multiple dispatch”), but worry not – I will explain those concepts next week.\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "homework/fly.html",
+    "href": "homework/fly.html",
     "title": "Making birds fly",
     "section": "",
-    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Note\n\n\n\nIn addition to a working Julia installation, you will need the Plots package in order to complete this homework. Run the following commands to install and load it:\n\nusing Pkg\nPkg.add(\"Plots\")\nusing Plots\n\n\n\nIn this week’s lecture, you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.\nSpecifically, we will implement a version of the artificial birds that we saw in first week’s lecture’s flocking example. For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds “fly”.\nYour task is to:\n\nWrite a custom type called Bird which has the following fields, each of them of type Float64:\n\nx, the bird’s location coordinate in the horizontal dimension\ny, the bird’s location coordinate in the vertical dimension\ndir_x, the bird’s direction (where its beak is pointing) in the horizontal dimension\ndir_y, the birds’ direction in the vertical dimension\n\nUse an array comprehension to make a population of Bird objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named population.\nDownload this file and save it with the filename plot_birds.jl. Then run the following in Julia:\n\ninclude(\"plot_birds.jl\")\n\n(You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)\n\n\n\n\n\n\nTip\n\n\n\nIf the above fails, you can also simply copy-paste the contents of plot_birds.jl into your own file.\n\n\nRun the following command:\n\nplot(population)\n\nThis will draw the bird’s positions and directions in a graphical plot.\nWrite a function called fly! which takes one argument – a Bird object – and makes this bird fly. In this context, to fly means to move x in the direction of dir_x by a little amount – let’s call that little amount delta – and to likewise move y in the direction of dir_y by the same amount. (You can make delta an argument of fly! if you want.)\n\n\n\n\n\n\nTip\n\n\n\nUse pen and paper to visually figure out how to update the x and y values of the Bird object. Use your imagination. Also note that there is no single “correct” answer as to how this function ought to be implemented. We will look at a few different possibilities in next week’s lecture.\n\n\nTest your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds’ positions change as you’d expect?\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "solutions.html",
     "href": "solutions.html",
     "title": "Solutions to homework",
     "section": "",
-    "text": "Date\n\n\nTitle\n\n\n\n\n\n\n22 April 2024\n\n\nMaking birds fly\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Date\n\n\nTitle\n\n\n\n\n\n\n23 April 2024\n\n\nMaking birds fly\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/fly.html#section",
-    "href": "solutions/fly.html#section",
-    "title": "Making birds fly",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Agent-based modelling",
     "section": "",
-    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend\n\n\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)\n\n\n\nWe now include the source code in the file plot_birds.jl which allows us to plot the population. (I store my scripts in a folder named jl in the parent directory of the current working directory, hence the ../jl/ construction before the filename.) Since this code requires the presence of the Plots package, we also first load that package using using.\n\n\nusing Plots\ninclude(\"../jl/plot_birds.jl\")\n\n\nWe can now plot:\n\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy are all our birds pointing in more or less the same direction? Recall that we used rand() to initialize the birds’ positions and directions, and recall that rand() returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:\n\n[2*rand() - 1 for i in 1:10]\n\n10-element Vector{Float64}:\n -0.22525187549286851\n  0.5438327116895545\n -0.24523348113449273\n  0.7511099991192371\n -0.4708637192761387\n  0.8037546490608298\n  0.7293861840623399\n  0.4644763024359402\n -0.7936063069983399\n  0.1751698724177022\n\n\nWith this idea in mind, let’s re-initialize our population:\n\npopulation = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.618865511882924, -0.5523183945589438, 0.7170489219693619, -0.24916615259097208)\n Bird(0.3534141180790922, 0.8417688482534209, 0.4129222831361803, 0.3919753816200593)\n Bird(0.7579538838754145, -0.16543176889487166, -0.12700639607293884, -0.6063073498246891)\n Bird(0.17059453226859533, 0.12660681452801836, -0.07117384268707516, 0.6495748680565732)\n Bird(0.1591833330768717, 0.6077337180274938, 0.08377142581999197, 0.5523786724183681)\n Bird(-0.8566393842375593, 0.8653672763283604, 0.6817832906156263, 0.590731985726523)\n Bird(0.5890138703978984, 0.280887894872357, -0.10813826831817863, -0.9059532971107356)\n Bird(0.2775156760816275, 0.41475391462741396, 0.9860955611224076, -0.6907174051634926)\n Bird(-0.7656879482170376, -0.8057846770570476, -0.8824796694661512, 0.24197793679586144)\n Bird(0.3464419510792771, -0.4091392851668356, 0.2423652677929784, -0.33347994991774543)\n\n\nAnd plot it:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nClearly my plotting code has a bug in it: look at the four birds which have arrows pointing to them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions… important lesson to be learned here: when deploying code, especially code for other people to use, always test it under all imaginable circumstances!) We’ll ignore this little problem for now. An updated, bug-free version of the plotting code is provided at the end of this solution.\n\n\n\nWe now get to the meat of the exercise: making these birds fly. The instruction was to\n\nmove x in the direction of dir_x by a little amount – let’s call that little amount delta – and […] move y in the direction of dir_y by the same amount.\n\nHow do we do this?\nOne way is to imagine that dir_x and dir_y define a local coordinate system – local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if dir_x is 0 and dir_y is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird’s position as a vector, an arrow from the origin (0,0) to (x,y), and you can similarly think of the birds’s direction as a vector, an arrow from (x,y) to (dir_x, dir_y); see this illustration:\nFIXME hand-drawn illustration\nTo make the bird move from (x,y) for (dir_x, dir_y), we perform vector summation: we set the new value of x to be x + dir_x and the new value of y to be y + dir_y.\nFIXME hand-drawn illustration\nThe only thing that remains is that “little amount delta”. If we replace the direction vector (dir_x, dir_y) with (delta*dir_x, delta*dir_y), then we are effectively scaling it down (assuming delta has a value between 0 and 1):\nFIXME hand-drawn illustration\nPutting all of the above together, we can now define our function for flying a bird:\n\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\nend\n\nfly! (generic function with 1 method)\n\n\nSimple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first…)\n\nLet’s now finally test the fly! function."
+    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these in real time.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/fly.html#the-bird-object",
-    "href": "solutions/fly.html#the-bird-object",
-    "title": "Making birds fly",
+    "objectID": "lectures/learning.html",
+    "href": "lectures/learning.html",
+    "title": "A model of language learning",
     "section": "",
-    "text": "Our blueprint for Birds looks like this. Notice that we declare it to be mutable – when a Bird flies, its position coordinates must change.\n\nmutable struct Bird\n  x::Float64\n  y::Float64\n  dir_x::Float64\n  dir_y::Float64\nend"
+    "text": "Starting this week, we will put programming to good use\nWe’ll start with a simple model of language learning\n\nHere, learning = process of updating a linguistic representation\nDoesn’t matter whether child or adult\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/fly.html#population",
-    "href": "solutions/fly.html#population",
-    "title": "Making birds fly",
-    "section": "2. Population",
-    "text": "2. Population\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)"
-  },
-  {
-    "objectID": "solutions/fly.html#sourcing-the-plotting-code",
-    "href": "solutions/fly.html#sourcing-the-plotting-code",
-    "title": "Making birds fly",
-    "section": "3. Sourcing the plotting code",
-    "text": "3. Sourcing the plotting code\nWe now include the source code in the file plot_birds.jl which allows us to plot the population. (I store my scripts in a folder named jl in the parent directory of the current working directory, hence the ../jl/ construction before the filename.) Since this code requires the presence of the Plots package, we also first load that package using using.\n\nusing Plots\ninclude(\"../jl/plot_birds.jl\")"
-  },
-  {
-    "objectID": "solutions/fly.html#plotting-the-population",
-    "href": "solutions/fly.html#plotting-the-population",
-    "title": "Making birds fly",
-    "section": "4. Plotting the population",
-    "text": "4. Plotting the population\nWe can now plot:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy are all our birds pointing in more or less the same direction? Recall that we used rand() to initialize the birds’ positions and directions, and recall that rand() returns a random number between 0 and 1. But we can also quite easily generate a random float between -1 and 1; see:\n\n[2*rand() - 1 for i in 1:10]\n\n10-element Vector{Float64}:\n -0.22525187549286851\n  0.5438327116895545\n -0.24523348113449273\n  0.7511099991192371\n -0.4708637192761387\n  0.8037546490608298\n  0.7293861840623399\n  0.4644763024359402\n -0.7936063069983399\n  0.1751698724177022\n\n\nWith this idea in mind, let’s re-initialize our population:\n\npopulation = [Bird(2*rand() - 1, 2*rand() - 1, 2*rand() - 1, 2*rand() - 1) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.618865511882924, -0.5523183945589438, 0.7170489219693619, -0.24916615259097208)\n Bird(0.3534141180790922, 0.8417688482534209, 0.4129222831361803, 0.3919753816200593)\n Bird(0.7579538838754145, -0.16543176889487166, -0.12700639607293884, -0.6063073498246891)\n Bird(0.17059453226859533, 0.12660681452801836, -0.07117384268707516, 0.6495748680565732)\n Bird(0.1591833330768717, 0.6077337180274938, 0.08377142581999197, 0.5523786724183681)\n Bird(-0.8566393842375593, 0.8653672763283604, 0.6817832906156263, 0.590731985726523)\n Bird(0.5890138703978984, 0.280887894872357, -0.10813826831817863, -0.9059532971107356)\n Bird(0.2775156760816275, 0.41475391462741396, 0.9860955611224076, -0.6907174051634926)\n Bird(-0.7656879482170376, -0.8057846770570476, -0.8824796694661512, 0.24197793679586144)\n Bird(0.3464419510792771, -0.4091392851668356, 0.2423652677929784, -0.33347994991774543)\n\n\nAnd plot it:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nClearly my plotting code has a bug in it: look at the four birds which have arrows pointing to them rather than away from them. (This is because when writing the code, I only tested it with birds that had positive positions and positive directions… important lesson to be learned here: when deploying code, especially code for other people to use, always test it under all imaginable circumstances!) We’ll ignore this little problem for now. A patched version of the plotting code is provided at the end of this solution."
-  },
-  {
-    "objectID": "solutions/fly.html#the-fly-function",
-    "href": "solutions/fly.html#the-fly-function",
-    "title": "Making birds fly",
-    "section": "5. The fly! function",
-    "text": "5. The fly! function\nWe now get to the meat of the exercise: making these birds fly. The instruction was to\n\nmove x in the direction of dir_x by a little amount – let’s call that little amount delta – and […] move y in the direction of dir_y by the same amount.\n\nHow do we do this?\nOne way is to imagine that dir_x and dir_y define a local coordinate system – local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if dir_x is 0 and dir_y is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird’s position as a vector, an arrow from the origin (0,0) to (x,y), and you can similarly think of the birds’s direction as a vector, an arrow from (x,y) to (dir_x, dir_y); see this illustration:\nFIXME hand-drawn illustration\nTo make the bird move from (x,y) for (dir_x, dir_y), we perform vector summation: we set the new value of x to be x + dir_x and the new value of y to be y + dir_y.\nFIXME hand-drawn illustration\nThe only thing that remains is that “little amount delta”. If we replace the direction vector (dir_x, dir_y) with (delta*dir_x, delta*dir_y), then we are effectively scaling it down (assuming delta has a value between 0 and 1):\nFIXME hand-drawn illustration\nPutting all of the above together, we can now define our function for flying a bird:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\nend\n\nfly! (generic function with 1 method)\n\n\nSimple! (In fact, this is the usual state of affairs: writing the code itself is not so difficult, the difficult thing is the thinking that has to be done first…)"
-  },
-  {
-    "objectID": "solutions/fly.html#testing",
-    "href": "solutions/fly.html#testing",
-    "title": "Making birds fly",
-    "section": "6. Testing",
-    "text": "6. Testing\nLet’s now finally test the fly! function. This is what our population looked like initially:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s now apply fly! to the first bird in the population a few times. (I’m choosing a very large value for delta so that we see the effects more clearly.)\n\ndelta = 0.9\nfly!(population[1], delta)\nfly!(population[1], delta)\nfly!(population[1], delta)\n\n-1.2250670065545686\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhat is this number that is returned? Recall that Julia functions automatically return the results of the last expression evaluated inside a function body, in this case, the value of b.y. If you want to disable this, add return nothing as the last line of your function definition, like this:\n\nfunction fly!(b::Bird, delta::Float64)\n  b.x = b.x + delta*b.dir_x\n  b.y = b.y + delta*b.dir_y\n  return nothing\nend\n\n\n\nLet’s see what happened:\n\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne bird is flying away from the population, in the direction of its direction arrow, exactly as expected."
-  },
-  {
-    "objectID": "solutions/fly.html#bonus-an-updated-plot_birds.jl",
-    "href": "solutions/fly.html#bonus-an-updated-plot_birds.jl",
-    "title": "Making birds fly",
-    "section": "Bonus: an updated plot_birds.jl",
-    "text": "Bonus: an updated plot_birds.jl\nThere are really two problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\n\nI have fixed both problems in an updated plot_birds_fixed.jl script which you can download here."
-  },
-  {
-    "objectID": "solutions/fly.html#the-population",
-    "href": "solutions/fly.html#the-population",
-    "title": "Making birds fly",
-    "section": "2. The population",
-    "text": "2. The population\nTo create a population of Birds, it is easiest to use an array comprehension. Notice how we use the rand() function to give each bird a random position and random direction. (The number of birds in the population wasn’t specified in the homework assignment – my mistake. Here, I’ve decided to create 10 birds.)\n\npopulation = [Bird(rand(), rand(), rand(), rand()) for i in 1:10]\n\n10-element Vector{Bird}:\n Bird(0.521213795535383, 0.5868067574533484, 0.8908786980927811, 0.19090669902576285)\n Bird(0.5256623915420473, 0.3905882754313441, 0.044818005017491114, 0.933353287277165)\n Bird(0.5805599818745412, 0.32723787925628356, 0.5269959187969865, 0.8362285750521512)\n Bird(0.04090613602769255, 0.4652015053812224, 0.3626493264184424, 0.10220460648875951)\n Bird(0.7201025594903295, 0.5736192424686392, 0.6644684787269287, 0.29536650475479964)\n Bird(0.2765974461749666, 0.9834357111198399, 0.8808974908158065, 0.23401680577405504)\n Bird(0.3809493792861086, 0.13194373253949954, 0.08829101913227844, 0.31350491450772877)\n Bird(0.4636097443249143, 0.7136359224862079, 0.20592490948670994, 0.09055116421778064)\n Bird(0.5819123423876457, 0.3114475007050529, 0.12114752051812694, 0.20452981732035946)\n Bird(0.38669016290895364, 0.018571999589938493, 0.07218072370140682, 0.9142465859437933)"
-  },
-  {
-    "objectID": "solutions/fly.html#bonus",
-    "href": "solutions/fly.html#bonus",
-    "title": "Making birds fly",
-    "section": "Bonus",
-    "text": "Bonus\n\nfly!.(population, 0.9)\nplot(population)"
-  },
-  {
-    "objectID": "solutions/fly.html#bonus-making-the-entire-population-fly",
-    "href": "solutions/fly.html#bonus-making-the-entire-population-fly",
-    "title": "Making birds fly",
-    "section": "Bonus: making the entire population fly",
-    "text": "Bonus: making the entire population fly\nRecall that in Julia, functions can be broadcast over arrays, meaning the function gets applied elementwise to each element of the array. Since our population of birds is an array, we can now very easily make each bird fly:\n\nfly!.(population, 0.9)\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFurthermore, we can use an array comprehension to make each bird fly some specified number of times. For example here 20 times:\n\n[fly!.(population, 0.1) for t in 1:20]\nplot(population)"
-  },
-  {
-    "objectID": "solutions/fly.html#a-bug-fixed-plot_birds.jl",
-    "href": "solutions/fly.html#a-bug-fixed-plot_birds.jl",
-    "title": "Making birds fly",
-    "section": "A bug-fixed plot_birds.jl",
-    "text": "A bug-fixed plot_birds.jl\nThere are really three problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\nFinally, I forgot to include a line in the code that specifies that the presence of the Plots package is required, leading to error messages in case the end-user hasn’t loaded Plots before attempting to use the code.\n\nI have fixed these problems in an updated plot_birds_fixed.jl script which you can download here.\nApplied to our population’s current state, the bug-fixed plotting code now gives:\n\ninclude(\"../jl/plot_birds_fixed.jl\")\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLooks much better, doesn’t it?"
-  },
-  {
-    "objectID": "solutions/fly.html#updated-plotting-code",
-    "href": "solutions/fly.html#updated-plotting-code",
-    "title": "Making birds fly",
-    "section": "Updated plotting code",
-    "text": "Updated plotting code\nThere are really three problems with the code in plot_birds.jl:\n\nSometimes the direction arrow points towards the bird rather than away from it, as expected.\nWhen the birds have flown numerous times, the direction arrows become so small that they can barely be seen (cf. the above population plot).\nFinally, I forgot to include a line in the code that specifies that the presence of the Plots package is required, leading to error messages in case the end-user hasn’t loaded Plots before attempting to use the code.\n\nI have fixed these problems in an updated plot_birds_fixed.jl script which you can download here.\nApplied to our population’s current state, the bug-fixed plotting code now gives:\n\ninclude(\"../jl/plot_birds_fixed.jl\")\nplot(population)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLooks much better, doesn’t it?"
-  },
-  {
-    "objectID": "bric-a-brac.html",
-    "href": "bric-a-brac.html",
-    "title": "Bric-a-brac",
+    "objectID": "lectures/learning.html#plan",
+    "href": "lectures/learning.html#plan",
+    "title": "A model of language learning",
     "section": "",
-    "text": "A collection of sundry miscellanea.\n\nplot_birds_fixed.jl – A Julia Plots recipe, used to plot birds in the homework Making birds fly\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Starting this week, we will put programming to good use\nWe’ll start with a simple model of language learning\n\nHere, learning = process of updating a linguistic representation\nDoesn’t matter whether child or adult"
+  },
+  {
+    "objectID": "lectures/learning.html#grammar-competition",
+    "href": "lectures/learning.html#grammar-competition",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nAssume two grammars \\(G_1\\) and \\(G_2\\) that generate languages \\(L_1\\) and \\(L_2\\)\n\nlanguage = set of strings (e.g. sentences)\n\nIn general, \\(L_1\\) and \\(L_2\\) will be different but may overlap:"
+  },
+  {
+    "objectID": "lectures/learning.html#grammar-competition-1",
+    "href": "lectures/learning.html#grammar-competition-1",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nThree sets of interest: \\(L_1 \\setminus L_2\\), \\(L_1 \\cap L_2\\) and \\(L_2 \\setminus L_1\\)"
+  },
+  {
+    "objectID": "lectures/learning.html#concrete-example",
+    "href": "lectures/learning.html#concrete-example",
+    "title": "A model of language learning",
+    "section": "Concrete example",
+    "text": "Concrete example\n\nSVO (\\(G_1\\)) vs. V2 (\\(G_2\\))"
+  },
+  {
+    "objectID": "lectures/learning.html#grammar-competition-4",
+    "href": "lectures/learning.html#grammar-competition-4",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nSuppose learner receives randomly chosen strings from \\(L_1\\) and \\(L_2\\)\nLearner uses either \\(G_1\\) or \\(G_2\\) to parse incoming string\nDefine \\(p =\\) probability of use of \\(G_1\\)\nHow should the learner update \\(p\\) in response to interactions with his/her environment?"
+  },
+  {
+    "objectID": "lectures/learning.html#variational-learning",
+    "href": "lectures/learning.html#variational-learning",
+    "title": "A model of language learning",
+    "section": "Variational learning",
+    "text": "Variational learning\n\nSuppose learner receives string/sentence \\(s\\)\nThen update is:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)"
+  },
+  {
+    "objectID": "lectures/learning.html#exercise",
+    "href": "lectures/learning.html#exercise",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\nHow can we increase/decrease \\(p\\) in practice? What is the update formula?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nOne possibility (which we will stick to):\n\nIncrease: \\(p\\) becomes \\(p + \\gamma (1 - p)\\)\nDecrease: \\(p\\) becomes \\(p - \\gamma p\\)\n\nThe parameter \\(0 &lt; \\gamma &lt; 1\\) is a learning rate"
+  },
+  {
+    "objectID": "lectures/learning.html#why-this-form-of-update-formula",
+    "href": "lectures/learning.html#why-this-form-of-update-formula",
+    "title": "A model of language learning",
+    "section": "Why this form of update formula?",
+    "text": "Why this form of update formula?\n\nNeed to make sure that always \\(0 \\leq p \\leq 1\\) (it is a probability)\nAlso notice:\n\nWhen \\(p\\) is increased, what is added is \\(\\gamma (1-p)\\). Since \\(1-p\\) is the probability of \\(G_2\\), this means transferring an amount of the probability mass of \\(G_2\\) onto \\(G_1\\).\nWhen \\(p\\) is decreased, what is removed is \\(\\gamma p\\). Since \\(p\\) is the probability of \\(G_1\\), this means transferring an amount of the probability mass of \\(G_1\\) onto \\(G_2\\).\nLearning rate \\(\\gamma\\) determines how much probability mass is transferred."
+  },
+  {
+    "objectID": "lectures/learning.html#plan-1",
+    "href": "lectures/learning.html#plan-1",
+    "title": "A model of language learning",
+    "section": "Plan",
+    "text": "Plan\n\nTo implement a variational learner computationally, we need:\n\nA representation of a learner who embodies a single probability, \\(p\\), and a learning rate, \\(\\gamma\\)\nA way to sample strings from \\(L_1 \\setminus L_2\\) and from \\(L_2 \\setminus L_1\\)\nA function that updates the learner’s \\(p\\)\n\nLet’s attempt this now!"
+  },
+  {
+    "objectID": "lectures/learning.html#the-struct",
+    "href": "lectures/learning.html#the-struct",
+    "title": "A model of language learning",
+    "section": "The struct",
+    "text": "The struct\n\nThe first point is very easy:\n\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\nend"
+  },
+  {
+    "objectID": "lectures/learning.html#sampling-strings",
+    "href": "lectures/learning.html#sampling-strings",
+    "title": "A model of language learning",
+    "section": "Sampling strings",
+    "text": "Sampling strings\n\nFor the second point, note we have three types of strings which occur with three corresponding probabilities\nLet’s refer to the string types as \"S1\", \"S12\" and \"S2\", and to the probabilities as P1, P12 and P2:\n\n\n\n\nString type\nProbability\nExplanation\n\n\n\n\n\"S1\"\nP1\n\\(s \\in L_1 \\setminus L_2\\)\n\n\n\"S12\"\nP12\n\\(s \\in L_1 \\cap L_2\\)\n\n\n\"S2\"\nP2\n\\(s \\in L_2 \\setminus L_1\\)\n\n\n\n\nIn Julia, sampling from a finite number of options (here, three string types) with corresponding probabilities is handled by a function called sample() which lives in the StatsBase package\nFirst, install and load the package:\n\n\nusing Pkg\nPkg.add(\"StatsBase\")\nusing StatsBase\n\nNow to sample a string, you can do the following:\n\n# the three probabilities (just some numbers I invented)\nP1 = 0.4\nP12 = 0.5\nP2 = 0.1\n\n# sample one string\nsample([\"S1\", \"S12\", \"S2\"], Weights([P1, P12, P2]))\n\n\"S12\""
+  },
+  {
+    "objectID": "lectures/learning.html#tidying-up",
+    "href": "lectures/learning.html#tidying-up",
+    "title": "A model of language learning",
+    "section": "Tidying up",
+    "text": "Tidying up\n\nThe above works but is a bit cumbersome – for example, every time you want to sample a string, you need to refer to the three probabilities\nLet’s carry out a bit of software engineering to make this nicer to use\nFirst, we encapsulate the probabilities in a struct of their own:\n\n\nstruct LearningEnvironment\n  P1::Float64\n  P12::Float64\n  P2::Float64\nend\n\n\nWe then define the following function:\n\n\nfunction sample_string(x::LearningEnvironment)\n  sample([\"S1\", \"S12\", \"S2\"], Weights([x.P1, x.P12, x.P2]))\nend\n\nsample_string (generic function with 1 method)\n\n\n\nTest the function:\n\n\nparis = LearningEnvironment(0.4, 0.5, 0.1)\nsample_string(paris)\n\n\"S12\""
+  },
+  {
+    "objectID": "lectures/learning.html#implementing-learning",
+    "href": "lectures/learning.html#implementing-learning",
+    "title": "A model of language learning",
+    "section": "Implementing learning",
+    "text": "Implementing learning\n\nWe now need to tackle point 3, the learning function which updates the learner’s state\nThis needs to do three things:\n\nSample a string from the learning environment\nPick a grammar to try and parse the string with\nUpdate \\(p\\) in response to whether parsing was successful or not"
+  },
+  {
+    "objectID": "lectures/learning.html#exercise-2",
+    "href": "lectures/learning.html#exercise-2",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\nHow would you implement point 2, i.e. picking a grammar to try and parse the incoming string?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nWe can again use the sample() function from StatsBase, and define:\n\nfunction pick_grammar(x::VariationalLearner)\n  sample([\"G1\", \"G2\"], Weights([x.p, 1 - x.p]))\nend\n\npick_grammar (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/learning.html#implementing-learning-1",
+    "href": "lectures/learning.html#implementing-learning-1",
+    "title": "A model of language learning",
+    "section": "Implementing learning",
+    "text": "Implementing learning\n\nNow it is easy to implement the first two points of the learning function:\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\nend\n\nlearn! (generic function with 1 method)\n\n\n\nHow to implement the last point, i.e. updating \\(p\\)?"
+  },
+  {
+    "objectID": "lectures/learning.html#aside-conditional-statements",
+    "href": "lectures/learning.html#aside-conditional-statements",
+    "title": "A model of language learning",
+    "section": "Aside: conditional statements",
+    "text": "Aside: conditional statements\n\nHere, we will be helped by conditionals:\n\n\nif COND1\n  # this is executed if COND1 is true\nelseif COND2\n  # this is executed if COND1 is false but COND2 is true\nelse\n  # this is executed otherwise\nend\n\n\nNote: only the if block is necessary; elseif and else are optional, and there may be more than one elseif block"
+  },
+  {
+    "objectID": "lectures/learning.html#aside-conditional-statements-1",
+    "href": "lectures/learning.html#aside-conditional-statements-1",
+    "title": "A model of language learning",
+    "section": "Aside: conditional statements",
+    "text": "Aside: conditional statements\n\nTry this for different values of number:\n\n\nnumber = 1\n\nif number &gt; 0\n  println(\"Your number is positive!\")\nelseif number &lt; 0\n  println(\"Your number is negative!\")\nelse\n  println(\"Your number is zero!\")\nend"
+  },
+  {
+    "objectID": "lectures/learning.html#comparison-neq-assignment",
+    "href": "lectures/learning.html#comparison-neq-assignment",
+    "title": "A model of language learning",
+    "section": "Comparison \\(\\neq\\) assignment",
+    "text": "Comparison \\(\\neq\\) assignment\n\n\n\n\n\n\nImportant\n\n\n\nTo compare equality of two values inside a condition, you must use a double equals sign, ==. This is because the single equals sign, =, is already reserved for assigning values to variables.\n\nif 0 = 1    # throws an error!\n  println(\"The world is topsy-turvy\")\nend\n\nif 0 == 1   # works as expected\n  println(\"The world is topsy-turvy\")\nend"
+  },
+  {
+    "objectID": "lectures/learning.html#exercise-4",
+    "href": "lectures/learning.html#exercise-4",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\nUse an if ... elseif ... else ... end block to finish off our learn! function\nTip: logical “and” is &&, logical “or” is ||\nRecall:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/learning.html#testing-our-code",
+    "href": "lectures/learning.html#testing-our-code",
+    "title": "A model of language learning",
+    "section": "Testing our code",
+    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.505\n\n\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.505\n 0.50995\n 0.5148505\n 0.5148505\n 0.5148505\n 0.519701995\n 0.519701995\n 0.52450497505\n 0.5292599252995001\n 0.5292599252995001\n 0.5339673260465051\n 0.5339673260465051\n 0.5386276527860401\n ⋮\n 0.779725655542553\n 0.7719283989871275\n 0.7742091149972562\n 0.7664670238472836\n 0.7688023536088108\n 0.7711143300727227\n 0.7711143300727227\n 0.7711143300727227\n 0.7634031867719955\n 0.7634031867719955\n 0.7634031867719955\n 0.7657691549042756"
+  },
+  {
+    "objectID": "lectures/learning.html#plotting-the-learning-trajectory",
+    "href": "lectures/learning.html#plotting-the-learning-trajectory",
+    "title": "A model of language learning",
+    "section": "Plotting the learning trajectory",
+    "text": "Plotting the learning trajectory\n\nusing Plots\nplot(1:1000, trajectory)"
+  },
+  {
+    "objectID": "lectures/learning.html#bibliographical-remarks",
+    "href": "lectures/learning.html#bibliographical-remarks",
+    "title": "A model of language learning",
+    "section": "Bibliographical remarks",
+    "text": "Bibliographical remarks\n\nFor more about the notion of grammar competition, see Kroch (1989), Kroch (1994)\nVariational learner originally from Yang (2000), Yang (2002)\nLearning algorithm itself is old: Bush and Mosteller (1955)"
+  },
+  {
+    "objectID": "lectures/learning.html#summary",
+    "href": "lectures/learning.html#summary",
+    "title": "A model of language learning",
+    "section": "Summary",
+    "text": "Summary\n\nYou’ve learned a few important concepts today:\n\nGrammar competition and variational learning\nHow to sample objects according to a discrete probability distribution\nHow to use conditional statements\nHow to make a simple plot of a learning trajectory\n\nYou get to practice these in the homework\nNext week, we’ll take the model to a new level and consider what happens when several variational learners interact"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#plan",
+    "href": "lectures/learning-slides.html#plan",
+    "title": "A model of language learning",
+    "section": "Plan",
+    "text": "Plan\n\nStarting this week, we will put programming to good use\nWe’ll start with a simple model of language learning\n\nHere, learning = process of updating a linguistic representation\nDoesn’t matter whether child or adult"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#grammar-competition",
+    "href": "lectures/learning-slides.html#grammar-competition",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nAssume two grammars \\(G_1\\) and \\(G_2\\) that generate languages \\(L_1\\) and \\(L_2\\)\n\nlanguage = set of strings (e.g. sentences)\n\nIn general, \\(L_1\\) and \\(L_2\\) will be different but may overlap:"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#grammar-competition-1",
+    "href": "lectures/learning-slides.html#grammar-competition-1",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nThree sets of interest: \\(L_1 \\setminus L_2\\), \\(L_1 \\cap L_2\\) and \\(L_2 \\setminus L_1\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#grammar-competition-2",
+    "href": "lectures/learning-slides.html#grammar-competition-2",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nThree sets of interest: \\(L_1 \\setminus L_2\\), \\(L_1 \\cap L_2\\) and \\(L_2 \\setminus L_1\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#grammar-competition-3",
+    "href": "lectures/learning-slides.html#grammar-competition-3",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nThree sets of interest: \\(L_1 \\setminus L_2\\), \\(L_1 \\cap L_2\\) and \\(L_2 \\setminus L_1\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#concrete-example",
+    "href": "lectures/learning-slides.html#concrete-example",
+    "title": "A model of language learning",
+    "section": "Concrete example",
+    "text": "Concrete example\n\nSVO (\\(G_1\\)) vs. V2 (\\(G_2\\))"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#grammar-competition-4",
+    "href": "lectures/learning-slides.html#grammar-competition-4",
+    "title": "A model of language learning",
+    "section": "Grammar competition",
+    "text": "Grammar competition\n\nSuppose learner receives randomly chosen strings from \\(L_1\\) and \\(L_2\\)\nLearner uses either \\(G_1\\) or \\(G_2\\) to parse incoming string\nDefine \\(p =\\) probability of use of \\(G_1\\)\nHow should the learner update \\(p\\) in response to interactions with his/her environment?"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#variational-learning",
+    "href": "lectures/learning-slides.html#variational-learning",
+    "title": "A model of language learning",
+    "section": "Variational learning",
+    "text": "Variational learning\n\nSuppose learner receives string/sentence \\(s\\)\nThen update is:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise",
+    "href": "lectures/learning-slides.html#exercise",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\nHow can we increase/decrease \\(p\\) in practice? What is the update formula?"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-1",
+    "href": "lectures/learning-slides.html#exercise-1",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nOne possibility (which we will stick to):\n\nIncrease: \\(p\\) becomes \\(p + \\gamma (1 - p)\\)\nDecrease: \\(p\\) becomes \\(p - \\gamma p\\)\n\nThe parameter \\(0 &lt; \\gamma &lt; 1\\) is a learning rate"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#why-this-form-of-update-formula",
+    "href": "lectures/learning-slides.html#why-this-form-of-update-formula",
+    "title": "A model of language learning",
+    "section": "Why this form of update formula?",
+    "text": "Why this form of update formula?\n\nNeed to make sure that always \\(0 \\leq p \\leq 1\\) (it is a probability)\nAlso notice:\n\nWhen \\(p\\) is increased, what is added is \\(\\gamma (1-p)\\). Since \\(1-p\\) is the probability of \\(G_2\\), this means transferring an amount of the probability mass of \\(G_2\\) onto \\(G_1\\).\nWhen \\(p\\) is decreased, what is removed is \\(\\gamma p\\). Since \\(p\\) is the probability of \\(G_1\\), this means transferring an amount of the probability mass of \\(G_1\\) onto \\(G_2\\).\nLearning rate \\(\\gamma\\) determines how much probability mass is transferred."
+  },
+  {
+    "objectID": "lectures/learning-slides.html#plan-1",
+    "href": "lectures/learning-slides.html#plan-1",
+    "title": "A model of language learning",
+    "section": "Plan",
+    "text": "Plan\n\nTo implement a variational learner computationally, we need:\n\nA representation of a learner who embodies a single probability, \\(p\\), and a learning rate, \\(\\gamma\\)\nA way to sample strings from \\(L_1 \\setminus L_2\\) and from \\(L_2 \\setminus L_1\\)\nA function that updates the learner’s \\(p\\)\n\nLet’s attempt this now!"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#the-struct",
+    "href": "lectures/learning-slides.html#the-struct",
+    "title": "A model of language learning",
+    "section": "The struct",
+    "text": "The struct\n\nThe first point is very easy:\n\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\nend"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#sampling-strings",
+    "href": "lectures/learning-slides.html#sampling-strings",
+    "title": "A model of language learning",
+    "section": "Sampling strings",
+    "text": "Sampling strings\n\nFor the second point, note we have three types of strings which occur with three corresponding probabilities\nLet’s refer to the string types as \"S1\", \"S12\" and \"S2\", and to the probabilities as P1, P12 and P2:\n\n\n\n\nString type\nProbability\nExplanation\n\n\n\n\n\"S1\"\nP1\n\\(s \\in L_1 \\setminus L_2\\)\n\n\n\"S12\"\nP12\n\\(s \\in L_1 \\cap L_2\\)\n\n\n\"S2\"\nP2\n\\(s \\in L_2 \\setminus L_1\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#sampling-strings-1",
+    "href": "lectures/learning-slides.html#sampling-strings-1",
+    "title": "A model of language learning",
+    "section": "Sampling strings",
+    "text": "Sampling strings\n\nIn Julia, sampling from a finite number of options (here, three string types) with corresponding probabilities is handled by a function called sample() which lives in the StatsBase package\nFirst, install and load the package:\n\n\nusing Pkg\nPkg.add(\"StatsBase\")\nusing StatsBase"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#sampling-strings-2",
+    "href": "lectures/learning-slides.html#sampling-strings-2",
+    "title": "A model of language learning",
+    "section": "Sampling strings",
+    "text": "Sampling strings\nNow to sample a string, you can do the following:\n\n# the three probabilities (just some numbers I invented)\nP1 = 0.4\nP12 = 0.5\nP2 = 0.1\n\n# sample one string\nsample([\"S1\", \"S12\", \"S2\"], Weights([P1, P12, P2]))\n\n\"S12\""
+  },
+  {
+    "objectID": "lectures/learning-slides.html#tidying-up",
+    "href": "lectures/learning-slides.html#tidying-up",
+    "title": "A model of language learning",
+    "section": "Tidying up",
+    "text": "Tidying up\n\nThe above works but is a bit cumbersome – for example, every time you want to sample a string, you need to refer to the three probabilities\nLet’s carry out a bit of software engineering to make this nicer to use\nFirst, we encapsulate the probabilities in a struct of their own:\n\n\nstruct LearningEnvironment\n  P1::Float64\n  P12::Float64\n  P2::Float64\nend"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#tidying-up-1",
+    "href": "lectures/learning-slides.html#tidying-up-1",
+    "title": "A model of language learning",
+    "section": "Tidying up",
+    "text": "Tidying up\n\nWe then define the following function:\n\n\nfunction sample_string(x::LearningEnvironment)\n  sample([\"S1\", \"S12\", \"S2\"], Weights([x.P1, x.P12, x.P2]))\nend\n\nsample_string (generic function with 1 method)\n\n\n\nTest the function:\n\n\nparis = LearningEnvironment(0.4, 0.5, 0.1)\nsample_string(paris)\n\n\"S12\""
+  },
+  {
+    "objectID": "lectures/learning-slides.html#implementing-learning",
+    "href": "lectures/learning-slides.html#implementing-learning",
+    "title": "A model of language learning",
+    "section": "Implementing learning",
+    "text": "Implementing learning\n\nWe now need to tackle point 3, the learning function which updates the learner’s state\nThis needs to do three things:\n\nSample a string from the learning environment\nPick a grammar to try and parse the string with\nUpdate \\(p\\) in response to whether parsing was successful or not"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-2",
+    "href": "lectures/learning-slides.html#exercise-2",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\nHow would you implement point 2, i.e. picking a grammar to try and parse the incoming string?"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-3",
+    "href": "lectures/learning-slides.html#exercise-3",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nWe can again use the sample() function from StatsBase, and define:\n\nfunction pick_grammar(x::VariationalLearner)\n  sample([\"G1\", \"G2\"], Weights([x.p, 1 - x.p]))\nend\n\npick_grammar (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#implementing-learning-1",
+    "href": "lectures/learning-slides.html#implementing-learning-1",
+    "title": "A model of language learning",
+    "section": "Implementing learning",
+    "text": "Implementing learning\n\nNow it is easy to implement the first two points of the learning function:\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\nend\n\nlearn! (generic function with 1 method)\n\n\n\nHow to implement the last point, i.e. updating \\(p\\)?"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#aside-conditional-statements",
+    "href": "lectures/learning-slides.html#aside-conditional-statements",
+    "title": "A model of language learning",
+    "section": "Aside: conditional statements",
+    "text": "Aside: conditional statements\n\nHere, we will be helped by conditionals:\n\n\nif COND1\n  # this is executed if COND1 is true\nelseif COND2\n  # this is executed if COND1 is false but COND2 is true\nelse\n  # this is executed otherwise\nend\n\n\nNote: only the if block is necessary; elseif and else are optional, and there may be more than one elseif block"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#aside-conditional-statements-1",
+    "href": "lectures/learning-slides.html#aside-conditional-statements-1",
+    "title": "A model of language learning",
+    "section": "Aside: conditional statements",
+    "text": "Aside: conditional statements\n\nTry this for different values of number:\n\n\nnumber = 1\n\nif number &gt; 0\n  println(\"Your number is positive!\")\nelseif number &lt; 0\n  println(\"Your number is negative!\")\nelse\n  println(\"Your number is zero!\")\nend"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#comparison-neq-assignment",
+    "href": "lectures/learning-slides.html#comparison-neq-assignment",
+    "title": "A model of language learning",
+    "section": "Comparison \\(\\neq\\) assignment",
+    "text": "Comparison \\(\\neq\\) assignment\n\n\n\n\n\n\nImportant\n\n\nTo compare equality of two values inside a condition, you must use a double equals sign, ==. This is because the single equals sign, =, is already reserved for assigning values to variables.\n\nif 0 = 1    # throws an error!\n  println(\"The world is topsy-turvy\")\nend\n\nif 0 == 1   # works as expected\n  println(\"The world is topsy-turvy\")\nend"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-4",
+    "href": "lectures/learning-slides.html#exercise-4",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\nUse an if ... elseif ... else ... end block to finish off our learn! function\nTip: logical “and” is &&, logical “or” is ||\nRecall:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-5",
+    "href": "lectures/learning-slides.html#exercise-5",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#testing-our-code",
+    "href": "lectures/learning-slides.html#testing-our-code",
+    "title": "A model of language learning",
+    "section": "Testing our code",
+    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.505"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#testing-our-code-1",
+    "href": "lectures/learning-slides.html#testing-our-code-1",
+    "title": "A model of language learning",
+    "section": "Testing our code",
+    "text": "Testing our code\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.505\n 0.50995\n 0.5148505\n 0.5148505\n 0.5148505\n 0.519701995\n 0.519701995\n 0.52450497505\n 0.5292599252995001\n 0.5292599252995001\n 0.5339673260465051\n 0.5339673260465051\n 0.5386276527860401\n ⋮\n 0.779725655542553\n 0.7719283989871275\n 0.7742091149972562\n 0.7664670238472836\n 0.7688023536088108\n 0.7711143300727227\n 0.7711143300727227\n 0.7711143300727227\n 0.7634031867719955\n 0.7634031867719955\n 0.7634031867719955\n 0.7657691549042756"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#plotting-the-learning-trajectory",
+    "href": "lectures/learning-slides.html#plotting-the-learning-trajectory",
+    "title": "A model of language learning",
+    "section": "Plotting the learning trajectory",
+    "text": "Plotting the learning trajectory\n\nusing Plots\nplot(1:1000, trajectory)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#bibliographical-remarks",
+    "href": "lectures/learning-slides.html#bibliographical-remarks",
+    "title": "A model of language learning",
+    "section": "Bibliographical remarks",
+    "text": "Bibliographical remarks\n\nFor more about the notion of grammar competition, see Kroch (1989), Kroch (1994)\nVariational learner originally from Yang (2000), Yang (2002)\nLearning algorithm itself is old: Bush and Mosteller (1955)"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#summary",
+    "href": "lectures/learning-slides.html#summary",
+    "title": "A model of language learning",
+    "section": "Summary",
+    "text": "Summary\n\nYou’ve learned a few important concepts today:\n\nGrammar competition and variational learning\nHow to sample objects according to a discrete probability distribution\nHow to use conditional statements\nHow to make a simple plot of a learning trajectory\n\nYou get to practice these in the homework\nNext week, we’ll take the model to a new level and consider what happens when several variational learners interact"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#references",
+    "href": "lectures/learning-slides.html#references",
+    "title": "A model of language learning",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nBush, Robert R., and Frederick Mosteller. 1955. Stochastic Models for Learning. New York, NY: Wiley.\n\n\nKroch, Anthony S. 1989. “Reflexes of Grammar in Patterns of Language Change.” Language Variation and Change 1 (3): 199–244. https://doi.org/10.1017/S0954394500000168.\n\n\n———. 1994. “Morphosyntactic Variation.” In Proceedings of the 30th Annual Meeting of the Chicago Linguistic Society, edited by K. Beals, 180–201. Chicago, IL: Chicago Linguistic Society.\n\n\nYang, Charles D. 2000. “Internal and External Forces in Language Change.” Language Variation and Change 12: 231–50. https://doi.org/10.1017/S0954394500123014.\n\n\n———. 2002. Knowledge and Learning in Natural Language. Oxford: Oxford University Press."
+  },
+  {
+    "objectID": "lectures.html",
+    "href": "lectures.html",
+    "title": "Lectures",
+    "section": "",
+    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA model of language learning\n\n\n\n23 April 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Note\n\n\n\nThe syllabus is tentative – topics may get rearranged as the course proceeds.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "syllabus.html#timetable",
+    "href": "syllabus.html#timetable",
+    "title": "Syllabus",
+    "section": "Timetable",
+    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling Julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\nVariational learning\nYang (2000), pages 231–236\n\n\n30.4.\nTwo models of language change\n\n\n\n\n7.5.\nSocial networks\n\n\n\n\n14.5.\nSpatial typology\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam"
+  },
+  {
+    "objectID": "syllabus.html#course-requirements",
+    "href": "syllabus.html#course-requirements",
+    "title": "Syllabus",
+    "section": "Course requirements",
+    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
   }
 ]

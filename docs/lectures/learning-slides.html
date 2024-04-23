@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.553">
+
+  <meta name="author" content="Henri Kauhanen">
+  <meta name="dcterms.date" content="2024-04-23">
+  <title>A model of language learning</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">A model of language learning</h1>
+  <p class="subtitle">Agent-based modelling, Konstanz, 2024</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Henri Kauhanen 
+</div>
+</div>
+</div>
+
+  <p class="date">23 April 2024</p>
+</section>
+<section id="plan" class="slide level2">
+<h2>Plan</h2>
+<ul>
+<li>Starting this week, we will put programming to good use</li>
+<li>We’ll start with a simple model of language learning
+<ul>
+<li>Here, <strong>learning = process of updating a linguistic representation</strong></li>
+<li>Doesn’t matter whether child or adult</li>
+</ul></li>
+</ul>
+</section>
+<section id="grammar-competition" class="slide level2">
+<h2>Grammar competition</h2>
+<ul>
+<li>Assume two grammars <span class="math inline">\(G_1\)</span> and <span class="math inline">\(G_2\)</span> that <strong>generate</strong> languages <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span>
+<ul>
+<li>language = set of strings (e.g.&nbsp;sentences)</li>
+</ul></li>
+<li>In general, <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> will be different but may overlap:</li>
+</ul>
+
+<img data-src="../img/grammar_competition.png" class="r-stretch"></section>
+<section id="grammar-competition-1" class="slide level2">
+<h2>Grammar competition</h2>
+<ul>
+<li>Three sets of interest: <span class="math inline">\(L_1 \setminus L_2\)</span>, <span class="math inline">\(L_1 \cap L_2\)</span> and <span class="math inline">\(L_2 \setminus L_1\)</span></li>
+</ul>
+
+<img data-src="../img/l1minusl2.png" class="r-stretch"></section>
+<section id="grammar-competition-2" class="slide level2">
+<h2>Grammar competition</h2>
+<ul>
+<li>Three sets of interest: <span class="math inline">\(L_1 \setminus L_2\)</span>, <span class="math inline">\(L_1 \cap L_2\)</span> and <span class="math inline">\(L_2 \setminus L_1\)</span></li>
+</ul>
+
+<img data-src="../img/intersection.png" class="r-stretch"></section>
+<section id="grammar-competition-3" class="slide level2">
+<h2>Grammar competition</h2>
+<ul>
+<li>Three sets of interest: <span class="math inline">\(L_1 \setminus L_2\)</span>, <span class="math inline">\(L_1 \cap L_2\)</span> and <span class="math inline">\(L_2 \setminus L_1\)</span></li>
+</ul>
+
+<img data-src="../img/l2minusl1.png" class="r-stretch"></section>
+<section id="concrete-example" class="slide level2">
+<h2>Concrete example</h2>
+<ul>
+<li>SVO (<span class="math inline">\(G_1\)</span>) vs.&nbsp;V2 (<span class="math inline">\(G_2\)</span>)</li>
+</ul>
+
+<img data-src="../img/svov2.png" class="r-stretch"></section>
+<section id="grammar-competition-4" class="slide level2">
+<h2>Grammar competition</h2>
+<ul>
+<li>Suppose learner receives randomly chosen strings from <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span></li>
+<li>Learner uses either <span class="math inline">\(G_1\)</span> or <span class="math inline">\(G_2\)</span> to parse incoming string</li>
+<li>Define <span class="math inline">\(p =\)</span> probability of use of <span class="math inline">\(G_1\)</span></li>
+<li><strong>How should the learner update <span class="math inline">\(p\)</span> in response to interactions with his/her environment?</strong></li>
+</ul>
+</section>
+<section id="variational-learning" class="slide level2">
+<h2>Variational learning</h2>
+<ul>
+<li>Suppose learner receives string/sentence <span class="math inline">\(s\)</span></li>
+<li>Then update is:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Learner’s grammar</th>
+<th>String received</th>
+<th>Update</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(G_1\)</span></td>
+<td><span class="math inline">\(s \in L_1\)</span></td>
+<td>increase <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(G_1\)</span></td>
+<td><span class="math inline">\(s \in L_2 \setminus L_1\)</span></td>
+<td>decrease <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(G_2\)</span></td>
+<td><span class="math inline">\(s \in L_2\)</span></td>
+<td>decrease <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(G_2\)</span></td>
+<td><span class="math inline">\(s \in L_1 \setminus L_2\)</span></td>
+<td>increase <span class="math inline">\(p\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercise" class="slide level2 ex">
+<h2>Exercise</h2>
+<p>How can we increase/decrease <span class="math inline">\(p\)</span> in practice? What is the update formula?</p>
+</section>
+<section id="exercise-1" class="slide level2 ex">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<p>One possibility (which we will stick to):</p>
+<ul>
+<li>Increase: <span class="math inline">\(p\)</span> becomes <span class="math inline">\(p + \gamma (1 - p)\)</span></li>
+<li>Decrease: <span class="math inline">\(p\)</span> becomes <span class="math inline">\(p - \gamma p\)</span></li>
+</ul>
+<p>The parameter <span class="math inline">\(0 &lt; \gamma &lt; 1\)</span> is a <strong>learning rate</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-this-form-of-update-formula" class="slide level2">
+<h2>Why this form of update formula?</h2>
+<ul>
+<li>Need to make sure that always <span class="math inline">\(0 \leq p \leq 1\)</span> (it is a probability)</li>
+<li>Also notice:
+<ul>
+<li>When <span class="math inline">\(p\)</span> is increased, what is added is <span class="math inline">\(\gamma (1-p)\)</span>. Since <span class="math inline">\(1-p\)</span> is the probability of <span class="math inline">\(G_2\)</span>, this means <em>transferring an amount of the probability mass of <span class="math inline">\(G_2\)</span> onto <span class="math inline">\(G_1\)</span></em>.</li>
+<li>When <span class="math inline">\(p\)</span> is decreased, what is removed is <span class="math inline">\(\gamma p\)</span>. Since <span class="math inline">\(p\)</span> is the probability of <span class="math inline">\(G_1\)</span>, this means <em>transferring an amount of the probability mass of <span class="math inline">\(G_1\)</span> onto <span class="math inline">\(G_2\)</span></em>.</li>
+<li>Learning rate <span class="math inline">\(\gamma\)</span> determines how much probability mass is transferred.</li>
+</ul></li>
+</ul>
+</section>
+<section id="plan-1" class="slide level2">
+<h2>Plan</h2>
+<ul>
+<li>To implement a variational learner computationally, we need:
+<ol type="1">
+<li>A representation of a learner who embodies a single probability, <span class="math inline">\(p\)</span>, and a learning rate, <span class="math inline">\(\gamma\)</span></li>
+<li>A way to sample strings from <span class="math inline">\(L_1 \setminus L_2\)</span> and from <span class="math inline">\(L_2 \setminus L_1\)</span></li>
+<li>A function that updates the learner’s <span class="math inline">\(p\)</span></li>
+</ol></li>
+<li>Let’s attempt this now!</li>
+</ul>
+</section>
+<section id="the-struct" class="slide level2">
+<h2>The struct</h2>
+<ul>
+<li>The first point is very easy:</li>
+</ul>
+<div id="459e8e11" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="kw">mutable struct</span> VariationalLearner</span>
+<span id="cb1-2"><a></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-3"><a></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-4"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sampling-strings" class="slide level2">
+<h2>Sampling strings</h2>
+<ul>
+<li>For the second point, note we have three types of strings which occur with three corresponding probabilities</li>
+<li>Let’s refer to the string types as <code>"S1"</code>, <code>"S12"</code> and <code>"S2"</code>, and to the probabilities as <code>P1</code>, <code>P12</code> and <code>P2</code>:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>String type</th>
+<th>Probability</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"S1"</code></td>
+<td><code>P1</code></td>
+<td><span class="math inline">\(s \in L_1 \setminus L_2\)</span></td>
+</tr>
+<tr class="even">
+<td><code>"S12"</code></td>
+<td><code>P12</code></td>
+<td><span class="math inline">\(s \in L_1 \cap L_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>"S2"</code></td>
+<td><code>P2</code></td>
+<td><span class="math inline">\(s \in L_2 \setminus L_1\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sampling-strings-1" class="slide level2">
+<h2>Sampling strings</h2>
+<ul>
+<li>In Julia, sampling from a finite number of options (here, three string types) with corresponding probabilities is handled by a function called <code>sample()</code> which lives in the <code>StatsBase</code> package</li>
+<li>First, install and load the package:</li>
+</ul>
+<div id="a95f1f4d" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb2-2"><a></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"StatsBase"</span>)</span>
+<span id="cb2-3"><a></a><span class="im">using</span> <span class="bu">StatsBase</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sampling-strings-2" class="slide level2">
+<h2>Sampling strings</h2>
+<p>Now to sample a string, you can do the following:</p>
+<div id="8f980eec" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a></a><span class="co"># the three probabilities (just some numbers I invented)</span></span>
+<span id="cb3-2"><a></a>P1 <span class="op">=</span> <span class="fl">0.4</span></span>
+<span id="cb3-3"><a></a>P12 <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb3-4"><a></a>P2 <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a><span class="co"># sample one string</span></span>
+<span id="cb3-7"><a></a><span class="fu">sample</span>([<span class="st">"S1"</span>, <span class="st">"S12"</span>, <span class="st">"S2"</span>], <span class="fu">Weights</span>([P1, P12, P2]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>"S12"</code></pre>
+</div>
+</div>
+</section>
+<section id="tidying-up" class="slide level2">
+<h2>Tidying up</h2>
+<ul>
+<li>The above works but is a bit cumbersome – for example, every time you want to sample a string, you need to refer to the three probabilities</li>
+<li>Let’s carry out a bit of software engineering to make this nicer to use</li>
+<li>First, we encapsulate the probabilities in a struct of their own:</li>
+</ul>
+<div id="d5a10fd7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a></a><span class="kw">struct</span> LearningEnvironment</span>
+<span id="cb5-2"><a></a>  P1<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb5-3"><a></a>  P12<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb5-4"><a></a>  P2<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb5-5"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tidying-up-1" class="slide level2">
+<h2>Tidying up</h2>
+<ul>
+<li>We then define the following function:</li>
+</ul>
+<div id="fcc52d90" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a><span class="kw">function</span> <span class="fu">sample_string</span>(x<span class="op">::</span><span class="dt">LearningEnvironment</span>)</span>
+<span id="cb6-2"><a></a>  <span class="fu">sample</span>([<span class="st">"S1"</span>, <span class="st">"S12"</span>, <span class="st">"S2"</span>], <span class="fu">Weights</span>([x.P1, x.P12, x.P2]))</span>
+<span id="cb6-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>sample_string (generic function with 1 method)</code></pre>
+</div>
+</div>
+<ul>
+<li>Test the function:</li>
+</ul>
+<div id="e5da7ed2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a>paris <span class="op">=</span> <span class="fu">LearningEnvironment</span>(<span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>)</span>
+<span id="cb8-2"><a></a><span class="fu">sample_string</span>(paris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>"S12"</code></pre>
+</div>
+</div>
+</section>
+<section id="implementing-learning" class="slide level2">
+<h2>Implementing learning</h2>
+<ul>
+<li>We now need to tackle point 3, the learning function which updates the learner’s state</li>
+<li>This needs to do three things:
+<ol type="1">
+<li>Sample a string from the learning environment</li>
+<li>Pick a grammar to try and parse the string with</li>
+<li>Update <span class="math inline">\(p\)</span> in response to whether parsing was successful or not</li>
+</ol></li>
+</ul>
+</section>
+<section id="exercise-2" class="slide level2 ex">
+<h2>Exercise</h2>
+<p>How would you implement point 2, i.e.&nbsp;picking a grammar to try and parse the incoming string?</p>
+</section>
+<section id="exercise-3" class="slide level2 ex">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<p>We can again use the <code>sample()</code> function from <code>StatsBase</code>, and define:</p>
+<div id="a15c06e9" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a><span class="kw">function</span> <span class="fu">pick_grammar</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
+<span id="cb10-2"><a></a>  <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
+<span id="cb10-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>pick_grammar (generic function with 1 method)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementing-learning-1" class="slide level2">
+<h2>Implementing learning</h2>
+<ul>
+<li>Now it is easy to implement the first two points of the learning function:</li>
+</ul>
+<div id="587faaae" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">LearningEnvironment</span>)</span>
+<span id="cb12-2"><a></a>  s <span class="op">=</span> <span class="fu">sample_string</span>(y)</span>
+<span id="cb12-3"><a></a>  g <span class="op">=</span> <span class="fu">pick_grammar</span>(x)</span>
+<span id="cb12-4"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>learn! (generic function with 1 method)</code></pre>
+</div>
+</div>
+<ul>
+<li>How to implement the last point, i.e.&nbsp;updating <span class="math inline">\(p\)</span>?</li>
+</ul>
+</section>
+<section id="aside-conditional-statements" class="slide level2">
+<h2>Aside: conditional statements</h2>
+<ul>
+<li>Here, we will be helped by <strong>conditionals</strong>:</li>
+</ul>
+<div id="604835ed" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a></a><span class="cf">if</span> COND1</span>
+<span id="cb14-2"><a></a>  <span class="co"># this is executed if COND1 is true</span></span>
+<span id="cb14-3"><a></a><span class="cf">elseif</span> COND2</span>
+<span id="cb14-4"><a></a>  <span class="co"># this is executed if COND1 is false but COND2 is true</span></span>
+<span id="cb14-5"><a></a><span class="cf">else</span></span>
+<span id="cb14-6"><a></a>  <span class="co"># this is executed otherwise</span></span>
+<span id="cb14-7"><a></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Note: only the <code>if</code> block is necessary; <code>elseif</code> and <code>else</code> are optional, and there may be more than one <code>elseif</code> block</li>
+</ul>
+</section>
+<section id="aside-conditional-statements-1" class="slide level2">
+<h2>Aside: conditional statements</h2>
+<ul>
+<li>Try this for different values of <code>number</code>:</li>
+</ul>
+<div id="bccebde1" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a></a>number <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a><span class="cf">if</span> number <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span id="cb15-4"><a></a>  <span class="fu">println</span>(<span class="st">"Your number is positive!"</span>)</span>
+<span id="cb15-5"><a></a><span class="cf">elseif</span> number <span class="op">&lt;</span> <span class="fl">0</span></span>
+<span id="cb15-6"><a></a>  <span class="fu">println</span>(<span class="st">"Your number is negative!"</span>)</span>
+<span id="cb15-7"><a></a><span class="cf">else</span></span>
+<span id="cb15-8"><a></a>  <span class="fu">println</span>(<span class="st">"Your number is zero!"</span>)</span>
+<span id="cb15-9"><a></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparison-neq-assignment" class="slide level2">
+<h2>Comparison <span class="math inline">\(\neq\)</span> assignment</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>To compare equality of two values inside a condition, you <strong>must</strong> use a double equals sign, <code>==</code>. This is because the single equals sign, <code>=</code>, is already reserved for assigning values to variables.</p>
+<div id="cd44af92" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a></a><span class="cf">if</span> <span class="fl">0</span> <span class="op">=</span> <span class="fl">1</span>    <span class="co"># throws an error!</span></span>
+<span id="cb16-2"><a></a>  <span class="fu">println</span>(<span class="st">"The world is topsy-turvy"</span>)</span>
+<span id="cb16-3"><a></a><span class="cf">end</span></span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a><span class="cf">if</span> <span class="fl">0</span> <span class="op">==</span> <span class="fl">1</span>   <span class="co"># works as expected</span></span>
+<span id="cb16-6"><a></a>  <span class="fu">println</span>(<span class="st">"The world is topsy-turvy"</span>)</span>
+<span id="cb16-7"><a></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="slide level2 ex">
+<h2>Exercise</h2>
+<ul>
+<li>Use an <code>if ... elseif ... else ... end</code> block to finish off our <code>learn!</code> function</li>
+<li>Tip: logical “and” is <code>&amp;&amp;</code>, logical “or” is <code>||</code></li>
+<li>Recall:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Learner’s grammar</th>
+<th>String received</th>
+<th>Update</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(G_1\)</span></td>
+<td><span class="math inline">\(s \in L_1\)</span></td>
+<td>increase <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(G_1\)</span></td>
+<td><span class="math inline">\(s \in L_2 \setminus L_1\)</span></td>
+<td>decrease <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(G_2\)</span></td>
+<td><span class="math inline">\(s \in L_2\)</span></td>
+<td>decrease <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(G_2\)</span></td>
+<td><span class="math inline">\(s \in L_1 \setminus L_2\)</span></td>
+<td>increase <span class="math inline">\(p\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercise-5" class="slide level2 ex">
+<h2>Exercise</h2>
+<div title="Answer">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Answer</strong></p>
+</div>
+<div class="callout-content">
+<div id="b654c206" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">LearningEnvironment</span>)</span>
+<span id="cb17-2"><a></a>  s <span class="op">=</span> <span class="fu">sample_string</span>(y)</span>
+<span id="cb17-3"><a></a>  g <span class="op">=</span> <span class="fu">pick_grammar</span>(x)</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a>  <span class="cf">if</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S1"</span></span>
+<span id="cb17-6"><a></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
+<span id="cb17-7"><a></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S2"</span></span>
+<span id="cb17-8"><a></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
+<span id="cb17-9"><a></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S2"</span></span>
+<span id="cb17-10"><a></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
+<span id="cb17-11"><a></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S1"</span></span>
+<span id="cb17-12"><a></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
+<span id="cb17-13"><a></a>  <span class="cf">end</span></span>
+<span id="cb17-14"><a></a></span>
+<span id="cb17-15"><a></a>  <span class="cf">return</span> x.p</span>
+<span id="cb17-16"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>learn! (generic function with 1 method)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-our-code" class="slide level2">
+<h2>Testing our code</h2>
+<ul>
+<li>Let’s test our code!</li>
+</ul>
+<div id="b92a6310" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a></a>bob <span class="op">=</span> <span class="fu">VariationalLearner</span>(<span class="fl">0.5</span>, <span class="fl">0.01</span>)</span>
+<span id="cb19-2"><a></a>paris <span class="op">=</span> <span class="fu">LearningEnvironment</span>(<span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>)</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a><span class="fu">learn!</span>(bob, paris)</span>
+<span id="cb19-5"><a></a><span class="fu">learn!</span>(bob, paris)</span>
+<span id="cb19-6"><a></a><span class="fu">learn!</span>(bob, paris)</span>
+<span id="cb19-7"><a></a><span class="fu">learn!</span>(bob, paris)</span>
+<span id="cb19-8"><a></a><span class="fu">learn!</span>(bob, paris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>0.505</code></pre>
+</div>
+</div>
+</section>
+<section id="testing-our-code-1" class="slide level2">
+<h2>Testing our code</h2>
+<div id="25bcad8b" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a></a>trajectory <span class="op">=</span> [<span class="fu">learn!</span>(bob, paris) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>1000-element Vector{Float64}:
+ 0.505
+ 0.50995
+ 0.5148505
+ 0.5148505
+ 0.5148505
+ 0.519701995
+ 0.519701995
+ 0.52450497505
+ 0.5292599252995001
+ 0.5292599252995001
+ 0.5339673260465051
+ 0.5339673260465051
+ 0.5386276527860401
+ ⋮
+ 0.779725655542553
+ 0.7719283989871275
+ 0.7742091149972562
+ 0.7664670238472836
+ 0.7688023536088108
+ 0.7711143300727227
+ 0.7711143300727227
+ 0.7711143300727227
+ 0.7634031867719955
+ 0.7634031867719955
+ 0.7634031867719955
+ 0.7657691549042756</code></pre>
+</div>
+</div>
+</section>
+<section id="plotting-the-learning-trajectory" class="slide level2">
+<h2>Plotting the learning trajectory</h2>
+<div id="6aa9e6c3" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb23-2"><a></a><span class="fu">plot</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, trajectory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="960" height="480" viewbox="0 0 3840 1920">
+<defs>
+  <clippath id="clip500">
+    <rect x="0" y="0" width="3840" height="1920"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip500)" d="M0 1920 L3840 1920 L3840 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip501">
+    <rect x="768" y="0" width="2689" height="1920"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip500)" d="M170.674 1811.89 L3792.76 1811.89 L3792.76 47.2441 L170.674 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip502">
+    <rect x="170" y="47" width="3623" height="1766"></rect>
+  </clippath>
+</defs>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="269.765,1811.89 269.765,47.2441 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1124.89,1811.89 1124.89,47.2441 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1980,1811.89 1980,47.2441 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2835.12,1811.89 2835.12,47.2441 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="3690.24,1811.89 3690.24,47.2441 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,1811.89 3792.76,1811.89 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="269.765,1811.89 269.765,1792.99 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1124.89,1811.89 1124.89,1792.99 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1980,1811.89 1980,1792.99 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2835.12,1811.89 2835.12,1792.99 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="3690.24,1811.89 3690.24,1792.99 "></polyline>
+<path clip-path="url(#clip500)" d="M269.765 1854.33 Q266.154 1854.33 264.326 1857.89 Q262.52 1861.43 262.52 1868.56 Q262.52 1875.67 264.326 1879.23 Q266.154 1882.78 269.765 1882.78 Q273.4 1882.78 275.205 1879.23 Q277.034 1875.67 277.034 1868.56 Q277.034 1861.43 275.205 1857.89 Q273.4 1854.33 269.765 1854.33 M269.765 1850.62 Q275.576 1850.62 278.631 1855.23 Q281.71 1859.81 281.71 1868.56 Q281.71 1877.29 278.631 1881.9 Q275.576 1886.48 269.765 1886.48 Q263.955 1886.48 260.877 1881.9 Q257.821 1877.29 257.821 1868.56 Q257.821 1859.81 260.877 1855.23 Q263.955 1850.62 269.765 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M1088.58 1881.87 L1104.9 1881.87 L1104.9 1885.81 L1082.95 1885.81 L1082.95 1881.87 Q1085.61 1879.12 1090.2 1874.49 Q1094.8 1869.84 1095.98 1868.49 Q1098.23 1865.97 1099.11 1864.23 Q1100.01 1862.47 1100.01 1860.78 Q1100.01 1858.03 1098.07 1856.29 Q1096.15 1854.56 1093.05 1854.56 Q1090.85 1854.56 1088.39 1855.32 Q1085.96 1856.09 1083.18 1857.64 L1083.18 1852.91 Q1086.01 1851.78 1088.46 1851.2 Q1090.92 1850.62 1092.95 1850.62 Q1098.32 1850.62 1101.52 1853.31 Q1104.71 1855.99 1104.71 1860.48 Q1104.71 1862.61 1103.9 1864.53 Q1103.11 1866.43 1101.01 1869.03 Q1100.43 1869.7 1097.33 1872.91 Q1094.23 1876.11 1088.58 1881.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M1114.76 1851.25 L1133.11 1851.25 L1133.11 1855.18 L1119.04 1855.18 L1119.04 1863.66 Q1120.06 1863.31 1121.08 1863.15 Q1122.1 1862.96 1123.11 1862.96 Q1128.9 1862.96 1132.28 1866.13 Q1135.66 1869.3 1135.66 1874.72 Q1135.66 1880.3 1132.19 1883.4 Q1128.72 1886.48 1122.4 1886.48 Q1120.22 1886.48 1117.95 1886.11 Q1115.71 1885.74 1113.3 1885 L1113.3 1880.3 Q1115.38 1881.43 1117.61 1881.99 Q1119.83 1882.54 1122.3 1882.54 Q1126.31 1882.54 1128.65 1880.44 Q1130.98 1878.33 1130.98 1874.72 Q1130.98 1871.11 1128.65 1869 Q1126.31 1866.9 1122.3 1866.9 Q1120.43 1866.9 1118.55 1867.31 Q1116.7 1867.73 1114.76 1868.61 L1114.76 1851.25 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M1154.87 1854.33 Q1151.26 1854.33 1149.43 1857.89 Q1147.63 1861.43 1147.63 1868.56 Q1147.63 1875.67 1149.43 1879.23 Q1151.26 1882.78 1154.87 1882.78 Q1158.51 1882.78 1160.31 1879.23 Q1162.14 1875.67 1162.14 1868.56 Q1162.14 1861.43 1160.31 1857.89 Q1158.51 1854.33 1154.87 1854.33 M1154.87 1850.62 Q1160.68 1850.62 1163.74 1855.23 Q1166.82 1859.81 1166.82 1868.56 Q1166.82 1877.29 1163.74 1881.9 Q1160.68 1886.48 1154.87 1886.48 Q1149.06 1886.48 1145.98 1881.9 Q1142.93 1877.29 1142.93 1868.56 Q1142.93 1859.81 1145.98 1855.23 Q1149.06 1850.62 1154.87 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M1939.62 1851.25 L1957.98 1851.25 L1957.98 1855.18 L1943.91 1855.18 L1943.91 1863.66 Q1944.92 1863.31 1945.94 1863.15 Q1946.96 1862.96 1947.98 1862.96 Q1953.77 1862.96 1957.15 1866.13 Q1960.53 1869.3 1960.53 1874.72 Q1960.53 1880.3 1957.05 1883.4 Q1953.58 1886.48 1947.26 1886.48 Q1945.09 1886.48 1942.82 1886.11 Q1940.57 1885.74 1938.16 1885 L1938.16 1880.3 Q1940.25 1881.43 1942.47 1881.99 Q1944.69 1882.54 1947.17 1882.54 Q1951.17 1882.54 1953.51 1880.44 Q1955.85 1878.33 1955.85 1874.72 Q1955.85 1871.11 1953.51 1869 Q1951.17 1866.9 1947.17 1866.9 Q1945.29 1866.9 1943.42 1867.31 Q1941.57 1867.73 1939.62 1868.61 L1939.62 1851.25 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M1979.74 1854.33 Q1976.13 1854.33 1974.3 1857.89 Q1972.49 1861.43 1972.49 1868.56 Q1972.49 1875.67 1974.3 1879.23 Q1976.13 1882.78 1979.74 1882.78 Q1983.37 1882.78 1985.18 1879.23 Q1987.01 1875.67 1987.01 1868.56 Q1987.01 1861.43 1985.18 1857.89 Q1983.37 1854.33 1979.74 1854.33 M1979.74 1850.62 Q1985.55 1850.62 1988.6 1855.23 Q1991.68 1859.81 1991.68 1868.56 Q1991.68 1877.29 1988.6 1881.9 Q1985.55 1886.48 1979.74 1886.48 Q1973.93 1886.48 1970.85 1881.9 Q1967.79 1877.29 1967.79 1868.56 Q1967.79 1859.81 1970.85 1855.23 Q1973.93 1850.62 1979.74 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M2009.9 1854.33 Q2006.29 1854.33 2004.46 1857.89 Q2002.66 1861.43 2002.66 1868.56 Q2002.66 1875.67 2004.46 1879.23 Q2006.29 1882.78 2009.9 1882.78 Q2013.53 1882.78 2015.34 1879.23 Q2017.17 1875.67 2017.17 1868.56 Q2017.17 1861.43 2015.34 1857.89 Q2013.53 1854.33 2009.9 1854.33 M2009.9 1850.62 Q2015.71 1850.62 2018.77 1855.23 Q2021.84 1859.81 2021.84 1868.56 Q2021.84 1877.29 2018.77 1881.9 Q2015.71 1886.48 2009.9 1886.48 Q2004.09 1886.48 2001.01 1881.9 Q1997.96 1877.29 1997.96 1868.56 Q1997.96 1859.81 2001.01 1855.23 Q2004.09 1850.62 2009.9 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M2793.4 1851.25 L2815.62 1851.25 L2815.62 1853.24 L2803.08 1885.81 L2798.19 1885.81 L2810 1855.18 L2793.4 1855.18 L2793.4 1851.25 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M2824.79 1851.25 L2843.15 1851.25 L2843.15 1855.18 L2829.07 1855.18 L2829.07 1863.66 Q2830.09 1863.31 2831.11 1863.15 Q2832.13 1862.96 2833.15 1862.96 Q2838.93 1862.96 2842.31 1866.13 Q2845.69 1869.3 2845.69 1874.72 Q2845.69 1880.3 2842.22 1883.4 Q2838.75 1886.48 2832.43 1886.48 Q2830.25 1886.48 2827.98 1886.11 Q2825.74 1885.74 2823.33 1885 L2823.33 1880.3 Q2825.41 1881.43 2827.64 1881.99 Q2829.86 1882.54 2832.34 1882.54 Q2836.34 1882.54 2838.68 1880.44 Q2841.02 1878.33 2841.02 1874.72 Q2841.02 1871.11 2838.68 1869 Q2836.34 1866.9 2832.34 1866.9 Q2830.46 1866.9 2828.59 1867.31 Q2826.73 1867.73 2824.79 1868.61 L2824.79 1851.25 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M2864.9 1854.33 Q2861.29 1854.33 2859.46 1857.89 Q2857.66 1861.43 2857.66 1868.56 Q2857.66 1875.67 2859.46 1879.23 Q2861.29 1882.78 2864.9 1882.78 Q2868.54 1882.78 2870.34 1879.23 Q2872.17 1875.67 2872.17 1868.56 Q2872.17 1861.43 2870.34 1857.89 Q2868.54 1854.33 2864.9 1854.33 M2864.9 1850.62 Q2870.71 1850.62 2873.77 1855.23 Q2876.85 1859.81 2876.85 1868.56 Q2876.85 1877.29 2873.77 1881.9 Q2870.71 1886.48 2864.9 1886.48 Q2859.09 1886.48 2856.02 1881.9 Q2852.96 1877.29 2852.96 1868.56 Q2852.96 1859.81 2856.02 1855.23 Q2859.09 1850.62 2864.9 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M3634.77 1881.87 L3642.41 1881.87 L3642.41 1855.51 L3634.1 1857.17 L3634.1 1852.91 L3642.36 1851.25 L3647.04 1851.25 L3647.04 1881.87 L3654.68 1881.87 L3654.68 1885.81 L3634.77 1885.81 L3634.77 1881.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M3674.12 1854.33 Q3670.51 1854.33 3668.68 1857.89 Q3666.88 1861.43 3666.88 1868.56 Q3666.88 1875.67 3668.68 1879.23 Q3670.51 1882.78 3674.12 1882.78 Q3677.76 1882.78 3679.56 1879.23 Q3681.39 1875.67 3681.39 1868.56 Q3681.39 1861.43 3679.56 1857.89 Q3677.76 1854.33 3674.12 1854.33 M3674.12 1850.62 Q3679.93 1850.62 3682.99 1855.23 Q3686.07 1859.81 3686.07 1868.56 Q3686.07 1877.29 3682.99 1881.9 Q3679.93 1886.48 3674.12 1886.48 Q3668.31 1886.48 3665.23 1881.9 Q3662.18 1877.29 3662.18 1868.56 Q3662.18 1859.81 3665.23 1855.23 Q3668.31 1850.62 3674.12 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M3704.28 1854.33 Q3700.67 1854.33 3698.84 1857.89 Q3697.04 1861.43 3697.04 1868.56 Q3697.04 1875.67 3698.84 1879.23 Q3700.67 1882.78 3704.28 1882.78 Q3707.92 1882.78 3709.72 1879.23 Q3711.55 1875.67 3711.55 1868.56 Q3711.55 1861.43 3709.72 1857.89 Q3707.92 1854.33 3704.28 1854.33 M3704.28 1850.62 Q3710.09 1850.62 3713.15 1855.23 Q3716.23 1859.81 3716.23 1868.56 Q3716.23 1877.29 3713.15 1881.9 Q3710.09 1886.48 3704.28 1886.48 Q3698.47 1886.48 3695.39 1881.9 Q3692.34 1877.29 3692.34 1868.56 Q3692.34 1859.81 3695.39 1855.23 Q3698.47 1850.62 3704.28 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M3734.45 1854.33 Q3730.83 1854.33 3729.01 1857.89 Q3727.2 1861.43 3727.2 1868.56 Q3727.2 1875.67 3729.01 1879.23 Q3730.83 1882.78 3734.45 1882.78 Q3738.08 1882.78 3739.89 1879.23 Q3741.71 1875.67 3741.71 1868.56 Q3741.71 1861.43 3739.89 1857.89 Q3738.08 1854.33 3734.45 1854.33 M3734.45 1850.62 Q3740.26 1850.62 3743.31 1855.23 Q3746.39 1859.81 3746.39 1868.56 Q3746.39 1877.29 3743.31 1881.9 Q3740.26 1886.48 3734.45 1886.48 Q3728.64 1886.48 3725.56 1881.9 Q3722.5 1877.29 3722.5 1868.56 Q3722.5 1859.81 3725.56 1855.23 Q3728.64 1850.62 3734.45 1850.62 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="170.674,1786.36 3792.76,1786.36 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="170.674,1297.98 3792.76,1297.98 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="170.674,809.589 3792.76,809.589 "></polyline>
+<polyline clip-path="url(#clip502)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="170.674,321.202 3792.76,321.202 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,1811.89 170.674,47.2441 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,1786.36 189.572,1786.36 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,1297.98 189.572,1297.98 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,809.589 189.572,809.589 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="170.674,321.202 189.572,321.202 "></polyline>
+<path clip-path="url(#clip500)" d="M56.8939 1772.16 Q53.2828 1772.16 51.4541 1775.73 Q49.6486 1779.27 49.6486 1786.4 Q49.6486 1793.51 51.4541 1797.07 Q53.2828 1800.61 56.8939 1800.61 Q60.5281 1800.61 62.3337 1797.07 Q64.1624 1793.51 64.1624 1786.4 Q64.1624 1779.27 62.3337 1775.73 Q60.5281 1772.16 56.8939 1772.16 M56.8939 1768.46 Q62.7041 1768.46 65.7596 1773.07 Q68.8383 1777.65 68.8383 1786.4 Q68.8383 1795.13 65.7596 1799.73 Q62.7041 1804.32 56.8939 1804.32 Q51.0838 1804.32 48.0051 1799.73 Q44.9495 1795.13 44.9495 1786.4 Q44.9495 1777.65 48.0051 1773.07 Q51.0838 1768.46 56.8939 1768.46 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M77.0558 1797.76 L81.9401 1797.76 L81.9401 1803.64 L77.0558 1803.64 L77.0558 1797.76 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M92.1715 1769.08 L110.528 1769.08 L110.528 1773.02 L96.4539 1773.02 L96.4539 1781.49 Q97.4724 1781.14 98.4909 1780.98 Q99.5094 1780.8 100.528 1780.8 Q106.315 1780.8 109.695 1783.97 Q113.074 1787.14 113.074 1792.56 Q113.074 1798.14 109.602 1801.24 Q106.13 1804.32 99.8103 1804.32 Q97.6344 1804.32 95.3659 1803.95 Q93.1206 1803.58 90.7132 1802.83 L90.7132 1798.14 Q92.7965 1799.27 95.0187 1799.83 Q97.2409 1800.38 99.7178 1800.38 Q103.722 1800.38 106.06 1798.27 Q108.398 1796.17 108.398 1792.56 Q108.398 1788.95 106.06 1786.84 Q103.722 1784.73 99.7178 1784.73 Q97.8428 1784.73 95.9678 1785.15 Q94.1159 1785.57 92.1715 1786.45 L92.1715 1769.08 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M55.7365 1283.78 Q52.1254 1283.78 50.2967 1287.34 Q48.4912 1290.88 48.4912 1298.01 Q48.4912 1305.12 50.2967 1308.68 Q52.1254 1312.22 55.7365 1312.22 Q59.3707 1312.22 61.1763 1308.68 Q63.005 1305.12 63.005 1298.01 Q63.005 1290.88 61.1763 1287.34 Q59.3707 1283.78 55.7365 1283.78 M55.7365 1280.07 Q61.5467 1280.07 64.6022 1284.68 Q67.6809 1289.26 67.6809 1298.01 Q67.6809 1306.74 64.6022 1311.34 Q61.5467 1315.93 55.7365 1315.93 Q49.9264 1315.93 46.8477 1311.34 Q43.7921 1306.74 43.7921 1298.01 Q43.7921 1289.26 46.8477 1284.68 Q49.9264 1280.07 55.7365 1280.07 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M75.8984 1309.38 L80.7827 1309.38 L80.7827 1315.26 L75.8984 1315.26 L75.8984 1309.38 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M101.546 1296.11 Q98.3983 1296.11 96.5465 1298.27 Q94.7178 1300.42 94.7178 1304.17 Q94.7178 1307.9 96.5465 1310.07 Q98.3983 1312.22 101.546 1312.22 Q104.695 1312.22 106.523 1310.07 Q108.375 1307.9 108.375 1304.17 Q108.375 1300.42 106.523 1298.27 Q104.695 1296.11 101.546 1296.11 M110.829 1281.46 L110.829 1285.72 Q109.07 1284.89 107.264 1284.45 Q105.482 1284.01 103.722 1284.01 Q99.0928 1284.01 96.6391 1287.13 Q94.2085 1290.26 93.8613 1296.58 Q95.227 1294.56 97.2872 1293.5 Q99.3474 1292.41 101.824 1292.41 Q107.033 1292.41 110.042 1295.58 Q113.074 1298.73 113.074 1304.17 Q113.074 1309.49 109.926 1312.71 Q106.778 1315.93 101.546 1315.93 Q95.5511 1315.93 92.3798 1311.34 Q89.2085 1306.74 89.2085 1298.01 Q89.2085 1289.82 93.0974 1284.96 Q96.9863 1280.07 103.537 1280.07 Q105.296 1280.07 107.079 1280.42 Q108.884 1280.77 110.829 1281.46 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M56.8013 795.388 Q53.1902 795.388 51.3615 798.953 Q49.556 802.494 49.556 809.624 Q49.556 816.731 51.3615 820.295 Q53.1902 823.837 56.8013 823.837 Q60.4356 823.837 62.2411 820.295 Q64.0698 816.731 64.0698 809.624 Q64.0698 802.494 62.2411 798.953 Q60.4356 795.388 56.8013 795.388 M56.8013 791.684 Q62.6115 791.684 65.667 796.291 Q68.7457 800.874 68.7457 809.624 Q68.7457 818.351 65.667 822.957 Q62.6115 827.541 56.8013 827.541 Q50.9912 827.541 47.9125 822.957 Q44.8569 818.351 44.8569 809.624 Q44.8569 800.874 47.9125 796.291 Q50.9912 791.684 56.8013 791.684 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M76.9632 820.99 L81.8475 820.99 L81.8475 826.869 L76.9632 826.869 L76.9632 820.99 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M90.8521 792.309 L113.074 792.309 L113.074 794.3 L100.528 826.869 L95.6437 826.869 L107.449 796.245 L90.8521 796.245 L90.8521 792.309 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M55.9911 307 Q52.38 307 50.5513 310.565 Q48.7458 314.107 48.7458 321.236 Q48.7458 328.343 50.5513 331.908 Q52.38 335.449 55.9911 335.449 Q59.6254 335.449 61.4309 331.908 Q63.2596 328.343 63.2596 321.236 Q63.2596 314.107 61.4309 310.565 Q59.6254 307 55.9911 307 M55.9911 303.297 Q61.8013 303.297 64.8568 307.903 Q67.9355 312.487 67.9355 321.236 Q67.9355 329.963 64.8568 334.57 Q61.8013 339.153 55.9911 339.153 Q50.181 339.153 47.1023 334.57 Q44.0468 329.963 44.0468 321.236 Q44.0468 312.487 47.1023 307.903 Q50.181 303.297 55.9911 303.297 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M76.1531 332.602 L81.0373 332.602 L81.0373 338.482 L76.1531 338.482 L76.1531 332.602 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M101.222 322.07 Q97.8891 322.07 95.9678 323.852 Q94.0696 325.635 94.0696 328.76 Q94.0696 331.885 95.9678 333.667 Q97.8891 335.449 101.222 335.449 Q104.556 335.449 106.477 333.667 Q108.398 331.861 108.398 328.76 Q108.398 325.635 106.477 323.852 Q104.579 322.07 101.222 322.07 M96.5465 320.079 Q93.5372 319.338 91.8474 317.278 Q90.1808 315.218 90.1808 312.255 Q90.1808 308.112 93.1206 305.704 Q96.0835 303.297 101.222 303.297 Q106.384 303.297 109.324 305.704 Q112.264 308.112 112.264 312.255 Q112.264 315.218 110.574 317.278 Q108.908 319.338 105.921 320.079 Q109.301 320.866 111.176 323.158 Q113.074 325.449 113.074 328.76 Q113.074 333.783 109.995 336.468 Q106.94 339.153 101.222 339.153 Q95.5048 339.153 92.4261 336.468 Q89.3706 333.783 89.3706 328.76 Q89.3706 325.449 91.2687 323.158 Q93.1669 320.866 96.5465 320.079 M94.8335 312.695 Q94.8335 315.38 96.5002 316.885 Q98.19 318.389 101.222 318.389 Q104.232 318.389 105.921 316.885 Q107.634 315.38 107.634 312.695 Q107.634 310.01 105.921 308.505 Q104.232 307 101.222 307 Q98.19 307 96.5002 308.505 Q94.8335 310.01 94.8335 312.695 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip502)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="273.186,1761.95 276.606,1737.77 280.027,1713.84 283.447,1713.84 286.868,1713.84 290.288,1690.14 293.709,1690.14 297.129,1666.69 300.55,1643.46 303.97,1643.46 307.391,1620.47 310.811,1620.47 314.232,1597.71 317.652,1575.18 321.073,1552.87 324.493,1530.79 327.914,1508.92 331.334,1487.28 334.755,1487.28 338.175,1465.85 341.595,1465.85 345.016,1465.85 348.436,1465.85 351.857,1465.85 355.277,1465.85 358.698,1465.85 362.118,1465.85 365.539,1465.85 368.959,1465.85 372.38,1465.85 375.8,1444.64 379.221,1444.64 382.641,1444.64 386.062,1444.64 389.482,1444.64 392.903,1472.47 396.323,1451.19 399.744,1430.12 403.164,1430.12 406.585,1430.12 410.005,1430.12 413.426,1430.12 416.846,1409.27 420.266,1409.27 423.687,1388.62 427.107,1388.62 430.528,1388.62 433.948,1388.62 437.369,1368.18 440.789,1368.18 444.21,1347.94 447.63,1347.94 451.051,1347.94 454.471,1347.94 457.892,1327.9 461.312,1356.91 464.733,1356.91 468.153,1356.91 471.574,1356.91 474.994,1336.78 478.415,1336.78 481.835,1336.78 485.256,1316.86 488.676,1345.97 492.097,1345.97 495.517,1325.96 498.938,1325.96 502.358,1306.14 505.778,1286.53 509.199,1286.53 512.619,1286.53 516.04,1286.53 519.46,1286.53 522.881,1286.53 526.301,1315.94 529.722,1296.23 533.142,1276.71 536.563,1276.71 539.983,1257.39 543.404,1257.39 546.824,1238.26 550.245,1219.32 553.665,1200.57 557.086,1200.57 560.506,1182.01 563.927,1182.01 567.347,1163.63 570.768,1163.63 574.188,1194.28 577.609,1194.28 581.029,1175.78 584.449,1157.47 587.87,1157.47 591.29,1157.47 594.711,1139.34 598.131,1139.34 601.552,1139.34 604.972,1139.34 608.393,1121.39 611.813,1121.39 615.234,1103.62 618.654,1103.62 622.075,1086.03 625.495,1086.03 628.916,1086.03 632.336,1068.61 635.757,1051.37 639.177,1051.37 642.598,1034.3 646.018,1034.3 649.439,1034.3 652.859,1034.3 656.28,1034.3 659.7,1017.4 663.12,1000.67 666.541,984.109 669.961,967.712 673.382,951.48 676.802,935.409 680.223,919.499 683.643,919.499 687.064,919.499 690.484,919.499 693.905,952.587 697.325,985.344 700.746,985.344 704.166,968.935 707.587,952.69 711.007,985.446 714.428,969.036 717.848,969.036 721.269,969.036 724.689,969.036 728.11,952.79 731.53,936.706 734.951,920.784 738.371,920.784 741.791,920.784 745.212,920.784 748.632,920.784 752.053,920.784 755.473,905.02 758.894,905.02 762.314,889.414 765.735,922.803 769.155,907.019 772.576,907.019 775.996,907.019 779.417,940.232 782.837,940.232 786.258,940.232 789.678,940.232 793.099,924.274 796.519,908.475 799.94,941.674 803.36,941.674 806.781,941.674 810.201,941.674 813.622,941.674 817.042,925.701 820.463,925.701 823.883,909.888 827.303,894.234 830.724,878.736 834.144,878.736 837.565,878.736 840.985,878.736 844.406,878.736 847.826,878.736 851.247,912.231 854.667,896.553 858.088,881.032 861.508,881.032 864.929,865.666 868.349,850.454 871.77,850.454 875.19,850.454 878.611,835.393 882.031,835.393 885.452,820.484 888.872,820.484 892.293,820.484 895.713,805.723 899.134,805.723 902.554,805.723 905.974,805.723 909.395,805.723 912.815,805.723 916.236,791.11 919.656,776.643 923.077,762.321 926.497,762.321 929.918,748.142 933.338,748.142 936.759,734.105 940.179,720.208 943.6,720.208 947.02,720.208 950.441,720.208 953.861,720.208 957.282,706.451 960.702,706.451 964.123,741.669 967.543,741.669 970.964,741.669 974.384,727.697 977.805,713.864 981.225,713.864 984.645,713.864 988.066,713.864 991.486,700.17 994.907,700.17 998.327,700.17 1001.75,686.612 1005.17,686.612 1008.59,673.19 1012.01,673.19 1015.43,673.19 1018.85,673.19 1022.27,659.903 1025.69,646.748 1029.11,633.725 1032.53,633.725 1035.95,633.725 1039.37,620.832 1042.79,608.068 1046.21,608.068 1049.63,608.068 1053.06,608.068 1056.48,608.068 1059.9,608.068 1063.32,608.068 1066.74,608.068 1070.16,644.27 1073.58,631.272 1077,631.272 1080.42,667.242 1083.84,667.242 1087.26,654.014 1090.68,640.918 1094.1,640.918 1097.52,627.953 1100.94,627.953 1104.36,627.953 1107.78,627.953 1111.2,615.118 1114.62,615.118 1118.04,615.118 1121.46,615.118 1124.89,615.118 1128.31,651.249 1131.73,638.181 1135.15,638.181 1138.57,638.181 1141.99,625.244 1145.41,625.244 1148.83,625.244 1152.25,625.244 1155.67,625.244 1159.09,612.436 1162.51,612.436 1165.93,612.436 1169.35,599.755 1172.77,587.202 1176.19,587.202 1179.61,587.202 1183.03,587.202 1186.45,574.774 1189.87,562.471 1193.29,562.471 1196.72,550.29 1200.14,550.29 1203.56,550.29 1206.98,550.29 1210.4,550.29 1213.82,550.29 1217.24,550.29 1220.66,538.232 1224.08,526.294 1227.5,526.294 1230.92,514.475 1234.34,514.475 1237.76,502.775 1241.18,502.775 1244.6,502.775 1248.02,491.191 1251.44,479.723 1254.86,468.371 1258.28,457.131 1261.7,457.131 1265.12,494.843 1268.55,494.843 1271.97,532.177 1275.39,532.177 1278.81,569.139 1282.23,556.892 1285.65,556.892 1289.07,556.892 1292.49,544.767 1295.91,544.767 1299.33,544.767 1302.75,532.763 1306.17,569.719 1309.59,606.305 1313.01,593.686 1316.43,593.686 1319.85,593.686 1323.27,593.686 1326.69,593.686 1330.11,581.193 1333.53,617.664 1336.95,617.664 1340.38,604.932 1343.8,592.327 1347.22,579.848 1350.64,579.848 1354.06,567.494 1357.48,604.102 1360.9,604.102 1364.32,604.102 1367.74,604.102 1371.16,604.102 1374.58,591.505 1378,627.873 1381.42,615.039 1384.84,602.332 1388.26,602.332 1391.68,602.332 1395.1,602.332 1398.52,602.332 1401.94,589.753 1405.36,577.3 1408.78,577.3 1412.21,564.971 1415.63,564.971 1419.05,601.605 1422.47,589.033 1425.89,589.033 1429.31,589.033 1432.73,625.426 1436.15,625.426 1439.57,625.426 1442.99,612.616 1446.41,612.616 1449.83,612.616 1453.25,599.934 1456.67,599.934 1460.09,599.934 1463.51,636.217 1466.93,672.138 1470.35,658.861 1473.77,658.861 1477.19,658.861 1480.61,658.861 1484.04,645.717 1487.46,645.717 1490.88,645.717 1494.3,632.704 1497.72,632.704 1501.14,632.704 1504.56,632.704 1507.98,632.704 1511.4,619.821 1514.82,607.067 1518.24,607.067 1521.66,594.441 1525.08,630.779 1528.5,630.779 1531.92,630.779 1535.34,666.755 1538.76,666.755 1542.18,666.755 1545.6,653.531 1549.02,653.531 1552.44,689.279 1555.87,689.279 1559.29,689.279 1562.71,675.831 1566.13,662.517 1569.55,698.174 1572.97,684.637 1576.39,671.235 1579.81,706.805 1583.23,706.805 1586.65,706.805 1590.07,693.182 1593.49,679.694 1596.91,679.694 1600.33,679.694 1603.75,666.341 1607.17,666.341 1610.59,653.122 1614.01,653.122 1617.43,653.122 1620.85,653.122 1624.28,653.122 1627.7,640.035 1631.12,627.079 1634.54,614.253 1637.96,614.253 1641.38,601.554 1644.8,588.983 1648.22,576.538 1651.64,576.538 1655.06,613.055 1658.48,649.208 1661.9,684.999 1665.32,684.999 1668.74,684.999 1672.16,720.432 1675.58,720.432 1679,720.432 1682.42,706.672 1685.84,706.672 1689.26,706.672 1692.68,706.672 1696.11,706.672 1699.53,693.049 1702.95,693.049 1706.37,679.563 1709.79,679.563 1713.21,715.05 1716.63,715.05 1720.05,701.344 1723.47,687.775 1726.89,687.775 1730.31,674.342 1733.73,661.042 1737.15,661.042 1740.57,696.715 1743.99,696.715 1747.41,696.715 1750.83,732.031 1754.25,732.031 1757.67,718.155 1761.09,753.256 1764.51,739.168 1767.94,725.221 1771.36,725.221 1774.78,725.221 1778.2,711.413 1781.62,746.582 1785.04,746.582 1788.46,732.56 1791.88,732.56 1795.3,732.56 1798.72,732.56 1802.14,732.56 1805.56,732.56 1808.98,718.679 1812.4,704.936 1815.82,704.936 1819.24,704.936 1822.66,704.936 1826.08,704.936 1829.5,691.331 1832.92,677.862 1836.34,713.366 1839.77,713.366 1843.19,713.366 1846.61,699.677 1850.03,686.124 1853.45,686.124 1856.87,672.707 1860.29,672.707 1863.71,672.707 1867.13,659.425 1870.55,659.425 1873.97,659.425 1877.39,646.275 1880.81,646.275 1884.23,633.256 1887.65,633.256 1891.07,633.256 1894.49,620.368 1897.91,620.368 1901.33,620.368 1904.75,656.447 1908.17,656.447 1911.6,643.327 1915.02,643.327 1918.44,643.327 1921.86,630.338 1925.28,630.338 1928.7,630.338 1932.12,630.338 1935.54,630.338 1938.96,617.479 1942.38,653.587 1945.8,653.587 1949.22,689.334 1952.64,724.724 1956.06,724.724 1959.48,759.76 1962.9,759.76 1966.32,745.606 1969.74,745.606 1973.16,745.606 1976.58,731.595 1980,717.723 1983.43,717.723 1986.85,703.99 1990.27,703.99 1993.69,690.394 1997.11,676.935 2000.53,663.61 2003.95,650.418 2007.37,637.358 2010.79,624.429 2014.21,624.429 2017.63,660.467 2021.05,647.307 2024.47,647.307 2027.89,683.117 2031.31,669.73 2034.73,669.73 2038.15,669.73 2041.57,669.73 2044.99,656.477 2048.41,692.195 2051.83,678.717 2055.26,678.717 2058.68,678.717 2062.1,678.717 2065.52,678.717 2068.94,678.717 2072.36,678.717 2075.78,678.717 2079.2,678.717 2082.62,665.375 2086.04,652.165 2089.46,639.088 2092.88,626.141 2096.3,613.324 2099.72,600.635 2103.14,588.073 2106.56,575.636 2109.98,563.324 2113.4,563.324 2116.82,563.324 2120.24,599.974 2123.66,599.974 2127.09,587.419 2130.51,574.989 2133.93,574.989 2137.35,574.989 2140.77,574.989 2144.19,562.683 2147.61,562.683 2151.03,562.683 2154.45,562.683 2157.87,550.501 2161.29,550.501 2164.71,550.501 2168.13,538.44 2171.55,526.5 2174.97,526.5 2178.39,514.679 2181.81,502.976 2185.23,491.391 2188.65,491.391 2192.07,491.391 2195.49,528.76 2198.92,565.755 2202.34,565.755 2205.76,553.542 2209.18,553.542 2212.6,590.29 2216.02,590.29 2219.44,577.831 2222.86,577.831 2226.28,565.497 2229.7,553.286 2233.12,541.198 2236.54,529.23 2239.96,529.23 2243.38,517.382 2246.8,517.382 2250.22,505.652 2253.64,494.04 2257.06,494.04 2260.48,494.04 2263.9,482.544 2267.33,471.163 2270.75,471.163 2274.17,459.896 2277.59,459.896 2281.01,459.896 2284.43,459.896 2287.85,459.896 2291.27,448.741 2294.69,448.741 2298.11,448.741 2301.53,448.741 2304.95,448.741 2308.37,448.741 2311.79,448.741 2315.21,437.698 2318.63,475.604 2322.05,464.292 2325.47,464.292 2328.89,453.093 2332.31,453.093 2335.73,453.093 2339.16,442.007 2342.58,442.007 2346,442.007 2349.42,431.031 2352.84,431.031 2356.26,431.031 2359.68,420.165 2363.1,409.407 2366.52,409.407 2369.94,409.407 2373.36,398.758 2376.78,388.214 2380.2,388.214 2383.62,388.214 2387.04,388.214 2390.46,377.776 2393.88,367.443 2397.3,406.052 2400.72,406.052 2404.14,406.052 2407.56,406.052 2410.99,395.435 2414.41,384.925 2417.83,374.52 2421.25,364.219 2424.67,402.86 2428.09,392.276 2431.51,381.797 2434.93,381.797 2438.35,381.797 2441.77,420.262 2445.19,420.262 2448.61,409.504 2452.03,409.504 2455.45,398.853 2458.87,398.853 2462.29,398.853 2465.71,437.148 2469.13,426.22 2472.55,415.403 2475.97,415.403 2479.39,404.693 2482.82,404.693 2486.24,394.09 2489.66,394.09 2493.08,394.09 2496.5,383.593 2499.92,373.202 2503.34,362.914 2506.76,362.914 2510.18,352.729 2513.6,342.646 2517.02,342.646 2520.44,332.664 2523.86,371.62 2527.28,410.187 2530.7,410.187 2534.12,410.187 2537.54,399.53 2540.96,388.979 2544.38,388.979 2547.8,388.979 2551.22,378.533 2554.65,368.192 2558.07,368.192 2561.49,368.192 2564.91,357.954 2568.33,357.954 2571.75,357.954 2575.17,357.954 2578.59,396.658 2582.01,386.135 2585.43,386.135 2588.85,375.718 2592.27,375.718 2595.69,414.244 2599.11,414.244 2602.53,414.244 2605.95,452.385 2609.37,452.385 2612.79,490.144 2616.21,478.687 2619.63,516.183 2623.05,553.304 2626.48,541.215 2629.9,529.248 2633.32,517.399 2636.74,505.67 2640.16,494.057 2643.58,482.561 2647,471.179 2650.42,459.912 2653.84,448.757 2657.26,437.714 2660.68,426.781 2664.1,415.957 2667.52,415.957 2670.94,415.957 2674.36,415.957 2677.78,405.242 2681.2,394.634 2684.62,394.634 2688.04,384.132 2691.46,373.735 2694.88,373.735 2698.31,373.735 2701.73,363.442 2705.15,363.442 2708.57,363.442 2711.99,402.09 2715.41,391.514 2718.83,381.043 2722.25,370.677 2725.67,370.677 2729.09,370.677 2732.51,370.677 2735.93,360.414 2739.35,350.254 2742.77,340.196 2746.19,330.238 2749.61,330.238 2753.03,330.238 2756.45,369.219 2759.87,369.219 2763.29,369.219 2766.71,358.971 2770.14,348.826 2773.56,348.826 2776.98,338.782 2780.4,328.838 2783.82,328.838 2787.24,318.994 2790.66,309.248 2794.08,299.6 2797.5,299.6 2800.92,299.6 2804.34,299.6 2807.76,299.6 2811.18,299.6 2814.6,299.6 2818.02,299.6 2821.44,299.6 2824.86,290.048 2828.28,290.048 2831.7,280.592 2835.12,271.23 2838.54,271.23 2841.97,271.23 2845.39,271.23 2848.81,271.23 2852.23,310.801 2855.65,301.137 2859.07,301.137 2862.49,301.137 2865.91,340.409 2869.33,330.449 2872.75,330.449 2876.17,320.589 2879.59,310.827 2883.01,310.827 2886.43,301.163 2889.85,291.596 2893.27,291.596 2896.69,291.596 2900.11,282.124 2903.53,272.747 2906.95,272.747 2910.38,272.747 2913.8,272.747 2917.22,272.747 2920.64,272.747 2924.06,272.747 2927.48,272.747 2930.9,263.464 2934.32,303.113 2937.74,303.113 2941.16,293.526 2944.58,293.526 2948,284.035 2951.42,323.477 2954.84,313.687 2958.26,303.994 2961.68,303.994 2965.1,343.237 2968.52,343.237 2971.94,343.237 2975.36,333.249 2978.78,333.249 2982.21,372.2 2985.63,361.922 2989.05,400.586 2992.47,390.024 2995.89,390.024 2999.31,379.568 3002.73,379.568 3006.15,379.568 3009.57,369.217 3012.99,369.217 3016.41,358.969 3019.83,348.823 3023.25,348.823 3026.67,348.823 3030.09,338.78 3033.51,338.78 3036.93,328.836 3040.35,328.836 3043.77,328.836 3047.19,318.992 3050.61,318.992 3054.04,318.992 3057.46,318.992 3060.88,358.085 3064.3,358.085 3067.72,347.948 3071.14,347.948 3074.56,337.913 3077.98,327.978 3081.4,327.978 3084.82,318.143 3088.24,318.143 3091.66,308.406 3095.08,298.766 3098.5,289.222 3101.92,279.775 3105.34,270.421 3108.76,270.421 3112.18,270.421 3115.6,270.421 3119.02,270.421 3122.44,270.421 3125.87,270.421 3129.29,261.161 3132.71,251.994 3136.13,251.994 3139.55,251.994 3142.97,251.994 3146.39,251.994 3149.81,251.994 3153.23,242.918 3156.65,233.933 3160.07,233.933 3163.49,225.038 3166.91,225.038 3170.33,225.038 3173.75,265.071 3177.17,255.864 3180.59,246.75 3184.01,237.727 3187.43,228.794 3190.85,228.794 3194.27,219.95 3197.7,219.95 3201.12,219.95 3204.54,219.95 3207.96,211.195 3211.38,202.527 3214.8,193.946 3218.22,185.451 3221.64,185.451 3225.06,177.041 3228.48,177.041 3231.9,168.715 3235.32,160.472 3238.74,152.311 3242.16,152.311 3245.58,144.232 3249,136.234 3252.42,177.155 3255.84,168.828 3259.26,160.584 3262.68,152.422 3266.1,152.422 3269.53,152.422 3272.95,144.342 3276.37,144.342 3279.79,185.182 3283.21,185.182 3286.63,176.774 3290.05,168.451 3293.47,160.21 3296.89,160.21 3300.31,152.053 3303.73,152.053 3307.15,143.976 3310.57,135.981 3313.99,135.981 3317.41,128.065 3320.83,120.229 3324.25,112.471 3327.67,104.79 3331.09,97.1868 3334.51,97.1868 3337.93,97.1868 3341.36,97.1868 3344.78,97.1868 3348.2,138.498 3351.62,138.498 3355.04,138.498 3358.46,130.557 3361.88,130.557 3365.3,130.557 3368.72,130.557 3372.14,122.696 3375.56,122.696 3378.98,114.913 3382.4,107.208 3385.82,99.5806 3389.24,140.868 3392.66,140.868 3396.08,132.903 3399.5,125.019 3402.92,166.051 3406.34,166.051 3409.76,157.835 3413.19,149.701 3416.61,141.648 3420.03,141.648 3423.45,141.648 3426.87,133.676 3430.29,133.676 3433.71,133.676 3437.13,133.676 3440.55,174.622 3443.97,166.32 3447.39,206.94 3450.81,247.154 3454.23,238.127 3457.65,238.127 3461.07,229.19 3464.49,229.19 3467.91,229.19 3471.33,229.19 3474.75,220.342 3478.17,260.422 3481.59,251.262 3485.02,242.193 3488.44,242.193 3491.86,282.054 3495.28,272.678 3498.7,312.234 3502.12,302.556 3505.54,302.556 3508.96,341.814 3512.38,341.814 3515.8,331.84 3519.22,370.805 3522.64,409.379 3526.06,409.379 3529.48,398.73 3532.9,398.73 3536.32,398.73 3539.74,388.187 3543.16,388.187 3546.58,377.749 3550,377.749 3553.43,367.416 3556.85,367.416 3560.27,367.416 3563.69,357.186 3567.11,357.186 3570.53,357.186 3573.95,357.186 3577.37,357.186 3580.79,395.897 3584.21,385.383 3587.63,385.383 3591.05,385.383 3594.47,385.383 3597.89,385.383 3601.31,374.973 3604.73,374.973 3608.15,374.973 3611.57,374.973 3614.99,413.506 3618.41,413.506 3621.83,402.816 3625.26,402.816 3628.68,402.816 3632.1,402.816 3635.52,402.816 3638.94,402.816 3642.36,392.232 3645.78,381.754 3649.2,381.754 3652.62,420.219 3656.04,458.3 3659.46,447.161 3662.88,484.973 3666.3,473.567 3669.72,462.276 3673.14,462.276 3676.56,462.276 3679.98,499.936 3683.4,499.936 3686.82,499.936 3690.24,488.381 "></polyline>
+<path clip-path="url(#clip500)" d="M291.41 209.746 L706.049 209.746 L706.049 106.066 L291.41 106.066  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip500)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="291.41,209.746 706.049,209.746 706.049,106.066 291.41,106.066 291.41,209.746 "></polyline>
+<polyline clip-path="url(#clip500)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="331.656,157.906 573.128,157.906 "></polyline>
+<path clip-path="url(#clip500)" d="M627.216 177.593 Q625.41 182.223 623.697 183.635 Q621.984 185.047 619.114 185.047 L615.711 185.047 L615.711 181.482 L618.211 181.482 Q619.97 181.482 620.942 180.648 Q621.915 179.815 623.095 176.713 L623.859 174.769 L613.373 149.26 L617.887 149.26 L625.989 169.537 L634.091 149.26 L638.604 149.26 L627.216 177.593 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip500)" d="M645.896 171.25 L653.535 171.25 L653.535 144.885 L645.225 146.551 L645.225 142.292 L653.489 140.626 L658.164 140.626 L658.164 171.25 L665.803 171.25 L665.803 175.186 L645.896 175.186 L645.896 171.25 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path></svg>
+</div>
+</div>
+</section>
+<section id="bibliographical-remarks" class="slide level2">
+<h2>Bibliographical remarks</h2>
+<ul>
+<li>For more about the notion of grammar competition, see <span class="citation" data-cites="Kro1989">Kroch (<a href="#/references" role="doc-biblioref" onclick="">1989</a>)</span>, <span class="citation" data-cites="Kro1994">Kroch (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span></li>
+<li>Variational learner originally from <span class="citation" data-cites="Yan2000">Yang (<a href="#/references" role="doc-biblioref" onclick="">2000</a>)</span>, <span class="citation" data-cites="Yan2002">Yang (<a href="#/references" role="doc-biblioref" onclick="">2002</a>)</span></li>
+<li>Learning algorithm itself is old: <span class="citation" data-cites="BusMos1955">Bush and Mosteller (<a href="#/references" role="doc-biblioref" onclick="">1955</a>)</span></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>You’ve learned a few important concepts today:
+<ul>
+<li>Grammar competition and variational learning</li>
+<li>How to sample objects according to a discrete probability distribution</li>
+<li>How to use conditional statements</li>
+<li>How to make a simple plot of a learning trajectory</li>
+</ul></li>
+<li>You get to practice these in the <a href="../homework/vl.html">homework</a></li>
+<li>Next week, we’ll take the model to a new level and consider what happens when several variational learners interact</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-BusMos1955" class="csl-entry" role="listitem">
+Bush, Robert R., and Frederick Mosteller. 1955. <em>Stochastic Models for Learning</em>. New York, NY: Wiley.
+</div>
+<div id="ref-Kro1989" class="csl-entry" role="listitem">
+Kroch, Anthony S. 1989. <span>“Reflexes of Grammar in Patterns of Language Change.”</span> <em>Language Variation and Change</em> 1 (3): 199–244. <a href="https://doi.org/10.1017/S0954394500000168">https://doi.org/10.1017/S0954394500000168</a>.
+</div>
+<div id="ref-Kro1994" class="csl-entry" role="listitem">
+———. 1994. <span>“Morphosyntactic Variation.”</span> In <em>Proceedings of the 30th Annual Meeting of the <span>Chicago Linguistic Society</span></em>, edited by K. Beals, 180–201. Chicago, IL: Chicago Linguistic Society.
+</div>
+<div id="ref-Yan2000" class="csl-entry" role="listitem">
+Yang, Charles D. 2000. <span>“Internal and External Forces in Language Change.”</span> <em>Language Variation and Change</em> 12: 231–50. <a href="https://doi.org/10.1017/S0954394500123014">https://doi.org/10.1017/S0954394500123014</a>.
+</div>
+<div id="ref-Yan2002" class="csl-entry" role="listitem">
+———. 2002. <em>Knowledge and Learning in Natural Language</em>. Oxford: Oxford University Press.
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: true,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

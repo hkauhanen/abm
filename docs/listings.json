@@ -3,20 +3,22 @@
     "listing": "/homework.html",
     "items": [
       "/homework/installing-julia.html",
-      "/homework/fly.html"
-    ]
-  },
-  {
-    "listing": "/lectures.html",
-    "items": [
-      "/lectures/intro.html",
-      "/lectures/basics.html"
+      "/homework/fly.html",
+      "/homework/vl.html"
     ]
   },
   {
     "listing": "/solutions.html",
     "items": [
       "/solutions/fly.html"
+    ]
+  },
+  {
+    "listing": "/lectures.html",
+    "items": [
+      "/lectures/intro.html",
+      "/lectures/basics.html",
+      "/lectures/learning.html"
     ]
   }
 ]
