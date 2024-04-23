@@ -1,13 +1,13 @@
 {
   "listingMap": {
+    "solutions.qmd": [
+      "solutions"
+    ],
     "homework.qmd": [
       "homework"
     ],
     "lectures.qmd": [
       "lectures"
-    ],
-    "solutions.qmd": [
-      "solutions"
     ]
   }
 }
