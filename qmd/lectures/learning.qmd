@@ -1,0 +1,430 @@
+---
+title: "A model of language learning"
+date: 04/23/2024
+image: "../img/learning-image.png"
+categories:
+  - lecture
+format:
+  revealjs:
+    output-file: learning-slides.html
+---
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: false
+using Random
+Random.seed!(123)
+```
+
+## Plan
+
+- Starting this week, we will put programming to good use
+- We'll start with a simple model of language learning
+  - Here, **learning = process of updating a linguistic representation**
+  - Doesn't matter whether child or adult
+
+
+## Grammar competition
+
+- Assume two grammars $G_1$ and $G_2$ that **generate** languages $L_1$ and $L_2$
+  - language = set of strings (e.g. sentences)
+- In general, $L_1$ and $L_2$ will be different but may overlap:
+
+![](../img/grammar_competition.png)
+
+
+## Grammar competition
+
+- Three sets of interest: $L_1 \setminus L_2$, $L_1 \cap L_2$ and $L_2 \setminus L_1$
+
+![](../img/l1minusl2.png)
+
+::: {.content-visible when-format="revealjs"}
+## Grammar competition
+
+- Three sets of interest: $L_1 \setminus L_2$, $L_1 \cap L_2$ and $L_2 \setminus L_1$
+
+:::
+
+![](../img/intersection.png)
+
+::: {.content-visible when-format="revealjs"}
+## Grammar competition
+
+- Three sets of interest: $L_1 \setminus L_2$, $L_1 \cap L_2$ and $L_2 \setminus L_1$
+
+:::
+
+![](../img/l2minusl1.png)
+
+
+## Concrete example
+
+- SVO ($G_1$) vs. V2 ($G_2$)
+
+![](../img/svov2.png)
+
+
+## Grammar competition
+
+- Suppose learner receives randomly chosen strings from $L_1$ and $L_2$
+- Learner uses either $G_1$ or $G_2$ to parse incoming string
+- Define $p =$ probability of use of $G_1$
+- **How should the learner update $p$ in response to interactions with his/her environment?**
+
+
+## Variational learning
+
+- Suppose learner receives string/sentence $s$
+- Then update is:
+
+| Learner's grammar | String received | Update |
+|-------------------|-----------------|--------|
+| $G_1$             | $s \in L_1$     | increase $p$ |
+| $G_1$             | $s \in L_2 \setminus L_1$ | decrease $p$ |
+| $G_2$             | $s \in L_2$     | decrease $p$ |
+| $G_2$             | $s \in L_1 \setminus L_2$ | increase $p$ |
+
+
+## Exercise {.ex}
+
+How can we increase/decrease $p$ in practice? What is the update formula?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+One possibility (which we will stick to):
+
+  - Increase: $p$ becomes $p + \gamma (1 - p)$
+  - Decrease: $p$ becomes $p - \gamma p$
+
+The parameter $0 < \gamma < 1$ is a **learning rate**
+:::
+
+## Why this form of update formula?
+
+- Need to make sure that always $0 \leq p \leq 1$ (it is a probability)
+- Also notice:
+  - When $p$ is increased, what is added is $\gamma (1-p)$. Since $1-p$ is the probability of $G_2$, this means *transferring an amount of the probability mass of $G_2$ onto $G_1$*.
+  - When $p$ is decreased, what is removed is $\gamma p$. Since $p$ is the probability of $G_1$, this means *transferring an amount of the probability mass of $G_1$ onto $G_2$*.
+  - Learning rate $\gamma$ determines how much probability mass is transferred.
+
+
+## Plan
+
+- To implement a variational learner computationally, we need:
+  1. A representation of a learner who embodies a single probability, $p$, and a learning rate, $\gamma$
+  1. A way to sample strings from $L_1 \setminus L_2$ and from $L_2 \setminus L_1$
+  1. A function that updates the learner's $p$
+- Let's attempt this now!
+
+
+## The struct
+
+- The first point is very easy:
+
+```{julia}
+#|echo: true
+mutable struct VariationalLearner
+  p::Float64
+  gamma::Float64
+end
+```
+
+
+## Sampling strings
+
+- For the second point, note we have three types of strings which occur with three corresponding probabilities
+- Let's refer to the string types as `"S1"`, `"S12"` and `"S2"`, and to the probabilities as `P1`, `P12` and `P2`:
+
+| String type   | Probability | Explanation    |
+|--------------|------|-------------|
+| `"S1"` | `P1` | $s \in L_1 \setminus L_2$ |
+| `"S12"` | `P12` | $s \in L_1 \cap L_2$ |
+| `"S2"` | `P2` | $s \in L_2 \setminus L_1$ |
+
+
+::: {.content-visible when-format="revealjs"}
+## Sampling strings
+:::
+
+- In Julia, sampling from a finite number of options (here, three string types) with corresponding probabilities is handled by a function called `sample()` which lives in the `StatsBase` package
+- First, install and load the package:
+
+```{julia}
+#|echo: true
+#|eval: false
+using Pkg
+Pkg.add("StatsBase")
+using StatsBase
+```
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: false
+using StatsBase
+```
+
+::: {.content-visible when-format="revealjs"}
+## Sampling strings
+:::
+
+Now to sample a string, you can do the following:
+
+```{julia}
+#|echo: true
+# the three probabilities (just some numbers I invented)
+P1 = 0.4
+P12 = 0.5
+P2 = 0.1
+
+# sample one string
+sample(["S1", "S12", "S2"], Weights([P1, P12, P2]))
+```
+
+
+## Tidying up
+
+- The above works but is a bit cumbersome -- for example, every time you want to sample a string, you need to refer to the three probabilities
+- Let's carry out a bit of software engineering to make this nicer to use
+- First, we encapsulate the probabilities in a struct of their own:
+
+```{julia}
+#| echo: true
+struct LearningEnvironment
+  P1::Float64
+  P12::Float64
+  P2::Float64
+end
+```
+
+::: {.content-visible when-format="revealjs"}
+## Tidying up
+:::
+
+- We then define the following function:
+
+```{julia}
+#| echo: true
+function sample_string(x::LearningEnvironment)
+  sample(["S1", "S12", "S2"], Weights([x.P1, x.P12, x.P2]))
+end
+```
+
+- Test the function:
+
+```{julia}
+#| echo: true
+paris = LearningEnvironment(0.4, 0.5, 0.1)
+sample_string(paris)
+```
+
+
+## Implementing learning
+
+- We now need to tackle point 3, the learning function which updates the learner's state
+- This needs to do three things:
+  1. Sample a string from the learning environment
+  1. Pick a grammar to try and parse the string with
+  1. Update $p$ in response to whether parsing was successful or not
+ 
+
+## Exercise {.ex}
+
+How would you implement point 2, i.e. picking a grammar to try and parse the incoming string?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+
+We can again use the `sample()` function from `StatsBase`, and define:
+
+```{julia}
+#| echo: true
+function pick_grammar(x::VariationalLearner)
+  sample(["G1", "G2"], Weights([x.p, 1 - x.p]))
+end
+```
+:::
+
+
+## Implementing learning
+
+- Now it is easy to implement the first two points of the learning function:
+
+```{julia}
+#| echo: true
+function learn!(x::VariationalLearner, y::LearningEnvironment)
+  s = sample_string(y)
+  g = pick_grammar(x)
+end
+```
+
+- How to implement the last point, i.e. updating $p$?
+
+
+## Aside: conditional statements
+
+- Here, we will be helped by **conditionals**:
+
+```{julia}
+#|echo: true
+#|eval: false
+if COND1
+  # this is executed if COND1 is true
+elseif COND2
+  # this is executed if COND1 is false but COND2 is true
+else
+  # this is executed otherwise
+end
+```
+
+- Note: only the `if` block is necessary; `elseif` and `else` are optional, and there may be more than one `elseif` block
+
+
+## Aside: conditional statements
+
+- Try this for different values of `number`:
+
+```{julia}
+#|echo: true
+#|output: false
+number = 1
+
+if number > 0
+  println("Your number is positive!")
+elseif number < 0
+  println("Your number is negative!")
+else
+  println("Your number is zero!")
+end
+```
+
+
+## Comparison $\neq$ assignment
+
+::: {.callout-important}
+To compare equality of two values inside a condition, you **must** use a double equals sign, `==`. This is because the single equals sign, `=`, is already reserved for assigning values to variables.
+
+```{julia}
+#|echo: true
+#|eval: false
+if 0 = 1    # throws an error!
+  println("The world is topsy-turvy")
+end
+
+if 0 == 1   # works as expected
+  println("The world is topsy-turvy")
+end
+```
+:::
+
+
+## Exercise {.ex}
+
+- Use an `if ... elseif ... else ... end` block to finish off our `learn!` function
+- Tip: logical "and" is `&&`, logical "or" is `||`
+- Recall:
+
+| Learner's grammar | String received | Update |
+|-------------------|-----------------|--------|
+| $G_1$             | $s \in L_1$     | increase $p$ |
+| $G_1$             | $s \in L_2 \setminus L_1$ | decrease $p$ |
+| $G_2$             | $s \in L_2$     | decrease $p$ |
+| $G_2$             | $s \in L_1 \setminus L_2$ | increase $p$ |
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+```{julia}
+#| echo: true
+function learn!(x::VariationalLearner, y::LearningEnvironment)
+  s = sample_string(y)
+  g = pick_grammar(x)
+
+  if g == "G1" && s == "S1"
+    x.p = x.p + x.gamma * (1 - x.p)
+  elseif g == "G1" && s == "S2"
+    x.p = x.p - x.gamma * x.p
+  elseif g == "G2" && s == "S2"
+    x.p = x.p - x.gamma * x.p
+  elseif g == "G2" && s == "S1"
+    x.p = x.p + x.gamma * (1 - x.p)
+  end
+
+  return x.p
+end
+```
+:::
+
+
+## Testing our code
+
+- Let's test our code!
+
+```{julia}
+#| echo: false
+#| eval: true
+#| output: false
+Random.seed!(123)
+```
+
+```{julia}
+#| echo: true
+bob = VariationalLearner(0.5, 0.01)
+paris = LearningEnvironment(0.4, 0.5, 0.1)
+
+learn!(bob, paris)
+learn!(bob, paris)
+learn!(bob, paris)
+learn!(bob, paris)
+learn!(bob, paris)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Testing our code
+:::
+
+```{julia}
+#| echo: true
+trajectory = [learn!(bob, paris) for t in 1:1000]
+```
+
+
+## Plotting the learning trajectory
+
+```{julia}
+#| echo: true
+using Plots
+plot(1:1000, trajectory)
+```
+
+
+## Bibliographical remarks
+
+- For more about the notion of grammar competition, see @Kro1989, @Kro1994
+- Variational learner originally from @Yan2000, @Yan2002
+- Learning algorithm itself is old: @BusMos1955
+
+
+## Summary
+
+- You've learned a few important concepts today:
+  - Grammar competition and variational learning
+  - How to sample objects according to a discrete probability distribution
+  - How to use conditional statements
+  - How to make a simple plot of a learning trajectory
+- You get to practice these in the [homework](../homework/vl.qmd)
+- Next week, we'll take the model to a new level and consider what happens when several variational learners interact
+
+
+## References
+

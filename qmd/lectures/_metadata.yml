@@ -1,7 +1,13 @@
 format:
   html: default
-  pdf: default
+  pdf:
+    date-format: "D MMMM YYYY"
+    subtitle: "Agent-based modelling, Konstanz, 2024"
+    author: "Henri Kauhanen"
   revealjs:
     theme: [default, ../custom-slides.scss]
     auto-play-media: true
     slide-number: c
+    date-format: "D MMMM YYYY"
+    subtitle: "Agent-based modelling, Konstanz, 2024"
+    author: "Henri Kauhanen"

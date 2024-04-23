@@ -64,5 +64,15 @@
   },
   "bric-a-brac.qmd": {
     "bric-a-brac.html": "643afd9b"
+  },
+  "lectures/learning.qmd": {
+    "basics-slides.html": "9b96426a",
+    "learning-slides.html": "589b8130",
+    "learning.html": "67383b9f",
+    "learning.tex": "419cd581"
+  },
+  "homework/vl.qmd": {
+    "vl.html": "ddb7b54a",
+    "vl.tex": "c3553f49"
   }
 }

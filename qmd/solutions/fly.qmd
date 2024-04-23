@@ -1,6 +1,6 @@
 ---
 title: "Making birds fly"
-date: 04/22/2024
+date: 04/23/2024
 categories:
   - solution
 ---
@@ -94,15 +94,15 @@ How do we do this?
 
 One way is to imagine that `dir_x` and `dir_y` define a local coordinate system -- local to the bird. (In fact, this is what my plotting code implicitly does in order to draw the direction arrows.) Hence, for example, if `dir_x` is 0 and `dir_y` is 1, this would mean that the bird is pointing directly northwards. You can then think of the bird's position as a vector, an arrow from the origin `(0,0)` to `(x,y)`, and you can similarly think of the birds's direction as a vector, an arrow from `(x,y)` to `(dir_x, dir_y)`; see this illustration:
 
-FIXME hand-drawn illustration
+![](../img/birds1.png)
 
 To make the bird move from `(x,y)` for `(dir_x, dir_y)`, we perform vector summation: we set the new value of `x` to be `x + dir_x` and the new value of `y` to be `y + dir_y`.
 
-FIXME hand-drawn illustration
+![](../img/birds2.png)
 
 The only thing that remains is that "little amount `delta`". If we replace the direction vector `(dir_x, dir_y)` with `(delta*dir_x, delta*dir_y)`, then we are effectively scaling it down (assuming `delta` has a value between 0 and 1):
 
-FIXME hand-drawn illustration
+![](../img/birds3.png)
 
 Putting all of the above together, we can now define our function for flying a bird:
 

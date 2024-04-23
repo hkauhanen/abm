@@ -11,7 +11,7 @@ This website is "alive" -- it will update as the course progresses, with new lec
 
 I **strongly recommend** that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.
 
-I also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these hands-on.
+I also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these in real time.
 
 Finally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!
 

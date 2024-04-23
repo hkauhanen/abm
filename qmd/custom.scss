@@ -4,6 +4,14 @@
 
 /*-- scss:rules --*/
 
+.ex-slide h2::before {
+	content: "🤔 ";
+}
+
+.ex h2::before {
+	content: "🤔 ";
+}
+
 .description {
 	display: none;
 	font-style: italic;

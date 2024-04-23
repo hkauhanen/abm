@@ -14,7 +14,7 @@ The syllabus is tentative -- topics may get rearranged as the course proceeds.
 |---------|---------|--------|-------|
 | 9.4.		| Welcome + [Intro to ABMs](lectures/intro.qmd)					| [Installing Julia](homework/installing-julia.qmd) | @Gilbert2020, chapter 1 |
 | 16.4.		| [Programming basics](lectures/basics.qmd) | [Making birds fly](homework/fly.qmd) | @Gilbert2020, chapter 2 |
-| 23.4.		|	A model of language learning				| | |
+| 23.4.		|	[A model of language learning](lectures/learning.qmd) | [Variational learning](homework/vl.qmd) | @Yang2000, pages 231--236 |
 | 30.4.		|	Two models of language change				| | |
 | 7.5.		|	Social networks				| | |
 | 14.5.		|	Spatial typology				| | |

@@ -2,9 +2,27 @@
 
 /*-- scss:rules --*/
 
+div.callout div.cell {
+	font-size: 175%;
+}
+
+.quarto-title-author-name {
+	font-size: 70%;
+	margin-top: 0em;
+}
+
+div.cell {
+	font-size: 120%;
+}
+
 .ex-slide h2::before {
 	content: "🤔 ";
 }
+
+.ex h2::before {
+	content: "🤔 ";
+}
+
 
 table {
 	font-size: 80%;

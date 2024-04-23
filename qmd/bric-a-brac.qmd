@@ -3,7 +3,7 @@ title: "Bric-a-brac"
 sidebar: false
 ---
 
-A collection of sundry miscellanea.
+A compendium of sundry miscellanea.
 
 - [plot_birds_fixed.jl](jl/plot_birds_fixed.jl) -- A Julia Plots recipe, used to plot birds in the homework [Making birds fly](homework/fly.qmd)
 

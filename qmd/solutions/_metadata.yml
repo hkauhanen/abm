@@ -1,3 +1,6 @@
 format:
   html: default
-  pdf: default
+  pdf:
+    date-format: "D MMMM YYYY"
+    subtitle: "Solution | Agent-based modelling, Konstanz, 2024"
+    author: "Henri Kauhanen"

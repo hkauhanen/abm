@@ -1,0 +1,24 @@
+---
+title: "Variational learning"
+date: 04/23/2024
+Solution: ""
+categories:
+  - homework
+---
+
+1. Simulate five variational learners for 1000 learning steps with learning rate $\gamma = 0.01$ in a learning environment characterized by the probabilities P1 = 0.4, P12 = 0.5 and P2 = 0.1 (these are the probabilities that were used in the lecture). Plot the five trajectories in the same plot.
+
+   ::: {.callout-tip}
+   To draw into an already existing plot, use `plot!()` instead of `plot()`.
+   :::
+
+2. Repeat the above exercise, but this time with five learners with $\gamma = 0.001$, and then with five learners with $\gamma = 1$.
+3. Now repeat both of the above points, but this time in an environment characterized by probablities P1 = 0.1, P12 = 0.5 and P2 = 0.4.
+4. Based on your observations, what would you say is the effect of
+   a. the learning rate parameter?
+   a. the probabilities of occurrence of the different types of string?
+5. By consulting the [Plots.jl documentation](https://docs.juliaplots.org/stable/), modify your trajectory plots so that
+   a. the trajectory is represented by points instead of lines
+   a. the x-axis is labelled "learning iteration"
+   a. the y-axis is labelled "probability of G1"
+   a. the plot title is "A variational learning trajectory"
