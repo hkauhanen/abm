@@ -1,6 +1,7 @@
 ---
 title: "A model of language learning"
 date: 04/23/2024
+date-modified: 04/30/2024
 image: "../img/learning-image.png"
 categories:
   - lecture
@@ -16,6 +17,13 @@ format:
 using Random
 Random.seed!(123)
 ```
+
+::: {.content-visible unless-format="revealjs"}
+::: {.callout-important title="Update 30 April 2024"}
+Fixed the set diagrams for $L_1 \setminus L_2$ and $L_2 \setminus L_1$.
+:::
+:::
+
 
 ## Plan
 

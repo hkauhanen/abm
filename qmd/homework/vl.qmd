@@ -1,7 +1,7 @@
 ---
 title: "Variational learning"
 date: 04/23/2024
-Solution: ""
+Solution: "[Here](solutions/vl.qmd)"
 categories:
   - homework
 ---
@@ -13,7 +13,7 @@ categories:
    :::
 
 2. Repeat the above exercise, but this time with five learners with $\gamma = 0.001$, and then with five learners with $\gamma = 1$.
-3. Now repeat both of the above points, but this time in an environment characterized by probablities P1 = 0.1, P12 = 0.5 and P2 = 0.4.
+3. Now repeat both of the above points, but this time in an environment characterized by probabilities P1 = 0.1, P12 = 0.5 and P2 = 0.4.
 4. Based on your observations, what would you say is the effect of
    a. the learning rate parameter?
    a. the probabilities of occurrence of the different types of string?

@@ -74,5 +74,18 @@
   "homework/vl.qmd": {
     "vl.html": "ddb7b54a",
     "vl.tex": "c3553f49"
+  },
+  "lectures/speaking.qmd": {
+    "speaking-slides.html": "92a49e27",
+    "speaking.html": "cfd51598",
+    "speaking.tex": "2b7ab4a7"
+  },
+  "solutions/vl.qmd": {
+    "vl.html": "85a4eb72",
+    "vl.tex": "09102cc1"
+  },
+  "homework/modules.qmd": {
+    "modules.html": "909edba5",
+    "modules.tex": "0f1a6a7b"
   }
 }

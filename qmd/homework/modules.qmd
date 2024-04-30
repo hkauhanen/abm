@@ -1,0 +1,15 @@
+---
+title: "Modules and packages"
+date: 04/30/2024
+Solution: ""
+categories:
+  - homework
+---
+
+Read the section on [Modules and packages](https://en.wikibooks.org/wiki/Introducing_Julia/Modules_and_packages) from the *Introducing Julia* WikiBook, and answer the following questions.
+
+1. What is the difference between `using` and `import` in Julia?
+1. When do you use `include()`?
+1. What does `export` do?
+1. Finally, put the code we have written so far for variational learning in a file, turning it into a module called `VariationalLearning`. Which composite types and which functions would you `export`?
+
