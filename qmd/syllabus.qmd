@@ -27,6 +27,7 @@ The syllabus is tentative -- topics may get rearranged as the course proceeds.
 | 2.7.		| Presentations 1					| | |
 | 9.7.		|	Presentations 2				| | |
 | 16.7.		| Exam					| | |
+| 25.8.		| Deadline for project written reports	| | |
 
 
 ## Course requirements
