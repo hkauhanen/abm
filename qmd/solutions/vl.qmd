@@ -1,6 +1,7 @@
 ---
 title: "Variational learning"
 date: 04/30/2024
+date-modified: 05/07/2024
 execute:
   echo: true
 categories:
@@ -13,6 +14,10 @@ categories:
 using Random
 Random.seed!(123)
 ```
+
+::: {.callout-important title="Update 7 May 2024"}
+Fixed bug in the `learn!` function. See the [lecture](../lectures/learning.qmd) for details.
+:::
 
 First, I repeat the definitions of the custom types `VariationalLearner` and `LearningEnvironment` and the associated functions we defined in the lecture. (Without these definitions, none of what follows will work!)
 
@@ -43,11 +48,11 @@ function learn!(x::VariationalLearner, y::LearningEnvironment)
   s = sample_string(y)
   g = pick_grammar(x)
 
-  if g == "G1" && s == "S1"
+  if g == "G1" && s != "S2"
     x.p = x.p + x.gamma * (1 - x.p)
   elseif g == "G1" && s == "S2"
     x.p = x.p - x.gamma * x.p
-  elseif g == "G2" && s == "S2"
+  elseif g == "G2" && s != "S1"
     x.p = x.p - x.gamma * x.p
   elseif g == "G2" && s == "S1"
     x.p = x.p + x.gamma * (1 - x.p)
