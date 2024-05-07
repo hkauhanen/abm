@@ -19,6 +19,309 @@ using Random
 Random.seed!(123)
 ```
 
-Nothing here yet.
+## Plan
+
+- Up to now, we have implemented an agent that
+  - uses $G_1$ with prob. $p$ and $G_2$ with prob. $1-p$
+  - can produce strings from both grammars
+  - can receive such strings produced by other agents and update the value of $p$ correspondingly
+- It is now time to look more carefully what happens at the population level when multiple such agents interact
+
+::: {.content-visible when-format="revealjs"}
+## Plan
+:::
+
+- In [last week's homework](../homework/modules.qmd), we encapsulated all our variational learning code in a module ([download here](../jl/VariationalLearning.jl))
+- To use this module, we call:^[The first line makes Julia aware of the code, i.e. of the module definition. The second one then instructs Julia to use that module. The dot before the module name is required for complex reasons (simple answer: this is a module of our own making, not an "official" one).]
+
+```{julia}
+#|echo: true
+#|eval: false
+#|output: false
+include("VariationalLearning.jl")
+using .VariationalLearning
+```
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: false
+if isdefined(Main, :VariationalLearning) == false
+  include("../jl/VariationalLearning.jl")
+  using .VariationalLearning
+end
+```
+
+
+## Population of agents
+
+- Last time, we also saw how an array comprehension can be used to create a whole population of agents:
+
+```{julia}
+pop = [VariationalLearner(0.1, 0.01, 0.4, 0.1) for i in 1:1000]
+```
+
+::: {.content-visible when-format="revealjs"}
+## Population of agents
+:::
+
+- We also saw that the `rand` function can be used to pick random agents from the population:
+
+```{julia}
+rand(pop)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Population of agents
+:::
+
+- With an array comprehension, this allows us to undergo random interactions:
+
+```{julia}
+[interact!(rand(pop), rand(pop)) for t in 1:100]
+```
+
+
+## Exercise {.ex}
+
+What gets returned is an array of 100 numbers (`100-element Vector{Float64}`).
+
+What are these numbers, and where do they come from?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+They come from `learn!` via `interact!`.
+
+Recall that the last line of the `learn!` function returns the current (i.e. new, after learning) value of $p$ of the learner:
+
+```{julia}
+#|eval: false
+function learn!(x::Variational Learner, s::String)
+  ...
+  return x.p
+end
+```
+:::
+
+
+## Summary statistics
+
+- But this just gives us the current state of a random speaker
+- This is rarely the sort of information we wish to gather
+- More useful would be: average $p$ over all agents in the population
+- A quantity like this is known as a **summary statistic** -- it summarizes the state of the entire population
+
+
+## Getting the average
+
+- The average, or mean, can be obtained using Julia's `mean` function. This is part of the `Statistics` module:
+
+```{julia}
+using Statistics
+my_vector = [1, 2, 3, 4, 5]
+mean(my_vector)
+```
+
+- Note that you could also compute this "by hand"!
+
+```{julia}
+sum(my_vector)/length(my_vector)
+```
+
+
+## Average $p$
+
+- With our population, we can't just do:
+
+```{julia}
+#|eval: false
+mean(pop)
+```
+
+- Why? Well, `mean` takes the average over an array of numbers. But `pop` is **not** an array of numbers -- it is an array of `VariationalLearner` objects. ☹️
+
+
+## Exercise {.ex}
+
+How can we obtain the average $p$ over our `pop` object?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+Once again, the answer is an array comprehension!
+
+```{julia}
+mean([speaker.p for speaker in pop])
+```
+:::
+
+
+## Average $p$
+
+- Let's wrap this up as a function:
+
+```{julia}
+function average_p(x::Array{VariationalLearner})
+  mean([speaker.p for speaker in x])
+end
+```
+
+- Note: the type of the argument is `Array{VariationalLearner}`, which means an array of elements all of which are `VariationalLearner`s
+
+::: {.content-visible when-format="revealjs"}
+## Average $p$
+:::
+
+- We can now simply call:
+
+```{julia}
+average_p(pop)
+```
+
+## Interacting and summarizing
+
+- Earlier, we used this to evolve the population:
+
+```{julia}
+#|output: false
+[interact!(rand(pop), rand(pop)) for t in 1:100]
+```
+
+- What if we also want to summarize, so that the resulting array stores the average $p$ rather than the $p$ of a random agent?
+- Problem: array comprehension takes only a single command to the left of the `for` block
+
+::: {.content-visible when-format="revealjs"}
+## Interacting and summarizing
+:::
+
+- Solution: a `begin ... end` block:
+
+```{julia}
+history = [begin
+              interact!(rand(pop), rand(pop))
+              average_p(pop)
+           end for t in 1:100]
+```
+
+
+::: {.content-visible when-format="revealjs"}
+## Interacting and summarizing
+:::
+
+- We can finally evolve the population, recording its average state at every iteration, for as many iterations as we wish:^[Here, the `_` in the upper limit for `t` is a number separator. It just helps humans read the large number (here, a million); the compiler ignores it. You could also write `1000000` if you wish (but then I, for one, won't be able to tell how many zeroes you have there!).]
+
+```{julia}
+#|output: false
+history2 = [begin
+              interact!(rand(pop), rand(pop))
+              average_p(pop)
+            end for t in 1:1_000_000]
+```
+
+::: {.content-visible when-format="revealjs"}
+## Interacting and summarizing
+:::
+
+- Let's plot the simulation history (i.e. the evolution of average $p$ over time):
+
+```{julia}
+#|eval: false
+#|output: false
+using Plots
+plot(1:1_000_000, history2, color=:black, legend=false)
+```
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: true
+using Plots
+#plot(1:1_000_000, history2, color=:black, legend=false)
+plot(1:1000:1_000_000, history2[begin:1000:end], color=:black, legend=false)
+```
+
+
+
+## Free tip
+
+- We have plotted a million points here (and `Plots` also connects them with veeeeery tiny lines). This is a lot, and may slow your computer down.
+- To plot, say, every 1000th point, try:
+
+```{julia}
+#| echo: true
+#| eval: false
+#| output: false
+plot(1:1000:1_100_000, history2[begin:1000:end], color=:black, legend=false)
+```
+
+## Exercise {.ex}
+
+In our simulation, we see the average value of $p$ steadily going up with time. What do you predict will happen in the future, i.e. if we continued the simulation for, say, another million time steps?
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+We would expect the average to keep increasing, as the $p$ of every speaker tends to increase over time. Why does it tend to keep increasing? Because of the way we initialized the model: we set the `P1` and `P2` values for each learner to `0.4` and `0.1`, meaning that there is always more evidence for grammar $G_1$ than for grammar $G_2$.
+
+Of course, the average value of $p$, just like each individual $p$, cannot increase forever. They have a hard maximum at $p = 1$, since probabilities cannot be greater than 1. In fact, the average $p$ plateaus at 1, if we continue the simulation. (Try it!)
+:::
+
+
+## Looking at individual learners
+
+- But what if, instead of summarizing the population, we **want** to look at the histories of individual learners?
+- This is also very easy, using **two-dimensional array comprehensions**.
+- I will be using a much smaller population, for a much shorter simulation, for clarity:
+
+
+::: {.content-visible when-format="revealjs"}
+## Looking at individual learners
+:::
+
+```{julia}
+#|eval: false
+#|output: false
+pop = [VariationalLearner(0.1, 0.01, 0.4, 0.1) for i in 1:20]
+history = [interact!(rand(pop), l) for t in 1:100, l in pop]
+```
+
+- Read this as: for every time step `t`, for every learner `l` in the population, make a random speaker speak to `l`.
+
+::: {.content-visible when-format="revealjs"}
+## Looking at individual learners
+:::
+
+- The result is a **matrix** (two-dimensional array), here of 100 rows and 20 columns:
+
+```{julia}
+pop = [VariationalLearner(0.1, 0.01, 0.4, 0.1) for i in 1:20]
+history = [interact!(rand(pop), l) for t in 1:100, l in pop]
+```
+
+::: {.content-visible when-format="revealjs"}
+## Looking at individual learners
+:::
+
+- Each column of the matrix represents the history of one learner
+- `plot()` is rather clever and accepts the matrix as argument:
+
+```{julia}
+plot(history)
+```
+
+## Homework
+
+- In the [homework](../homework/change.qmd), you get to replicate the above simulations (with the summary statistic of average $p$), exploring how variation in **model parameters** such as population size and learning rate affects the population's evolution
+- Next week:
+  - Structured populations (with the help of *Agents.jl*)
+  - Info about the final projects
+
 
 

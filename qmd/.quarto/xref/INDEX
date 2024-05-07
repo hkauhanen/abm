@@ -96,5 +96,13 @@
   "solutions/modules.qmd": {
     "modules.html": "16be9231",
     "modules.tex": "70fd661d"
+  },
+  "homework/project.qmd": {
+    "project.html": "6941bb7f",
+    "project.tex": "621eef93"
+  },
+  "homework/change.qmd": {
+    "change.html": "b7b7bd40",
+    "change.tex": "a91357a6"
   }
 }

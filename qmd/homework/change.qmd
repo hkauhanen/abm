@@ -1,0 +1,21 @@
+---
+title: "Language change: parameter exploration"
+date: 05/07/2024
+Solution: ""#[Here](solutions/modules.qmd)"
+categories:
+  - homework
+---
+
+Following the example set in the [lecture](../lectures/change.qmd), simulate a population of variational learners, obtaining the evolution (=history) of the average value of $p$. Explore how variation in the following **model parameters** affects the population's evolution. Use the *Plots* package to visualize your findings.
+
+1. `N`: population size, i.e. the number of agents
+1. `p`: the initial value of $p$. Set this to the same value for each learner.
+1. `P1`: probability of a string that only $G_1$ can parse. Set this to the same value for each learner.
+1. `P2`: probability of a string that only $G_2$ can parse. Set this to the same value for each learner.
+1. `gamma`: learning rate.
+
+For the learning rate parameter, do both of the following:
+
+1. First, set `gamma` to the same value for each learner.
+1. In a second set of simulations, initialize your population so that each learner gets a randomly chosen `gamma` from the interval between 0 and 1.
+
