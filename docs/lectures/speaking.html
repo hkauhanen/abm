@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">7 May 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -186,6 +192,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-important callout-titled" title="Update 7 May 2024">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Update 7 May 2024
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fixed the link to the homework.</p>
+</div>
+</div>
 <section id="plan" class="level2">
 <h2 class="anchored" data-anchor-id="plan">Plan</h2>
 <ul>
@@ -215,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Hence we define:</li>
 </ul>
-<div id="c3aa9504" class="cell" data-execution_count="2">
+<div id="d44e971b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> VariationalLearner</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  p<span class="op">::</span><span class="dt">Float64      </span><span class="co"># prob. of using G1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  gamma<span class="op">::</span><span class="dt">Float64  </span><span class="co"># learning rate</span></span>
@@ -233,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>interact!(x::VariationalLearner, y::VariationalLearner)</code>: makes <code>x</code> utter a string and <code>y</code> learn from that string</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer (speak)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -242,9 +261,9 @@ Answer (speak)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="493c6b21" class="cell" data-execution_count="3">
+<div id="3e2412c6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsBase</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">speak</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
@@ -264,7 +283,7 @@ Answer (speak)
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer (learn!)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -273,9 +292,9 @@ Answer (learn!)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="05a61ca2" class="cell" data-execution_count="4">
+<div id="77b00bff" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, s<span class="op">::</span><span class="dt">String</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -299,7 +318,7 @@ Answer (learn!)
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer (interact!)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -308,9 +327,9 @@ Answer (interact!)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="b8913ab2" class="cell" data-execution_count="5">
+<div id="c0b6e5fa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">interact!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="fu">speak</span>(x)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">learn!</span>(y, s)</span>
@@ -338,7 +357,7 @@ Answer (interact!)
 <li>A <code>for</code> loop is used to repeat a code block a number of times</li>
 <li>Similar to array comprehensions; however, result is not stored in an array</li>
 </ul>
-<div id="b186f5f6" class="cell" data-execution_count="6">
+<div id="91807268" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Current number is "</span> <span class="op">*</span> <span class="fu">string</span>(i))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -354,7 +373,7 @@ Current number is 3</code></pre>
 <ul>
 <li>Using a <code>for</code> loop and the functions we defined above, it is now very easy to iterate or evolve a population of agents:</li>
 </ul>
-<div id="07390774" class="cell" data-execution_count="7">
+<div id="f160d7a3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
@@ -368,7 +387,7 @@ Current number is 3</code></pre>
 <h2 class="ex anchored" data-anchor-id="exercise-4">Exercise</h2>
 <p>Write the same thing using an array comprehension instead of a <code>for</code> loop.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -377,9 +396,9 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="71db5347" class="cell" data-execution_count="8">
+<div id="fda42349" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>[<span class="fu">interact!</span>(<span class="fu">rand</span>(pop), <span class="fu">rand</span>(pop)) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -422,7 +441,7 @@ Answer
 <ul>
 <li>Next week, we will learn how to <strong>summarize</strong> the state of an entire population</li>
 <li>This will allow us to track the population’s behaviour over time and hence model potential <strong>language change</strong></li>
-<li>This week’s <a href="FIXME">homework</a> is all about consolidating the ideas we’ve looked at so far – the variational learner and basics of Julia</li>
+<li>This week’s <a href="../homework/modules.html">homework</a> is all about consolidating the ideas we’ve looked at so far – the variational learner and basics of Julia</li>
 </ul>
 
 

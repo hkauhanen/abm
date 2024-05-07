@@ -1,6 +1,7 @@
 ---
 title: "Speaking and listening"
 date: 04/30/2024
+date-modified: 05/07/2024
 image: "../img/speaking-image.png"
 execute:
   echo: true
@@ -18,6 +19,12 @@ format:
 using Random
 Random.seed!(123)
 ```
+
+::: {.content-visible unless-format="revealjs"}
+::: {.callout-important title="Update 7 May 2024"}
+Fixed the link to the homework.
+:::
+:::
 
 
 ## Plan
@@ -193,7 +200,7 @@ pop = [VariationalLearner(0.1, 0.01, 0.4, 0.1) for i in 1:1000]
 
 - Next week, we will learn how to **summarize** the state of an entire population
 - This will allow us to track the population's behaviour over time and hence model potential **language change**
-- This week's [homework](FIXME) is all about consolidating the ideas we've looked at so far -- the variational learner and basics of Julia
+- This week's [homework](../homework/modules.qmd) is all about consolidating the ideas we've looked at so far -- the variational learner and basics of Julia
 
 
 

@@ -443,7 +443,7 @@ Henri Kauhanen
 <ul>
 <li>Hence we define:</li>
 </ul>
-<div id="0e35a0e7" class="cell" data-execution_count="2">
+<div id="d44e971b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="kw">mutable struct</span> VariationalLearner</span>
 <span id="cb1-2"><a></a>  p<span class="op">::</span><span class="dt">Float64      </span><span class="co"># prob. of using G1</span></span>
 <span id="cb1-3"><a></a>  gamma<span class="op">::</span><span class="dt">Float64  </span><span class="co"># learning rate</span></span>
@@ -473,7 +473,7 @@ Henri Kauhanen
 <p><strong>Answer (speak)</strong></p>
 </div>
 <div class="callout-content">
-<div id="261d724b" class="cell" data-execution_count="3">
+<div id="3e2412c6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a><span class="im">using</span> <span class="bu">StatsBase</span></span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a><span class="kw">function</span> <span class="fu">speak</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
@@ -506,7 +506,7 @@ Henri Kauhanen
 <p><strong>Answer (learn!)</strong></p>
 </div>
 <div class="callout-content">
-<div id="cacbd376" class="cell" data-execution_count="4">
+<div id="77b00bff" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, s<span class="op">::</span><span class="dt">String</span>)</span>
 <span id="cb4-2"><a></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
 <span id="cb4-3"><a></a></span>
@@ -543,7 +543,7 @@ Henri Kauhanen
 <p><strong>Answer (interact!)</strong></p>
 </div>
 <div class="callout-content">
-<div id="b59648ba" class="cell" data-execution_count="5">
+<div id="c0b6e5fa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a><span class="kw">function</span> <span class="fu">interact!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
 <span id="cb6-2"><a></a>  s <span class="op">=</span> <span class="fu">speak</span>(x)</span>
 <span id="cb6-3"><a></a>  <span class="fu">learn!</span>(y, s)</span>
@@ -572,7 +572,7 @@ Henri Kauhanen
 <li>A <code>for</code> loop is used to repeat a code block a number of times</li>
 <li>Similar to array comprehensions; however, result is not stored in an array</li>
 </ul>
-<div id="369dfe53" class="cell" data-execution_count="6">
+<div id="91807268" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
 <span id="cb8-2"><a></a>  <span class="fu">println</span>(<span class="st">"Current number is "</span> <span class="op">*</span> <span class="fu">string</span>(i))</span>
 <span id="cb8-3"><a></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ Current number is 3</code></pre>
 <ul>
 <li>Using a <code>for</code> loop and the functions we defined above, it is now very easy to iterate or evolve a population of agents:</li>
 </ul>
-<div id="fa4a0a52" class="cell" data-execution_count="7">
+<div id="f160d7a3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
 <span id="cb10-2"><a></a></span>
 <span id="cb10-3"><a></a><span class="cf">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
@@ -614,7 +614,7 @@ Current number is 3</code></pre>
 <p><strong>Answer</strong></p>
 </div>
 <div class="callout-content">
-<div id="f802940c" class="cell" data-execution_count="8">
+<div id="fda42349" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
 <span id="cb11-2"><a></a></span>
 <span id="cb11-3"><a></a>[<span class="fu">interact!</span>(<span class="fu">rand</span>(pop), <span class="fu">rand</span>(pop)) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -658,7 +658,7 @@ Current number is 3</code></pre>
 <ul>
 <li>Next week, we will learn how to <strong>summarize</strong> the state of an entire population</li>
 <li>This will allow us to track the population’s behaviour over time and hence model potential <strong>language change</strong></li>
-<li>This week’s <a href="FIXME">homework</a> is all about consolidating the ideas we’ve looked at so far – the variational learner and basics of Julia</li>
+<li>This week’s <a href="../homework/modules.html">homework</a> is all about consolidating the ideas we’ve looked at so far – the variational learner and basics of Julia</li>
 </ul>
 
 <div class="quarto-auto-generated-content">

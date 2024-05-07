@@ -165,14 +165,14 @@
     "href": "lectures/speaking.html",
     "title": "Speaking and listening",
     "section": "",
-    "text": "Last week, we ran out of time\nBetter go slowly and build a solid foundation rather than try to cover as much ground as possible\nHence, today:\n\nFinish last week’s material\nIntroduce a little bit of new material: implementing interactions between variational learners\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Update 7 May 2024\n\n\n\nFixed the link to the homework.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "lectures/speaking.html#plan",
     "href": "lectures/speaking.html#plan",
     "title": "Speaking and listening",
-    "section": "",
-    "text": "Last week, we ran out of time\nBetter go slowly and build a solid foundation rather than try to cover as much ground as possible\nHence, today:\n\nFinish last week’s material\nIntroduce a little bit of new material: implementing interactions between variational learners"
+    "section": "Plan",
+    "text": "Plan\n\nLast week, we ran out of time\nBetter go slowly and build a solid foundation rather than try to cover as much ground as possible\nHence, today:\n\nFinish last week’s material\nIntroduce a little bit of new material: implementing interactions between variational learners"
   },
   {
     "objectID": "lectures/speaking.html#dropping-the-environment",
@@ -641,7 +641,7 @@
     "href": "lectures/learning.html",
     "title": "A model of language learning",
     "section": "",
-    "text": "Update 30 April 2024\n\n\n\nFixed the set diagrams for \\(L_1 \\setminus L_2\\) and \\(L_2 \\setminus L_1\\).\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Update 7 May 2024\n\n\n\nFixed bug in the learn! function so that learning also occurs on strings in the intersection \\(L_1 \\cap L_2\\) of the two languages.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "lectures/learning.html#plan",
@@ -774,14 +774,14 @@
     "href": "lectures/learning.html#exercise-4",
     "title": "A model of language learning",
     "section": "Exercise",
-    "text": "Exercise\n\nUse an if ... elseif ... else ... end block to finish off our learn! function\nTip: logical “and” is &&, logical “or” is ||\nRecall:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
+    "text": "Exercise\n\nUse an if ... elseif ... else ... end block to finish off our learn! function\nTip: logical “and” is &&, logical “or” is ||\nRecall:\n\n\n\n\nLearner’s grammar\nString received\nUpdate\n\n\n\n\n\\(G_1\\)\n\\(s \\in L_1\\)\nincrease \\(p\\)\n\n\n\\(G_1\\)\n\\(s \\in L_2 \\setminus L_1\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_2\\)\ndecrease \\(p\\)\n\n\n\\(G_2\\)\n\\(s \\in L_1 \\setminus L_2\\)\nincrease \\(p\\)\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nImportant! The following function, which we originally used, has a bug! It does not update the learner’s state with input strings from \\(L_1 \\cap L_2\\). See below for fixed version.\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\n\n\n\n\n\n\n\n\n\nAnswer\n\n\n\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s != \"S2\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s != \"S1\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
   },
   {
     "objectID": "lectures/learning.html#testing-our-code",
     "href": "lectures/learning.html#testing-our-code",
     "title": "A model of language learning",
     "section": "Testing our code",
-    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.505\n\n\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.505\n 0.50995\n 0.5148505\n 0.5148505\n 0.5148505\n 0.519701995\n 0.519701995\n 0.52450497505\n 0.5292599252995001\n 0.5292599252995001\n 0.5339673260465051\n 0.5339673260465051\n 0.5386276527860401\n ⋮\n 0.779725655542553\n 0.7719283989871275\n 0.7742091149972562\n 0.7664670238472836\n 0.7688023536088108\n 0.7711143300727227\n 0.7711143300727227\n 0.7711143300727227\n 0.7634031867719955\n 0.7634031867719955\n 0.7634031867719955\n 0.7657691549042756"
+    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.51489901495\n\n\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.5097500248005\n 0.514652524552495\n 0.5195059993069701\n 0.5143109393139004\n 0.5191678299207614\n 0.5239761516215538\n 0.5287363901053382\n 0.5334490262042848\n 0.5381145359422419\n 0.5327333905828194\n 0.5374060566769913\n 0.5420319961102213\n 0.5466116761491191\n ⋮\n 0.8043883364948524\n 0.7963444531299039\n 0.7983810085986048\n 0.7903971985126188\n 0.7924932265274927\n 0.7945682942622178\n 0.7966226113195956\n 0.7986563852063996\n 0.7906698213543356\n 0.7927631231407922\n 0.7948354919093843\n 0.7968871369902905"
   },
   {
     "objectID": "lectures/learning.html#plotting-the-learning-trajectory",
@@ -991,21 +991,28 @@
     "href": "lectures/learning-slides.html#exercise-5",
     "title": "A model of language learning",
     "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nImportant! The following function, which we originally used, has a bug! It does not update the learner’s state with input strings from \\(L_1 \\cap L_2\\). See below for fixed version.\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend"
+  },
+  {
+    "objectID": "lectures/learning-slides.html#exercise-6",
+    "href": "lectures/learning-slides.html#exercise-6",
+    "title": "A model of language learning",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s != \"S2\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s != \"S1\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)"
   },
   {
     "objectID": "lectures/learning-slides.html#testing-our-code",
     "href": "lectures/learning-slides.html#testing-our-code",
     "title": "A model of language learning",
     "section": "Testing our code",
-    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.505"
+    "text": "Testing our code\n\nLet’s test our code!\n\n\nbob = VariationalLearner(0.5, 0.01)\nparis = LearningEnvironment(0.4, 0.5, 0.1)\n\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\nlearn!(bob, paris)\n\n0.51489901495"
   },
   {
     "objectID": "lectures/learning-slides.html#testing-our-code-1",
     "href": "lectures/learning-slides.html#testing-our-code-1",
     "title": "A model of language learning",
     "section": "Testing our code",
-    "text": "Testing our code\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.505\n 0.50995\n 0.5148505\n 0.5148505\n 0.5148505\n 0.519701995\n 0.519701995\n 0.52450497505\n 0.5292599252995001\n 0.5292599252995001\n 0.5339673260465051\n 0.5339673260465051\n 0.5386276527860401\n ⋮\n 0.779725655542553\n 0.7719283989871275\n 0.7742091149972562\n 0.7664670238472836\n 0.7688023536088108\n 0.7711143300727227\n 0.7711143300727227\n 0.7711143300727227\n 0.7634031867719955\n 0.7634031867719955\n 0.7634031867719955\n 0.7657691549042756"
+    "text": "Testing our code\n\ntrajectory = [learn!(bob, paris) for t in 1:1000]\n\n1000-element Vector{Float64}:\n 0.5097500248005\n 0.514652524552495\n 0.5195059993069701\n 0.5143109393139004\n 0.5191678299207614\n 0.5239761516215538\n 0.5287363901053382\n 0.5334490262042848\n 0.5381145359422419\n 0.5327333905828194\n 0.5374060566769913\n 0.5420319961102213\n 0.5466116761491191\n ⋮\n 0.8043883364948524\n 0.7963444531299039\n 0.7983810085986048\n 0.7903971985126188\n 0.7924932265274927\n 0.7945682942622178\n 0.7966226113195956\n 0.7986563852063996\n 0.7906698213543356\n 0.7927631231407922\n 0.7948354919093843\n 0.7968871369902905"
   },
   {
     "objectID": "lectures/learning-slides.html#plotting-the-learning-trajectory",
@@ -1187,14 +1194,14 @@
     "href": "lectures/basics.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.9915146041884858"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.24750514287672132"
   },
   {
     "objectID": "lectures/basics.html#exercise-4",
     "href": "lectures/basics.html#exercise-4",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n44.270480435006235\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n88.36011926450192"
+    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n22.892821533115278\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n91.46074135919395"
   },
   {
     "objectID": "lectures/basics.html#comments",
@@ -1467,7 +1474,7 @@
     "href": "lectures/basics-slides.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.6915511513008293"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.4133778661299048"
   },
   {
     "objectID": "lectures/basics-slides.html#exercise-4",
@@ -1481,7 +1488,7 @@
     "href": "lectures/basics-slides.html#exercise-5",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n39.38447125693987\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n74.31452898906403"
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n5.956796970100465\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n71.34350945795907"
   },
   {
     "objectID": "lectures/basics-slides.html#comments",

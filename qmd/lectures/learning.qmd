@@ -1,7 +1,7 @@
 ---
 title: "A model of language learning"
 date: 04/23/2024
-date-modified: 04/30/2024
+date-modified: 05/07/2024
 image: "../img/learning-image.png"
 categories:
   - lecture
@@ -19,6 +19,9 @@ Random.seed!(123)
 ```
 
 ::: {.content-visible unless-format="revealjs"}
+::: {.callout-important title="Update 7 May 2024"}
+Fixed bug in the `learn!` function so that learning also occurs on strings in the intersection $L_1 \cap L_2$ of the two languages.
+:::
 ::: {.callout-important title="Update 30 April 2024"}
 Fixed the set diagrams for $L_1 \setminus L_2$ and $L_2 \setminus L_1$.
 :::
@@ -352,8 +355,11 @@ end
 :::
 
 ::: {.callout-tip collapse=true title="Answer"}
+**Important!** The following function, which we originally used, has a bug! It does not update the learner's state with input strings from $L_1 \cap L_2$. See below for fixed version.
+
 ```{julia}
 #| echo: true
+#| eval: false
 function learn!(x::VariationalLearner, y::LearningEnvironment)
   s = sample_string(y)
   g = pick_grammar(x)
@@ -372,6 +378,33 @@ function learn!(x::VariationalLearner, y::LearningEnvironment)
 end
 ```
 :::
+
+::: {.content-visible when-format="revealjs"}
+## Exercise {.ex}
+:::
+
+::: {.callout-tip collapse=true title="Answer"}
+```{julia}
+#| echo: true
+function learn!(x::VariationalLearner, y::LearningEnvironment)
+  s = sample_string(y)
+  g = pick_grammar(x)
+
+  if g == "G1" && s != "S2"
+    x.p = x.p + x.gamma * (1 - x.p)
+  elseif g == "G1" && s == "S2"
+    x.p = x.p - x.gamma * x.p
+  elseif g == "G2" && s != "S1"
+    x.p = x.p - x.gamma * x.p
+  elseif g == "G2" && s == "S1"
+    x.p = x.p + x.gamma * (1 - x.p)
+  end
+
+  return x.p
+end
+```
+:::
+
 
 
 ## Testing our code
