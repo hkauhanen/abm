@@ -1,0 +1,24 @@
+---
+title: "Models of language change"
+date: 05/07/2024
+image: "../img/change-image.png"
+execute:
+  echo: true
+categories:
+  - lecture
+format:
+  revealjs:
+    output-file: change-slides.html
+---
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: false
+using Random
+Random.seed!(123)
+```
+
+Nothing here yet.
+
+

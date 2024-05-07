@@ -1,7 +1,7 @@
 ---
 title: "Modules and packages"
 date: 04/30/2024
-Solution: ""
+Solution: "[Here](solutions/modules.qmd)"
 categories:
   - homework
 ---

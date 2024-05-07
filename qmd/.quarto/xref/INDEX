@@ -87,5 +87,14 @@
   "homework/modules.qmd": {
     "modules.html": "909edba5",
     "modules.tex": "0f1a6a7b"
+  },
+  "lectures/change.qmd": {
+    "change-slides.html": "ba3efdba",
+    "change.html": "22303314",
+    "change.tex": "193a5cd4"
+  },
+  "solutions/modules.qmd": {
+    "modules.html": "16be9231",
+    "modules.tex": "70fd661d"
   }
 }
