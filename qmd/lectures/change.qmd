@@ -99,7 +99,7 @@ Recall that the last line of the `learn!` function returns the current (i.e. new
 
 ```{julia}
 #|eval: false
-function learn!(x::Variational Learner, s::String)
+function learn!(x::VariationalLearner, s::String)
   ...
   return x.p
 end
@@ -276,7 +276,7 @@ Of course, the average value of $p$, just like each individual $p$, cannot incre
 
 ## Looking at individual learners
 
-- But what if, instead of summarizing the population, we **want** to look at the histories of individual learners?
+- What if, instead of summarizing the population, we **want** to look at the histories of individual learners?
 - This is also very easy, using **two-dimensional array comprehensions**.
 - I will be using a much smaller population, for a much shorter simulation, for clarity:
 

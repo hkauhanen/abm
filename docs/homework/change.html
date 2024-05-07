@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-04-16">
+<meta name="dcterms.date" content="2024-05-07">
 
-<title>Making birds fly</title>
+<title>Language change: parameter exploration</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -102,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -154,13 +149,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="fly.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="change.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Making birds fly</h1>
+<h1 class="title">Language change: parameter exploration</h1>
   <div class="quarto-categories">
     <div class="quarto-category">homework</div>
   </div>
@@ -174,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">16 April 2024</p>
+      <p class="date">7 May 2024</p>
     </div>
   </div>
   
@@ -186,74 +181,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In addition to a working <a href="../homework/installing-julia.html">Julia installation</a>, you will need the <a href="https://docs.juliaplots.org/">Plots</a> package in order to complete this homework. Run the following commands to install and load it:</p>
-<div id="27cac11d" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Plots"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-<p>In this week’s <a href="../lectures/basics.html">lecture</a>, you learned about custom types, functions and array comprehensions. In this homework, you get to put these concepts to practice.</p>
-<p>Specifically, we will implement a version of the artificial birds that we saw in first week’s lecture’s <a href="../lectures/intro.html#example-2-flocking-1">flocking example</a>. For now, however, we omit the collision avoidance, tracking and navigation rules and only concentrate on figuring out how to make the birds “fly”.</p>
-<p>Your task is to:</p>
+<p>Following the example set in the <a href="../lectures/change.html">lecture</a>, simulate a population of variational learners, obtaining the evolution (=history) of the average value of <span class="math inline">\(p\)</span>. Explore how variation in the following <strong>model parameters</strong> affects the population’s evolution. Use the <em>Plots</em> package to visualize your findings.</p>
 <ol type="1">
-<li><p>Write a custom type called <code>Bird</code> which has the following fields, each of them of type <code>Float64</code>:</p>
-<ul>
-<li><code>x</code>, the bird’s location coordinate in the horizontal dimension</li>
-<li><code>y</code>, the bird’s location coordinate in the vertical dimension</li>
-<li><code>dir_x</code>, the bird’s direction (where its beak is pointing) in the horizontal dimension</li>
-<li><code>dir_y</code>, the birds’ direction in the vertical dimension</li>
-</ul></li>
-<li><p>Use an array comprehension to make a population of <code>Bird</code> objects such that each bird gets a random location and random direction in both dimensions. Store this array in a variable named <code>population</code>.</p></li>
-<li><p>Download <a href="../jl/plot_birds.jl">this file</a> and save it with the filename <code>plot_birds.jl</code>. Then run the following in Julia:</p>
-<div id="26c9e5c6" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"plot_birds.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>(You may need to specify the whole path of the file in the above command if the file is not located in the same directory as your Julia session.)</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If the above fails, you can also simply copy-paste the contents of <code>plot_birds.jl</code> into your own file.</p>
-</div>
-</div></li>
-<li><p>Run the following command:</p>
-<div id="880c07dd" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This will draw the bird’s positions and directions in a graphical plot.</p></li>
-<li><p>Write a function called <code>fly!</code> which takes one argument – a <code>Bird</code> object – and makes this bird fly. In this context, to fly means to move <code>x</code> in the direction of <code>dir_x</code> by a little amount – let’s call that little amount <code>delta</code> – and to likewise move <code>y</code> in the direction of <code>dir_y</code> by the same amount. (You can make <code>delta</code> an argument of <code>fly!</code> if you want.)</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Use pen and paper to visually figure out how to update the <code>x</code> and <code>y</code> values of the <code>Bird</code> object. Use your imagination. Also note that there is no single “correct” answer as to how this function ought to be implemented. We will look at a few different possibilities in next week’s lecture.</p>
-</div>
-</div></li>
-<li><p>Test your function by calling it on a few birds in your population of birds. Then re-plot the population. Do the birds’ positions change as you’d expect?</p></li>
+<li><code>N</code>: population size, i.e.&nbsp;the number of agents</li>
+<li><code>p</code>: the initial value of <span class="math inline">\(p\)</span>. Set this to the same value for each learner.</li>
+<li><code>P1</code>: probability of a string that only <span class="math inline">\(G_1\)</span> can parse. Set this to the same value for each learner.</li>
+<li><code>P2</code>: probability of a string that only <span class="math inline">\(G_2\)</span> can parse. Set this to the same value for each learner.</li>
+<li><code>gamma</code>: learning rate.</li>
+</ol>
+<p>For the learning rate parameter, do both of the following:</p>
+<ol type="1">
+<li>First, set <code>gamma</code> to the same value for each learner.</li>
+<li>In a second set of simulations, initialize your population so that each learner gets a randomly chosen <code>gamma</code> from the interval between 0 and 1.</li>
 </ol>
 
 

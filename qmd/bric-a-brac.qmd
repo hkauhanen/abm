@@ -6,5 +6,11 @@ sidebar: false
 A compendium of sundry miscellanea.
 
 - [plot_birds_fixed.jl](jl/plot_birds_fixed.jl) -- A Julia Plots recipe, used to plot birds in the homework [Making birds fly](homework/fly.qmd)
-- [VariationalLearning.jl](jl/VariationalLearning.jl) -- A Julia module that defines the `VariationalLearner` type and some functions to deal with such learners. See, in particular, [this homework solution](homework/modules.qmd).
+- [VariationalLearning.jl](jl/VariationalLearning.jl) -- A Julia module that defines the `VariationalLearner` type and some functions to deal with such learners. See, in particular, [this homework solution](homework/modules.qmd). To use this, execute the following (don't forget the dot before the module name, as this is a local module):
+
+  ```{julia}
+  #|eval: false
+  include("VariationalLearning.jl")
+  using .VariationalLearning
+  ```
 

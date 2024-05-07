@@ -1,27 +1,30 @@
 [
   {
-    "listing": "/lectures.html",
-    "items": [
-      "/lectures/intro.html",
-      "/lectures/basics.html",
-      "/lectures/learning.html",
-      "/lectures/speaking.html"
-    ]
-  },
-  {
     "listing": "/homework.html",
     "items": [
       "/homework/installing-julia.html",
       "/homework/fly.html",
       "/homework/vl.html",
-      "/homework/modules.html"
+      "/homework/modules.html",
+      "/homework/change.html"
     ]
   },
   {
     "listing": "/solutions.html",
     "items": [
       "/solutions/fly.html",
-      "/solutions/vl.html"
+      "/solutions/vl.html",
+      "/solutions/modules.html"
+    ]
+  },
+  {
+    "listing": "/lectures.html",
+    "items": [
+      "/lectures/intro.html",
+      "/lectures/basics.html",
+      "/lectures/learning.html",
+      "/lectures/speaking.html",
+      "/lectures/change.html"
     ]
   }
 ]

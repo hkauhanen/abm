@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-04-30">
+<meta name="dcterms.date" content="2024-05-07">
 
-<title>Speaking and listening</title>
+<title>Modules and packages</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,15 +154,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="speaking-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="speaking.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="modules.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Speaking and listening</h1>
+<h1 class="title">Modules and packages</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">lecture</div>
+    <div class="quarto-category">solution</div>
   </div>
   </div>
 
@@ -174,16 +174,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">30 April 2024</p>
+      <p class="date">7 May 2024</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">7 May 2024</p>
-    </div>
-  </div>
     
   </div>
   
@@ -192,257 +186,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled" title="Update 7 May 2024">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="using-vs.-import" class="level2">
+<h2 class="anchored" data-anchor-id="using-vs.-import">1. <code>using</code> vs.&nbsp;<code>import</code></h2>
+<p>Imagine the following scenario: Alice writes some Julia code which defines a function <code>do_cool_stuff()</code> (which does cool stuff), and Bob also writes some Julia code that also defines a function named <code>do_cool_stuff()</code>, which also does cool stuff but some slightly different cool stuff than Alice’s function. In other words, the functions have the same name but do slightly different things.</p>
+<p>Now imagine Carlos has access to both Alice’s and Bob’s code. If Carlos executes the function <code>do_cool_stuff()</code>, what is going to happen? Will Alice’s code run, or will Bob’s code run?</p>
+<p>The standard solution to this kind of problem is to put code in <strong>modules</strong>. A module defines a <strong>namespace</strong>. This makes it possible to use the same function names (as well as names for custom types etc.) in different modules.</p>
+<p>If Alice has created a module called <code>CodeOfAlice</code> and Bob’s module is called <code>CodeOfBob</code>, then the following commands can be used to distinguish between the two different but homonymous functions:</p>
+<div id="befcbb90" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CodeOfAlice.<span class="fu">do_cool_stuff</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>CodeOfBob.<span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Update 7 May 2024
+<p>Now we can finally explain the difference between <code>using</code> and <code>import</code>. Both commands can be used to load a module into memory. The difference is:</p>
+<ul>
+<li><code>using</code> allows the user to refer to a function such as <code>do_cool_stuff()</code> without specifying the module the function comes from. This can cause conflicts, if more than one module is used that defines the same name. In that case, Julia will throw a warning, and it is up to you (or Carlos, in this case) to make sure that you’re not accidentally calling the wrong function!</li>
+<li><code>import</code> does not allow the above behaviour. With <code>import</code>, you <strong>must</strong> specify the module name every time you call a function.</li>
+</ul>
+<p>In summary, you can do either</p>
+<div id="668f90c3" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CodeOfAlice</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Fixed the buggy <code>learn!</code> function. Also added the missing link to the homework.</p>
-</div>
-</div>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
-<ul>
-<li>Last week, we ran out of time</li>
-<li>Better go slowly and build a solid foundation rather than try to cover as much ground as possible</li>
-<li>Hence, today:
-<ul>
-<li>Finish last week’s material</li>
-<li>Introduce a little bit of new material: implementing interactions between variational learners</li>
-</ul></li>
-</ul>
-</section>
-<section id="dropping-the-environment" class="level2">
-<h2 class="anchored" data-anchor-id="dropping-the-environment">Dropping the environment</h2>
-<ul>
-<li>So far, we’ve been working with the abstraction of a <code>LearningEnvironment</code>:</li>
-</ul>
-<p><img src="../img/learningenvironment.png" class="img-fluid"></p>
-<ul>
-<li>We will now drop this and have two <code>VariationalLearner</code>s interacting:</li>
-</ul>
-<p><img src="../img/twovariationallearners.png" class="img-fluid"></p>
-<ul>
-<li>The probabilities <code>P1</code> and <code>P2</code> now need to be represented inside the learner:</li>
-</ul>
-<p><img src="../img/twovariationallearners2.png" class="img-fluid"></p>
-<ul>
-<li>Hence we define:</li>
-</ul>
-<div id="0b97a2de" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> VariationalLearner</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  p<span class="op">::</span><span class="dt">Float64      </span><span class="co"># prob. of using G1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  gamma<span class="op">::</span><span class="dt">Float64  </span><span class="co"># learning rate</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  P1<span class="op">::</span><span class="dt">Float64     </span><span class="co"># prob. of L1 \ L2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  P2<span class="op">::</span><span class="dt">Float64     </span><span class="co"># prob. of L2 \ L1</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or</p>
+<div id="12cb3ac6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">CodeOfAlice</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CodeOfAlice.<span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise" class="level2 ex">
-<h2 class="ex anchored" data-anchor-id="exercise">Exercise</h2>
-<p>Write three functions:</p>
-<ul>
-<li><code>speak(x::VariationalLearner)</code>: takes a variational learner as argument and returns a string uttered by the learner</li>
-<li><code>learn!(x::VariationalLearner, s::String)</code>: makes variational learner <code>x</code> learn from string <code>s</code></li>
-<li><code>interact!(x::VariationalLearner, y::VariationalLearner)</code>: makes <code>x</code> utter a string and <code>y</code> learn from that string</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Answer (speak)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer (speak)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="8cac99e0" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsBase</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">speak</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> g <span class="op">==</span> <span class="st">"G1"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">sample</span>([<span class="st">"S1"</span>, <span class="st">"S12"</span>], <span class="fu">Weights</span>([x.P1, <span class="fl">1</span> <span class="op">-</span> x.P1]))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">sample</span>([<span class="st">"S2"</span>, <span class="st">"S12"</span>], <span class="fu">Weights</span>([x.P2, <span class="fl">1</span> <span class="op">-</span> x.P2]))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>speak (generic function with 1 method)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Answer (learn!)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer (learn!)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="5d9bb202" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, s<span class="op">::</span><span class="dt">String</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">!=</span> <span class="st">"S2"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S2"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">!=</span> <span class="st">"S1"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S1"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x.p</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>learn! (generic function with 1 method)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Answer (interact!)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer (interact!)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="7faf7cb3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">interact!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="fu">speak</span>(x)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">learn!</span>(y, s)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>interact! (generic function with 1 method)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section id="include" class="level2">
+<h2 class="anchored" data-anchor-id="include">2. <code>include()</code></h2>
+<p>The command <code>include()</code> is used when you want to import into your session Julia code which lives in an external file (typically, with the <code>.jl</code> file extension) but which is not necessarily organized into a module. We used this before to load the plotting code I had written for the bird agents.</p>
 </section>
-<section id="picking-random-agents" class="level2">
-<h2 class="anchored" data-anchor-id="picking-random-agents">Picking random agents</h2>
-<ul>
-<li><code>rand()</code> without arguments returns a random float between 0 and 1</li>
-<li><code>rand(x)</code> with argument <code>x</code> returns a random element of <code>x</code></li>
-<li>If we have a population of agents <code>pop</code>, then we can use <code>rand(pop)</code> to pick a random agent</li>
-<li>This is very useful for evolving an ABM</li>
-</ul>
+<section id="export" class="level2">
+<h2 class="anchored" data-anchor-id="export">3. <code>export</code></h2>
+<p>The command <code>export</code> defines which functions and objects defined inside a module will be visible to outside users. For example, in the above example, both Alice and Bob have included the line <code>export do_cool_stuff</code> in their code, to make the function available to outside users of the module.</p>
+<p>Functions which are not <code>export</code>ed can still be used. However, in that case, the module name must always be specified, regardless of whether the module has been loaded using <code>using</code> or <code>import</code>. In other words, non-<code>export</code>ed stuff can only be accessed like this: <code>ModuleName.function_name()</code>.</p>
 </section>
-<section id="aside-for-loops" class="level2">
-<h2 class="anchored" data-anchor-id="aside-for-loops">Aside: <code>for</code> loops</h2>
-<ul>
-<li>A <code>for</code> loop is used to repeat a code block a number of times</li>
-<li>Similar to array comprehensions; however, result is not stored in an array</li>
-</ul>
-<div id="90277517" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Current number is "</span> <span class="op">*</span> <span class="fu">string</span>(i))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Current number is 1
-Current number is 2
-Current number is 3</code></pre>
+<section id="the-variationallearning-module" class="level2">
+<h2 class="anchored" data-anchor-id="the-variationallearning-module">4. The <code>VariationalLearning</code> module</h2>
+<p>Here, I am following the logic of the lecture on <a href="../lecture/speaking.qmd">Speaking and listening</a>, omitting the older <code>LearningEnvironment</code> type which we will no longer need. I’ve decided to <code>export</code> every type and function defined by the module. In this case it makes sense, since the external user may conceivably want to make use of all of them. (We will later see examples of so-called “helper” functions which need not be exposed to end-users.)</p>
+<div id="8f765c52" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> VariationalLearning</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we need this package for the sample() function</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsBase</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we export the following types and functions</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">export</span> VariationalLearner</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">export</span> speak</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">export</span> learn!</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">export</span> interact!</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># variational learner type</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> VariationalLearner</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  p<span class="op">::</span><span class="dt">Float64      </span><span class="co"># prob. of using G1</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  gamma<span class="op">::</span><span class="dt">Float64  </span><span class="co"># learning rate</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  P1<span class="op">::</span><span class="dt">Float64     </span><span class="co"># prob. of L1 \ L2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  P2<span class="op">::</span><span class="dt">Float64     </span><span class="co"># prob. of L2 \ L1</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># makes variational learner x utter a string</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">speak</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> g <span class="op">==</span> <span class="st">"G1"</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">sample</span>([<span class="st">"S1"</span>, <span class="st">"S12"</span>], <span class="fu">Weights</span>([x.P1, <span class="fl">1</span> <span class="op">-</span> x.P1]))</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">sample</span>([<span class="st">"S2"</span>, <span class="st">"S12"</span>], <span class="fu">Weights</span>([x.P2, <span class="fl">1</span> <span class="op">-</span> x.P2]))</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co"># makes variational learner x learn from input string s</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">learn!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, s<span class="op">::</span><span class="dt">String</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  g <span class="op">=</span> <span class="fu">sample</span>([<span class="st">"G1"</span>, <span class="st">"G2"</span>], <span class="fu">Weights</span>([x.p, <span class="fl">1</span> <span class="op">-</span> x.p]))</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S1"</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G1"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S2"</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S2"</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">-</span> x.gamma <span class="op">*</span> x.p</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elseif</span> g <span class="op">==</span> <span class="st">"G2"</span> <span class="op">&amp;&amp;</span> s <span class="op">==</span> <span class="st">"S1"</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    x.p <span class="op">=</span> x.p <span class="op">+</span> x.gamma <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> x.p)</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x.p</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># makes two variational learners interact, with one speaking</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># and the other one learning</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">interact!</span>(x<span class="op">::</span><span class="dt">VariationalLearner</span>, y<span class="op">::</span><span class="dt">VariationalLearner</span>)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="fu">speak</span>(x)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">learn!</span>(y, s)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span>   <span class="co"># this closes the module</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>It now makes sense to save this code in a file. I’ve saved it in <a href="../jl/VariationalLearning.jl"><code>VariationalLearning.jl</code></a>. This way, we can easily <strong>reuse</strong> our code in the future and not have to rewrite it again and again.</p>
 </section>
-<section id="a-whole-population" class="level2">
-<h2 class="anchored" data-anchor-id="a-whole-population">A whole population</h2>
-<ul>
-<li>Using a <code>for</code> loop and the functions we defined above, it is now very easy to iterate or evolve a population of agents:</li>
-</ul>
-<div id="5eb6aa5c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="fu">rand</span>(pop)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="fu">rand</span>(pop)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">interact!</span>(x, y)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-4" class="level2 ex">
-<h2 class="ex anchored" data-anchor-id="exercise-4">Exercise</h2>
-<p>Write the same thing using an array comprehension instead of a <code>for</code> loop.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="d5369b43" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pop <span class="op">=</span> [<span class="fu">VariationalLearner</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>[<span class="fu">interact!</span>(<span class="fu">rand</span>(pop), <span class="fu">rand</span>(pop)) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>100-element Vector{Float64}:
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- ⋮
- 0.09801
- 0.099
- 0.10900000000000001
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099
- 0.099</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="next-time" class="level2">
-<h2 class="anchored" data-anchor-id="next-time">Next time</h2>
-<ul>
-<li>Next week, we will learn how to <strong>summarize</strong> the state of an entire population</li>
-<li>This will allow us to track the population’s behaviour over time and hence model potential <strong>language change</strong></li>
-<li>This week’s <a href="../homework/modules.html">homework</a> is all about consolidating the ideas we’ve looked at so far – the variational learner and basics of Julia</li>
-</ul>
+<section id="bonus" class="level2">
+<h2 class="anchored" data-anchor-id="bonus">Bonus</h2>
+<p>Okay, so now we know what a module is. What about the other thing mentioned in the title, packages? What is a package?</p>
+<p>Essentially, a package is just a module which is being maintained using a version control system and is offered to the rest of the world, usually (but not always) through the official <a href="https://juliapackages.com/">Julia registry</a>. (These are the things you install with <code>Pkg.add("PackageName")</code>.)</p>
 
 
 </section>
