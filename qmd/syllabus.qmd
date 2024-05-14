@@ -17,7 +17,7 @@ The syllabus is tentative -- topics may get rearranged as the course proceeds.
 | 23.4.		|	[A model of language learning](lectures/learning.qmd) | [Variational learning](homework/vl.qmd) | @Yang2000, pages 231--236 |
 | 30.4.		|	[Speaking and listening](lectures/speaking.qmd)	| [Modules and packages](homework/modules.qmd) | [Introducing Julia/Modules and packages](https://en.wikibooks.org/wiki/Introducing_Julia/Modules_and_packages) |
 | 7.5.		| [Models of language change](lectures/change.qmd) | [Language change: parameter exploration](homework/change.qmd) | None |
-| 14.5.		|	Social networks				| | |
+| 14.5.		| [Structured populations](lectures/structured.qmd) | [Thinking about your project](homework/project.qmd) | One paper of your choice from *readings/projects* on ILIAS |
 | 21.5.		|	Programming best practices				| | |
 | ~~28.5.~~ | *No lecture (Vorlesungsfreie Zeit)*					| | |
 | ~~4.6.~~  |	*No lecture (Vertiefungswoche)*				| | |

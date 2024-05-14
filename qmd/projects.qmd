@@ -1,0 +1,23 @@
+---
+title: "Projects"
+sidebar: false
+---
+
+Rules for projects:
+
+1. Your team must consist of at least 1 person and at most 2 persons.
+1. Your project needs to
+   a. formulate a question to explore with an ABM
+   a. implement that ABM in Julia
+   a. illustrate the results (using plots, animations, numbers...)
+1. Your project presentation cannot be longer than 15 minutes
+1. Your team must meet with me at least once before the course is over (to discuss how the project is coming along, and to see if you have any questions I might be able to answer). This can be either before or after your presentation.
+
+Remarks:
+
+1. Your project does not have to be complete when it is presented! You are welcome to present work in progress, and also to ask your peers for feedback and suggestions. The final written reports, on the other hand, must represent completed work.
+1. Look for inspiration by skimming the papers collected in the *readings/projects* folder on ILIAS.
+1. Also look for inspiration on the [Agents.jl website](https://juliadynamics.github.io/Agents.jl/stable/).
+1. Your project can also focus on attempting to replicate the analysis from one of these papers.
+1. Your research question does not need to be about linguistics!
+

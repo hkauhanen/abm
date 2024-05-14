@@ -1,20 +1,22 @@
 [
   {
+    "listing": "/solutions.html",
+    "items": [
+      "/solutions/fly.html",
+      "/solutions/vl.html",
+      "/solutions/modules.html",
+      "/solutions/change.html"
+    ]
+  },
+  {
     "listing": "/homework.html",
     "items": [
       "/homework/installing-julia.html",
       "/homework/fly.html",
       "/homework/vl.html",
       "/homework/modules.html",
-      "/homework/change.html"
-    ]
-  },
-  {
-    "listing": "/solutions.html",
-    "items": [
-      "/solutions/fly.html",
-      "/solutions/vl.html",
-      "/solutions/modules.html"
+      "/homework/change.html",
+      "/homework/project.html"
     ]
   },
   {
@@ -24,7 +26,8 @@
       "/lectures/basics.html",
       "/lectures/learning.html",
       "/lectures/speaking.html",
-      "/lectures/change.html"
+      "/lectures/change.html",
+      "/lectures/structured.html"
     ]
   }
 ]

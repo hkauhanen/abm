@@ -104,5 +104,22 @@
   "homework/change.qmd": {
     "change.html": "b7b7bd40",
     "change.tex": "a91357a6"
+  },
+  "lectures/networks.qmd": {
+    "networks-slides.html": "bb3a88f8",
+    "networks.html": "b087fc93",
+    "networks.tex": "7a055db0"
+  },
+  "lectures/structured.qmd": {
+    "structured-slides.html": "25deff18",
+    "structured.html": "c542846f",
+    "structured.tex": "ef07bbb4"
+  },
+  "projects.qmd": {
+    "projects.html": "acdee97b"
+  },
+  "solutions/change.qmd": {
+    "change.html": "eac6d630",
+    "change.tex": "418db627"
   }
 }

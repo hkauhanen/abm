@@ -73,7 +73,7 @@ Functions which are not `export`ed can still be used. However, in that case, the
 
 ## 4. The `VariationalLearning` module
 
-Here, I am following the logic of the lecture on [Speaking and listening](../lecture/speaking.qmd), omitting the older `LearningEnvironment` type which we will no longer need. I've decided to `export` every type and function defined by the module. In this case it makes sense, since the external user may conceivably want to make use of all of them. (We will later see examples of so-called "helper" functions which need not be exposed to end-users.)
+Here, I am following the logic of the lecture on [Speaking and listening](../lectures/speaking.qmd), omitting the older `LearningEnvironment` type which we will no longer need. I've decided to `export` every type and function defined by the module. In this case it makes sense, since the external user may conceivably want to make use of all of them. (We will later see examples of so-called "helper" functions which need not be exposed to end-users.)
 
 ```{julia}
 #|echo: true

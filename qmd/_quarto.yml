@@ -22,6 +22,8 @@ website:
         file: homework.qmd
       - text: "Solutions"
         file: solutions.qmd
+      - text: "Projects"
+        file: projects.qmd
       - text: "Bric-a-brac"
         file: bric-a-brac.qmd
 

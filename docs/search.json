@@ -4,49 +4,70 @@
     "href": "bric-a-brac.html",
     "title": "Bric-a-brac",
     "section": "",
-    "text": "A compendium of sundry miscellanea.\n\nplot_birds_fixed.jl – A Julia Plots recipe, used to plot birds in the homework Making birds fly\nVariationalLearning.jl – A Julia module that defines the VariationalLearner type and some functions to deal with such learners. See, in particular, this homework solution. To use this, execute the following (don’t forget the dot before the module name, as this is a local module):\n\ninclude(\"VariationalLearning.jl\")\nusing .VariationalLearning\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "A compendium of sundry miscellanea.\n\nplot_birds_fixed.jl – A Julia Plots recipe, used to plot birds in the homework Making birds fly\nVariationalLearning.jl – A Julia module that defines the VariationalLearner type and some functions to deal with such learners. See, in particular, this homework solution. To use this, execute the following (don’t forget the dot before the module name, as this is a local module):\n\ninclude(\"VariationalLearning.jl\")\nusing .VariationalLearning\n\nGridVL.jl – A Julia module that implements a VariationalLearner on a grid space in Agents.jl. To use:\n\ninclude(\"GridVL.jl\")\nusing .GridVL\n\nIf Julia complains about an “invalid redefinition of type VariationalLearner”, this is because you have the older (non-spatial) type in memory. Exit your Julia session (or VSCode) and try again. Once the module has been successfully loaded, you can run the commands in the lecture on structured populations.\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/vl.html",
-    "href": "solutions/vl.html",
-    "title": "Variational learning",
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
     "section": "",
-    "text": "Update 7 May 2024\n\n\n\nFixed bug in the learn! function. See the lecture for details.\nFirst, I repeat the definitions of the custom types VariationalLearner and LearningEnvironment and the associated functions we defined in the lecture. (Without these definitions, none of what follows will work!)\nusing Plots       # for drawing plots\nusing StatsBase   # for the sample() function\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\nend\n\nstruct LearningEnvironment\n  P1::Float64\n  P12::Float64\n  P2::Float64\nend\n\nfunction sample_string(x::LearningEnvironment)\n  sample([\"S1\", \"S12\", \"S2\"], Weights([x.P1, x.P12, x.P2]))\nend\n\nfunction pick_grammar(x::VariationalLearner)\n  sample([\"G1\", \"G2\"], Weights([x.p, 1 - x.p]))\nend\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s != \"S2\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s != \"S1\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Note\n\n\n\nThe syllabus is tentative – topics may get rearranged as the course proceeds.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/vl.html#five-learners",
-    "href": "solutions/vl.html#five-learners",
-    "title": "Variational learning",
-    "section": "1. Five learners",
-    "text": "1. Five learners\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
+    "objectID": "syllabus.html#timetable",
+    "href": "syllabus.html#timetable",
+    "title": "Syllabus",
+    "section": "Timetable",
+    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling Julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\nVariational learning\nYang (2000), pages 231–236\n\n\n30.4.\nSpeaking and listening\nModules and packages\nIntroducing Julia/Modules and packages\n\n\n7.5.\nModels of language change\nLanguage change: parameter exploration\nNone\n\n\n14.5.\nStructured populations\nThinking about your project\nOne paper of your choice from readings/projects on ILIAS\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam\n\n\n\n\n25.8.\nDeadline for project written reports"
   },
   {
-    "objectID": "solutions/vl.html#different-learning-rates",
-    "href": "solutions/vl.html#different-learning-rates",
-    "title": "Variational learning",
-    "section": "2. Different learning rates",
-    "text": "2. Different learning rates\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 0.001\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 1.0\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
+    "objectID": "syllabus.html#course-requirements",
+    "href": "syllabus.html#course-requirements",
+    "title": "Syllabus",
+    "section": "Course requirements",
+    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
   },
   {
-    "objectID": "solutions/vl.html#varying-the-environment",
-    "href": "solutions/vl.html#varying-the-environment",
-    "title": "Variational learning",
-    "section": "3. Varying the environment",
-    "text": "3. Varying the environment\nHere I’m only doing this with the value of the learning rate \\(\\gamma = 0.01\\); the principle will be exactly the same for any other value.\n\n# create learning environment\nprague = LearningEnvironment(0.1, 0.5, 0.4)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, prague) for t in 1:1000]\ntrajectory2 = [learn!(learner2, prague) for t in 1:1000]\ntrajectory3 = [learn!(learner3, prague) for t in 1:1000]\ntrajectory4 = [learn!(learner4, prague) for t in 1:1000]\ntrajectory5 = [learn!(learner5, prague) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
+    "objectID": "solutions/change.html",
+    "href": "solutions/change.html",
+    "title": "Language change: parameter exploration",
+    "section": "",
+    "text": "First, we load the module we have already written:\n\ninclude(\"VariationalLearning.jl\")\nusing .VariationalLearning\n\n\n\n\n\n\n\nNote\n\n\n\nIf VSCode complains about the module, remove the line module VariationalLearning and the last end statement from the source file VariationalLearning.jl. Then load the contents of the file by simply issuing include(\"VariationalLearning.jl\") (without the using command).\n\n\nWe also need to load Plots to be able to do the visualizations:\n\nusing Plots\n\nAnd we also need StatsBase for the mean function, which we will use to calculate population averages:\n\nusing StatsBase\n\nIn the lecture, we noted that, in order to both carry out an interaction between two agents and summarize the population’s state over one time step, we had to use a begin ... end block. Like this:\n\nhistory = [begin\n             interact!(rand(pop), rand(pop))\n             average_p(pop)\n           end for t in 1:1_000_000]\n\nAlternatively, we can wrap the contents of the block in a function, and then call that function. This leads to neater code for the array comprehensions later, so that’s the strategy I will follow in this solution. Accordingly, I define:\n\nfunction average_p(x::Array{VariationalLearner})\n  return mean([a.p for a in x])\nend\n\nfunction step!(x::Array{VariationalLearner})\n  interact!(rand(x), rand(x))\n  return average_p(x)\nend\n\nOur goal in this exercise is to see what varying a number of model parameters does. Since the steps for running the simulation stay the same, it makes sense to define a function that takes the model parameters as arguments and then runs a whole simulation for a desired number of steps, returning the population’s history (defined as the sequence of average values of p over time). So that we don’t get confused over which argument to this function represents which model parameter, I am going to use keyword arguments here. You can read more about them in this week’s lecture.\n\nfunction simulate(; N, p, gamma, P1, P2, maxtime)\n  # initialize a population\n  pop = [VariationalLearner(p, gamma, P1, P2) for i in 1:N]\n\n  # step the population until maxtime\n  history = [step!(pop) for t in 1:maxtime]\n\n  # return history\n  return history\nend\n\nI am also going to wrap my plotting code in a custom function, for similar reasons:\n\nfunction my_plot(x)\n  plot(1:100:length(x), x[begin:100:end], label=false)\n  ylims!(0.0, 1.0)\nend\n\nmy_plot (generic function with 1 method)\n\n\nThis function is set up so that we plot every 100th time step (otherwise there will be so much stuff to plot that both plotting and displaying the figures will be very slow). Additionally, the function sets the y-axis limits to 0 and 1.\n\n\n\n\n\n\nTip\n\n\n\nWhenever there is something that needs to be repeated a number of times in your code, it is very probably a good idea to wrap that something in a function! The benefits are:\n\nYou only need to write the function definition once\nPartly because of the above, you are less likely to make mistakes (compare alternative strategy: you copy-paste a block of code, then later decide that the code needs to be modified somehow, but forget to modify all instances of the same block of code)\nYou can use arguments to modulate how the function does its thing\n\nMake a habit of writing functions whenever the opportunity arises.\n\n\nUnless otherwise noted, I am going to run each simulation for 100,000 steps, and set that with the following global variable:\n\nmaxt = 100_000\n\n100000\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions/vl.html#what-does-this-mean",
-    "href": "solutions/vl.html#what-does-this-mean",
-    "title": "Variational learning",
-    "section": "4. What does this mean?",
-    "text": "4. What does this mean?\nThe effect of the learning rate parameter \\(\\gamma\\) (gamma) is quite straightforward: the smaller the value of this parameter, the slower learning is. In the extreme case \\(\\gamma = 1\\), learning is in a sense as “fast” as it can possibly be: each learner switches between probability 1 of using \\(G_1\\) and probability 0 of using \\(G_1\\) at parsing failure.\nThe effect of the the probabilities P1, P12 and P2 of the learning environment is a bit less straightforward. In fact, a formula exists that allows one to predict the expected value of \\(p\\) (probability of using \\(G_1\\)) a variational learner ends up with after a long period of learning, and that formula only depends on the environment’s probability parameters. We might look at this in detail later. For now, suffice it to say that the parameters have some such effect. More precisely, in the above simulations we see that\n\nWhen P1 = 0.4 and P2 = 0.1 (environment london), the learners end up with \\(p \\approx 0.8\\).\nWhen P1 = 0.1 and P2 = 0.4 (environment prague), the learners end up with \\(p \\approx 0.2\\)."
+    "objectID": "solutions/change.html#setting-up",
+    "href": "solutions/change.html#setting-up",
+    "title": "Language change: parameter exploration",
+    "section": "",
+    "text": "First, we load the module we have already written:\n\ninclude(\"VariationalLearning.jl\")\nusing .VariationalLearning\n\n\n\n\n\n\n\nNote\n\n\n\nIf VSCode complains about the module, remove the line module VariationalLearning and the last end statement from the source file VariationalLearning.jl. Then load the contents of the file by simply issuing include(\"VariationalLearning.jl\") (without the using command).\n\n\nWe also need to load Plots to be able to do the visualizations:\n\nusing Plots\n\nAnd we also need StatsBase for the mean function, which we will use to calculate population averages:\n\nusing StatsBase\n\nIn the lecture, we noted that, in order to both carry out an interaction between two agents and summarize the population’s state over one time step, we had to use a begin ... end block. Like this:\n\nhistory = [begin\n             interact!(rand(pop), rand(pop))\n             average_p(pop)\n           end for t in 1:1_000_000]\n\nAlternatively, we can wrap the contents of the block in a function, and then call that function. This leads to neater code for the array comprehensions later, so that’s the strategy I will follow in this solution. Accordingly, I define:\n\nfunction average_p(x::Array{VariationalLearner})\n  return mean([a.p for a in x])\nend\n\nfunction step!(x::Array{VariationalLearner})\n  interact!(rand(x), rand(x))\n  return average_p(x)\nend\n\nOur goal in this exercise is to see what varying a number of model parameters does. Since the steps for running the simulation stay the same, it makes sense to define a function that takes the model parameters as arguments and then runs a whole simulation for a desired number of steps, returning the population’s history (defined as the sequence of average values of p over time). So that we don’t get confused over which argument to this function represents which model parameter, I am going to use keyword arguments here. You can read more about them in this week’s lecture.\n\nfunction simulate(; N, p, gamma, P1, P2, maxtime)\n  # initialize a population\n  pop = [VariationalLearner(p, gamma, P1, P2) for i in 1:N]\n\n  # step the population until maxtime\n  history = [step!(pop) for t in 1:maxtime]\n\n  # return history\n  return history\nend\n\nI am also going to wrap my plotting code in a custom function, for similar reasons:\n\nfunction my_plot(x)\n  plot(1:100:length(x), x[begin:100:end], label=false)\n  ylims!(0.0, 1.0)\nend\n\nmy_plot (generic function with 1 method)\n\n\nThis function is set up so that we plot every 100th time step (otherwise there will be so much stuff to plot that both plotting and displaying the figures will be very slow). Additionally, the function sets the y-axis limits to 0 and 1.\n\n\n\n\n\n\nTip\n\n\n\nWhenever there is something that needs to be repeated a number of times in your code, it is very probably a good idea to wrap that something in a function! The benefits are:\n\nYou only need to write the function definition once\nPartly because of the above, you are less likely to make mistakes (compare alternative strategy: you copy-paste a block of code, then later decide that the code needs to be modified somehow, but forget to modify all instances of the same block of code)\nYou can use arguments to modulate how the function does its thing\n\nMake a habit of writing functions whenever the opportunity arises.\n\n\nUnless otherwise noted, I am going to run each simulation for 100,000 steps, and set that with the following global variable:\n\nmaxt = 100_000\n\n100000"
   },
   {
-    "objectID": "solutions/vl.html#prettifying-the-plots",
-    "href": "solutions/vl.html#prettifying-the-plots",
-    "title": "Variational learning",
-    "section": "5. Prettifying the plots",
-    "text": "5. Prettifying the plots\n\n# create learning environment\nprague = LearningEnvironment(0.1, 0.5, 0.4)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, prague) for t in 1:1000]\ntrajectory2 = [learn!(learner2, prague) for t in 1:1000]\ntrajectory3 = [learn!(learner3, prague) for t in 1:1000]\ntrajectory4 = [learn!(learner4, prague) for t in 1:1000]\ntrajectory5 = [learn!(learner5, prague) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1, seriestype=:scatter)\nplot!(1:1000, trajectory2, seriestype=:scatter)\nplot!(1:1000, trajectory3, seriestype=:scatter)\nplot!(1:1000, trajectory4, seriestype=:scatter)\nplot!(1:1000, trajectory5, seriestype=:scatter)\nxlabel!(\"learning iteration\")\nylabel!(\"probability of G1\")\ntitle!(\"A variational learning trajectory\")"
+    "objectID": "solutions/change.html#effect-of-n-population-size",
+    "href": "solutions/change.html#effect-of-n-population-size",
+    "title": "Language change: parameter exploration",
+    "section": "Effect of N (population size)",
+    "text": "Effect of N (population size)\nPopulation of 100 agents:\n\nsimu1 = simulate(N = 100, p = 0.1, gamma = 0.01, P1 = 0.4, P2 = 0.1, maxtime = maxt)\nmy_plot(simu1)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPopulation of 10 agents:\n\nsimu2 = simulate(N = 10, p = 0.1, gamma = 0.01, P1 = 0.4, P2 = 0.1, maxtime = maxt)\nmy_plot(simu2)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservation: in both populations, the average of p increases along an S-shaped curve. However, in the smaller population, this happens faster."
+  },
+  {
+    "objectID": "solutions/change.html#effect-of-p-initial-value-of-p",
+    "href": "solutions/change.html#effect-of-p-initial-value-of-p",
+    "title": "Language change: parameter exploration",
+    "section": "Effect of p (initial value of p)",
+    "text": "Effect of p (initial value of p)\nAll learners start with \\(p = 0.5\\):\n\nsimu3 = simulate(N = 50, p = 0.5, gamma = 0.01, P1 = 0.4, P2 = 0.1, maxtime = maxt)\nmy_plot(simu3)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAll learners start with \\(p = 0.8\\):\n\nsimu4 = simulate(N = 50, p = 0.8, gamma = 0.01, P1 = 0.4, P2 = 0.1, maxtime = maxt)\nmy_plot(simu4)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservation: in both cases, the average of p increases over time. This behaviour does not seem dependent on the initial value of p in the learners."
+  },
+  {
+    "objectID": "solutions/change.html#effect-of-p1-and-p2-the-amounts-of-evidence-for-grammars-g_1-and-g_2",
+    "href": "solutions/change.html#effect-of-p1-and-p2-the-amounts-of-evidence-for-grammars-g_1-and-g_2",
+    "title": "Language change: parameter exploration",
+    "section": "Effect of P1 and P2 (the amounts of evidence for grammars \\(G_1\\) and \\(G_2\\))",
+    "text": "Effect of P1 and P2 (the amounts of evidence for grammars \\(G_1\\) and \\(G_2\\))\nThe values of P1 and P2 reversed:\n\nsimu5 = simulate(N = 50, p = 0.1, gamma = 0.01, P1 = 0.1, P2 = 0.4, maxtime = maxt)\nmy_plot(simu5)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStarting from \\(p = 0.9\\):\n\nsimu6 = simulate(N = 50, p = 0.9, gamma = 0.01, P1 = 0.1, P2 = 0.4, maxtime = maxt)\nmy_plot(simu6)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservation: average p decreases. This makes sense, because now \\(G_2\\) has more evidence for it than \\(G_1\\) (P2 = 0.4 and P1 = 0.1)."
+  },
+  {
+    "objectID": "solutions/change.html#effect-of-gamma-learning-rate",
+    "href": "solutions/change.html#effect-of-gamma-learning-rate",
+    "title": "Language change: parameter exploration",
+    "section": "Effect of \\(\\gamma\\) (learning rate)",
+    "text": "Effect of \\(\\gamma\\) (learning rate)\n\nEverybody with equal \\(\\gamma\\)\nHigher value of \\(\\gamma\\):\n\nsimu7 = simulate(N = 50, p = 0.9, gamma = 0.1, P1 = 0.1, P2 = 0.4, maxtime = maxt)\nmy_plot(simu7)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLower value:\n\nsimu8 = simulate(N = 50, p = 0.9, gamma = 0.001, P1 = 0.1, P2 = 0.4, maxtime = maxt)\nmy_plot(simu8)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservation: higher \\(\\gamma\\)s lead to faster change.\n\n\nRandom \\(\\gamma\\)\nNew simulation function:\n\nfunction simulate(; N, p, P1, P2, maxtime)\n  # initialize a population\n  pop = [VariationalLearner(p, rand(), P1, P2) for i in 1:N]\n\n  # step the population until maxtime\n  history = [step!(pop) for t in 1:maxtime]\n\n  # return history\n  return history\nend\n\nTry it:\n\nsimu9 = simulate(N = 50, p = 0.9, P1 = 0.1, P2 = 0.4, maxtime = maxt)\nmy_plot(simu9)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChange is again faster, with some added noise (possibly?)."
   },
   {
     "objectID": "solutions/fly.html",
@@ -333,7 +354,7 @@
     "href": "lectures/basics-slides.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.6597479523261572"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.12012886701631675"
   },
   {
     "objectID": "lectures/basics-slides.html#exercise-4",
@@ -347,7 +368,7 @@
     "href": "lectures/basics-slides.html#exercise-5",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n0.4619601156492459\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n61.665130596713134"
+    "text": "Exercise\n\n\n\n\n\n\n\nAnswer\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n48.70576838215456\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n91.20814091883378"
   },
   {
     "objectID": "lectures/basics-slides.html#comments",
@@ -564,14 +585,14 @@
     "href": "lectures/basics.html#random-numbers",
     "title": "Programming basics",
     "section": "Random numbers",
-    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.40823571038823303"
+    "text": "Random numbers\n\nTo get a (pseudo)random number from between 0 and 1, simply call:\n\n\nrand()\n\n0.621358179841143"
   },
   {
     "objectID": "lectures/basics.html#exercise-4",
     "href": "lectures/basics.html#exercise-4",
     "title": "Programming basics",
     "section": "Exercise",
-    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n6.819426505670401\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n88.44615441849768"
+    "text": "Exercise\nHow can you obtain a random number from between 0 and 50?\nHow about between 50 and 100?\n\n\n\n\n\n\nAnswer\n\n\n\n\n\nRandom number from between 0 and 50:\n\n50*rand()\n\n43.59799038622533\n\n\nRandom number from between 50 and 100:\n\n50 + 50*rand()\n\n91.53058820733376"
   },
   {
     "objectID": "lectures/basics.html#comments",
@@ -1309,11 +1330,18 @@
     "text": "Homework\n\nIn the homework, you get to replicate the above simulations (with the summary statistic of average \\(p\\)), exploring how variation in model parameters such as population size and learning rate affects the population’s evolution\nNext week:\n\nStructured populations (with the help of Agents.jl)\nInfo about the final projects"
   },
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Agent-based modelling",
     "section": "",
-    "text": "Date\n\n\nTitle\n\n\nSolution\n\n\n\n\n\n\n9 April 2024\n\n\nInstalling Julia\n\n\nN/A\n\n\n\n\n16 April 2024\n\n\nMaking birds fly\n\n\nHere\n\n\n\n\n23 April 2024\n\n\nVariational learning\n\n\nHere\n\n\n\n\n30 April 2024\n\n\nModules and packages\n\n\nHere\n\n\n\n\n7 May 2024\n\n\nLanguage change: parameter exploration\n\n\n \n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these in real time.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "solutions.html",
+    "href": "solutions.html",
+    "title": "Solutions to homework",
+    "section": "",
+    "text": "Date\n\n\nTitle\n\n\n\n\n\n\n23 April 2024\n\n\nMaking birds fly\n\n\n\n\n30 April 2024\n\n\nVariational learning\n\n\n\n\n7 May 2024\n\n\nModules and packages\n\n\n\n\n14 May 2024\n\n\nLanguage change: parameter exploration\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "homework/vl.html",
@@ -1351,18 +1379,347 @@
     "text": "Following the example set in the lecture, simulate a population of variational learners, obtaining the evolution (=history) of the average value of \\(p\\). Explore how variation in the following model parameters affects the population’s evolution. Use the Plots package to visualize your findings.\n\nN: population size, i.e. the number of agents\np: the initial value of \\(p\\). Set this to the same value for each learner.\nP1: probability of a string that only \\(G_1\\) can parse. Set this to the same value for each learner.\nP2: probability of a string that only \\(G_2\\) can parse. Set this to the same value for each learner.\ngamma: learning rate.\n\nFor the learning rate parameter, do both of the following:\n\nFirst, set gamma to the same value for each learner.\nIn a second set of simulations, initialize your population so that each learner gets a randomly chosen gamma from the interval between 0 and 1.\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "solutions.html",
-    "href": "solutions.html",
-    "title": "Solutions to homework",
+    "objectID": "homework/project.html",
+    "href": "homework/project.html",
+    "title": "Thinking about your project",
     "section": "",
-    "text": "Date\n\n\nTitle\n\n\n\n\n\n\n23 April 2024\n\n\nMaking birds fly\n\n\n\n\n30 April 2024\n\n\nVariational learning\n\n\n\n\n7 May 2024\n\n\nModules and packages\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "It’s time to start thinking about your programming project! You don’t need to start coding yet, but I want you to think carefully about all the following questions. Even better if you write down your answers (for your own benefit). :)\n\nWho am I going to work with? Or do I prefer to work on my own? Your team can be either 1 person (you work on your own) or 2 persons (you work with 1 friend), not larger.\nWhat phenomenon am I / are we interested in? What would I like to model? What sorts of things about language excite me that could potentially be approached using an ABM?\nOnce you have a broad answer to the previous question, try to narrow it down. Think about the following:\n\nCan I make use of code already written during the course (such as variational learning) to answer my question? Can I possibly extend that code, to make it better suited to what I’m interested in modelling?\nIf not, then can I still figure out how to implement what I need to implement in Julia code?\nCan I think of specific research questions or predictions? (Example: “Does the rate of language change depend on population size?”)\n\nIf you are working as part of a team, get together for a brainstorming!\nFinally, move on to thinking about the following specific implementation-level questions:\n\nWhat will be the agents in my model?\nWhat is the environment which the agents will occupy?\nHow will the agents interact with each other (e.g. randomly, or in some other way)?\nHow will I summarize the results of a simulation?\nHow many simulations will I need to run?\nHow will I communicate my results to my audience (numbers, plots, perhaps animations)?\n\n\nFor inspiration, read (at least) one paper from the readings/projects folder on ILIAS.\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Agent-based modelling",
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
     "section": "",
-    "text": "Welcome to this course on agent-based models (ABMs). Use the top bar to navigate.\nThis website is “alive” – it will update as the course progresses, with new lectures and homework added regularly.\nI strongly recommend that you do the homework. Doing ABMs requires programming, and the best (perhaps only?) way of learning programming is by actually doing some programming.\nI also recommend bringing your laptop, if you have one, to the lectures. We will be doing little programming exercises and explorations in most of the lectures, and it will benefit you if you can do these in real time.\nFinally, if you notice any errors or typos in the course materials, would you be so kind as to point them out to me either at lectures or via email (firstname lastname uni konstanz de). Thank you!\n– Henri\n\n\n\n\n\n\nAcknowledgements\n\n\n\n\n\nThese materials have benefitted immensely from the labours of the open source software movement. Thanks are due to the developers of Julia as well as to developers and contributors of the Agents.jl framework. Quarto made typesetting the materials a breeze – and fun.\n\n\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Date\n\n\nTitle\n\n\nSolution\n\n\n\n\n\n\n9 April 2024\n\n\nInstalling Julia\n\n\nN/A\n\n\n\n\n16 April 2024\n\n\nMaking birds fly\n\n\nHere\n\n\n\n\n23 April 2024\n\n\nVariational learning\n\n\nHere\n\n\n\n\n30 April 2024\n\n\nModules and packages\n\n\nHere\n\n\n\n\n7 May 2024\n\n\nLanguage change: parameter exploration\n\n\nHere\n\n\n\n\n14 May 2024\n\n\nThinking about your project\n\n\nN/A\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/structured.html",
+    "href": "lectures/structured.html",
+    "title": "Structured populations",
+    "section": "",
+    "text": "So far, we have had agents interacting randomly\nWe did this by:\n\ninitializing a population, pop, using an array comprehension\nusing rand(pop) to sample random agents\nusing our own function interact! to make two agents interact\n\n\n\nToday: using Agents.jl to work with structured populations\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+  },
+  {
+    "objectID": "lectures/structured.html#plan",
+    "href": "lectures/structured.html#plan",
+    "title": "Structured populations",
+    "section": "",
+    "text": "So far, we have had agents interacting randomly\nWe did this by:\n\ninitializing a population, pop, using an array comprehension\nusing rand(pop) to sample random agents\nusing our own function interact! to make two agents interact\n\n\n\nToday: using Agents.jl to work with structured populations"
+  },
+  {
+    "objectID": "lectures/structured.html#positional-vs.-keyword-arguments",
+    "href": "lectures/structured.html#positional-vs.-keyword-arguments",
+    "title": "Structured populations",
+    "section": "Positional vs. keyword arguments",
+    "text": "Positional vs. keyword arguments\n\nFirst, though, a technical remark about function arguments\nWe’ve seen function calls like this:\n\n\nplot(1:100, (1:100) .^ 2, seriestype = :scatter, color = :blue)\n\n\nHere,\n\n1:100 and (1:100) .^ 2 are positional arguments\nseriestype = :scatter and color = :blue are keyword arguments\n\nYou can swap the order of the latter but not of the former\n\n\nTo create keyword arguments in your own function, you separate the list of keyword and positional arguments with a semicolon (;):\n\n\nfunction my_fun(pos1, pos2; keyword1, keyword2)\n  ...\nend\n\n\nIf you don’t want any positional arguments, you have to write the following!\n\n\nfunction my_fun(; keyword1, keyword2)\n  ...\nend\n\n\nKeyword (but not positional) arguments can have default values:\n\n\nfunction my_fun(; firstname = \"John\", lastname)\n  println(firstname * \" \" * lastname)\nend\n\nmy_fun(firstname = \"Jane\", lastname = \"Doe\")\nmy_fun(lastname = \"Doe\")\n\nJane Doe\nJohn Doe"
+  },
+  {
+    "objectID": "lectures/structured.html#structured-populations",
+    "href": "lectures/structured.html#structured-populations",
+    "title": "Structured populations",
+    "section": "Structured populations",
+    "text": "Structured populations\n\nI define a population to be structured whenever speakers do not interact fully at random\n\n\nFormally:\n\nlet \\(P(X)\\) = probability of sampling agent \\(X\\) for an interaction\nlet \\(P(Y \\mid X)\\) = (conditional) probability of sampling agent \\(Y\\), given that \\(X\\) was already sampled\nthen population is structured if \\(P(Y \\mid X) = P(Y)\\)\n\n\n\nExample: \\(P(\\text{D. Trump} \\mid \\text{Henri}) = 0\\) even though \\(P(\\text{D. Trump}) &gt; 0\\)"
+  },
+  {
+    "objectID": "lectures/structured.html#implementation",
+    "href": "lectures/structured.html#implementation",
+    "title": "Structured populations",
+    "section": "Implementation",
+    "text": "Implementation\n\nIt would be possible for us to write code for structured populations from scratch\nHowever, this would be more of an exercise in programming than in ABMs…\nWe’re better off, here, using code written by other people\nEnter the Agents.jl package, an ecosystem/framework for ABMs in Julia\nYou should already have Agents installed. If not, now’s the time to:\n\n\nusing Pkg\nPkg.add(\"Agents\")"
+  },
+  {
+    "objectID": "lectures/structured.html#agents.jl-basic-steps",
+    "href": "lectures/structured.html#agents.jl-basic-steps",
+    "title": "Structured populations",
+    "section": "Agents.jl basic steps",
+    "text": "Agents.jl basic steps\n\nDecide on model space (e.g. social network)\nDefine agent type(s) (using special @agent keyword)\nDefine rules that evolve the model\nInitialize your model with AgentBasedModel\nEvolve, visualize and collect data\n\n\nThis may seem intimidating at first, but is really quite simple!\nLet’s walk through an example: variational learners in space"
+  },
+  {
+    "objectID": "lectures/structured.html#grid-space",
+    "href": "lectures/structured.html#grid-space",
+    "title": "Structured populations",
+    "section": "Grid space",
+    "text": "Grid space\n\nFor this, we will reuse (with some modifications) our code for variational learners\nAnd assume that individual learners/agents occupy the nodes of a grid, also known as a two-dimensional regular lattice:\n\n\n\nPoint: interactions only occur along links in this grid"
+  },
+  {
+    "objectID": "lectures/structured.html#grid-space-implementation",
+    "href": "lectures/structured.html#grid-space-implementation",
+    "title": "Structured populations",
+    "section": "Grid space: implementation",
+    "text": "Grid space: implementation\n\nTo implement this in Julia with Agents.jl:\n\n\ndims = (50, 50)\nspace = GridSpaceSingle(dims)\n\n\n(50, 50) is a data structure known as a tuple\nGridSpaceSingle comes from Agents.jl and defines a grid space in which each node can carry at most one agent (hence, Single)\n\n\n\n\n\n\n\nTuples and arrays\n\n\n\nTuples are similar to arrays. However, there are important differences. The most important of them is that arrays are mutable (the values of their elements can be changed after creation), while tuples are never mutable. Compare:\n\narr = [10,20]\ntup = (10,20)\narr[1] = 30   # arr is now [30,20]\ntup[1] = 30   # throws an error\n\nThe developers of Agents.jl have decided that the argument of GridSpaceSingle has to be a tuple (this decision makes sense in this case—as an immutable type, a tuple is more efficient than an array of similar size).\nIf you are running into errors trying to initialize a GridSpaceSingle, the problem is probably that you are trying to pass it the wrong type of argument. Compare:\n\nGridSpaceSingle([50, 50])   # trying to pass array; error\nGridSpaceSingle(50, 50)     # trying to pass two separate numbers; error\nGridSpaceSingle((50, 50))   # passing a tuple; works"
+  },
+  {
+    "objectID": "lectures/structured.html#agent-redefinition",
+    "href": "lectures/structured.html#agent-redefinition",
+    "title": "Structured populations",
+    "section": "Agent redefinition",
+    "text": "Agent redefinition\n\nTo make use of the machinery provided by Agents.jl, we replace:\n\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\n  P1::Float64\n  P2::Float64\nend\n\n\nwith this:\n\n\n@agent struct VariationalLearner(GridAgent{2})\n  p::Float64\n  gamma::Float64\n  P1::Float64\n  P2::Float64\nend\n\n\n@agent is a special “macro” (more on these later) that introduces all agents in Agents.jl\nGridAgent{2} instructs Agents.jl that this agent is to be used in a 2-dimensional grid space"
+  },
+  {
+    "objectID": "lectures/structured.html#stepping-rule",
+    "href": "lectures/structured.html#stepping-rule",
+    "title": "Structured populations",
+    "section": "Stepping rule",
+    "text": "Stepping rule\n\nWe next need a function that evolves i.e. steps the model\nThis is a function that takes a single agent and the model as arguments\nWe can make use of the interact! function we have already written:\n\n\nfunction VL_step!(agent, model)\n  interlocutor = random_nearby_agent(agent, model)\n  interact!(interlocutor, agent)\nend"
+  },
+  {
+    "objectID": "lectures/structured.html#model-initialization",
+    "href": "lectures/structured.html#model-initialization",
+    "title": "Structured populations",
+    "section": "Model initialization",
+    "text": "Model initialization\n\nWe now have all the ingredients we need to initialize the ABM:\n\n\nmodel = StandardABM(VariationalLearner, space; \n                    agent_step! = VL_step!)\n\nStandardABM with 0 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest\n\n\nIn the above function call, you cannot write agent_step!=VL_step! (i.e. without spaces around the = sign). This is because, if you do so, Julia parses this as agent_step != VL_step!, which is not what we want.\nIn other words, when using keyword arguments with exclamation points in their names, make it a habit to separate the equals sign with spaces.\n\nThis creates a sort of an “empty” container (it has no agents yet). To add agents, we call:\n\n\nadd_agent_single!(model; p = 0.1, gamma = 0.01, \n                  P1 = 0.4, P2 = 0.1)\n\nVariationalLearner(1, (4, 27), 0.1, 0.01, 0.4, 0.1)\n\n\n\nNote: the values of the agent’s internal fields (p, gamma etc.) are specified as keyword arguments!\n\n\nWe have a space of 50 x 50 = 2,500 nodes\nLet’s add 2,499 more agents:\n\n\nfor i in 1:2499\n  add_agent_single!(model; p = 0.1, gamma = 0.01, \n                    P1 = 0.4, P2 = 0.1)\nend\n\n\nCheck number of agents:\n\n\nnagents(model)\n\n2500"
+  },
+  {
+    "objectID": "lectures/structured.html#stepping-the-model",
+    "href": "lectures/structured.html#stepping-the-model",
+    "title": "Structured populations",
+    "section": "Stepping the model",
+    "text": "Stepping the model\n\nStepping the model is now easy:\n\n\nstep!(model)\n\nStandardABM with 2500 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest\n\n\n\nOr, for a desired number of steps:\n\n\nstep!(model, 10)\n\nStandardABM with 2500 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest\n\n\n\n\n\n\n\n\nImportant\n\n\n\nStepping in Agents.jl is controlled by a so-called scheduler. You can decide which scheduler to use when initializing your model; for now, we will stick to the default scheduler.\nThis is important to know: when the default scheduler steps a model, every agent gets updated. In the case of our model, this means that every agent undergoes exactly one interaction as the “listening” party, i.e. every agent gets to learn from exactly one interaction during one time step."
+  },
+  {
+    "objectID": "lectures/structured.html#plotting-the-population",
+    "href": "lectures/structured.html#plotting-the-population",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nWith Agents.jl, we also have access to a number of functions that can be used for purposes of visualization\nabmplot(model) plots model in its current state. It has two return values:\n\nthe first one is the plot itself\nthe second one contains metadata which we usually don’t need to care about\n\nTo actually see the plot, you have to call the first return value explicitly:\n\n\nfig, meta = abmplot(model)\nfig\n\n┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.\n└ @ Makie ~/.julia/packages/Makie/iRM0c/src/scenes.jl:220\n\n\n\n\n\n\n\n\n\n\nSo all we get is a purple square… what gives?\nThe problem is that we haven’t yet instructed abmplot how we want our model to be visualized\nWe could in principle be interested in plotting various kinds of things\nFor our model here, it makes sense to plot the value of p, i.e. each learner’s internal “grammatical state”\nThis is done with a function that maps an agent to its p\n\n\nIn this case, the function is as simple as:\n\n\nfunction getp(a)\n  return a.p\nend\n\ngetp (generic function with 1 method)\n\n\n\n\n\n\n\n\nTip\n\n\n\nJulia also allows one-liner function definitions. These are often useful when defining very simple functions, like getp. The equivalent one-liner definition here is:\n\ngetp(a) = a.p\n\ngetp (generic function with 1 method)\n\n\n\n\n\nWe now pass our getp function as the value of the agent_color keyword argument to abmplot:\n\n\nfig, meta = abmplot(model; agent_color = getp)\nfig\n\n┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.\n└ @ Makie ~/.julia/packages/Makie/iRM0c/src/scenes.jl:220\n\n\n\n\n\n\n\n\n\n\nWe can see how the population changes as we evolve the model further (the new as keyword argument specifies the size of the dots that represent the agents):\n\n\nstep!(model, 1000)\nfig2, meta = abmplot(model; agent_color = getp, as = 12)\nfig2\n\n┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.\n└ @ Makie ~/.julia/packages/Makie/iRM0c/src/scenes.jl:220\n┌ Warning: Keywords `as, am, ac` has been deprecated in favor of\n│           `agent_size, agent_marker, agent_color`\n└ @ AgentsVisualizations ~/.julia/packages/Agents/8JW8b/ext/AgentsVisualizations/src/abmplot.jl:70\n\n\n\n\n\n\n\n\n\n\nAnd further:\n\n\nstep!(model, 1000)\nfig3, meta = abmplot(model; agent_color = getp, as = 12)\nfig3\n\n┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.\n└ @ Makie ~/.julia/packages/Makie/iRM0c/src/scenes.jl:220\n\n\n\n\n\n\n\n\n\n\nMaking an animation/video allows us to visualize the evolution dynamically\nThis is achieved with the abmvideo function\n\n\nabmvideo(\"vid.mp4\", model; agent_color = getp, as = 12, \n         frames = 100, framerate = 10)"
+  },
+  {
+    "objectID": "lectures/structured.html#a-more-interesting-example",
+    "href": "lectures/structured.html#a-more-interesting-example",
+    "title": "Structured populations",
+    "section": "A more interesting example",
+    "text": "A more interesting example\n\nAbove, we initialized the population so that everybody had p = 0.1 in the beginning\nWhat about the following: at time \\(t=0\\),\n\nthree people have p = 1 (uses \\(G_1\\) all the time),\nevery other person has p = 0 (uses \\(G_2\\) all the time)?\n\nWill we see \\(G_1\\) spread across the population?\nLet’s try!\n\n\nWe first reinitialize the model:\n\n\nspace2 = GridSpaceSingle((50, 50))\nmodel2 = StandardABM(VariationalLearner, space2;\n                     agent_step! = VL_step!)\n\nfor i in 1:3\n  add_agent_single!(model2; p = 1.0, gamma = 0.1, \n                    P1 = 0.4, P2 = 0.1)\nend\n\nfor i in 4:2500\n  add_agent_single!(model2; p = 0.0, gamma = 0.1, \n                    P1 = 0.4, P2 = 0.1)\nend\n\n\n\n\n\n\n\nImportant\n\n\n\nHere it is important that we create a new space (I’ve called it space2). Otherwise Agents.jl would try to add agents to our old space, which is already full!\n\n\n\nVisualize initial state of population:\n\n\nfig, meta = abmplot(model2; agent_color = getp, as = 12)\nfig\n\n┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.\n└ @ Makie ~/.julia/packages/Makie/iRM0c/src/scenes.jl:220\n\n\n\n\n\n\n\n\n\n\nAnimate for 1,000 iterations (every agent gets to learn 1,000 times):\n\n\nabmvideo(\"interesting.mp4\", model2; agent_color = getp,\n         as = 12, frames = 1000, framerate = 20)"
+  },
+  {
+    "objectID": "lectures/structured.html#next-time",
+    "href": "lectures/structured.html#next-time",
+    "title": "Structured populations",
+    "section": "Next time",
+    "text": "Next time\n\nSocial networks, and how to implement them in Agents.jl\nWrapping up some technical topics: modules, abstract types and inheritance"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plan",
+    "href": "lectures/structured-slides.html#plan",
+    "title": "Structured populations",
+    "section": "Plan",
+    "text": "Plan\n\nSo far, we have had agents interacting randomly\nWe did this by:\n\ninitializing a population, pop, using an array comprehension\nusing rand(pop) to sample random agents\nusing our own function interact! to make two agents interact\n\n\n\n\nToday: using Agents.jl to work with structured populations"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#positional-vs.-keyword-arguments",
+    "href": "lectures/structured-slides.html#positional-vs.-keyword-arguments",
+    "title": "Structured populations",
+    "section": "Positional vs. keyword arguments",
+    "text": "Positional vs. keyword arguments\n\nFirst, though, a technical remark about function arguments\nWe’ve seen function calls like this:\n\n\nplot(1:100, (1:100) .^ 2, seriestype = :scatter, color = :blue)\n\n\nHere,\n\n1:100 and (1:100) .^ 2 are positional arguments\nseriestype = :scatter and color = :blue are keyword arguments\n\nYou can swap the order of the latter but not of the former"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#positional-vs.-keyword-arguments-1",
+    "href": "lectures/structured-slides.html#positional-vs.-keyword-arguments-1",
+    "title": "Structured populations",
+    "section": "Positional vs. keyword arguments",
+    "text": "Positional vs. keyword arguments\n\nTo create keyword arguments in your own function, you separate the list of keyword and positional arguments with a semicolon (;):\n\n\nfunction my_fun(pos1, pos2; keyword1, keyword2)\n  ...\nend\n\n\nIf you don’t want any positional arguments, you have to write the following!\n\n\nfunction my_fun(; keyword1, keyword2)\n  ...\nend"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#positional-vs.-keyword-arguments-2",
+    "href": "lectures/structured-slides.html#positional-vs.-keyword-arguments-2",
+    "title": "Structured populations",
+    "section": "Positional vs. keyword arguments",
+    "text": "Positional vs. keyword arguments\n\nKeyword (but not positional) arguments can have default values:\n\n\nfunction my_fun(; firstname = \"John\", lastname)\n  println(firstname * \" \" * lastname)\nend\n\nmy_fun(firstname = \"Jane\", lastname = \"Doe\")\nmy_fun(lastname = \"Doe\")\n\nJane Doe\nJohn Doe"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#structured-populations",
+    "href": "lectures/structured-slides.html#structured-populations",
+    "title": "Structured populations",
+    "section": "Structured populations",
+    "text": "Structured populations\n\nI define a population to be structured whenever speakers do not interact fully at random\n\n\n\nFormally:\n\nlet \\(P(X)\\) = probability of sampling agent \\(X\\) for an interaction\nlet \\(P(Y \\mid X)\\) = (conditional) probability of sampling agent \\(Y\\), given that \\(X\\) was already sampled\nthen population is structured if \\(P(Y \\mid X) = P(Y)\\)\n\n\n\n\n\nExample: \\(P(\\text{D. Trump} \\mid \\text{Henri}) = 0\\) even though \\(P(\\text{D. Trump}) &gt; 0\\)"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#implementation",
+    "href": "lectures/structured-slides.html#implementation",
+    "title": "Structured populations",
+    "section": "Implementation",
+    "text": "Implementation\n\nIt would be possible for us to write code for structured populations from scratch\nHowever, this would be more of an exercise in programming than in ABMs…\nWe’re better off, here, using code written by other people\nEnter the Agents.jl package, an ecosystem/framework for ABMs in Julia\nYou should already have Agents installed. If not, now’s the time to:\n\n\nusing Pkg\nPkg.add(\"Agents\")"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#agents.jl-basic-steps",
+    "href": "lectures/structured-slides.html#agents.jl-basic-steps",
+    "title": "Structured populations",
+    "section": "Agents.jl basic steps",
+    "text": "Agents.jl basic steps\n\nDecide on model space (e.g. social network)\nDefine agent type(s) (using special @agent keyword)\nDefine rules that evolve the model\nInitialize your model with AgentBasedModel\nEvolve, visualize and collect data\n\n\n\nThis may seem intimidating at first, but is really quite simple!\nLet’s walk through an example: variational learners in space"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#grid-space",
+    "href": "lectures/structured-slides.html#grid-space",
+    "title": "Structured populations",
+    "section": "Grid space",
+    "text": "Grid space\n\nFor this, we will reuse (with some modifications) our code for variational learners\nAnd assume that individual learners/agents occupy the nodes of a grid, also known as a two-dimensional regular lattice:\n\n\n\nPoint: interactions only occur along links in this grid"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#grid-space-implementation",
+    "href": "lectures/structured-slides.html#grid-space-implementation",
+    "title": "Structured populations",
+    "section": "Grid space: implementation",
+    "text": "Grid space: implementation\n\nTo implement this in Julia with Agents.jl:\n\n\ndims = (50, 50)\nspace = GridSpaceSingle(dims)\n\n\n\n(50, 50) is a data structure known as a tuple\nGridSpaceSingle comes from Agents.jl and defines a grid space in which each node can carry at most one agent (hence, Single)"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#aside-tuples-are-immutable",
+    "href": "lectures/structured-slides.html#aside-tuples-are-immutable",
+    "title": "Structured populations",
+    "section": "Aside: tuples are immutable",
+    "text": "Aside: tuples are immutable\n\narr = [10,20]\ntup = (10,20)\narr[1] = 30   # arr is now [30,20]\ntup[1] = 30   # throws an error\n\n\n\n\n\n\n\nNote\n\n\nWhen initializing a GridSpaceSingle, you must use a tuple!"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#agent-redefinition",
+    "href": "lectures/structured-slides.html#agent-redefinition",
+    "title": "Structured populations",
+    "section": "Agent redefinition",
+    "text": "Agent redefinition\n\nTo make use of the machinery provided by Agents.jl, we replace:\n\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\n  P1::Float64\n  P2::Float64\nend"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#agent-redefinition-1",
+    "href": "lectures/structured-slides.html#agent-redefinition-1",
+    "title": "Structured populations",
+    "section": "Agent redefinition",
+    "text": "Agent redefinition\n\nwith this:\n\n\n@agent struct VariationalLearner(GridAgent{2})\n  p::Float64\n  gamma::Float64\n  P1::Float64\n  P2::Float64\nend"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#agent-redefinition-2",
+    "href": "lectures/structured-slides.html#agent-redefinition-2",
+    "title": "Structured populations",
+    "section": "Agent redefinition",
+    "text": "Agent redefinition\n\n@agent struct VariationalLearner(GridAgent{2})\n  p::Float64\n  gamma::Float64\n  P1::Float64\n  P2::Float64\nend\n\n\n@agent is a special “macro” (more on these later) that introduces all agents in Agents.jl\nGridAgent{2} instructs Agents.jl that this agent is to be used in a 2-dimensional grid space"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#stepping-rule",
+    "href": "lectures/structured-slides.html#stepping-rule",
+    "title": "Structured populations",
+    "section": "Stepping rule",
+    "text": "Stepping rule\n\nWe next need a function that evolves i.e. steps the model\nThis is a function that takes a single agent and the model as arguments\nWe can make use of the interact! function we have already written:\n\n\nfunction VL_step!(agent, model)\n  interlocutor = random_nearby_agent(agent, model)\n  interact!(interlocutor, agent)\nend"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#model-initialization",
+    "href": "lectures/structured-slides.html#model-initialization",
+    "title": "Structured populations",
+    "section": "Model initialization",
+    "text": "Model initialization\n\nWe now have all the ingredients we need to initialize the ABM:\n\n\nmodel = StandardABM(VariationalLearner, space; \n                    agent_step! = VL_step!)\n\nStandardABM with 0 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#model-initialization-1",
+    "href": "lectures/structured-slides.html#model-initialization-1",
+    "title": "Structured populations",
+    "section": "Model initialization",
+    "text": "Model initialization\n\nThis creates a sort of an “empty” container (it has no agents yet). To add agents, we call:\n\n\nadd_agent_single!(model; p = 0.1, gamma = 0.01, \n                  P1 = 0.4, P2 = 0.1)\n\nVariationalLearner(1, (4, 27), 0.1, 0.01, 0.4, 0.1)\n\n\n\nNote: the values of the agent’s internal fields (p, gamma etc.) are specified as keyword arguments!"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#model-initialization-2",
+    "href": "lectures/structured-slides.html#model-initialization-2",
+    "title": "Structured populations",
+    "section": "Model initialization",
+    "text": "Model initialization\n\nWe have a space of 50 x 50 = 2,500 nodes\nLet’s add 2,499 more agents:\n\n\nfor i in 1:2499\n  add_agent_single!(model; p = 0.1, gamma = 0.01, \n                    P1 = 0.4, P2 = 0.1)\nend\n\n\nCheck number of agents:\n\n\nnagents(model)\n\n2500"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#stepping-the-model",
+    "href": "lectures/structured-slides.html#stepping-the-model",
+    "title": "Structured populations",
+    "section": "Stepping the model",
+    "text": "Stepping the model\n\nStepping the model is now easy:\n\n\nstep!(model)\n\nStandardABM with 2500 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest\n\n\n\nOr, for a desired number of steps:\n\n\nstep!(model, 10)\n\nStandardABM with 2500 agents of type VariationalLearner\n agents container: Dict\n space: GridSpaceSingle with size (50, 50), metric=chebyshev, periodic=true\n scheduler: fastest"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#stepping-the-model-1",
+    "href": "lectures/structured-slides.html#stepping-the-model-1",
+    "title": "Structured populations",
+    "section": "Stepping the model",
+    "text": "Stepping the model\n\n\n\n\n\n\nImportant\n\n\nStepping in Agents.jl is controlled by a so-called scheduler. You can decide which scheduler to use when initializing your model; for now, we will stick to the default scheduler.\nThis is important to know: when the default scheduler steps a model, every agent gets updated. In the case of our model, this means that every agent undergoes exactly one interaction as the “listening” party, i.e. every agent gets to learn from exactly one interaction during one time step."
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population",
+    "href": "lectures/structured-slides.html#plotting-the-population",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nWith Agents.jl, we also have access to a number of functions that can be used for purposes of visualization\nabmplot(model) plots model in its current state. It has two return values:\n\nthe first one is the plot itself\nthe second one contains metadata which we usually don’t need to care about\n\nTo actually see the plot, you have to call the first return value explicitly:\n\n\nfig, meta = abmplot(model)\nfig"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-1",
+    "href": "lectures/structured-slides.html#plotting-the-population-1",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-2",
+    "href": "lectures/structured-slides.html#plotting-the-population-2",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nSo all we get is a purple square… what gives?\nThe problem is that we haven’t yet instructed abmplot how we want our model to be visualized\nWe could in principle be interested in plotting various kinds of things\nFor our model here, it makes sense to plot the value of p, i.e. each learner’s internal “grammatical state”\nThis is done with a function that maps an agent to its p"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-3",
+    "href": "lectures/structured-slides.html#plotting-the-population-3",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nIn this case, the function is as simple as:\n\n\nfunction getp(a)\n  return a.p\nend\n\ngetp (generic function with 1 method)"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-4",
+    "href": "lectures/structured-slides.html#plotting-the-population-4",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nWe now pass our getp function as the value of the agent_color keyword argument to abmplot:\n\n\nfig, meta = abmplot(model; agent_color = getp)\nfig"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-5",
+    "href": "lectures/structured-slides.html#plotting-the-population-5",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nWe can see how the population changes as we evolve the model further (the new as keyword argument specifies the size of the dots that represent the agents):\n\n\nstep!(model, 1000)\nfig2, meta = abmplot(model; agent_color = getp, as = 12)\nfig2"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-6",
+    "href": "lectures/structured-slides.html#plotting-the-population-6",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nAnd further:\n\n\nstep!(model, 1000)\nfig3, meta = abmplot(model; agent_color = getp, as = 12)\nfig3"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#plotting-the-population-7",
+    "href": "lectures/structured-slides.html#plotting-the-population-7",
+    "title": "Structured populations",
+    "section": "Plotting the population",
+    "text": "Plotting the population\n\nMaking an animation/video allows us to visualize the evolution dynamically\nThis is achieved with the abmvideo function\n\n\nabmvideo(\"vid.mp4\", model; agent_color = getp, as = 12, \n         frames = 100, framerate = 10)"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#a-more-interesting-example",
+    "href": "lectures/structured-slides.html#a-more-interesting-example",
+    "title": "Structured populations",
+    "section": "A more interesting example",
+    "text": "A more interesting example\n\nAbove, we initialized the population so that everybody had p = 0.1 in the beginning\nWhat about the following: at time \\(t=0\\),\n\nthree people have p = 1 (uses \\(G_1\\) all the time),\nevery other person has p = 0 (uses \\(G_2\\) all the time)?\n\nWill we see \\(G_1\\) spread across the population?\nLet’s try!"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#a-more-interesting-example-1",
+    "href": "lectures/structured-slides.html#a-more-interesting-example-1",
+    "title": "Structured populations",
+    "section": "A more interesting example",
+    "text": "A more interesting example\n\nWe first reinitialize the model:\n\n\nspace2 = GridSpaceSingle((50, 50))\nmodel2 = StandardABM(VariationalLearner, space2;\n                     agent_step! = VL_step!)\n\nfor i in 1:3\n  add_agent_single!(model2; p = 1.0, gamma = 0.1, \n                    P1 = 0.4, P2 = 0.1)\nend\n\nfor i in 4:2500\n  add_agent_single!(model2; p = 0.0, gamma = 0.1, \n                    P1 = 0.4, P2 = 0.1)\nend"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#a-more-interesting-example-2",
+    "href": "lectures/structured-slides.html#a-more-interesting-example-2",
+    "title": "Structured populations",
+    "section": "A more interesting example",
+    "text": "A more interesting example\n\nVisualize initial state of population:\n\n\nfig, meta = abmplot(model2; agent_color = getp, as = 12)\nfig"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#a-more-interesting-example-3",
+    "href": "lectures/structured-slides.html#a-more-interesting-example-3",
+    "title": "Structured populations",
+    "section": "A more interesting example",
+    "text": "A more interesting example\n\nAnimate for 1,000 iterations (every agent gets to learn 1,000 times):\n\n\nabmvideo(\"interesting.mp4\", model2; agent_color = getp,\n         as = 12, frames = 1000, framerate = 20)"
+  },
+  {
+    "objectID": "lectures/structured-slides.html#next-time",
+    "href": "lectures/structured-slides.html#next-time",
+    "title": "Structured populations",
+    "section": "Next time",
+    "text": "Next time\n\nSocial networks, and how to implement them in Agents.jl\nWrapping up some technical topics: modules, abstract types and inheritance"
   },
   {
     "objectID": "lectures/intro.html",
@@ -1901,7 +2258,7 @@
     "href": "lectures.html",
     "title": "Lectures",
     "section": "",
-    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA model of language learning\n\n\n\n23 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpeaking and listening\n\n\n\n30 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModels of language change\n\n\n\n7 May 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Intro to ABMs\n\n\n\n9 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProgramming basics\n\n\n\n16 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA model of language learning\n\n\n\n23 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpeaking and listening\n\n\n\n30 April 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModels of language change\n\n\n\n7 May 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStructured populations\n\n\n\n14 May 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
     "objectID": "solutions/modules.html",
@@ -1946,24 +2303,52 @@
     "text": "Bonus\nOkay, so now we know what a module is. What about the other thing mentioned in the title, packages? What is a package?\nEssentially, a package is just a module which is being maintained using a version control system and is offered to the rest of the world, usually (but not always) through the official Julia registry. (These are the things you install with Pkg.add(\"PackageName\").)"
   },
   {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
+    "objectID": "solutions/vl.html",
+    "href": "solutions/vl.html",
+    "title": "Variational learning",
     "section": "",
-    "text": "Note\n\n\n\nThe syllabus is tentative – topics may get rearranged as the course proceeds.\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
+    "text": "Update 7 May 2024\n\n\n\nFixed bug in the learn! function. See the lecture for details.\nFirst, I repeat the definitions of the custom types VariationalLearner and LearningEnvironment and the associated functions we defined in the lecture. (Without these definitions, none of what follows will work!)\nusing Plots       # for drawing plots\nusing StatsBase   # for the sample() function\n\nmutable struct VariationalLearner\n  p::Float64\n  gamma::Float64\nend\n\nstruct LearningEnvironment\n  P1::Float64\n  P12::Float64\n  P2::Float64\nend\n\nfunction sample_string(x::LearningEnvironment)\n  sample([\"S1\", \"S12\", \"S2\"], Weights([x.P1, x.P12, x.P2]))\nend\n\nfunction pick_grammar(x::VariationalLearner)\n  sample([\"G1\", \"G2\"], Weights([x.p, 1 - x.p]))\nend\n\nfunction learn!(x::VariationalLearner, y::LearningEnvironment)\n  s = sample_string(y)\n  g = pick_grammar(x)\n\n  if g == \"G1\" && s != \"S2\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  elseif g == \"G1\" && s == \"S2\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s != \"S1\"\n    x.p = x.p - x.gamma * x.p\n  elseif g == \"G2\" && s == \"S1\"\n    x.p = x.p + x.gamma * (1 - x.p)\n  end\n\n  return x.p\nend\n\nlearn! (generic function with 1 method)\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   },
   {
-    "objectID": "syllabus.html#timetable",
-    "href": "syllabus.html#timetable",
-    "title": "Syllabus",
-    "section": "Timetable",
-    "text": "Timetable\n\n\n\nDate\nTopic\nHomework\nReading\n\n\n\n\n9.4.\nWelcome + Intro to ABMs\nInstalling Julia\nGilbert (2020), chapter 1\n\n\n16.4.\nProgramming basics\nMaking birds fly\nGilbert (2020), chapter 2\n\n\n23.4.\nA model of language learning\nVariational learning\nYang (2000), pages 231–236\n\n\n30.4.\nSpeaking and listening\nModules and packages\nIntroducing Julia/Modules and packages\n\n\n7.5.\nModels of language change\nLanguage change: parameter exploration\nNone\n\n\n14.5.\nSocial networks\n\n\n\n\n21.5.\nProgramming best practices\n\n\n\n\n28.5.\nNo lecture (Vorlesungsfreie Zeit)\n\n\n\n\n4.6.\nNo lecture (Vertiefungswoche)\n\n\n\n\n11.6.\nExemplar dynamics\n\n\n\n\n18.6.\nConformity\n\n\n\n\n25.6.\nRoaming in space\n\n\n\n\n2.7.\nPresentations 1\n\n\n\n\n9.7.\nPresentations 2\n\n\n\n\n16.7.\nExam\n\n\n\n\n25.8.\nDeadline for project written reports"
+    "objectID": "solutions/vl.html#five-learners",
+    "href": "solutions/vl.html#five-learners",
+    "title": "Variational learning",
+    "section": "1. Five learners",
+    "text": "1. Five learners\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
   },
   {
-    "objectID": "syllabus.html#course-requirements",
-    "href": "syllabus.html#course-requirements",
-    "title": "Syllabus",
-    "section": "Course requirements",
-    "text": "Course requirements\nTo pass this course, you will need to satisfactorily complete both:\n\nThe final exam\nSmall programming project + in-class presentation + written report, either solo or in small group (depending on your preference)\n\nThe examination will be based on the following materials:\n\nLectures and associated lecture notes (on this website)\nHomework contents (on this website)\nReadings (on ILIAS)\n\nProgramming project topics need to be decided before the Vorlesungsfreie Zeit. However, I encourage you to start thinking about potential topics as soon as possible, and, if you want to work in a group, also to form your group as early as possible."
+    "objectID": "solutions/vl.html#different-learning-rates",
+    "href": "solutions/vl.html#different-learning-rates",
+    "title": "Variational learning",
+    "section": "2. Different learning rates",
+    "text": "2. Different learning rates\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 0.001\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# create learning environment\nlondon = LearningEnvironment(0.4, 0.5, 0.1)\n\n# create 5 learners\ngamma = 1.0\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, london) for t in 1:1000]\ntrajectory2 = [learn!(learner2, london) for t in 1:1000]\ntrajectory3 = [learn!(learner3, london) for t in 1:1000]\ntrajectory4 = [learn!(learner4, london) for t in 1:1000]\ntrajectory5 = [learn!(learner5, london) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
+  },
+  {
+    "objectID": "solutions/vl.html#varying-the-environment",
+    "href": "solutions/vl.html#varying-the-environment",
+    "title": "Variational learning",
+    "section": "3. Varying the environment",
+    "text": "3. Varying the environment\nHere I’m only doing this with the value of the learning rate \\(\\gamma = 0.01\\); the principle will be exactly the same for any other value.\n\n# create learning environment\nprague = LearningEnvironment(0.1, 0.5, 0.4)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, prague) for t in 1:1000]\ntrajectory2 = [learn!(learner2, prague) for t in 1:1000]\ntrajectory3 = [learn!(learner3, prague) for t in 1:1000]\ntrajectory4 = [learn!(learner4, prague) for t in 1:1000]\ntrajectory5 = [learn!(learner5, prague) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1)\nplot!(1:1000, trajectory2)\nplot!(1:1000, trajectory3)\nplot!(1:1000, trajectory4)\nplot!(1:1000, trajectory5)"
+  },
+  {
+    "objectID": "solutions/vl.html#what-does-this-mean",
+    "href": "solutions/vl.html#what-does-this-mean",
+    "title": "Variational learning",
+    "section": "4. What does this mean?",
+    "text": "4. What does this mean?\nThe effect of the learning rate parameter \\(\\gamma\\) (gamma) is quite straightforward: the smaller the value of this parameter, the slower learning is. In the extreme case \\(\\gamma = 1\\), learning is in a sense as “fast” as it can possibly be: each learner switches between probability 1 of using \\(G_1\\) and probability 0 of using \\(G_1\\) at parsing failure.\nThe effect of the the probabilities P1, P12 and P2 of the learning environment is a bit less straightforward. In fact, a formula exists that allows one to predict the expected value of \\(p\\) (probability of using \\(G_1\\)) a variational learner ends up with after a long period of learning, and that formula only depends on the environment’s probability parameters. We might look at this in detail later. For now, suffice it to say that the parameters have some such effect. More precisely, in the above simulations we see that\n\nWhen P1 = 0.4 and P2 = 0.1 (environment london), the learners end up with \\(p \\approx 0.8\\).\nWhen P1 = 0.1 and P2 = 0.4 (environment prague), the learners end up with \\(p \\approx 0.2\\)."
+  },
+  {
+    "objectID": "solutions/vl.html#prettifying-the-plots",
+    "href": "solutions/vl.html#prettifying-the-plots",
+    "title": "Variational learning",
+    "section": "5. Prettifying the plots",
+    "text": "5. Prettifying the plots\n\n# create learning environment\nprague = LearningEnvironment(0.1, 0.5, 0.4)\n\n# create 5 learners\ngamma = 0.01\nlearner1 = VariationalLearner(0.5, gamma)\nlearner2 = VariationalLearner(0.5, gamma)\nlearner3 = VariationalLearner(0.5, gamma)\nlearner4 = VariationalLearner(0.5, gamma)\nlearner5 = VariationalLearner(0.5, gamma)\n\n# simulate each learner for 1000 steps\ntrajectory1 = [learn!(learner1, prague) for t in 1:1000]\ntrajectory2 = [learn!(learner2, prague) for t in 1:1000]\ntrajectory3 = [learn!(learner3, prague) for t in 1:1000]\ntrajectory4 = [learn!(learner4, prague) for t in 1:1000]\ntrajectory5 = [learn!(learner5, prague) for t in 1:1000]\n\n# plot\nplot(1:1000, trajectory1, seriestype=:scatter)\nplot!(1:1000, trajectory2, seriestype=:scatter)\nplot!(1:1000, trajectory3, seriestype=:scatter)\nplot!(1:1000, trajectory4, seriestype=:scatter)\nplot!(1:1000, trajectory5, seriestype=:scatter)\nxlabel!(\"learning iteration\")\nylabel!(\"probability of G1\")\ntitle!(\"A variational learning trajectory\")"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Rules for projects:\n\nYour team must consist of at least 1 person and at most 2 persons.\nYour project needs to\n\nformulate a question to explore with an ABM\nimplement that ABM in Julia\nillustrate the results (using plots, animations, numbers…)\n\nYour project presentation cannot be longer than 15 minutes\nYour team must meet with me at least once before the course is over (to discuss how the project is coming along, and to see if you have any questions I might be able to answer). This can be either before or after your presentation.\n\nRemarks:\n\nYour project does not have to be complete when it is presented! You are welcome to present work in progress, and also to ask your peers for feedback and suggestions. The final written reports, on the other hand, must represent completed work.\nLook for inspiration by skimming the papers collected in the readings/projects folder on ILIAS.\nAlso look for inspiration on the Agents.jl website.\nYour project can also focus on attempting to replicate the analysis from one of these papers.\nYour research question does not need to be about linguistics!\n\n\n\n\n© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited."
   }
 ]
