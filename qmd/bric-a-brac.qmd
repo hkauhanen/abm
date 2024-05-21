@@ -24,3 +24,20 @@ A compendium of sundry miscellanea.
 
   If Julia complains about an "invalid redefinition of type VariationalLearner", this is because you have the older (non-spatial) type in memory. Exit your Julia session (or VSCode) and try again. Once the module has been successfully loaded, you can run the commands in the lecture on [structured populations](lectures/structured.qmd).
 
+- [VL.jl](jl/VL.jl) -- Updated version of our variational learning module. Defines `VariationalLearner` as an abstract type, plus two non-abstract daughter types, `SimpleVL` (corresponding to our old variational learning code) and `GridVL` (a variational learner on a 2D grid). Load like this:
+
+  ```{julia}
+  #|eval: false
+  include("VL.jl")
+  using .VL
+  ```
+
+  If VSCode gives you module-related troubles, delete the first and last lines of the file `VL.jl` and load it using just:
+
+  ```{julia}
+  #|eval: false
+  include("VL.jl")
+  ```
+
+
+

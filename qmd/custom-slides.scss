@@ -2,6 +2,10 @@
 
 /*-- scss:rules --*/
 
+:root {
+	--mermaid-font-size: 20pt;
+}
+
 div.callout div.cell {
 	font-size: 175%;
 }

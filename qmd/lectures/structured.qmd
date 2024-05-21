@@ -1,6 +1,7 @@
 ---
 title: "Structured populations"
 date: 05/14/2024
+date-modified: 04/21/2024
 image: "../img/structured-image.png"
 execute:
   echo: true
@@ -22,6 +23,13 @@ using Agents
 include("../jl/GridVL.jl")
 using .GridVL
 ```
+
+::: {.content-visible unless-format="revealjs"}
+::: {.callout-important title="Update 21 May 2024"}
+Fixed definition of structured population. The correct definition is: a population is structured if $P(Y \mid X) \neq P(Y)$.
+:::
+:::
+
 
 ## Plan
 
@@ -103,7 +111,7 @@ my_fun(lastname = "Doe")
 - Formally:
   - let $P(X)$ = probability of sampling agent $X$ for an interaction
   - let $P(Y \mid X)$ = (conditional) probability of sampling agent $Y$, given that $X$ was already sampled
-  - then population is **structured** if $P(Y \mid X) = P(Y)$
+  - then population is **structured** if $P(Y \mid X) \neq P(Y)$
 
 ::: {.content-visible when-format="revealjs"}
 . . . 

@@ -121,5 +121,16 @@
   "solutions/change.qmd": {
     "change.html": "eac6d630",
     "change.tex": "418db627"
+  },
+  "lectures/bestpractices.qmd": {
+    "bestpractices-slides.html": "2228e8ba",
+    "bestpractices.html": "a1f74ffb",
+    "bestpractices.tex": "b53102f1",
+    "bestpractices.md": "2c01756a"
+  },
+  "lectures/parallel.qmd": {
+    "parallel-slides.html": "f65d7633",
+    "parallel.html": "137b3a7b",
+    "parallel.tex": "10ceb568"
   }
 }

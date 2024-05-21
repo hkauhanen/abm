@@ -1,0 +1,171 @@
+---
+title: "Parallel processing"
+date: 05/21/2024
+image: "../img/parallel-image.png"
+execute:
+  echo: true
+categories:
+  - lecture
+format:
+  revealjs:
+    output-file: parallel-slides.html
+    mermaid-format: png
+---
+
+```{julia}
+#| echo: false
+#| eval: true
+#| output: false
+using Random
+Random.seed!(123)
+```
+
+
+## Parallel processing
+
+- One way of making your code faster is to make use of parallel processing
+- Here, **parallel processing** = when several simulation runs are computed simultaneously
+- This is not always easy, and may not be worth doing unless you're running into serious efficiency issues...
+
+
+## A bit of history
+
+- My first computer (mid-90s) had a 66 MHz processor
+- My current office computer runs at 4.5 GHz -- almost 70 times the frequency^[It should be noted that processor frequency is *not* the only thing affecting the overall speed of a computer. There have also been improvements in memory speed, memory bus speed, the speed of storage media, and so on. These all play a role.]
+- Engineering problem/reality: the faster you make a processor run, the hotter it gets
+- Engineering advance: smaller and smaller "lithographies" for processor manufacturing, meaning you can fit more transistors in a given surface area (Moore's Law)
+- Put these two together and you have the idea of a **multi-core processor**
+
+
+## Parallel processing
+
+- But now you have a **software challenge**: how do I make all processor cores work in parallel, if my code is a linear sequence of operations?
+- In ABM, you often need to repeat a simulation many times.
+  - Excellent use case for multi-core processors: each core can run an independent simulation in parallel
+  - After every core has finished, we just collect the results
+
+
+## Distributed.jl
+
+- In Julia, the *Distributed.jl* package makes this easy
+- If your processor has, say, 4 cores and you want to engage them all, write:
+
+```{julia}
+#| eval: false
+#| output: false
+using BenchmarkTools
+using Distributed
+
+addprocs(4)
+```
+
+```{julia}
+#| echo: false
+#| eval: true
+#| output: false
+using BenchmarkTools
+using Distributed
+need_procs = 2 - nworkers()
+if need_procs > 0
+  addprocs(need_procs)
+end
+```
+
+- This makes Julia run in 4 parallel processes, each process being sent to an individual processor core
+
+
+## Example
+
+- Let's simulate a population of 1000 `SimpleVL`s over 100,000 time steps:
+
+```{julia}
+#| output: true
+#| eval: true
+@everywhere include("../jl/VL.jl")
+@everywhere using .VL
+
+@everywhere function simulation()
+  pop = [SimpleVL(0.1, 0.01, 0.4, 0.1) for i in 1:1000]
+  [interact!(rand(pop), rand(pop)) for t in 1:100_000]
+  return nothing
+end
+
+simulation()
+```
+
+::: {.content-visible when-format="revealjs"}
+## Example
+:::
+
+- What if we want to repeat this 10 times?
+- We can do it in series:
+
+```{julia}
+#| eval: false
+for rep in 1:10
+  simulation()
+end
+```
+
+::: {.content-visible when-format="revealjs"}
+## Example
+:::
+
+- Or we can parallelize:
+
+```{julia}
+#| eval: false
+@distributed for rep in 1:10
+  simulation()
+end
+```
+
+- Here, each repetition gets assigned to a process/core. Once the process finishes, it becomes available for another repetition.
+- The function definition additionally has to be prepended by the `@everywhere` macro, which makes the function available to
+
+
+## How much speed-up do we obtain?
+
+```{julia}
+@btime for x in 1:1_000_000
+  sqrt(x)
+end
+```
+
+::: {.content-visible when-format="revealjs"}
+## How much speed-up do we obtain?
+:::
+
+```{julia}
+function parfun()
+  result = @distributed (vcat) for x in 1:1_0
+    sqrt(x)
+  end
+
+  result
+end
+
+@btime parfun()
+```
+
+## Thinking about the speed gain
+
+- We've invoked 4 cores
+- Why is the parallel code not 4 times faster than the sequential code?
+- Complex reasons, but, for example: the cores still share the same bus to memory, so there is an inevitable bottleneck
+
+
+## Collecting the results
+
+- The output of every simulation is a vector of numbers, namely, the `p` field of a randomly chosen speaker
+- We can collect these into a matrix, so that each vector becomes one of the columns of the matrix. This is accomplished with `hcat` ("horizontal catenate"):
+
+```{julia}
+#result = @distributed (hcat) for rep in 1:10
+#  simulation()
+#end
+```
+
+
+## Amdahl's Law
+

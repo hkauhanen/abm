@@ -182,16 +182,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p><a href="jl/plot_birds_fixed.jl">plot_birds_fixed.jl</a> – A Julia Plots recipe, used to plot birds in the homework <a href="./homework/fly.html">Making birds fly</a></p></li>
 <li><p><a href="jl/VariationalLearning.jl">VariationalLearning.jl</a> – A Julia module that defines the <code>VariationalLearner</code> type and some functions to deal with such learners. See, in particular, <a href="./solutions/modules.html">this homework solution</a>. To use this, execute the following (don’t forget the dot before the module name, as this is a local module):</p>
-<div id="a1defa99" class="cell" data-execution_count="1">
+<div id="5ee512d4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"VariationalLearning.jl"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.VariationalLearning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p><a href="jl/GridVL.jl">GridVL.jl</a> – A Julia module that implements a <code>VariationalLearner</code> on a grid space in Agents.jl. To use:</p>
-<div id="4eec7054" class="cell" data-execution_count="2">
+<div id="b0d6e808" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"GridVL.jl"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.GridVL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If Julia complains about an “invalid redefinition of type VariationalLearner”, this is because you have the older (non-spatial) type in memory. Exit your Julia session (or VSCode) and try again. Once the module has been successfully loaded, you can run the commands in the lecture on <a href="./lectures/structured.html">structured populations</a>.</p></li>
+<li><p><a href="jl/VL.jl">VL.jl</a> – Updated version of our variational learning module. Defines <code>VariationalLearner</code> as an abstract type, plus two non-abstract daughter types, <code>SimpleVL</code> (corresponding to our old variational learning code) and <code>GridVL</code> (a variational learner on a 2D grid). Load like this:</p>
+<div id="9e2dd2e9" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"VL.jl"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.VL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If VSCode gives you module-related troubles, delete the first and last lines of the file <code>VL.jl</code> and load it using just:</p>
+<div id="d3ee078c" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"VL.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
 </ul>
 
 
