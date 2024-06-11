@@ -132,5 +132,9 @@
     "parallel-slides.html": "f65d7633",
     "parallel.html": "137b3a7b",
     "parallel.tex": "10ceb568"
+  },
+  "homework/clustering.qmd": {
+    "clustering.html": "10017190",
+    "clustering.tex": "abd99aa4"
   }
 }

@@ -1,0 +1,73 @@
+---
+title: "Degree and clustering"
+date: 06/11/2024
+Solution: ""#"[Here](solutions/clustering.qmd)"
+categories:
+  - homework
+---
+
+Many real-life social networks have the following properties simultaneously:
+
+1. Low average degree -- most people have a limited set of friends
+1. High average clustering -- most people are part of cliques
+
+To study whether these conditions are satisfied by simple random graph models, the following little computational experiment was carried out. First, 51 Erdős-Rényi graphs were generated, one for each value of $p$, where $p$ is the rewiring probability and ranges from 0.0 to 0.5 in equally-spaced steps (of size 0.01). (The number of nodes was set to $n=100$.) Then, the (1) mean degree and (2) mean local clustering coefficient was calculated for each of these graphs. The results are:
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: true
+
+using Graphs, Plots, Statistics
+
+pp = 0.0:0.01:0.5
+
+G = [erdos_renyi(100, p) for p in pp]
+
+mean_degr = [mean(degree(g)) for g in G]
+mean_clus = [mean([local_clustering_coefficient(g, v) for v in vertices(g)]) for g in G]
+
+plot(pp, xaxis="rewiring probability", mean_degr, yaxis="average degree (blue curve)", color=:deepskyblue, legend=false, linewidth=2.0)
+plot!(twinx(), pp, mean_clus, yaxis="average clustering (red curve)", color=:salmon, legend=false, linewidth=2.0)
+title!("Erdős-Rényi graphs")
+```
+
+Next, the same experiment was performed but this time with Watts-Strogatz (small-world) networks instead, again sweeping over different values of the rewiring probability. The other parameters were set to $n=100$ (network size) and $k=16$ (initial degree). The results are:
+
+```{julia}
+#|echo: false
+#|eval: true
+#|output: true
+
+using Graphs, Plots, Statistics
+
+pp = 0.0:0.01:0.5
+
+G = [watts_strogatz(100, 16, p) for p in pp]
+
+mean_degr = [mean(degree(g)) for g in G]
+mean_clus = [mean([local_clustering_coefficient(g, v) for v in vertices(g)]) for g in G]
+
+plot(pp, xaxis="rewiring probability", mean_degr, yaxis="average degree (blue curve)", color=:deepskyblue, legend=false, linewidth=2.0)
+plot!(twinx(), pp, mean_clus, yaxis="average clustering (red curve)", color=:salmon, legend=false, linewidth=2.0)
+title!("Watts-Strogatz graphs")
+```
+
+This demonstrates that the two conditions, low average degree and high average clustering, can be achieved in Watts-Strogatz networks but not in Erdős-Rényi graphs.
+
+**Your task** is to replicate the above analysis, producing the plots in the end.
+
+::: {.callout-tip}
+You can make good use of array comprehensions, the `mean` function from *Statistics.jl*, and [this tip](https://docs.juliaplots.org/stable/gallery/gr/generated/gr-ref063/#gr_ref063) on how to put two vertical axes in the same plot.
+:::
+
+::: {.callout-note title="Bonus"}
+For even more fun, think about the following questions:
+
+1. Why is the average degree a linearly increasing function of $p$ in the case of Erdős-Rényi graphs?
+1. Why is it a constant function in the case of Watts-Strogatz graphs?
+1. Why is the average degree function "wiggly" in the case of Erdős-Rényi graphs but not so in the case of Watts-Strogatz graphs?
+1. Why is the average clustering wiggly in both cases?
+:::
+
+

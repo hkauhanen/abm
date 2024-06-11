@@ -618,7 +618,7 @@ Henri Kauhanen
 </section>
 <section id="abstract-types-and-inheritance-9" class="slide level2">
 <h2>Abstract types and inheritance</h2>
-<div id="fc0844ce" class="cell" data-execution_count="2">
+<div id="53c15645" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="kw">abstract type</span> VariationalLearner <span class="op">&lt;:</span><span class="dt"> AbstractAgent </span><span class="kw">end</span></span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a><span class="kw">mutable struct</span> SimpleVL <span class="op">&lt;:</span><span class="dt"> VariationalLearner</span></span>
@@ -639,7 +639,7 @@ Henri Kauhanen
 <ul>
 <li>We can now do things like:</li>
 </ul>
-<div id="70affe19" class="cell" data-execution_count="3">
+<div id="569a5d62" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a>bob <span class="op">=</span> <span class="fu">SimpleVL</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>)</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a><span class="fu">speak</span>(bob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -679,7 +679,7 @@ Henri Kauhanen
 </section>
 <section id="our-vl-code-so-far" class="slide level2 scrollable">
 <h2>Our VL code so far</h2>
-<div id="5fdcc226" class="cell" data-execution_count="6">
+<div id="c2df5b27" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a></a><span class="kw">module</span> VL</span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a><span class="co"># Agents.jl functionality</span></span>
@@ -774,19 +774,19 @@ Henri Kauhanen
 <ul>
 <li>Example:</li>
 </ul>
-<div id="e4f3e833" class="cell" data-execution_count="7">
+<div id="a58d681e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a><span class="pp">@benchmark</span> <span class="fu">sum</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1_000_000_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1000 evaluations.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">1.303 ns</span> … <span class="ansi-magenta-fg">29.124 ns</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">1.497 ns              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">1.520 ns</span> ± <span class="ansi-green-fg"> 0.498 ns</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
-  ▁            ▂ █    ▄   <span class="ansi-blue-fg"> </span>▃ <span class="ansi-green-fg"> </span> ▂       █    ▁                 
-  ██▇▂▃▄▅▂▂▂█▂▁█▅█▂▁█▄█▂▁▅<span class="ansi-blue-fg">█</span>█▇<span class="ansi-green-fg">▁</span>▂█▅▂▁▁▁▁▁█▅▁▂▅█▂▂▂▂▂▃▄▅▆▃▁▁▃▇▄ ▄
-  1.3 ns<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        1.77 ns <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">1.370 ns</span> … <span class="ansi-magenta-fg">30.990 ns</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">1.543 ns              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">1.587 ns</span> ± <span class="ansi-green-fg"> 0.617 ns</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+     █  ▅   ▅  ▁<span class="ansi-blue-fg"> </span>  ▂<span class="ansi-green-fg"> </span>   ▂                                     
+  █▁▁█▂▂█▄▂▃█▂▂█<span class="ansi-blue-fg">▅</span>▂▂█<span class="ansi-green-fg">▄</span>▂▂██▂▂▂█▃▂▂▃▃█▄▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ▃
+  1.37 ns<span class="ansi-bright-black-fg">        Histogram: frequency by time</span>        2.09 ns <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">0 bytes</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">0</span>.</pre>
 </div>
 </div>
@@ -798,7 +798,7 @@ Henri Kauhanen
 <li>Suppose we want to calculate the square root of all numbers between 0 and 100,000 and put them in an array</li>
 <li>One way of doing this:</li>
 </ul>
-<div id="d2fb4796" class="cell" data-execution_count="8">
+<div id="2775964f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a></a>result <span class="op">=</span> []   <span class="co"># empty array</span></span>
 <span id="cb5-2"><a></a><span class="cf">for</span> x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span></span>
 <span id="cb5-3"><a></a>  <span class="fu">append!</span>(result, <span class="fu">sqrt</span>(x))   <span class="co"># put √x in array</span></span>
@@ -807,7 +807,7 @@ Henri Kauhanen
 </section>
 <section id="all-roads-lead-to-rome-but-theyre-not-all-equally-fast-1" class="slide level2">
 <h2>All roads lead to Rome, but they’re not all equally fast…</h2>
-<div id="93a9a23f" class="cell" data-execution_count="9">
+<div id="4fbee637" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a><span class="pp">@benchmark</span> <span class="cf">begin</span></span>
 <span id="cb6-2"><a></a>  result <span class="op">=</span> []   <span class="co"># empty array</span></span>
 <span id="cb6-3"><a></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span></span>
@@ -816,13 +816,13 @@ Henri Kauhanen
 <span id="cb6-6"><a></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 3337 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">1.170 ms</span> … <span class="ansi-magenta-fg">  4.004 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 66.72%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">1.323 ms               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">1.496 ms</span> ± <span class="ansi-green-fg">497.756 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>8.89% ± 14.73%
-  ▁▄▇█<span class="ansi-blue-fg">▅</span>▂▁ <span class="ansi-green-fg"> </span> ▂▄▃                                               ▁
-  ████<span class="ansi-blue-fg">█</span>███<span class="ansi-green-fg">▅</span>▄████▆▅▅▅▃▄▁▅▄▁▁▁▁▁▄▆▇▇▇▃▁▅▅███▆▇▆▇▅▅▆▆▅▃▁▁▃▇█▆▅▄▆ █
-  1.17 ms<span class="ansi-bright-black-fg">      </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>      3.71 ms <span class="ansi-bold">&lt;</span>
+<pre>BenchmarkTools.Trial: 2818 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">1.183 ms</span> … <span class="ansi-magenta-fg">  6.474 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 54.43%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">1.604 ms               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">1.768 ms</span> ± <span class="ansi-green-fg">613.787 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>8.58% ± 14.50%
+   ▂▇█▆▇▇▆<span class="ansi-blue-fg">▆</span>▇▆<span class="ansi-green-fg">▆</span>▄▄▃▃▂▂▃ ▁▁                                      ▂
+  ▅███████<span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>███████▇███▇▇▇▁▅▅██▇▇▆▆▇▆▇▆▆█▇▇▇▆█▆▅▆▇▇▄▅▆▆▆▅▆▇ █
+  1.18 ms<span class="ansi-bright-black-fg">      </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>      4.41 ms <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">3.35 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">100012</span>.</pre>
 </div>
 </div>
@@ -833,7 +833,7 @@ Henri Kauhanen
 <ul>
 <li>Another way:</li>
 </ul>
-<div id="536e1334" class="cell" data-execution_count="10">
+<div id="e3a80ed5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a></a>result <span class="op">=</span> <span class="fu">zeros</span>(<span class="fl">100_000</span> <span class="op">+</span> <span class="fl">1</span>)</span>
 <span id="cb7-2"><a></a><span class="cf">for</span> x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span></span>
 <span id="cb7-3"><a></a>  result[x<span class="op">+</span><span class="fl">1</span>] <span class="op">=</span> <span class="fu">sqrt</span>(x)   <span class="co"># put √x in array</span></span>
@@ -842,7 +842,7 @@ Henri Kauhanen
 </section>
 <section id="all-roads-lead-to-rome-but-theyre-not-all-equally-fast-3" class="slide level2">
 <h2>All roads lead to Rome, but they’re not all equally fast…</h2>
-<div id="aa1b4990" class="cell" data-execution_count="11">
+<div id="a1d78503" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a><span class="pp">@benchmark</span> <span class="cf">begin</span></span>
 <span id="cb8-2"><a></a>  result <span class="op">=</span> <span class="fu">zeros</span>(<span class="fl">100_000</span> <span class="op">+</span> <span class="fl">1</span>)</span>
 <span id="cb8-3"><a></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span></span>
@@ -852,12 +852,12 @@ Henri Kauhanen
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">100.025 μs</span> … <span class="ansi-magenta-fg">711.973 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 49.35%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">103.252 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">112.584 μs</span> ± <span class="ansi-green-fg"> 45.953 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.29% ±  8.90%
-  █<span class="ansi-blue-fg">▄</span>▂<span class="ansi-green-fg">▁</span>▁                                                         ▁
-  █<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">█</span>███████▇▆█▆▄▇▆▅▆▄▃▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄▄▃▅▃▄▁▅▃▅▄▄▅██ █
-  100 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        400 μs <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold"> 99.733 μs</span> … <span class="ansi-magenta-fg">736.438 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 49.80%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">102.901 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">114.981 μs</span> ± <span class="ansi-green-fg"> 45.146 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.00% ±  8.63%
+  █<span class="ansi-blue-fg">▅</span>▂<span class="ansi-green-fg">▂</span>▄▃▁▂▁ ▁▁▁                                                 ▁
+  █<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">█</span>████████████▇█▇▅▅▄▄▁▃▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▃▅▄▃▃▃▅▄▄▅██ █
+  99.7 μs<span class="ansi-bright-black-fg">       </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        383 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">781.36 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">2</span>.</pre>
 </div>
 </div>
@@ -868,23 +868,23 @@ Henri Kauhanen
 <ul>
 <li>A third possibility:</li>
 </ul>
-<div id="510358a2" class="cell" data-execution_count="12">
+<div id="07803199" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a></a>result <span class="op">=</span> [<span class="fu">sqrt</span>(x) for x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="all-roads-lead-to-rome-but-theyre-not-all-equally-fast-5" class="slide level2">
 <h2>All roads lead to Rome, but they’re not all equally fast…</h2>
-<div id="b1704368" class="cell" data-execution_count="13">
+<div id="ea249935" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a><span class="pp">@benchmark</span> result <span class="op">=</span> [<span class="fu">sqrt</span>(x) for x <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">78.197 μs</span> … <span class="ansi-magenta-fg">691.092 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 51.38%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.291 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">84.522 μs</span> ± <span class="ansi-green-fg"> 29.224 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.40% ±  8.36%
-  <span class="ansi-blue-fg">█</span> <span class="ansi-green-fg"> </span>  ▁                                                       ▁
-  <span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">▇</span>▇██▇█▆▃▅▇██▄▄▃▅▃▁▃▁▁▁▄▁▁▁▁▃▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▅██ █
-  78.2 μs<span class="ansi-bright-black-fg">       </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       255 μs <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">78.380 μs</span> … <span class="ansi-magenta-fg">681.586 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 50.62%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.536 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">87.784 μs</span> ± <span class="ansi-green-fg"> 33.330 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.67% ±  8.44%
+  <span class="ansi-blue-fg">█</span>▄▂<span class="ansi-green-fg"> </span>▂▃▂        ▁                                             ▁
+  <span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>████▇███▇▇▇██▇▆▅▆▆▅▄▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▄▇▇▇▆▆▆▆ █
+  78.4 μs<span class="ansi-bright-black-fg">       </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       278 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">781.36 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">2</span>.</pre>
 </div>
 </div>
@@ -895,23 +895,23 @@ Henri Kauhanen
 <ul>
 <li>A fourth way:</li>
 </ul>
-<div id="cfcbc05e" class="cell" data-execution_count="14">
+<div id="409c90c0" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a></a>result <span class="op">=</span> <span class="fu">sqrt</span>.(<span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="all-roads-lead-to-rome-but-theyre-not-all-equally-fast-7" class="slide level2">
 <h2>All roads lead to Rome, but they’re not all equally fast…</h2>
-<div id="b016c6a8" class="cell" data-execution_count="15">
+<div id="aedc61e3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a></a><span class="pp">@benchmark</span> result <span class="op">=</span> <span class="fu">sqrt</span>.(<span class="fl">0</span><span class="op">:</span><span class="fl">100_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">77.890 μs</span> … <span class="ansi-magenta-fg">698.451 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 51.61%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.046 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">84.720 μs</span> ± <span class="ansi-green-fg"> 30.239 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.55% ±  8.50%
-  <span class="ansi-blue-fg">█</span> <span class="ansi-green-fg"> </span>  ▁      ▁                                                ▁
-  <span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">▇</span>█▇█▇▇▆▄▇▆█▇▅▄▅▅▇▆▁▄▅▇▃▁▁▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▁▁▁▁▁▁▁▁▇██ █
-  77.9 μs<span class="ansi-bright-black-fg">       </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       263 μs <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">78.522 μs</span> … <span class="ansi-magenta-fg">645.113 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 49.88%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.355 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">88.545 μs</span> ± <span class="ansi-green-fg"> 37.467 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.87% ±  8.65%
+  <span class="ansi-blue-fg">█</span>▂▁<span class="ansi-green-fg">▁</span>▄▂   ▁   ▁                                               ▁
+  <span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>███████▇▇██▇▅▅▇▅▄▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▄▆▇▆▆▆▅▅▅▅▅▄ █
+  78.5 μs<span class="ansi-bright-black-fg">       </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       306 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">781.36 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">2</span>.</pre>
 </div>
 </div>
@@ -991,7 +991,7 @@ Henri Kauhanen
 <ul>
 <li>To illustrate this, suppose you want to toss a coin 10 times. This is easy:</li>
 </ul>
-<div id="c692cb73" class="cell" data-execution_count="16">
+<div id="e09edd4e" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a></a><span class="fu">rand</span>([<span class="st">"heads"</span>, <span class="st">"tails"</span>], <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>10-element Vector{String}:
@@ -1013,7 +1013,7 @@ Henri Kauhanen
 <ul>
 <li>Now restart Julia and execute the same thing. You will get a different result:</li>
 </ul>
-<div id="396da0be" class="cell" data-execution_count="17">
+<div id="9de00b57" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a></a><span class="co"># here, restart Julia...</span></span>
 <span id="cb15-2"><a></a></span>
 <span id="cb15-3"><a></a><span class="fu">rand</span>([<span class="st">"heads"</span>, <span class="st">"tails"</span>], <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1038,7 +1038,7 @@ Henri Kauhanen
 <li>If you want to make sure the exact same sample is obtained, you can seed the PRNG manually after startup</li>
 <li>For example, seed with the number 123:</li>
 </ul>
-<div id="83ace308" class="cell" data-execution_count="18">
+<div id="fa120d6e" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb17-2"><a></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123</span>)</span>
 <span id="cb17-3"><a></a></span>
@@ -1083,7 +1083,7 @@ Henri Kauhanen
 <ul>
 <li>To avoid this, pass <code>Random.default_rng()</code> as an argument to <code>StandardABM</code> when creating your model:</li>
 </ul>
-<div id="81c31dc6" class="cell" data-execution_count="19">
+<div id="55144255" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a></a><span class="im">using</span> <span class="bu">Agents</span></span>
 <span id="cb19-2"><a></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb19-3"><a></a><span class="fu">include</span>(<span class="st">"VL.jl"</span>)</span>

@@ -1,5 +1,14 @@
 [
   {
+    "listing": "/solutions.html",
+    "items": [
+      "/solutions/fly.html",
+      "/solutions/vl.html",
+      "/solutions/modules.html",
+      "/solutions/change.html"
+    ]
+  },
+  {
     "listing": "/homework.html",
     "items": [
       "/homework/installing-julia.html",
@@ -7,16 +16,8 @@
       "/homework/vl.html",
       "/homework/modules.html",
       "/homework/change.html",
-      "/homework/project.html"
-    ]
-  },
-  {
-    "listing": "/solutions.html",
-    "items": [
-      "/solutions/fly.html",
-      "/solutions/vl.html",
-      "/solutions/modules.html",
-      "/solutions/change.html"
+      "/homework/project.html",
+      "/homework/clustering.html"
     ]
   },
   {
@@ -28,7 +29,8 @@
       "/lectures/speaking.html",
       "/lectures/change.html",
       "/lectures/structured.html",
-      "/lectures/bestpractices.html"
+      "/lectures/bestpractices.html",
+      "/lectures/networks.html"
     ]
   }
 ]

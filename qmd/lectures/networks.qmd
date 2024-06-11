@@ -1,0 +1,651 @@
+---
+title: "Social networks"
+date: 06/11/2024
+image: "../img/networks-image.png"
+execute:
+  echo: true
+categories:
+  - lecture
+format:
+  revealjs:
+    output-file: networks-slides.html
+    mermaid-format: png
+---
+
+```{julia}
+#| echo: false
+#| eval: true
+#| output: false
+using Random
+Random.seed!(123)
+```
+
+## Plan
+
+- In our models so far, agent interactions have been either
+  1. Completely random
+  1. Random, but within a local spatial neighbourhood
+- Today, we will take a step towards generalizing our models by assuming that agents are connected through a social network
+- We will require *Graphs.jl* and *GraphPlot.jl*:
+
+```{julia}
+#| eval: false
+using Pkg
+Pkg.add(["Graphs", "GraphPlot"])
+```
+
+
+## Networks
+
+- A **network** (also known as a **graph**) consists of
+  1. A set of **nodes** (a.k.a. **vertices** (singular: *vertex*)) -- for us, these are the agents
+  1. A set of **connections** (a.k.a. **links** or **edges**) between nodes -- for us, these define the interaction pattern
+- Connections can be
+  1. Unidirectional (A is connected to B, but B is not connected to A)
+  1. Bidirectional (A is connected to B and B is also connected to A)
+  1. Weighted or not
+
+
+## Drawing networks
+
+- Nodes typically drawn as points / filled circles
+- A unidirectional connection is drawn as an arrow
+- A bidirectional connection is drawn as a line segment
+- If connections are weighted, this can be represented e.g. by line width
+
+
+## Example ([Zachary's karate club](https://en.wikipedia.org/wiki/Zachary%27s_karate_club))
+
+```{julia}
+#| echo: false
+using Graphs, GraphPlot
+Z = smallgraph(:karate)
+gplot(Z)
+```
+
+
+## Networks in Julia
+
+- In Julia, networks/graphs are handled by the [Graphs.jl](https://juliagraphs.org/Graphs.jl) package
+- Simple example: create an undirected graph of three nodes, connecting each node:
+
+```{julia}
+#| output: false
+using Graphs, GraphPlot
+
+G = Graph(3)
+
+add_edge!(G, 1, 2)
+add_edge!(G, 1, 3)
+add_edge!(G, 2, 3)
+```
+
+
+## Plotting networks
+
+- Networks can be plotted with the `gplot` function from *GraphPlot.jl*:
+
+```{julia}
+gplot(G, nodelabel=1:3)
+```
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-important}
+The `gplot` function in fact returns something known as a "composition"; this may or may not be actually drawn as a picture, depending on your working environment. If you're in VSCode, a picture will be displayed, but if you're using the ordinary Julia REPL, you will not see a picture. In the latter case, you need to save the composition to an image file as follows:
+
+```{julia}
+#|eval: false
+using Compose
+
+pic = gplot(G, nodelabel=1:3)
+draw(PNG("mypicture.png"), pic)
+```
+::::
+:::
+
+
+## Removing connections
+
+- `rem_edge!` can be used to remove existing connections:
+
+```{julia}
+rem_edge!(G, 1, 2)
+gplot(G, nodelabel=1:3)
+```
+
+
+## Constructing a network from an adjacency matrix
+
+- Using lots of `add_edge!` calls quickly becomes tedious...
+- Often, a better way of constructing a graph is by way of its **adjacency matrix**
+- This is a matrix (two-dimensional array) of numbers such that:
+  - if there is a 1 in the cell on the *i*th row, *j*th column, then nodes *i* and *j* are connected
+  - if there is a 0 there, the nodes are not connected
+
+
+::: {.content-visible when-format="revealjs"}
+## Constructing a network from an adjacency matrix
+:::
+
+- Example:
+
+```{julia}
+#|output: false
+A = [0 1 1
+     1 0 1
+     1 1 0]
+
+G2 = Graph(A)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Constructing a network from an adjacency matrix
+:::
+
+```{julia}
+gplot(G2, nodelabel=1:3)
+```
+
+
+## Directed graphs
+
+- What if we need a network in which at least some connections are unidirectional?
+- We need a **directed graph**, implemented by the `DiGraph` type
+
+```{julia}
+A = [0 1 0
+     1 0 0
+     1 1 0]
+
+G3 = DiGraph(A)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Directed graphs
+:::
+
+```{julia}
+gplot(G3, nodelabel=1:3)
+```
+
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-important}
+Notice that, since `Graph` constructs an undirected graph, it expects a **symmetric** adjacency matrix as argument. If you try to pass an asymmetric adjacency matrix (such as the one above) to `Graph`, you will get an error.
+
+In other words, if your adjacency matrix is asymmetric, you are dealing with a directed graph, and you *must* use `DiGraph`.
+::::
+:::
+
+
+## Exercise {.ex}
+
+What kind of network do the following adjacency matrices represent? **Think about it first** (draw with your "mind's eye"), then implement the code and plot the graphs.
+
+::: {.columns}
+:::: {.column width="33%"}
+```{julia}
+#| output: false
+A = [0 1 0
+     0 1 0
+     0 1 0]
+```
+::::
+
+:::: {.column width="33%"}
+```{julia}
+#| output: false
+B = [0 0 0
+     1 1 1
+     0 0 0]
+```
+::::
+
+:::: {.column width="33%"}
+```{julia}
+#| output: false
+C = [1 0 0
+     0 1 0
+     0 0 1]
+```
+::::
+:::
+
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-tip title="Solution" collapse=true}
+```{julia}
+GA = DiGraph(A)
+gplot(GA, nodelabel=1:3)
+```
+
+```{julia}
+GB = DiGraph(B)
+gplot(GB, nodelabel=1:3)
+```
+
+```{julia}
+GC = DiGraph(C)
+gplot(GC, nodelabel=1:3)
+```
+::::
+:::
+
+::: {.content-visible when-format="revealjs"}
+##
+
+```{julia}
+GA = DiGraph(A)
+gplot(GA, nodelabel=1:3)
+```
+
+##
+
+```{julia}
+GB = DiGraph(B)
+gplot(GB, nodelabel=1:3)
+```
+
+##
+
+```{julia}
+GC = DiGraph(C)
+gplot(GC, nodelabel=1:3)
+```
+:::
+
+
+## Graph generators
+
+- For large networks, it would be tedious to construct them by hand...
+- And in any case, we are rarely interested in the **precise** construction of a network
+- What's more important are the **statistical characteristics** of the network
+  - How many connections does a node have on average?
+  - Are some nodes much more connected than others?
+  - And so on.
+- Large graphs with known statistical properties can be constructed using **generators**
+
+
+## Erdős-Rényi graphs
+
+- Take $n$ nodes, initially unconnected. Cycle through each pair of nodes, connecting them with probability $p$.
+  - In other words: At each node pair, you flip a biased coin that lands heads with prob. $p$ and tails with prob. $1-p$. If you get heads, you connect the nodes; if tails, you don't.
+- This algorithm results in a so-called **Erdős-Rényi random graph**.
+- In Graphs.jl, the `erdos_renyi` function can be used:
+
+```{julia}
+#|output: false
+GER = erdos_renyi(100, 0.1)
+GER2 = erdos_renyi(100, 0.03)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Erdős-Rényi graphs
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+gplot(GER)
+```
+::::
+
+:::: {.column width="50%"}
+```{julia}
+gplot(GER2)
+```
+::::
+:::
+
+
+## Accessing graph properties
+
+::: {.columns}
+:::: {.column width="100%"}
+- Number of nodes (vertices):
+::::
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+nv(GER)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+nv(GER2)
+```
+::::
+:::
+
+::: {.columns}
+:::: {.column width="100%"}
+- Number of connections (edges):
+::::
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+ne(GER)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+ne(GER2)
+```
+::::
+:::
+
+
+::: {.content-visible when-format="revealjs"}
+## Accessing graph properties
+:::
+
+::: {.columns}
+:::: {.column width="100%"}
+- Number of connections for each node (called the node's **degree**):
+::::
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+degree(GER)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+degree(GER2)
+```
+::::
+:::
+
+
+## Degree distribution
+
+- This makes it easy to plot a graph's **degree distribution**:
+
+```{julia}
+#| eval: false
+using Plots        # for the histogram() function
+d = degree(GER)
+histogram(d)
+```
+
+::: {.content-visible when-format="revealjs"}
+## Degree distribution
+:::
+
+```{julia}
+#| echo: false
+using Plots        # for the histogram() function
+d = degree(GER)
+histogram(d)
+```
+
+
+
+## Exercise {.ex}
+
+Open Wikipedia on the page for *Switzerland*. Then, **using only links on the page**, try to navigate to the page for *Albert Einstein*.
+
+How many links do you need to go through to reach the destination?
+
+::: {.content-visible when-format="revealjs"}
+## 
+
+One possible path:
+
+*Switzerland*
+
+$\quad\to$ *German*
+
+$\quad\quad\to$ *Germany* 
+
+$\quad\quad\quad\to$ *Education in Germany* 
+
+$\quad\quad\quad\quad\to$ *Max Planck Institute for Plasma Physics* 
+
+$\quad\quad\quad\quad\quad\to$ *Physics* 
+
+$\quad\quad\quad\quad\quad\quad\to$ *Albert Einstein*
+
+That's 6 links.
+
+:::
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-tip collapse=true title="Answer"}
+Here's one possible path:
+
+*Switzerland*
+
+$\quad\to$ *German*
+
+$\quad\quad\to$ *Germany* 
+
+$\quad\quad\quad\to$ *Education in Germany* 
+
+$\quad\quad\quad\quad\to$ *Max Planck Institute for Plasma Physics* 
+
+$\quad\quad\quad\quad\quad\to$ *Physics* 
+
+$\quad\quad\quad\quad\quad\quad\to$ *Albert Einstein*
+
+That's 6 links.
+
+But it's not the shortest path. You can also go, if you're in the know:
+
+*Switzerland* 
+
+$\quad\to$ *University of Zurich* 
+
+$\quad\quad\to$ *Albert Einstein* 
+
+(2 links.)
+::::
+:::
+
+
+## "Six degrees of separation"
+
+- Some networks have the "small-world property": there is a short path from every node to every other node
+- The **Watts-Strogatz model** or **small world graph** is one way of modelling this
+- To obtain such a graph, one does a random rewiring of a ring lattice
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+::: {.columns}
+:::: {.column width="100%"}
+1. Start with a ring lattice (on the left, each node has $k = 2$ neighbours; on the right, each node has $k = 4$ neighbours):
+::::
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+#|echo: false
+H1 = watts_strogatz(10, 2, 0.0)
+gplot(H1, layout=circular_layout)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+#|echo: false
+H1 = watts_strogatz(10, 4, 0.0)
+gplot(H1, layout=circular_layout)
+```
+::::
+:::
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+::: {.columns}
+:::: {.column width="100%"}
+2. Randomly rewire each edge with probability $\beta$ to a randomly chosen destination (here, $\beta = 0.4$):
+::::
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+#|echo: false
+H1 = watts_strogatz(10, 2, 0.4)
+gplot(H1, layout=circular_layout)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+#|echo: false
+H1 = watts_strogatz(10, 4, 0.4)
+gplot(H1, layout=circular_layout)
+```
+::::
+:::
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+- In Graphs.jl, small-world networks can be created with `watts_strogatz(n, k, β)`
+  - `n`: number of nodes
+  - `k`: initial degree of every node
+  - `β`: rewiring probability
+- For example:
+
+```{julia}
+#| output: false
+GWS1 = watts_strogatz(100, 8, 0.1)
+GWS2 = watts_strogatz(100, 2, 0.1)
+```
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+gplot(GWS1)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+gplot(GWS2)
+```
+::::
+:::
+
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+::: {.columns}
+:::: {.column width="50%"}
+```{julia}
+gplot(GWS1, layout=circular_layout)
+```
+::::
+:::: {.column width="50%"}
+```{julia}
+gplot(GWS2, layout=circular_layout)
+```
+::::
+:::
+
+
+## Clustering
+
+- Short path lengths are not the only way in which small-world networks are interesting
+- They also exhibit high clustering
+- The **local clustering coefficient** of a node $v$ is defined as the proportion of neighbours of $v$ which are neighbours amongst themselves
+- A highly clustered network contains **cliques**, subnetworks in which all nodes are connected to each other
+
+
+::: {.content-visible when-format="revealjs"}
+## Clustering
+:::
+
+::: {.columns}
+Low clustering for node 1:
+
+:::: {.column width="50%"}
+```{julia}
+#|echo: false
+g = Graph(4)
+add_edge!(g, 1, 2)
+add_edge!(g, 1, 3)
+add_edge!(g, 1, 4)
+gplot(g, nodelabel=1:4)
+```
+::::
+:::: {.column width="50%"}
+High clustering for node 1:
+
+```{julia}
+#|echo: false
+g = Graph(4)
+add_edge!(g, 1, 2)
+add_edge!(g, 1, 3)
+add_edge!(g, 1, 4)
+add_edge!(g, 2, 3)
+add_edge!(g, 2, 4)
+add_edge!(g, 3, 4)
+gplot(g, nodelabel=1:4)
+```
+::::
+:::
+
+
+::: {.content-visible when-format="revealjs"}
+## Clustering
+:::
+
+- In Graphs.jl, we can use `local_clustering_coefficient`
+- E.g. to get the average local clustering coefficient:
+
+```{julia}
+using Statistics
+G = erdos_renyi(100, 0.1)
+mean([local_clustering_coefficient(G, v) for v in vertices(G)])
+```
+
+```{julia}
+using Statistics
+G = watts_strogatz(100, 10, 0.1)
+mean([local_clustering_coefficient(G, v) for v in vertices(G)])
+```
+
+
+## Exercise {.ex}
+
+1. Download and unzip the dolphin social network data from [https://networkrepository.com/soc-dolphins.php](https://networkrepository.com/soc-dolphins.php)
+1. Import these data into Julia, construct a graph, and plot the network
+1. Modify the plot so that each node's side is proportional to its degree
+1. Plot a histogram of the degree distribution
+1. Plot a histogram of the distribution of local clustering coefficient
+
+You will need [MatrixMarket.jl](https://github.com/JuliaSparse/MatrixMarket.jl) and [GraphPlot.jl documentation](https://juliagraphs.org/GraphPlot.jl/)
+
+
+## Going forward
+
+- Next time, we will learn how to interface Graph.jl with Agents.jl, so that we can run ABM simulations on networks
+- Homework:
+  1. Read @Smaldino2023, chapter 9
+  1. Complete the [homework assignment](../homework/clustering.qmd)
+
+
+::: {.content-visible when-format="revealjs"}
+## References
+:::
+
+
+

@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now imagine Carlos has access to both Alice’s and Bob’s code. If Carlos executes the function <code>do_cool_stuff()</code>, what is going to happen? Will Alice’s code run, or will Bob’s code run?</p>
 <p>The standard solution to this kind of problem is to put code in <strong>modules</strong>. A module defines a <strong>namespace</strong>. This makes it possible to use the same function names (as well as names for custom types etc.) in different modules.</p>
 <p>If Alice has created a module called <code>CodeOfAlice</code> and Bob’s module is called <code>CodeOfBob</code>, then the following commands can be used to distinguish between the two different but homonymous functions:</p>
-<div id="8baf8732" class="cell" data-execution_count="2">
+<div id="376e8116" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CodeOfAlice.<span class="fu">do_cool_stuff</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>CodeOfBob.<span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -206,12 +206,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>import</code> does not allow the above behaviour. With <code>import</code>, you <strong>must</strong> specify the module name every time you call a function.</li>
 </ul>
 <p>In summary, you can do either</p>
-<div id="0fd822c8" class="cell" data-execution_count="3">
+<div id="b269b77a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CodeOfAlice</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>or</p>
-<div id="4f0a85e7" class="cell" data-execution_count="4">
+<div id="87d8feca" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">CodeOfAlice</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CodeOfAlice.<span class="fu">do_cool_stuff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-variationallearning-module" class="level2">
 <h2 class="anchored" data-anchor-id="the-variationallearning-module">4. The <code>VariationalLearning</code> module</h2>
 <p>Here, I am following the logic of the lecture on <a href="../lectures/speaking.html">Speaking and listening</a>, omitting the older <code>LearningEnvironment</code> type which we will no longer need. I’ve decided to <code>export</code> every type and function defined by the module. In this case it makes sense, since the external user may conceivably want to make use of all of them. (We will later see examples of so-called “helper” functions which need not be exposed to end-users.)</p>
-<div id="19cb3539" class="cell" data-execution_count="5">
+<div id="1621572a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> VariationalLearning</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we need this package for the sample() function</span></span>
