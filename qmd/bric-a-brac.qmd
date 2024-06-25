@@ -39,5 +39,6 @@ A compendium of sundry miscellanea.
   include("VL.jl")
   ```
 
+- [VL2.jl](jl/VL2.jl) -- Yet again updated version of our variational learning module. Defines a `NetworkVL` type, a variational learner that occupies the node of a graph.
 
 

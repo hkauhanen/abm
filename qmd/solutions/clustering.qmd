@@ -1,0 +1,77 @@
+---
+title: "Degree and clustering"
+date: 06/25/2024
+execute:
+  echo: true
+categories:
+  - solution
+---
+
+## Erdős--Rényi graphs
+
+```{julia}
+#|eval: true
+#|output: true
+
+# packages we need
+using Graphs, Plots, Statistics
+
+# values of p (rewiring probability)
+pp = 0.0:0.01:0.5
+
+# construct a graph for each value of p
+G = [erdos_renyi(100, p) for p in pp]
+
+# get mean degree for each graph
+mean_degr = [mean(degree(g)) for g in G]
+
+# get mean clustering for each graph
+mean_clus = [mean([local_clustering_coefficient(g, v) for v in vertices(g)]) for g in G]
+
+# plot
+plot(pp, xaxis="rewiring probability", mean_degr, yaxis="average degree (blue curve)", 
+     color=:deepskyblue, legend=false, linewidth=2.0)
+
+plot!(twinx(), pp, mean_clus, yaxis="average clustering (red curve)", 
+      color=:salmon, legend=false, linewidth=2.0)
+
+title!("Erdős-Rényi graphs")
+```
+
+
+## Watts--Strogatz graphs
+
+```{julia}
+#|eval: true
+#|output: true
+
+# construct a graph for each value of p
+G = [watts_strogatz(100, 16, p) for p in pp]
+
+# mean degree and clustering, just like above
+mean_degr = [mean(degree(g)) for g in G]
+mean_clus = [mean([local_clustering_coefficient(g, v) for v in vertices(g)]) for g in G]
+
+# plot
+plot(pp, xaxis="rewiring probability", mean_degr, yaxis="average degree (blue curve)", 
+     color=:deepskyblue, legend=false, linewidth=2.0)
+
+plot!(twinx(), pp, mean_clus, yaxis="average clustering (red curve)", 
+      color=:salmon, legend=false, linewidth=2.0)
+
+title!("Watts-Strogatz graphs")
+```
+
+
+## Bonus questions
+
+1. Why is the average degree a linearly increasing function of $p$ in the case of Erdős--Rényi graphs?
+   - Because in the Erdős--Rényi algorithm, $p$ represents the probability with which an edge is added between two nodes which are not yet connected. Hence, the larger $p$ is, the more nodes get connected, and hence the average degree increases.
+1. Why is it a constant function in the case of Watts--Strogatz graphs?
+   - In the Watts-Strogatz algorithm, by contrast, the rewiring probability means the probability that an already existing edge is detached and is attached elsewhere. As a consequence, the number of links in the graph remains constant, and average degree is not affected (one node gains one more friend, but another one loses one).
+1. Why is the average degree function "wiggly" in the case of Erdős--Rényi graphs but not so in the case of Watts--Strogatz graphs?
+   - See answer to above question. In Watts--Strogatz, average degree is not affected by rewiring, hence it is also constant across different values of the rewiring probability.
+1. Why is the average clustering wiggly in both cases?
+   - Unlike average degree, average clustering is affected by rewiring in each case. Since the graph construction algorithms are stochastic, you get slightly different values even if you repeat the construction with the exact same parameter values. When we do vary the rewiring probability, we see this as "wigglyness".
+
+

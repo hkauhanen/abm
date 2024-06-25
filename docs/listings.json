@@ -1,11 +1,26 @@
 [
   {
+    "listing": "/lectures.html",
+    "items": [
+      "/lectures/intro.html",
+      "/lectures/basics.html",
+      "/lectures/learning.html",
+      "/lectures/speaking.html",
+      "/lectures/change.html",
+      "/lectures/structured.html",
+      "/lectures/bestpractices.html",
+      "/lectures/networks.html",
+      "/lectures/network-simulations.html"
+    ]
+  },
+  {
     "listing": "/solutions.html",
     "items": [
       "/solutions/fly.html",
       "/solutions/vl.html",
       "/solutions/modules.html",
-      "/solutions/change.html"
+      "/solutions/change.html",
+      "/solutions/clustering.html"
     ]
   },
   {
@@ -17,20 +32,8 @@
       "/homework/modules.html",
       "/homework/change.html",
       "/homework/project.html",
-      "/homework/clustering.html"
-    ]
-  },
-  {
-    "listing": "/lectures.html",
-    "items": [
-      "/lectures/intro.html",
-      "/lectures/basics.html",
-      "/lectures/learning.html",
-      "/lectures/speaking.html",
-      "/lectures/change.html",
-      "/lectures/structured.html",
-      "/lectures/bestpractices.html",
-      "/lectures/networks.html"
+      "/homework/clustering.html",
+      "/homework/ensembles.html"
     ]
   }
 ]

@@ -1,0 +1,674 @@
+---
+title: "Simulations on social networks"
+date: 06/25/2024
+image: "../img/network-simulations-image.png"
+execute:
+  echo: true
+categories:
+  - lecture
+format:
+  revealjs:
+    output-file: network-simulations-slides.html
+    mermaid-format: png
+---
+
+```{julia}
+#| echo: false
+#| eval: true
+#| output: false
+using Random
+Random.seed!(123)
+using Agents
+using Graphs
+
+include("../jl/VL2.jl")
+using .VL
+```
+
+## Plan
+
+- Last time we learned about (social) networks
+- Today, we'll learn how to interface Graphs.jl with Agents.jl
+- This allows ABM simulations on networks: our population of agents can now be structured in very interesting ways
+- We'll also talk about how to gather statistics from simulation runs
+- For a concrete example, we will implement a simulation with variational learners on a social network without spatial effects
+
+
+## Requirements
+
+- We will need the following packages today:
+  - Agents
+  - Graphs
+  - Plots
+  - Statistics
+  - DataFrames
+- Now would be a good time to make sure you have all these installed
+- Code for today's lecture: VL2.jl under ["Bric-a-brac"](../bric-a-brac.qmd)
+
+
+## Catching errors
+
+- Before moving on, we need to discuss an important technicality
+- Sometimes, your code throws an error
+  - For example, try: `rand([])`
+  - This tries to draw a random element from an empty array, which of course won't work
+- Often, you want to eliminate these errors
+  - For example, make sure that you never use things like `rand([])`
+- Other times, they may be unavoidable, and need to be **caught**
+
+::: {.content-visible when-format="revealjs"}
+## Catching errors
+
+::: {.columns}
+:::: {.column width="60%"}
+- For a concrete example, assume the network on the right
+- Suppose we want to obtain a random neighbour of a given node
+- If that node does have neighbours, then all is well
+- But if the node happens to have no neighbours, then we have a problem!
+- If we don't want our code to crash, we need to catch the error
+::::
+:::: {.column width="40%"}
+```{julia}
+#|echo: false
+Random.seed!(12)
+using GraphPlot
+G = erdos_renyi(10, 0.20)
+rem_edge!(G, 1, 2)
+rem_edge!(G, 1, 6)
+gplot(G, nodelabel=1:10)
+```
+::::
+:::
+:::
+
+::: {.content-visible unless-format="revealjs"}
+```{julia}
+#|echo: false
+Random.seed!(12)
+using GraphPlot
+G = erdos_renyi(10, 0.20)
+rem_edge!(G, 1, 2)
+rem_edge!(G, 1, 6)
+gplot(G, nodelabel=1:10)
+```
+
+- For a concrete example, assume the above network
+- Suppose we want to obtain a random neighbour of a given node
+- If that node does have neighbours, then all is well
+- But if the node happens to have no neighbours (such as node number 5), then we have a problem!
+- If we don't want our code to crash, we need to catch the error
+:::
+
+::: {.content-visible when-format="revealjs"}
+## Catching errors
+:::
+
+- Errors are caught using a `try ... catch ... end` block:
+
+```{julia}
+try
+  rand([])
+catch
+  println("Trying to draw from an empty container!")
+end
+```
+
+- Here, Julia will try to execute everything found between the `try` and `catch` keywords
+- If an error is thrown, then it is caught and the stuff between the `catch` and `end` keywords is executed, **without crashing**
+
+
+::: {.content-visible when-format="revealjs"}
+## Catching errors
+:::
+
+- You can also leave the catch block empty, if you just want to continue silently!
+
+```{julia}
+try
+  rand([])
+catch
+end
+```
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. Decide on model space
+  1. Define agent type(s)
+  1. Define rules that evolve the model
+  1. Initialize your model
+  1. Evolve, visualize and collect data
+
+::: {.content-visible unless-format="revealjs"}
+- For this particular application:
+  1. Decide on model space --- we'll use a graph
+  1. Define agent type(s) --- reuse existing code, with small modifications
+  1. Define rules that evolve the model --- reuse, with small modifications
+  1. Initialize your model --- just like before
+  1. Evolve, visualize and collect data --- we'll talk more about this
+:::
+
+::: {.content-visible when-format="revealjs"}
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. Decide on model space [--- we'll use a graph]{.fragment}
+  1. [Define agent type(s)]{.grey}
+  1. [Define rules that evolve the model]{.grey}
+  1. [Initialize your model]{.grey}
+  1. [Evolve, visualize and collect data]{.grey}
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. [Decide on model space --- we'll use a graph]{.grey}
+  1. Define agent type(s) [--- reuse existing code, with small modifications]{.fragment}
+  1. [Define rules that evolve the model]{.grey}
+  1. [Initialize your model]{.grey}
+  1. [Evolve, visualize and collect data]{.grey}
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. [Decide on model space --- we'll use a graph]{.grey}
+  1. [Define agent type(s) --- reuse existing code, with small modifications]{.grey}
+  1. Define rules that evolve the model [--- reuse, with small modifications]{.fragment}
+  1. [Initialize your model]{.grey}
+  1. [Evolve, visualize and collect data]{.grey}
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. [Decide on model space --- we'll use a graph]{.grey}
+  1. [Define agent type(s) --- reuse existing code, with small modifications]{.grey}
+  1. [Define rules that evolve the model --- reuse, with small modifications]{.grey}
+  1. Initialize your model [--- just like before]{.fragment}
+  1. [Evolve, visualize and collect data]{.grey}
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. [Decide on model space --- we'll use a graph]{.grey}
+  1. [Define agent type(s) --- reuse existing code, with small modifications]{.grey}
+  1. [Define rules that evolve the model --- reuse, with small modifications]{.grey}
+  1. [Initialize your model --- just like before]{.grey}
+  1. Evolve, visualize and collect data [--- we'll talk more about this]{.fragment}
+
+## Strategy
+
+- Recall the 5 steps to define a model in Agents.jl:
+  1. Decide on model space --- we'll use a graph
+  1. Define agent type(s) --- reuse existing code, with small modifications
+  1. Define rules that evolve the model --- reuse, with small modifications
+  1. Initialize your model --- just like before
+  1. Evolve, visualize and collect data --- we'll talk more about this
+:::
+
+## 1. Space
+
+- In [a previous lecture](structured.qmd), we used:
+
+```{julia}
+#|eval: false
+dims = (10, 10)
+space = GridSpace(dims)
+```
+
+::: {.content-visible when-format="revealjs"}
+. . . 
+:::
+
+- Now, we use (for example):
+
+```{julia}
+#|output: false
+G = erdos_renyi(100, 0.3)
+space = GraphSpace(G)
+```
+
+## 2. Agent
+
+- Previously, we defined:
+
+```{julia}
+#|eval: false
+@agent struct GridVL(GridAgent{2}) <: VariationalLearner
+  p::Float64
+  gamma::Float64
+  P1::Float64
+  P2::Float64
+end
+```
+
+::: {.content-visible when-format="revealjs"}
+## 2. Agent
+:::
+
+- We now add a new type:
+
+```{julia}
+#|eval: false
+@agent struct NetworkVL(GraphAgent) <: VariationalLearner
+  p::Float64
+  gamma::Float64
+  P1::Float64
+  P2::Float64
+end
+```
+
+## 3. Rules
+
+- We previously used:
+
+```{julia}
+#|eval: false
+function VL_step!(agent, model)
+  interlocutor = random_nearby_agent(agent, model)
+  interact!(interlocutor, agent)
+end
+```
+
+- Here, `random_nearby_agent` returned the 8 agents surrounding `agent` in the `GridSpace`
+
+
+::: {.content-visible when-format="revealjs"}
+## 3. Rules
+:::
+
+- `random_nearby_agent` also has a method for `GraphSpace`s
+- However, in a graph, an agent may be neighbourless!
+- We need to consider this, and so define:
+
+```{julia}
+#|eval: false
+function VL_step!(agent::NetworkVL, model)
+  try
+    interlocutor = random_nearby_agent(agent, model)
+    interact!(interlocutor, agent)
+  catch
+  end
+end
+```
+
+
+## 4. Initialize model
+
+- Previously, we used the following to initialize a model:
+
+```{julia}
+#|eval: false
+model = StandardABM(GridVL,
+                    GridSpace((10, 10)),
+                    agent_step! = VL_step!)
+```
+
+::: {.content-visible when-format="revealjs"}
+## 4. Initialize model
+:::
+
+- Now we do (for example):
+
+```{julia}
+#|eval: false
+model = StandardABM(NetworkVL,
+                    GraphSpace(erdos_renyi(10, 0.5)),
+                    agent_step! = VL_step!)
+```
+
+
+## Putting it all together
+
+```{julia}
+#| eval: true
+# create space
+G = erdos_renyi(10, 0.5)
+space = GraphSpace(G)
+
+# initialize model
+model = StandardABM(NetworkVL,
+                    space,
+                    agent_step! = VL_step!)
+
+# add agents
+for i in 1:10
+  add_agent_single!(model, 0.01, 0.01, 0.4, 0.1)
+end
+```
+
+
+## 5. Evolve, visualize and collect data
+
+- Previously, we used the `step!` function from Agents.jl to evolve our model
+- We also wrote our own custom functions for retrieving summary statistics
+- Graphs.jl actually contains **data collection** functions which make this even easier
+- The most important of these (for us) are `run!` and `ensemblerun!`
+
+
+## Using `run!` to collect data
+
+- `run!` is like `step!`, except it also collects the model's state and returns it as a `DataFrame`
+  - `DataFrame`s are tables that are used to represent data
+- Syntax: `run!(model, n; adata)`, where
+  - `n` is the number of time steps we want to run the model for
+  - `adata` is a keyword argument that specifies what data ("agent data") is gathered
+- For reasons which are not superbly clear, `run!` has *two* return values, two `DataFrame`s
+  - We can safely ignore the second one
+
+
+::: {.content-visible when-format="revealjs"}
+## Using `run!` to collect data
+:::
+
+- Example: suppose we want to collect each agent's `p` field (their weight for grammar $G_1$) at each time step, over 4000 model iterations (each agent is updated 4000 times).
+- This is achieved by:
+
+```{julia}
+#|output: false
+data, _ = run!(model, 4000; adata = [:p])
+```
+
+- Note the two return values; since we are not interested in the second one, we store it in the `_` variable (think of this as a trash bin)
+- Also note that `p` is prefixed with a colon (`:p`) -- this is crucial!
+- Also note that `adata` is a vector (this means you can specify more than one agent field to be collected, should you wish to do so)
+
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-note}
+Why does `p` have to be prefixed by a colon? Well, we couldn't just put `p` in there, as that would refer to a variable whose name is `p`. But that's not what we want. What we want is somehow to refer to each agent's internal `p` field. This can be achieved using so-called **symbols**. In Julia, symbols always begin with a colon (`:`). Think of them as labels. They are a bit like strings, but not quite (for example, a string is composed of characters but a symbol isn't!).
+::::
+:::
+
+::: {.content-visible when-format="revealjs"}
+## Using `run!` to collect data
+:::
+
+- The variable `data` now contains a `DataFrame` with three columns: the time step, the agent's ID, and the agent's `p`:
+
+```{julia}
+data
+```
+
+::: {.content-visible when-format="revealjs"}
+## Using `run!` to collect data
+:::
+
+- We can now, for example, plot this:
+
+```{julia}
+#|output: false
+using Plots
+plot(data.time, data.p, group=data.id)
+```
+
+- Here, note that:
+  - columns of a data frame are selected using the dot (`.`)
+  - we use the `group` keyword argument on `plot` so that each agent gets its own trajectory in the plot
+
+
+::: {.content-visible when-format="revealjs"}
+## Using `run!` to collect data
+:::
+
+```{julia}
+#|echo: false
+using Plots
+plot(data.time, data.p, group=data.id)
+```
+
+
+## Collecting aggregated data
+
+- Often we don't need to collect data for each agent individually
+- For example: it is often enough to know how the average, or mean, of `p` evolves
+- This is very easy to do with `run!`: all we need to do is to feed the `adata` keyword argument with the tuple `(:p, mean)` instead of plain `:p`
+- More generally, in place of `mean`, you can put any function that you want to aggregate over the agents
+
+::: {.content-visible when-format="revealjs"}
+## Collecting aggregated data
+:::
+
+- Example:
+
+```{julia}
+#|output: false
+#|eval: true
+using Statistics
+
+G2 = erdos_renyi(10, 0.5)
+space2 = GraphSpace(G2)
+
+model2 = StandardABM(NetworkVL, space2,
+                     agent_step! = VL_step!)
+
+for i in 1:10
+  add_agent_single!(model2, 0.01, 0.01, 0.4, 0.1)
+end
+
+data2, _ = run!(model2, 4000; adata = [(:p, mean)])
+```
+
+::: {.content-visible when-format="revealjs"}
+## Collecting aggregated data
+:::
+
+- Now the returned dataframe contains a `mean_p` column:
+
+```{julia}
+data2
+```
+
+::: {.content-visible when-format="revealjs"}
+## Collecting aggregated data
+:::
+
+```{julia}
+plot(data2.time, data2.mean_p)
+```
+
+
+## Exercise {.ex}
+
+::: {.columns}
+:::: {.column width="50%"}
+- Recall that the constructor of a Watts--Strogatz network, `watts_strogatz(n, k, beta)`, takes three arguments:
+  - `n`: number of nodes
+  - `k`: initial degree
+  - `beta`: rewiring probability
+- Your task: simulate VLs in a Watts--Strogatz network, exploring how/if variation in `beta` affects the evolution of mean `p`
+::::
+:::: {.column width="50%"}
+- Use these parameters for your learners:
+  - initial value of `p`: 0.01
+  - learning rate `gamma`: 0.01
+  - `P1`: 0.2
+  - `P2`: 0.1
+- Use these for your network(s):
+  - `n`: 50
+  - `k`: 8
+  - `beta`: 0.1 versus 0.5
+::::
+:::
+
+
+::: {.content-visible when-format="revealjs"}
+## Solution
+
+- It is useful to wrap the model construction in a function:
+
+```{julia}
+#|output: false
+function make_model(beta)
+  G = watts_strogatz(50, 8, beta)
+  space = GraphSpace(G)
+
+  model = StandardABM(NetworkVL, space,
+                      agent_step! = VL_step!)
+
+  for i in 1:50
+    add_agent_single!(model, 0.01, 0.01, 0.2, 0.1)
+  end
+
+  return model
+end
+```
+
+## Solution
+
+- It is now easy to run both models and visualize the results:
+
+```{julia}
+#|echo: false
+#|output: false
+Random.seed!(12)
+```
+
+```{julia}
+#|output: false
+model1 = make_model(0.1)
+model2 = make_model(0.5)
+
+data1, _ = run!(model1, 10_000; adata = [(:p, mean)])
+data2, _ = run!(model2, 10_000; adata = [(:p, mean)])
+
+plot(data1.time, data1.mean_p, label="β = 0.1")
+plot!(data2.time, data2.mean_p, label="β = 0.5")
+```
+
+## Solution
+
+```{julia}
+#|echo: false
+plot(data1.time, data1.mean_p, label="β = 0.1")
+plot!(data2.time, data2.mean_p, label="β = 0.5")
+```
+:::
+
+::: {.content-visible unless-format="revealjs"}
+:::: {.callout-tip title="Solution" collapse=true}
+It is useful to wrap the model construction in a function:
+
+```{julia}
+#|output: false
+function make_model(beta)
+  G = watts_strogatz(50, 8, beta)
+  space = GraphSpace(G)
+
+  model = StandardABM(NetworkVL, space,
+                      agent_step! = VL_step!)
+
+  for i in 1:50
+    add_agent_single!(model, 0.01, 0.01, 0.2, 0.1)
+  end
+
+  return model
+end
+```
+
+It is now easy to run both models:
+
+```{julia}
+#|echo: false
+#|output: false
+Random.seed!(12)
+```
+
+```{julia}
+#|output: false
+model1 = make_model(0.1)
+model2 = make_model(0.5)
+
+data1, _ = run!(model1, 10_000; adata = [(:p, mean)])
+data2, _ = run!(model2, 10_000; adata = [(:p, mean)])
+
+plot(data1.time, data1.mean_p, label="β = 0.1")
+plot!(data2.time, data2.mean_p, label="β = 0.5")
+```
+
+And to visualize the results:
+
+```{julia}
+#|echo: false
+plot(data1.time, data1.mean_p, label="β = 0.1")
+plot!(data2.time, data2.mean_p, label="β = 0.5")
+```
+::::
+:::
+
+
+## Ensemble data with `ensemblerun!`
+
+- It looks like there might be a small difference: the change is quicker with $\beta = 0.5$ compared to $\beta = 0.1$
+- But is this difference real, or just a random fluke?
+- To answer this question, we need to run several repetitions of each simulation!
+- This is easiest by using the dedicated `ensemblerun!` function
+- It works like `run!` but, instead of a single model, takes a *vector* of models as input
+
+
+::: {.content-visible when-format="revealjs"}
+## Ensemble data with `ensemblerun!`
+:::
+
+- Like this:
+
+```{julia}
+#|echo: false
+#|output: false
+Random.seed!(1539)
+```
+
+```{julia}
+#|output: false
+models1 = [make_model(0.1) for i in 1:10]
+models2 = [make_model(0.5) for i in 1:10]
+
+data1, _ = ensemblerun!(models1, 10_000; adata = [(:p, mean)])
+data2, _ = ensemblerun!(models2, 10_000; adata = [(:p, mean)])
+```
+
+::: {.content-visible when-format="revealjs"}
+## Ensemble data with `ensemblerun!`
+:::
+
+- The returned data frames look like this:
+
+```{julia}
+data1
+```
+
+::: {.content-visible when-format="revealjs"}
+## Ensemble data with `ensemblerun!`
+:::
+
+- To plot these in a sensible way, we need to group by the ensemble column:
+
+```{julia}
+#|output: false
+plot(data1.time, data1.mean_p, 
+     group=data1.ensemble, color=1, label="β = 0.1")
+plot!(data2.time, data2.mean_p, 
+      group=data2.ensemble, color=2, label="β = 0.5")
+```
+
+::: {.content-visible when-format="revealjs"}
+## Ensemble data with `ensemblerun!`
+:::
+
+```{julia}
+#|echo: false
+plot(data1.time, data1.mean_p, 
+     group=data1.ensemble, color=1, label="β = 0.1")
+plot!(data2.time, data2.mean_p, 
+      group=data2.ensemble, color=2, label="β = 0.5")
+```
+
+::: {.content-visible when-format="revealjs"}
+## Ensemble data with `ensemblerun!`
+:::
+
+- These results suggest that there may be a difference; however, it looks to be small
+- To settle this question more conclusively, we need to:
+  - Run more simulations!
+  - Do some statistics on the simulation results
+- You get to practice both these things in this week's [homework](../homework/ensembles.qmd)
+
+

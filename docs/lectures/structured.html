@@ -261,7 +261,7 @@ Update 21 May 2024
 <li>First, though, a technical remark about function arguments</li>
 <li>We’ve seen function calls like this:</li>
 </ul>
-<div id="8b550dc6" class="cell" data-execution_count="2">
+<div id="a89acabf" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, (<span class="fl">1</span><span class="op">:</span><span class="fl">100</span>) <span class="op">.^</span> <span class="fl">2</span>, seriestype <span class="op">=</span> <span class="op">:</span>scatter, color <span class="op">=</span> <span class="op">:</span>blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -275,7 +275,7 @@ Update 21 May 2024
 <ul>
 <li>To create keyword arguments in your own function, you separate the list of keyword and positional arguments with a semicolon (<code>;</code>):</li>
 </ul>
-<div id="bb944644" class="cell" data-execution_count="3">
+<div id="4ccd2638" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">my_fun</span>(pos1, pos2; keyword1, keyword2)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -283,7 +283,7 @@ Update 21 May 2024
 <ul>
 <li>If you don’t want any positional arguments, you have to write the following!</li>
 </ul>
-<div id="208face5" class="cell" data-execution_count="4">
+<div id="81df4066" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">my_fun</span>(; keyword1, keyword2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -291,7 +291,7 @@ Update 21 May 2024
 <ul>
 <li>Keyword (but not positional) arguments can have default values:</li>
 </ul>
-<div id="040dc6c1" class="cell" data-execution_count="5">
+<div id="55da1fd4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">my_fun</span>(; firstname <span class="op">=</span> <span class="st">"John"</span>, lastname)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(firstname <span class="op">*</span> <span class="st">" "</span> <span class="op">*</span> lastname)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
@@ -330,7 +330,7 @@ John Doe</code></pre>
 <li>Enter the <a href="https://juliadynamics.github.io/Agents.jl/stable/"><em>Agents.jl</em></a> package, an ecosystem/framework for ABMs in Julia</li>
 <li>You should already have <em>Agents</em> installed. If not, now’s the time to:</li>
 </ul>
-<div id="2bb10504" class="cell" data-execution_count="6">
+<div id="03b7392c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Agents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -365,7 +365,7 @@ John Doe</code></pre>
 <ul>
 <li>To implement this in Julia with Agents.jl:</li>
 </ul>
-<div id="995425bf" class="cell" data-execution_count="7">
+<div id="5a8bd566" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dims <span class="op">=</span> (<span class="fl">50</span>, <span class="fl">50</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>space <span class="op">=</span> <span class="fu">GridSpaceSingle</span>(dims)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -384,7 +384,7 @@ Tuples and arrays
 </div>
 <div class="callout-body-container callout-body">
 <p>Tuples are similar to arrays. However, there are important differences. The most important of them is that arrays are mutable (the values of their elements can be changed after creation), while tuples are never mutable. Compare:</p>
-<div id="6ff269fb" class="cell" data-execution_count="9">
+<div id="d3c0f495" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> [<span class="fl">10</span>,<span class="fl">20</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tup <span class="op">=</span> (<span class="fl">10</span>,<span class="fl">20</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>arr[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">30</span>   <span class="co"># arr is now [30,20]</span></span>
@@ -392,7 +392,7 @@ Tuples and arrays
 </div>
 <p>The developers of Agents.jl have decided that the argument of <code>GridSpaceSingle</code> has to be a tuple (this decision makes sense in this case—as an immutable type, a tuple is more efficient than an array of similar size).</p>
 <p><strong>If you are running into errors trying to initialize a <code>GridSpaceSingle</code>, the problem is probably that you are trying to pass it the wrong type of argument.</strong> Compare:</p>
-<div id="5411a683" class="cell" data-execution_count="10">
+<div id="632d6562" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GridSpaceSingle</span>([<span class="fl">50</span>, <span class="fl">50</span>])   <span class="co"># trying to pass array; error</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">GridSpaceSingle</span>(<span class="fl">50</span>, <span class="fl">50</span>)     <span class="co"># trying to pass two separate numbers; error</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">GridSpaceSingle</span>((<span class="fl">50</span>, <span class="fl">50</span>))   <span class="co"># passing a tuple; works</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -405,7 +405,7 @@ Tuples and arrays
 <ul>
 <li>To make use of the machinery provided by <em>Agents.jl</em>, we replace:</li>
 </ul>
-<div id="c0509606" class="cell" data-execution_count="11">
+<div id="59d2ac3c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> VariationalLearner</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
@@ -416,7 +416,7 @@ Tuples and arrays
 <ul>
 <li>with this:</li>
 </ul>
-<div id="494ca574" class="cell" data-execution_count="12">
+<div id="9d73dafd" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@agent</span> <span class="kw">struct</span> <span class="fu">VariationalLearner</span>(GridAgent{<span class="fl">2</span>})</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
@@ -436,7 +436,7 @@ Tuples and arrays
 <li>This is a function that takes a single agent and the model as arguments</li>
 <li>We can make use of the <code>interact!</code> function we have already written:</li>
 </ul>
-<div id="15b6b2b9" class="cell" data-execution_count="14">
+<div id="b9ac869b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">VL_step!</span>(agent, model)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  interlocutor <span class="op">=</span> <span class="fu">random_nearby_agent</span>(agent, model)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">interact!</span>(interlocutor, agent)</span>
@@ -448,7 +448,7 @@ Tuples and arrays
 <ul>
 <li>We now have all the ingredients we need to initialize the ABM:</li>
 </ul>
-<div id="7fc59277" class="cell" data-execution_count="15">
+<div id="b81398a3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> <span class="fu">StandardABM</span>(VariationalLearner, space; </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                    agent_step! <span class="op">=</span> VL_step!)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -463,7 +463,7 @@ Tuples and arrays
 <ul>
 <li>This creates a sort of an “empty” container (it has no agents yet). To add agents, we call:</li>
 </ul>
-<div id="17e71058" class="cell" data-execution_count="16">
+<div id="e6b872f0" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_agent_single!</span>(model; p <span class="op">=</span> <span class="fl">0.1</span>, gamma <span class="op">=</span> <span class="fl">0.01</span>, </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                  P1 <span class="op">=</span> <span class="fl">0.4</span>, P2 <span class="op">=</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -477,7 +477,7 @@ Tuples and arrays
 <li>We have a space of 50 x 50 = 2,500 nodes</li>
 <li>Let’s add 2,499 more agents:</li>
 </ul>
-<div id="9dcfe238" class="cell" data-execution_count="17">
+<div id="86b6994f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2499</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_agent_single!</span>(model; p <span class="op">=</span> <span class="fl">0.1</span>, gamma <span class="op">=</span> <span class="fl">0.01</span>, </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    P1 <span class="op">=</span> <span class="fl">0.4</span>, P2 <span class="op">=</span> <span class="fl">0.1</span>)</span>
@@ -486,7 +486,7 @@ Tuples and arrays
 <ul>
 <li>Check number of agents:</li>
 </ul>
-<div id="e23a0377" class="cell" data-execution_count="18">
+<div id="3e3ee669" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nagents</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>2500</code></pre>
@@ -498,7 +498,7 @@ Tuples and arrays
 <ul>
 <li>Stepping the model is now easy:</li>
 </ul>
-<div id="40094715" class="cell" data-execution_count="19">
+<div id="93077aa9" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step!</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>StandardABM with 2500 agents of type VariationalLearner
@@ -510,7 +510,7 @@ Tuples and arrays
 <ul>
 <li>Or, for a desired number of steps:</li>
 </ul>
-<div id="6446af78" class="cell" data-execution_count="20">
+<div id="e964262e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step!</span>(model, <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>StandardABM with 2500 agents of type VariationalLearner
@@ -545,7 +545,7 @@ Important
 </ul></li>
 <li>To actually see the plot, you have to call the first return value explicitly:</li>
 </ul>
-<div id="3e4cf804" class="cell" data-execution_count="23">
+<div id="42168325" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -570,7 +570,7 @@ Important
 <ul>
 <li>In this case, the function is as simple as:</li>
 </ul>
-<div id="9c64cd4f" class="cell" data-execution_count="24">
+<div id="c8f23f13" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getp</span>(a)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a.p</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -589,7 +589,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Julia also allows one-liner function definitions. These are often useful when defining very simple functions, like <code>getp</code>. The equivalent one-liner definition here is:</p>
-<div id="99805663" class="cell" data-execution_count="25">
+<div id="5d9e29d4" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getp</span>(a) <span class="op">=</span> a.p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>getp (generic function with 1 method)</code></pre>
@@ -600,7 +600,7 @@ Tip
 <ul>
 <li>We now pass our <code>getp</code> function as the value of the <code>agent_color</code> keyword argument to <code>abmplot</code>:</li>
 </ul>
-<div id="f0931de7" class="cell" data-execution_count="26">
+<div id="172fd580" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -618,7 +618,7 @@ Tip
 <ul>
 <li>We can see how the population changes as we evolve the model further (the new <code>as</code> keyword argument specifies the size of the dots that represent the agents):</li>
 </ul>
-<div id="5e8798bf" class="cell" data-execution_count="27">
+<div id="270a9992" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step!</span>(model, <span class="fl">1000</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fig2, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fig2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -640,7 +640,7 @@ Tip
 <ul>
 <li>And further:</li>
 </ul>
-<div id="dad087b5" class="cell" data-execution_count="28">
+<div id="4792bbd8" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step!</span>(model, <span class="fl">1000</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fig3, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>fig3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -660,7 +660,7 @@ Tip
 <li>Making an animation/video allows us to visualize the evolution dynamically</li>
 <li>This is achieved with the <code>abmvideo</code> function</li>
 </ul>
-<div id="17053c09" class="cell" data-execution_count="29">
+<div id="8f75067f" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abmvideo</span>(<span class="st">"vid.mp4"</span>, model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>, </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>         frames <span class="op">=</span> <span class="fl">100</span>, framerate <span class="op">=</span> <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -681,7 +681,7 @@ Tip
 <ul>
 <li>We first reinitialize the model:</li>
 </ul>
-<div id="dfcad425" class="cell" data-execution_count="31">
+<div id="3f9f029b" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>space2 <span class="op">=</span> <span class="fu">GridSpaceSingle</span>((<span class="fl">50</span>, <span class="fl">50</span>))</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="op">=</span> <span class="fu">StandardABM</span>(VariationalLearner, space2;</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                     agent_step! <span class="op">=</span> VL_step!)</span>
@@ -712,7 +712,7 @@ Important
 <ul>
 <li>Visualize initial state of population:</li>
 </ul>
-<div id="9f8aac63" class="cell" data-execution_count="32">
+<div id="ec8e6d1a" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model2; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -730,7 +730,7 @@ Important
 <ul>
 <li>Animate for 1,000 iterations (every agent gets to learn 1,000 times):</li>
 </ul>
-<div id="5fc6b16e" class="cell" data-execution_count="33">
+<div id="b1fda246" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abmvideo</span>(<span class="st">"interesting.mp4"</span>, model2; agent_color <span class="op">=</span> getp,</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         as <span class="op">=</span> <span class="fl">12</span>, frames <span class="op">=</span> <span class="fl">1000</span>, framerate <span class="op">=</span> <span class="fl">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

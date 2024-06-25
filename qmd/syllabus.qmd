@@ -22,8 +22,8 @@ The syllabus is tentative -- topics may get rearranged as the course proceeds.
 | ~~28.5.~~ | *No lecture (Vorlesungsfreie Zeit)*					| | |
 | ~~4.6.~~  |	*No lecture (Vertiefungswoche)*				| | |
 | 11.6.		| [Social networks](lectures/networks.qmd) | [Degree and clustering](homework/clustering.qmd) | @Smaldino2023, chapter 9 |
-| 18.6.		| Simulations on social networks	| | |
-| 25.6.		| TBC	| | |
+| ~~18.6.~~		| *Cancelled due to sickness*	| | |
+| 25.6.		| [Simulations on social networks](lectures/network-simulations.qmd) | [Ensembles and statistics](homework/ensembles.qmd) | |
 | 2.7.		| Presentations 1					| | |
 | 9.7.		| Presentations 2				| | |
 | 16.7.		| Exam					| | |

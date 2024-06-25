@@ -136,5 +136,18 @@
   "homework/clustering.qmd": {
     "clustering.html": "10017190",
     "clustering.tex": "abd99aa4"
+  },
+  "lectures/network-simulations.qmd": {
+    "network-simulations-slides.html": "96aedccf",
+    "network-simulations.html": "3554743d",
+    "network-simulations.tex": "fed94d86"
+  },
+  "homework/ensembles.qmd": {
+    "ensembles.html": "17eb0c02",
+    "ensembles.tex": "c131b3e7"
+  },
+  "solutions/clustering.qmd": {
+    "clustering.html": "99ce91ed",
+    "clustering.tex": "d225b12a"
   }
 }

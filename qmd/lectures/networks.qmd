@@ -1,6 +1,7 @@
 ---
 title: "Social networks"
 date: 06/11/2024
+date-modified: 06/25/2024
 image: "../img/networks-image.png"
 execute:
   echo: true
@@ -19,6 +20,17 @@ format:
 using Random
 Random.seed!(123)
 ```
+
+:::: {.content-visible unless-format="revealjs"}
+::: {.callout-note title="Update 25 June 2024"}
+As some of you cleverly pointed out, there is actually a direct link from *Switzerland* to *Albert Einstein* on Wikipedia, rendering my six degrees of separation exercise somewhat vacuous... 🤦 
+
+To better get the desired effect, try navigating between two pages which are less obviously related, such as *Easter Island* and *Albert Einstein*.
+
+Also: I've fixed a typo: "each node's side" $\to$ "each node's size".
+:::
+::::
+
 
 ## Plan
 
@@ -628,7 +640,7 @@ mean([local_clustering_coefficient(G, v) for v in vertices(G)])
 
 1. Download and unzip the dolphin social network data from [https://networkrepository.com/soc-dolphins.php](https://networkrepository.com/soc-dolphins.php)
 1. Import these data into Julia, construct a graph, and plot the network
-1. Modify the plot so that each node's side is proportional to its degree
+1. Modify the plot so that each node's size is proportional to its degree
 1. Plot a histogram of the degree distribution
 1. Plot a histogram of the distribution of local clustering coefficient
 
