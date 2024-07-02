@@ -1,0 +1,229 @@
+---
+title: "Ensembles and statistics"
+date: 07/02/2024
+categories:
+  - solution
+---
+
+## Quantifying the duration of change
+
+> How could you quantify the duration of a change using a single number? In other words, what sort of summary statistic can you use to decide whether one trajectory goes up earlier than another one? Try to go for the *simplest* such summary statistic.
+
+Here's a simple summary statistic that will do the job. Let $\overline{p}$ refer to the mean $p$ across the population of our variational learners; i.e. $\overline{p}$ is the average probability that $G_1$ is used. We will then find out the time point at which a simulation first satisfies $\overline{p} > 0.5$, i.e. the earliest time at which $G_1$ has more than 50% usage. Let $T$ refer to this time point.
+
+
+## The statistical test
+
+> Once you have such a number for each trajectory, you have a set of these numbers. What kind of statistical test could you use to decide whether the set of numbers for $\beta = 0.1$ is significantly different from the set of numbers for $\beta = 0.5$? (Hint: you want a test that compares two means from two samples.)
+
+We get a single value of $T$ for each simulation trajectory; for example, if we repeat the simulation 100 times for each value of $\beta$, we have two sets of 100 $T$ numbers. To test whether there is a statistically significant difference between these sets of numbers, we can use a two-sample *t*-test.
+
+
+## Implementation
+
+> Once you have answers to the above questions, you can try and implement the following procedure:
+>
+>   a. Instead of 10 simulations, use `ensemblerun!` to produce simulated trajectories for 100 repetitions for each $\beta$.
+>   a. Then figure out how to extract your summary statistic from these data.
+>   a. Finally, carry out the statistical test in order to make a decision.
+
+### a. Running the simulations
+
+We first load all the necessary ingredients:
+
+```{julia}
+#|eval: false
+
+using Random
+using Agents
+using Graphs
+using Statistics
+using DataFrames
+using HypothesisTests
+
+include("VL2.jl")
+using .VL
+```
+
+```{julia}
+#|eval: true
+#|echo: false
+#|output: false
+
+using Random
+using Agents
+using Graphs
+using Statistics
+using DataFrames
+using HypothesisTests
+
+include("../jl/VL2.jl")
+using .VL
+```
+
+Here is our function that creates one model:
+
+```{julia}
+#|output: false
+function make_model(beta)
+  G = watts_strogatz(50, 8, beta)
+  space = GraphSpace(G)
+
+  model = StandardABM(NetworkVL, space,
+                      agent_step! = VL_step!)
+
+  for i in 1:50
+    add_agent_single!(model, 0.01, 0.01, 0.2, 0.1)
+  end
+
+  return model
+end
+```
+
+We can set the PRNG seed for reproducibility:
+
+```{julia}
+#|output: false
+Random.seed!(1539)
+```
+
+Create vectors of models using array comprehensions:
+
+```{julia}
+#|output: false
+models1 = [make_model(0.1) for i in 1:100]
+models2 = [make_model(0.5) for i in 1:100]
+```
+
+Use `ensemblerun!` to simulate and obtain the mean of `p`:
+
+```{julia}
+#|output: false
+data1, _ = ensemblerun!(models1, 10_000; adata = [(:p, mean)])
+data2, _ = ensemblerun!(models2, 10_000; adata = [(:p, mean)])
+```
+
+Verify that the dataframes look the way we'd expect them to:
+
+```{julia}
+data1
+```
+
+### b. Obtaining the summary statistics
+
+Now for the tricky part: in order to determine $T$ for a simulation run, we need to find the lowest value of `time` such that `mean_p` is at least 0.5, for each value of `ensemble` separately.
+
+Reading the part about [indexing](https://dataframes.juliadata.org/stable/man/working_with_dataframes/#Indexing-syntax) in the DataFrames.jl documentation, we find that the following command will take a **subset** of the original dataframe, a subset which only contains rows of the original dataframe on which the value of `mean_p` is greater than 0.5:
+
+```{julia}
+data1[data1.mean_p .> 0.5, :]
+```
+
+This operation returns a new dataframe, which we can now save in a new variable:
+
+```{julia}
+#|output: false
+df1 = data1[data1.mean_p .> 0.5, :]
+```
+
+All we need to do now, to extract the $T$ numbers we need, is to obtain the first row from this new dataframe for each separate `ensemble`. How do we do this?
+
+The answer is something known as [**split--apply--combine**](https://dataframes.juliadata.org/stable/man/split_apply_combine/#The-Split-Apply-Combine-Strategy). This procedure allows us to first split a dataframe based on the values in one column (in our case, `ensemble`), then carry out an operation on each of the resulting dataframes individually, and then finally combine them back into a single dataframe. The `groupby` function from DataFrames.jl is used for the splitting; here, we split on the `ensemble` column:
+
+```{julia}
+#|output: false
+df1 = groupby(df1, :ensemble)
+```
+
+Then, we use `combine` to apply an operation to each individual dataframe in the grouping. The function we apply is `minimum`, which returns the smallest element in an array. In this case, we wish to obtain the smallest `time` for each individual dataframe:
+
+```{julia}
+df1 = combine(df1, :time => minimum)
+```
+
+The $T$ values we're interested in are now in the `time_minimum` column; let's store them in a new variable for ease of use:
+
+```{julia}
+T1 = df1.time_minimum
+```
+
+We can now perform all the same steps for the second set of simulations:
+
+```{julia}
+df2 = data2[data2.mean_p .> 0.5, :]
+df2 = groupby(df2, :ensemble)
+df2 = combine(df2, :time => minimum)
+T2 = df2.time_minimum
+```
+
+### c. Carrying out the statistical test
+
+The *t*-test can be performed using `EqualVarianceTTest` from HypothesisTests.jl (see [documentation](https://juliastats.org/HypothesisTests.jl/stable/parametric/#t-test)):
+
+```{julia}
+EqualVarianceTTest(T1, T2)
+```
+
+The "test summary" bit tells us that the test failed to reject the null hypothesis (which in this case states that the mean $T$ values between the two sets of simulations do not differ). Thus, **we do not have any evidence that there is actually a difference in the speed with which trajectories reach $p = 0.5$ between the two sets of simulations**.
+
+
+## Bonus: pipes
+
+To obtain the vector of $T$ values from a simulation history, we did this:
+
+```{julia}
+#|eval: false
+df1 = data1[data1.mean_p .> 0.5, :]
+df1 = groupby(df1, :ensemble)
+df1 = combine(df1, :time => minimum)
+T1 = df1.time_minimum
+```
+
+Notice that what we're doing here is to take the contents of a variable (`df1`), carry out some operation, and put the result back in the same variable. Julia, like many modern programming languages, support an operation known as the **pipe** which makes this kind of process simpler. The idea is that the result of an operation is piped into the following operation, whose result is then piped into the following operation, and so on. In Julia, the pipe operator is `|>`, and the following does exactly the same as the above code snippet:
+
+```{julia}
+using Pipe
+@pipe data1[data1.mean_p .> 0.5, :] |> groupby(_, :ensemble) |> combine(_, :time => minimum) |> _.time_minimum
+```
+
+Notice that the underscore (`_`) symbol takes the place of the "anonymous" variable. The `@pipe` macro does the magic of populating this temporary variable for you, so you don't need to do it yourself.
+
+What this means is that, to create the `T1` and `T2` arrays, all we need are the following two lines of code:
+
+```{julia}
+#|output: false
+T1 = @pipe data1 |> _[_.mean_p .> 0.5, :] |> groupby(_, :ensemble) |> combine(_, :time => minimum) |> _.time_minimum
+T2 = @pipe data2 |> _[_.mean_p .> 0.5, :] |> groupby(_, :ensemble) |> combine(_, :time => minimum) |> _.time_minimum
+```
+
+::: {.callout-tip}
+Whether you find using pipes more natural than explicitly creating temporary variables (such as `df1` above) boils down to personal preference and experience. If you're like me, you will initially find pipes confusing, but the more programming experience you gather, the more natural pipes become. Having said this, it's good to point out that using a pipe is never *necessary*; whatever you can do with a pipe you can also do without.
+:::
+
+
+## Bonus 2: plotting the distributions of $T$
+
+The statistical test suggests that there is no difference between the two sets of $T$ numbers. Can we visualize this somehow? A usual way of doing this is by way of a boxplot. Here's how we can do it in Julia.
+
+```{julia}
+# load the StatsPlots package
+using StatsPlots
+
+# create dataframes: first column is the beta value, second column is the T values
+set1 = DataFrame(beta="0.1", T=T1)
+set2 = DataFrame(beta="0.5", T=T2)
+
+# join these dataframes (literally, put one on top of the other, "vertical catenation")
+sets = vcat(set1, set2)
+
+# plot
+@df sets boxplot(:beta, :T, label="time to p = 0.5")
+```
+
+We see that the distributions of $T$ numbers overlap to a large extent; this is a visual representation of the fact that there is no difference between the two sets.
+
+::: {.callout-tip}
+Peruse the [StatsPlots.jl documentation](https://docs.juliaplots.org/stable/generated/statsplots/) to learn more about the `@df` macro and all the visualization functions you can use with dataframes.
+:::
+
+

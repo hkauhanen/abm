@@ -1,0 +1,86 @@
+---
+title: "Ensembles and statistics"
+date: 06/25/2024
+Solution: "[Here](solutions/ensembles.qmd)"
+categories:
+  - homework
+---
+
+In the [lecture on network simulations](../lectures/network-simulations.qmd), we simulated VL on Watts--Strogatz networks, using either $\beta = 0.1$ or $\beta = 0.5$ as the rewiring probability when the network is constructed. The question was whether one value of $\beta$ leads to shorter durations of change than the other. The results we saw with 10 simulations per each value of $\beta$ are illustrated in this plot:
+
+```{julia}
+#|echo: false
+#|warning: false
+
+using Random
+using Agents
+using Graphs
+using Statistics
+using Plots
+
+include("../jl/VL2.jl")
+using .VL
+
+function make_model(beta)
+  G = watts_strogatz(50, 8, beta)
+  space = GraphSpace(G)
+
+  model = StandardABM(NetworkVL, space,
+                      agent_step! = VL_step!)
+
+  for i in 1:50
+    add_agent_single!(model, 0.01, 0.01, 0.2, 0.1)
+  end
+
+  return model
+end
+
+Random.seed!(1539)
+
+models1 = [make_model(0.1) for i in 1:10]
+models2 = [make_model(0.5) for i in 1:10]
+
+data1, _ = ensemblerun!(models1, 10_000; adata = [(:p, mean)])
+data2, _ = ensemblerun!(models2, 10_000; adata = [(:p, mean)])
+
+plot(data1.time, data1.mean_p, 
+     group=data1.ensemble, color=1, label="β = 0.1")
+plot!(data2.time, data2.mean_p, 
+      group=data2.ensemble, color=2, label="β = 0.5")
+```
+
+It looks like there may be a small difference in the average duration of change between the $\beta$ values. However, it is difficult to be convinced about this: firstly, we have only 10 simulations per $\beta$, and secondly, all we have done so far is to visually inspect a picture.
+
+In this homework exercise, I want you to think about the following questions:
+
+1. How could you quantify the duration of a change using a single number? In other words, what sort of summary statistic can you use to decide whether one trajectory goes up earlier than another one? Try to go for the *simplest* such summary statistic.
+1. Once you have such a number for each trajectory, you have a set of these numbers. What kind of statistical test could you use to decide whether the set of numbers for $\beta = 0.1$ is significantly different from the set of numbers for $\beta = 0.5$? (Hint: you want a test that compares two means from two samples.)
+1. Once you have answers to the above questions, you can try and implement the following procedure:
+   a. Instead of 10 simulations, use `ensemblerun!` to produce simulated trajectories for 100 repetitions for each $\beta$.
+   a. Then figure out how to extract your summary statistic from these data.
+   a. Finally, carry out the statistical test in order to make a decision.
+
+In this exercise, the most important thing is to think about questions 1 and 2 above. If you struggle with the implementation (question 3), don't worry -- I will show you how to do it in the next lecture.
+
+::: {.callout-tip}
+If you do wish to work on the implementation, you will find the following useful:
+
+1. The [documentation for DataFrames.jl](https://dataframes.juliadata.org/stable/man/getting_started/) will help you figure out how to extract your summary statistic from the simulation data.
+1. [HypothesisTests.jl](https://juliastats.org/HypothesisTests.jl/stable/) has functions for a number of statistical tests.
+
+Alternatively, if you do not wish to work in Julia, you can export your simulation data and continue working in R, Python, Excel, or some other software of your choice. The following saves the contents of a dataframe `df` in a file named `outfile.csv` as a comma-separated values file:
+
+```{julia}
+#|eval: false
+CSV.write("outfile.csv", df)
+```
+
+If you don't have the CSV.jl package yet, you'll have to install it first:
+
+```{julia}
+#|eval: false
+using Pkg
+Pkg.add("CSV")
+```
+
+:::

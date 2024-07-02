@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-07-02">
+
+<title>Ensembles and statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lectures.html"> 
+<span class="menu-text">Lectures</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../solutions.html"> 
+<span class="menu-text">Solutions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bric-a-brac.html"> 
+<span class="menu-text">Bric-a-brac</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ensembles.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ensembles and statistics</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">solution</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Date</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2 July 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="quantifying-the-duration-of-change" class="level2">
+<h2 class="anchored" data-anchor-id="quantifying-the-duration-of-change">Quantifying the duration of change</h2>
+<blockquote class="blockquote">
+<p>How could you quantify the duration of a change using a single number? In other words, what sort of summary statistic can you use to decide whether one trajectory goes up earlier than another one? Try to go for the <em>simplest</em> such summary statistic.</p>
+</blockquote>
+<p>Here’s a simple summary statistic that will do the job. Let <span class="math inline">\(\overline{p}\)</span> refer to the mean <span class="math inline">\(p\)</span> across the population of our variational learners; i.e.&nbsp;<span class="math inline">\(\overline{p}\)</span> is the average probability that <span class="math inline">\(G_1\)</span> is used. We will then find out the time point at which a simulation first satisfies <span class="math inline">\(\overline{p} &gt; 0.5\)</span>, i.e.&nbsp;the earliest time at which <span class="math inline">\(G_1\)</span> has more than 50% usage. Let <span class="math inline">\(T\)</span> refer to this time point.</p>
+</section>
+<section id="the-statistical-test" class="level2">
+<h2 class="anchored" data-anchor-id="the-statistical-test">The statistical test</h2>
+<blockquote class="blockquote">
+<p>Once you have such a number for each trajectory, you have a set of these numbers. What kind of statistical test could you use to decide whether the set of numbers for <span class="math inline">\(\beta = 0.1\)</span> is significantly different from the set of numbers for <span class="math inline">\(\beta = 0.5\)</span>? (Hint: you want a test that compares two means from two samples.)</p>
+</blockquote>
+<p>We get a single value of <span class="math inline">\(T\)</span> for each simulation trajectory; for example, if we repeat the simulation 100 times for each value of <span class="math inline">\(\beta\)</span>, we have two sets of 100 <span class="math inline">\(T\)</span> numbers. To test whether there is a statistically significant difference between these sets of numbers, we can use a two-sample <em>t</em>-test.</p>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<blockquote class="blockquote">
+<p>Once you have answers to the above questions, you can try and implement the following procedure:</p>
+<ol type="a">
+<li>Instead of 10 simulations, use <code>ensemblerun!</code> to produce simulated trajectories for 100 repetitions for each <span class="math inline">\(\beta\)</span>.</li>
+<li>Then figure out how to extract your summary statistic from these data.</li>
+<li>Finally, carry out the statistical test in order to make a decision.</li>
+</ol>
+</blockquote>
+<section id="a.-running-the-simulations" class="level3">
+<h3 class="anchored" data-anchor-id="a.-running-the-simulations">a. Running the simulations</h3>
+<p>We first load all the necessary ingredients:</p>
+<div id="b4694403" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Agents</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Graphs</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">HypothesisTests</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"VL2.jl"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.VL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is our function that creates one model:</p>
+<div id="aa3692cb" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">make_model</span>(beta)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  G <span class="op">=</span> <span class="fu">watts_strogatz</span>(<span class="fl">50</span>, <span class="fl">8</span>, beta)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  space <span class="op">=</span> <span class="fu">GraphSpace</span>(G)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  model <span class="op">=</span> <span class="fu">StandardABM</span>(NetworkVL, space,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                      agent_step! <span class="op">=</span> VL_step!)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_agent_single!</span>(model, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> model</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can set the PRNG seed for reproducibility:</p>
+<div id="6af3eedc" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">1539</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create vectors of models using array comprehensions:</p>
+<div id="c46ae879" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>models1 <span class="op">=</span> [<span class="fu">make_model</span>(<span class="fl">0.1</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>models2 <span class="op">=</span> [<span class="fu">make_model</span>(<span class="fl">0.5</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use <code>ensemblerun!</code> to simulate and obtain the mean of <code>p</code>:</p>
+<div id="3207df4b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data1, _ <span class="op">=</span> <span class="fu">ensemblerun!</span>(models1, <span class="fl">10_000</span>; adata <span class="op">=</span> [(<span class="op">:</span>p, mean)])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data2, _ <span class="op">=</span> <span class="fu">ensemblerun!</span>(models2, <span class="fl">10_000</span>; adata <span class="op">=</span> [(<span class="op">:</span>p, mean)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Verify that the dataframes look the way we’d expect them to:</p>
+<div id="271d3397" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+<div><div style="float: left;"><span>1000100×3 DataFrame</span></div><div style="float: right;"><span style="font-style: italic;">1000075 rows omitted</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">mean_p</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ensemble</th>
+</tr>
+<tr class="odd subheader headerLastRow">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0103</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.010197</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.010095</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.00999408</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.00989414</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.0097952</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.00989725</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.00999827</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.00989829</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.00979931</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.00990131</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0100023</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000089</td>
+<td style="text-align: right;">9989</td>
+<td style="text-align: right;">0.990469</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000090</td>
+<td style="text-align: right;">9990</td>
+<td style="text-align: right;">0.990564</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000091</td>
+<td style="text-align: right;">9991</td>
+<td style="text-align: right;">0.990659</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000092</td>
+<td style="text-align: right;">9992</td>
+<td style="text-align: right;">0.990752</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000093</td>
+<td style="text-align: right;">9993</td>
+<td style="text-align: right;">0.990845</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000094</td>
+<td style="text-align: right;">9994</td>
+<td style="text-align: right;">0.990736</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000095</td>
+<td style="text-align: right;">9995</td>
+<td style="text-align: right;">0.990829</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000096</td>
+<td style="text-align: right;">9996</td>
+<td style="text-align: right;">0.990921</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000097</td>
+<td style="text-align: right;">9997</td>
+<td style="text-align: right;">0.991011</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000098</td>
+<td style="text-align: right;">9998</td>
+<td style="text-align: right;">0.991101</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000099</td>
+<td style="text-align: right;">9999</td>
+<td style="text-align: right;">0.99099</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1000100</td>
+<td style="text-align: right;">10000</td>
+<td style="text-align: right;">0.99108</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="b.-obtaining-the-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="b.-obtaining-the-summary-statistics">b. Obtaining the summary statistics</h3>
+<p>Now for the tricky part: in order to determine <span class="math inline">\(T\)</span> for a simulation run, we need to find the lowest value of <code>time</code> such that <code>mean_p</code> is at least 0.5, for each value of <code>ensemble</code> separately.</p>
+<p>Reading the part about <a href="https://dataframes.juliadata.org/stable/man/working_with_dataframes/#Indexing-syntax">indexing</a> in the DataFrames.jl documentation, we find that the following command will take a <strong>subset</strong> of the original dataframe, a subset which only contains rows of the original dataframe on which the value of <code>mean_p</code> is greater than 0.5:</p>
+<div id="75e89584" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data1[data1.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+<div><div style="float: left;"><span>524282×3 DataFrame</span></div><div style="float: right;"><span style="font-style: italic;">524257 rows omitted</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">mean_p</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ensemble</th>
+</tr>
+<tr class="odd subheader headerLastRow">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">4543</td>
+<td style="text-align: right;">0.500058</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">4545</td>
+<td style="text-align: right;">0.500459</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">4546</td>
+<td style="text-align: right;">0.501054</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">4547</td>
+<td style="text-align: right;">0.502444</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">4548</td>
+<td style="text-align: right;">0.503219</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">4549</td>
+<td style="text-align: right;">0.502587</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">4550</td>
+<td style="text-align: right;">0.501361</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">4551</td>
+<td style="text-align: right;">0.501548</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">4552</td>
+<td style="text-align: right;">0.503332</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">4553</td>
+<td style="text-align: right;">0.504099</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">4554</td>
+<td style="text-align: right;">0.504658</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">4555</td>
+<td style="text-align: right;">0.504611</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">4556</td>
+<td style="text-align: right;">0.505565</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524271</td>
+<td style="text-align: right;">9989</td>
+<td style="text-align: right;">0.990469</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524272</td>
+<td style="text-align: right;">9990</td>
+<td style="text-align: right;">0.990564</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524273</td>
+<td style="text-align: right;">9991</td>
+<td style="text-align: right;">0.990659</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524274</td>
+<td style="text-align: right;">9992</td>
+<td style="text-align: right;">0.990752</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524275</td>
+<td style="text-align: right;">9993</td>
+<td style="text-align: right;">0.990845</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524276</td>
+<td style="text-align: right;">9994</td>
+<td style="text-align: right;">0.990736</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524277</td>
+<td style="text-align: right;">9995</td>
+<td style="text-align: right;">0.990829</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524278</td>
+<td style="text-align: right;">9996</td>
+<td style="text-align: right;">0.990921</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524279</td>
+<td style="text-align: right;">9997</td>
+<td style="text-align: right;">0.991011</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524280</td>
+<td style="text-align: right;">9998</td>
+<td style="text-align: right;">0.991101</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524281</td>
+<td style="text-align: right;">9999</td>
+<td style="text-align: right;">0.99099</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">524282</td>
+<td style="text-align: right;">10000</td>
+<td style="text-align: right;">0.99108</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>This operation returns a new dataframe, which we can now save in a new variable:</p>
+<div id="e90a0bb5" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> data1[data1.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>All we need to do now, to extract the <span class="math inline">\(T\)</span> numbers we need, is to obtain the first row from this new dataframe for each separate <code>ensemble</code>. How do we do this?</p>
+<p>The answer is something known as <a href="https://dataframes.juliadata.org/stable/man/split_apply_combine/#The-Split-Apply-Combine-Strategy"><strong>split–apply–combine</strong></a>. This procedure allows us to first split a dataframe based on the values in one column (in our case, <code>ensemble</code>), then carry out an operation on each of the resulting dataframes individually, and then finally combine them back into a single dataframe. The <code>groupby</code> function from DataFrames.jl is used for the splitting; here, we split on the <code>ensemble</code> column:</p>
+<div id="d0259822" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> <span class="fu">groupby</span>(df1, <span class="op">:</span>ensemble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we use <code>combine</code> to apply an operation to each individual dataframe in the grouping. The function we apply is <code>minimum</code>, which returns the smallest element in an array. In this case, we wish to obtain the smallest <code>time</code> for each individual dataframe:</p>
+<div id="37d252c2" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> <span class="fu">combine</span>(df1, <span class="op">:</span>time <span class="op">=&gt;</span> minimum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<div><div style="float: left;"><span>100×2 DataFrame</span></div><div style="float: right;"><span style="font-style: italic;">75 rows omitted</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ensemble</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">time_minimum</th>
+</tr>
+<tr class="odd subheader headerLastRow">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4543</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4431</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4648</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4421</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4985</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5691</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5601</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5243</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4732</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">4749</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">5069</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4342</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">4325</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+<td style="text-align: right;">⋮</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">89</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">6073</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">4126</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">91</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">4386</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">92</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">4041</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">93</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">6995</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">94</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">5015</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">95</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">4455</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">96</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">4101</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">97</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">4528</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">98</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">5090</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">3895</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">100</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">5525</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>The <span class="math inline">\(T\)</span> values we’re interested in are now in the <code>time_minimum</code> column; let’s store them in a new variable for ease of use:</p>
+<div id="3b58ba0f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> df1.time_minimum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>100-element Vector{Int64}:
+ 4543
+ 4431
+ 4648
+ 4421
+ 4985
+ 5691
+ 5601
+ 5243
+ 4732
+ 4749
+ 5069
+ 4342
+ 4325
+    ⋮
+ 6073
+ 4126
+ 4386
+ 4041
+ 6995
+ 5015
+ 4455
+ 4101
+ 4528
+ 5090
+ 3895
+ 5525</code></pre>
+</div>
+</div>
+<p>We can now perform all the same steps for the second set of simulations:</p>
+<div id="4e1e25c9" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> data2[data2.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> <span class="fu">groupby</span>(df2, <span class="op">:</span>ensemble)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> <span class="fu">combine</span>(df2, <span class="op">:</span>time <span class="op">=&gt;</span> minimum)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>T2 <span class="op">=</span> df2.time_minimum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>100-element Vector{Int64}:
+ 4075
+ 4992
+ 4488
+ 5096
+ 4602
+ 4885
+ 5299
+ 4444
+ 5876
+ 4178
+ 4397
+ 4873
+ 4753
+    ⋮
+ 4924
+ 4594
+ 4410
+ 5430
+ 4672
+ 4682
+ 4807
+ 4276
+ 4807
+ 4444
+ 5099
+ 4310</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-carrying-out-the-statistical-test" class="level3">
+<h3 class="anchored" data-anchor-id="c.-carrying-out-the-statistical-test">c.&nbsp;Carrying out the statistical test</h3>
+<p>The <em>t</em>-test can be performed using <code>EqualVarianceTTest</code> from HypothesisTests.jl (see <a href="https://juliastats.org/HypothesisTests.jl/stable/parametric/#t-test">documentation</a>):</p>
+<div id="40cca53d" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EqualVarianceTTest</span>(T1, T2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Two sample t-test (equal variance)
+----------------------------------
+Population details:
+    parameter of interest:   Mean difference
+    value under h_0:         0
+    point estimate:          -41.98
+    95% confidence interval: (-192.0, 108.0)
+
+Test summary:
+    outcome with 95% confidence: fail to reject h_0
+    two-sided p-value:           0.5817
+
+Details:
+    number of observations:   [100,100]
+    t-statistic:              -0.5518436540887174
+    degrees of freedom:       198
+    empirical standard error: 76.07227099371633</code></pre>
+</div>
+</div>
+<p>The “test summary” bit tells us that the test failed to reject the null hypothesis (which in this case states that the mean <span class="math inline">\(T\)</span> values between the two sets of simulations do not differ). Thus, <strong>we do not have any evidence that there is actually a difference in the speed with which trajectories reach <span class="math inline">\(p = 0.5\)</span> between the two sets of simulations</strong>.</p>
+</section>
+</section>
+<section id="bonus-pipes" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-pipes">Bonus: pipes</h2>
+<p>To obtain the vector of <span class="math inline">\(T\)</span> values from a simulation history, we did this:</p>
+<div id="2b433631" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> data1[data1.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> <span class="fu">groupby</span>(df1, <span class="op">:</span>ensemble)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> <span class="fu">combine</span>(df1, <span class="op">:</span>time <span class="op">=&gt;</span> minimum)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> df1.time_minimum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that what we’re doing here is to take the contents of a variable (<code>df1</code>), carry out some operation, and put the result back in the same variable. Julia, like many modern programming languages, support an operation known as the <strong>pipe</strong> which makes this kind of process simpler. The idea is that the result of an operation is piped into the following operation, whose result is then piped into the following operation, and so on. In Julia, the pipe operator is <code>|&gt;</code>, and the following does exactly the same as the above code snippet:</p>
+<div id="5d612fa0" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pipe</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@pipe</span> data1[data1.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>] <span class="op">|&gt;</span> <span class="fu">groupby</span>(_, <span class="op">:</span>ensemble) <span class="op">|&gt;</span> <span class="fu">combine</span>(_, <span class="op">:</span>time <span class="op">=&gt;</span> minimum) <span class="op">|&gt;</span> _.time_minimum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>100-element Vector{Int64}:
+ 4543
+ 4431
+ 4648
+ 4421
+ 4985
+ 5691
+ 5601
+ 5243
+ 4732
+ 4749
+ 5069
+ 4342
+ 4325
+    ⋮
+ 6073
+ 4126
+ 4386
+ 4041
+ 6995
+ 5015
+ 4455
+ 4101
+ 4528
+ 5090
+ 3895
+ 5525</code></pre>
+</div>
+</div>
+<p>Notice that the underscore (<code>_</code>) symbol takes the place of the “anonymous” variable. The <code>@pipe</code> macro does the magic of populating this temporary variable for you, so you don’t need to do it yourself.</p>
+<p>What this means is that, to create the <code>T1</code> and <code>T2</code> arrays, all we need are the following two lines of code:</p>
+<div id="11473014" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> <span class="pp">@pipe</span> data1 <span class="op">|&gt;</span> _[_.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>] <span class="op">|&gt;</span> <span class="fu">groupby</span>(_, <span class="op">:</span>ensemble) <span class="op">|&gt;</span> <span class="fu">combine</span>(_, <span class="op">:</span>time <span class="op">=&gt;</span> minimum) <span class="op">|&gt;</span> _.time_minimum</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>T2 <span class="op">=</span> <span class="pp">@pipe</span> data2 <span class="op">|&gt;</span> _[_.mean_p <span class="op">.&gt;</span> <span class="fl">0.5</span>, <span class="op">:</span>] <span class="op">|&gt;</span> <span class="fu">groupby</span>(_, <span class="op">:</span>ensemble) <span class="op">|&gt;</span> <span class="fu">combine</span>(_, <span class="op">:</span>time <span class="op">=&gt;</span> minimum) <span class="op">|&gt;</span> _.time_minimum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Whether you find using pipes more natural than explicitly creating temporary variables (such as <code>df1</code> above) boils down to personal preference and experience. If you’re like me, you will initially find pipes confusing, but the more programming experience you gather, the more natural pipes become. Having said this, it’s good to point out that using a pipe is never <em>necessary</em>; whatever you can do with a pipe you can also do without.</p>
+</div>
+</div>
+</section>
+<section id="bonus-2-plotting-the-distributions-of-t" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-2-plotting-the-distributions-of-t">Bonus 2: plotting the distributions of <span class="math inline">\(T\)</span></h2>
+<p>The statistical test suggests that there is no difference between the two sets of <span class="math inline">\(T\)</span> numbers. Can we visualize this somehow? A usual way of doing this is by way of a boxplot. Here’s how we can do it in Julia.</p>
+<div id="2d3c1062" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the StatsPlots package</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsPlots</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataframes: first column is the beta value, second column is the T values</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>set1 <span class="op">=</span> <span class="fu">DataFrame</span>(beta<span class="op">=</span><span class="st">"0.1"</span>, T<span class="op">=</span>T1)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>set2 <span class="op">=</span> <span class="fu">DataFrame</span>(beta<span class="op">=</span><span class="st">"0.5"</span>, T<span class="op">=</span>T2)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># join these dataframes (literally, put one on top of the other, "vertical catenation")</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>sets <span class="op">=</span> <span class="fu">vcat</span>(set1, set2)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="pp">@df</span> sets <span class="fu">boxplot</span>(<span class="op">:</span>beta, <span class="op">:</span>T, label<span class="op">=</span><span class="st">"time to p = 0.5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="672" height="480" viewbox="0 0 2688 1920">
+<defs>
+  <clippath id="clip160">
+    <rect x="0" y="0" width="2688" height="1920"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip160)" d="M0 1920 L2688 1920 L2688 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip161">
+    <rect x="537" y="0" width="1883" height="1883"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip160)" d="M205.057 1800.78 L2640.76 1800.78 L2640.76 47.2441 L205.057 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip162">
+    <rect x="205" y="47" width="2437" height="1755"></rect>
+  </clippath>
+</defs>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="784.62,1800.78 784.62,47.2441 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2061.19,1800.78 2061.19,47.2441 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,1800.78 2640.76,1800.78 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="784.62,1800.78 784.62,1781.88 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2061.19,1800.78 2061.19,1781.88 "></polyline>
+<path clip-path="url(#clip160)" d="M762.618 1834 Q759.007 1834 757.178 1837.57 Q755.373 1841.11 755.373 1848.24 Q755.373 1855.34 757.178 1858.91 Q759.007 1862.45 762.618 1862.45 Q766.252 1862.45 768.058 1858.91 Q769.887 1855.34 769.887 1848.24 Q769.887 1841.11 768.058 1837.57 Q766.252 1834 762.618 1834 M762.618 1830.3 Q768.428 1830.3 771.484 1834.9 Q774.563 1839.49 774.563 1848.24 Q774.563 1856.96 771.484 1861.57 Q768.428 1866.15 762.618 1866.15 Q756.808 1866.15 753.729 1861.57 Q750.674 1856.96 750.674 1848.24 Q750.674 1839.49 753.729 1834.9 Q756.808 1830.3 762.618 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M782.78 1859.6 L787.664 1859.6 L787.664 1865.48 L782.78 1865.48 L782.78 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M798.66 1861.55 L806.298 1861.55 L806.298 1835.18 L797.988 1836.85 L797.988 1832.59 L806.252 1830.92 L810.928 1830.92 L810.928 1861.55 L818.567 1861.55 L818.567 1865.48 L798.66 1865.48 L798.66 1861.55 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2039.07 1834 Q2035.46 1834 2033.63 1837.57 Q2031.83 1841.11 2031.83 1848.24 Q2031.83 1855.34 2033.63 1858.91 Q2035.46 1862.45 2039.07 1862.45 Q2042.71 1862.45 2044.51 1858.91 Q2046.34 1855.34 2046.34 1848.24 Q2046.34 1841.11 2044.51 1837.57 Q2042.71 1834 2039.07 1834 M2039.07 1830.3 Q2044.88 1830.3 2047.94 1834.9 Q2051.02 1839.49 2051.02 1848.24 Q2051.02 1856.96 2047.94 1861.57 Q2044.88 1866.15 2039.07 1866.15 Q2033.26 1866.15 2030.19 1861.57 Q2027.13 1856.96 2027.13 1848.24 Q2027.13 1839.49 2030.19 1834.9 Q2033.26 1830.3 2039.07 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2059.24 1859.6 L2064.12 1859.6 L2064.12 1865.48 L2059.24 1865.48 L2059.24 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2074.35 1830.92 L2092.71 1830.92 L2092.71 1834.86 L2078.63 1834.86 L2078.63 1843.33 Q2079.65 1842.98 2080.67 1842.82 Q2081.69 1842.64 2082.71 1842.64 Q2088.5 1842.64 2091.87 1845.81 Q2095.25 1848.98 2095.25 1854.4 Q2095.25 1859.97 2091.78 1863.08 Q2088.31 1866.15 2081.99 1866.15 Q2079.81 1866.15 2077.55 1865.78 Q2075.3 1865.41 2072.89 1864.67 L2072.89 1859.97 Q2074.98 1861.11 2077.2 1861.66 Q2079.42 1862.22 2081.9 1862.22 Q2085.9 1862.22 2088.24 1860.11 Q2090.58 1858.01 2090.58 1854.4 Q2090.58 1850.78 2088.24 1848.68 Q2085.9 1846.57 2081.9 1846.57 Q2080.02 1846.57 2078.15 1846.99 Q2076.3 1847.4 2074.35 1848.28 L2074.35 1830.92 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="205.057,1675.26 2640.76,1675.26 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="205.057,1148.25 2640.76,1148.25 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="205.057,621.246 2640.76,621.246 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="205.057,94.2374 2640.76,94.2374 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,1800.78 205.057,47.2441 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,1675.26 223.954,1675.26 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,1148.25 223.954,1148.25 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,621.246 223.954,621.246 "></polyline>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="205.057,94.2374 223.954,94.2374 "></polyline>
+<path clip-path="url(#clip160)" d="M65.1539 1662.06 L53.3484 1680.5 L65.1539 1680.5 L65.1539 1662.06 M63.927 1657.98 L69.8066 1657.98 L69.8066 1680.5 L74.7372 1680.5 L74.7372 1684.39 L69.8066 1684.39 L69.8066 1692.54 L65.1539 1692.54 L65.1539 1684.39 L49.5521 1684.39 L49.5521 1679.88 L63.927 1657.98 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M92.4686 1661.06 Q88.8575 1661.06 87.0288 1664.63 Q85.2232 1668.17 85.2232 1675.3 Q85.2232 1682.4 87.0288 1685.97 Q88.8575 1689.51 92.4686 1689.51 Q96.1028 1689.51 97.9083 1685.97 Q99.737 1682.4 99.737 1675.3 Q99.737 1668.17 97.9083 1664.63 Q96.1028 1661.06 92.4686 1661.06 M92.4686 1657.36 Q98.2787 1657.36 101.334 1661.96 Q104.413 1666.55 104.413 1675.3 Q104.413 1684.02 101.334 1688.63 Q98.2787 1693.21 92.4686 1693.21 Q86.6584 1693.21 83.5797 1688.63 Q80.5242 1684.02 80.5242 1675.3 Q80.5242 1666.55 83.5797 1661.96 Q86.6584 1657.36 92.4686 1657.36 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M122.63 1661.06 Q119.019 1661.06 117.191 1664.63 Q115.385 1668.17 115.385 1675.3 Q115.385 1682.4 117.191 1685.97 Q119.019 1689.51 122.63 1689.51 Q126.265 1689.51 128.07 1685.97 Q129.899 1682.4 129.899 1675.3 Q129.899 1668.17 128.07 1664.63 Q126.265 1661.06 122.63 1661.06 M122.63 1657.36 Q128.441 1657.36 131.496 1661.96 Q134.575 1666.55 134.575 1675.3 Q134.575 1684.02 131.496 1688.63 Q128.441 1693.21 122.63 1693.21 Q116.82 1693.21 113.742 1688.63 Q110.686 1684.02 110.686 1675.3 Q110.686 1666.55 113.742 1661.96 Q116.82 1657.36 122.63 1657.36 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M152.792 1661.06 Q149.181 1661.06 147.353 1664.63 Q145.547 1668.17 145.547 1675.3 Q145.547 1682.4 147.353 1685.97 Q149.181 1689.51 152.792 1689.51 Q156.427 1689.51 158.232 1685.97 Q160.061 1682.4 160.061 1675.3 Q160.061 1668.17 158.232 1664.63 Q156.427 1661.06 152.792 1661.06 M152.792 1657.36 Q158.602 1657.36 161.658 1661.96 Q164.737 1666.55 164.737 1675.3 Q164.737 1684.02 161.658 1688.63 Q158.602 1693.21 152.792 1693.21 Q146.982 1693.21 143.903 1688.63 Q140.848 1684.02 140.848 1675.3 Q140.848 1666.55 143.903 1661.96 Q146.982 1657.36 152.792 1657.36 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M52.353 1130.97 L70.7094 1130.97 L70.7094 1134.91 L56.6354 1134.91 L56.6354 1143.38 Q57.6539 1143.03 58.6724 1142.87 Q59.691 1142.69 60.7095 1142.69 Q66.4965 1142.69 69.8761 1145.86 Q73.2557 1149.03 73.2557 1154.45 Q73.2557 1160.02 69.7835 1163.13 Q66.3113 1166.2 59.9919 1166.2 Q57.816 1166.2 55.5475 1165.83 Q53.3021 1165.46 50.8947 1164.72 L50.8947 1160.02 Q52.978 1161.16 55.2002 1161.71 Q57.4225 1162.27 59.8993 1162.27 Q63.9039 1162.27 66.2419 1160.16 Q68.5798 1158.06 68.5798 1154.45 Q68.5798 1150.83 66.2419 1148.73 Q63.9039 1146.62 59.8993 1146.62 Q58.0243 1146.62 56.1493 1147.04 Q54.2975 1147.46 52.353 1148.33 L52.353 1130.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M92.4686 1134.05 Q88.8575 1134.05 87.0288 1137.62 Q85.2232 1141.16 85.2232 1148.29 Q85.2232 1155.39 87.0288 1158.96 Q88.8575 1162.5 92.4686 1162.5 Q96.1028 1162.5 97.9083 1158.96 Q99.737 1155.39 99.737 1148.29 Q99.737 1141.16 97.9083 1137.62 Q96.1028 1134.05 92.4686 1134.05 M92.4686 1130.35 Q98.2787 1130.35 101.334 1134.96 Q104.413 1139.54 104.413 1148.29 Q104.413 1157.02 101.334 1161.62 Q98.2787 1166.2 92.4686 1166.2 Q86.6584 1166.2 83.5797 1161.62 Q80.5242 1157.02 80.5242 1148.29 Q80.5242 1139.54 83.5797 1134.96 Q86.6584 1130.35 92.4686 1130.35 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M122.63 1134.05 Q119.019 1134.05 117.191 1137.62 Q115.385 1141.16 115.385 1148.29 Q115.385 1155.39 117.191 1158.96 Q119.019 1162.5 122.63 1162.5 Q126.265 1162.5 128.07 1158.96 Q129.899 1155.39 129.899 1148.29 Q129.899 1141.16 128.07 1137.62 Q126.265 1134.05 122.63 1134.05 M122.63 1130.35 Q128.441 1130.35 131.496 1134.96 Q134.575 1139.54 134.575 1148.29 Q134.575 1157.02 131.496 1161.62 Q128.441 1166.2 122.63 1166.2 Q116.82 1166.2 113.742 1161.62 Q110.686 1157.02 110.686 1148.29 Q110.686 1139.54 113.742 1134.96 Q116.82 1130.35 122.63 1130.35 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M152.792 1134.05 Q149.181 1134.05 147.353 1137.62 Q145.547 1141.16 145.547 1148.29 Q145.547 1155.39 147.353 1158.96 Q149.181 1162.5 152.792 1162.5 Q156.427 1162.5 158.232 1158.96 Q160.061 1155.39 160.061 1148.29 Q160.061 1141.16 158.232 1137.62 Q156.427 1134.05 152.792 1134.05 M152.792 1130.35 Q158.602 1130.35 161.658 1134.96 Q164.737 1139.54 164.737 1148.29 Q164.737 1157.02 161.658 1161.62 Q158.602 1166.2 152.792 1166.2 Q146.982 1166.2 143.903 1161.62 Q140.848 1157.02 140.848 1148.29 Q140.848 1139.54 143.903 1134.96 Q146.982 1130.35 152.792 1130.35 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M62.8854 619.382 Q59.7373 619.382 57.8854 621.535 Q56.0567 623.688 56.0567 627.438 Q56.0567 631.164 57.8854 633.34 Q59.7373 635.493 62.8854 635.493 Q66.0335 635.493 67.8622 633.34 Q69.7141 631.164 69.7141 627.438 Q69.7141 623.688 67.8622 621.535 Q66.0335 619.382 62.8854 619.382 M72.1677 604.729 L72.1677 608.989 Q70.4085 608.155 68.6029 607.716 Q66.8206 607.276 65.0613 607.276 Q60.4317 607.276 57.978 610.401 Q55.5475 613.526 55.2002 619.845 Q56.566 617.831 58.6262 616.766 Q60.6863 615.678 63.1632 615.678 Q68.3715 615.678 71.3807 618.85 Q74.4131 621.998 74.4131 627.438 Q74.4131 632.762 71.265 635.979 Q68.1168 639.197 62.8854 639.197 Q56.89 639.197 53.7188 634.614 Q50.5475 630.007 50.5475 621.28 Q50.5475 613.086 54.4364 608.225 Q58.3252 603.341 64.8761 603.341 Q66.6354 603.341 68.4178 603.688 Q70.2233 604.035 72.1677 604.729 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M92.4686 607.044 Q88.8575 607.044 87.0288 610.609 Q85.2232 614.151 85.2232 621.28 Q85.2232 628.387 87.0288 631.951 Q88.8575 635.493 92.4686 635.493 Q96.1028 635.493 97.9083 631.951 Q99.737 628.387 99.737 621.28 Q99.737 614.151 97.9083 610.609 Q96.1028 607.044 92.4686 607.044 M92.4686 603.341 Q98.2787 603.341 101.334 607.947 Q104.413 612.53 104.413 621.28 Q104.413 630.007 101.334 634.614 Q98.2787 639.197 92.4686 639.197 Q86.6584 639.197 83.5797 634.614 Q80.5242 630.007 80.5242 621.28 Q80.5242 612.53 83.5797 607.947 Q86.6584 603.341 92.4686 603.341 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M122.63 607.044 Q119.019 607.044 117.191 610.609 Q115.385 614.151 115.385 621.28 Q115.385 628.387 117.191 631.951 Q119.019 635.493 122.63 635.493 Q126.265 635.493 128.07 631.951 Q129.899 628.387 129.899 621.28 Q129.899 614.151 128.07 610.609 Q126.265 607.044 122.63 607.044 M122.63 603.341 Q128.441 603.341 131.496 607.947 Q134.575 612.53 134.575 621.28 Q134.575 630.007 131.496 634.614 Q128.441 639.197 122.63 639.197 Q116.82 639.197 113.742 634.614 Q110.686 630.007 110.686 621.28 Q110.686 612.53 113.742 607.947 Q116.82 603.341 122.63 603.341 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M152.792 607.044 Q149.181 607.044 147.353 610.609 Q145.547 614.151 145.547 621.28 Q145.547 628.387 147.353 631.951 Q149.181 635.493 152.792 635.493 Q156.427 635.493 158.232 631.951 Q160.061 628.387 160.061 621.28 Q160.061 614.151 158.232 610.609 Q156.427 607.044 152.792 607.044 M152.792 603.341 Q158.602 603.341 161.658 607.947 Q164.737 612.53 164.737 621.28 Q164.737 630.007 161.658 634.614 Q158.602 639.197 152.792 639.197 Q146.982 639.197 143.903 634.614 Q140.848 630.007 140.848 621.28 Q140.848 612.53 143.903 607.947 Q146.982 603.341 152.792 603.341 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M51.1262 76.9574 L73.3483 76.9574 L73.3483 78.9481 L60.8021 111.517 L55.9178 111.517 L67.7233 80.8926 L51.1262 80.8926 L51.1262 76.9574 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M92.4686 80.0361 Q88.8575 80.0361 87.0288 83.6009 Q85.2232 87.1425 85.2232 94.2721 Q85.2232 101.379 87.0288 104.943 Q88.8575 108.485 92.4686 108.485 Q96.1028 108.485 97.9083 104.943 Q99.737 101.379 99.737 94.2721 Q99.737 87.1425 97.9083 83.6009 Q96.1028 80.0361 92.4686 80.0361 M92.4686 76.3324 Q98.2787 76.3324 101.334 80.9389 Q104.413 85.5222 104.413 94.2721 Q104.413 102.999 101.334 107.605 Q98.2787 112.189 92.4686 112.189 Q86.6584 112.189 83.5797 107.605 Q80.5242 102.999 80.5242 94.2721 Q80.5242 85.5222 83.5797 80.9389 Q86.6584 76.3324 92.4686 76.3324 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M122.63 80.0361 Q119.019 80.0361 117.191 83.6009 Q115.385 87.1425 115.385 94.2721 Q115.385 101.379 117.191 104.943 Q119.019 108.485 122.63 108.485 Q126.265 108.485 128.07 104.943 Q129.899 101.379 129.899 94.2721 Q129.899 87.1425 128.07 83.6009 Q126.265 80.0361 122.63 80.0361 M122.63 76.3324 Q128.441 76.3324 131.496 80.9389 Q134.575 85.5222 134.575 94.2721 Q134.575 102.999 131.496 107.605 Q128.441 112.189 122.63 112.189 Q116.82 112.189 113.742 107.605 Q110.686 102.999 110.686 94.2721 Q110.686 85.5222 113.742 80.9389 Q116.82 76.3324 122.63 76.3324 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M152.792 80.0361 Q149.181 80.0361 147.353 83.6009 Q145.547 87.1425 145.547 94.2721 Q145.547 101.379 147.353 104.943 Q149.181 108.485 152.792 108.485 Q156.427 108.485 158.232 104.943 Q160.061 101.379 160.061 94.2721 Q160.061 87.1425 158.232 83.6009 Q156.427 80.0361 152.792 80.0361 M152.792 76.3324 Q158.602 76.3324 161.658 80.9389 Q164.737 85.5222 164.737 94.2721 Q164.737 102.999 161.658 107.605 Q158.602 112.189 152.792 112.189 Q146.982 112.189 143.903 107.605 Q140.848 102.999 140.848 94.2721 Q140.848 85.5222 143.903 80.9389 Q146.982 76.3324 152.792 76.3324 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip162)" d="M784.62 1751.15 L529.306 1751.15 L1039.93 1751.15 L784.62 1751.15 L784.62 1449.44 L784.62 1751.15  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="784.62,1751.15 529.306,1751.15 1039.93,1751.15 784.62,1751.15 784.62,1449.44 784.62,1751.15 "></polyline>
+<path clip-path="url(#clip162)" d="M1295.25 1449.44 L1295.25 1296.34 L273.992 1296.34 L273.992 1449.44 L1295.25 1449.44 L1295.25 1296.34 L1295.25 1449.44  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1295.25,1449.44 1295.25,1296.34 273.992,1296.34 273.992,1449.44 1295.25,1449.44 1295.25,1296.34 1295.25,1449.44 "></polyline>
+<path clip-path="url(#clip162)" d="M1295.25 1126.12 L273.992 1126.12 L273.992 1296.34 L1295.25 1296.34 L1295.25 1126.12 L784.62 1126.12 L1295.25 1126.12  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1295.25,1126.12 273.992,1126.12 273.992,1296.34 1295.25,1296.34 1295.25,1126.12 784.62,1126.12 1295.25,1126.12 "></polyline>
+<path clip-path="url(#clip162)" d="M784.62 721.904 L529.306 721.904 L1039.93 721.904 L784.62 721.904 L784.62 1126.12 L784.62 721.904  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="784.62,721.904 529.306,721.904 1039.93,721.904 784.62,721.904 784.62,1126.12 784.62,721.904 "></polyline>
+<path clip-path="url(#clip162)" d="M2061.19 1732.71 L1805.88 1732.71 L2316.51 1732.71 L2061.19 1732.71 L2061.19 1471.18 L2061.19 1732.71  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2061.19,1732.71 1805.88,1732.71 2316.51,1732.71 2061.19,1732.71 2061.19,1471.18 2061.19,1732.71 "></polyline>
+<path clip-path="url(#clip162)" d="M2571.82 1471.18 L2571.82 1278.95 L1550.56 1278.95 L1550.56 1471.18 L2571.82 1471.18 L2571.82 1278.95 L2571.82 1471.18  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2571.82,1471.18 2571.82,1278.95 1550.56,1278.95 1550.56,1471.18 2571.82,1471.18 2571.82,1278.95 2571.82,1471.18 "></polyline>
+<path clip-path="url(#clip162)" d="M2571.82 1101.61 L1550.56 1101.61 L1550.56 1278.95 L2571.82 1278.95 L2571.82 1101.61 L2061.19 1101.61 L2571.82 1101.61  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2571.82,1101.61 1550.56,1101.61 1550.56,1278.95 2571.82,1278.95 2571.82,1101.61 2061.19,1101.61 2571.82,1101.61 "></polyline>
+<path clip-path="url(#clip162)" d="M2061.19 643.38 L1805.88 643.38 L2316.51 643.38 L2061.19 643.38 L2061.19 1101.61 L2061.19 643.38  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip162)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2061.19,643.38 1805.88,643.38 2316.51,643.38 2061.19,643.38 2061.19,1101.61 2061.19,643.38 "></polyline>
+<circle clip-path="url(#clip162)" cx="784.62" cy="582.774" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="784.62" cy="96.8724" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="2061.19" cy="492.656" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="2061.19" cy="423.617" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="2061.19" cy="546.937" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="2061.19" cy="510.574" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<circle clip-path="url(#clip162)" cx="2061.19" cy="540.613" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.84"></circle>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="784.62,1751.15 529.306,1751.15 1039.93,1751.15 784.62,1751.15 784.62,1449.44 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="1295.25,1449.44 1295.25,1296.34 273.992,1296.34 273.992,1449.44 1295.25,1449.44 1295.25,1296.34 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="1295.25,1126.12 273.992,1126.12 273.992,1296.34 1295.25,1296.34 1295.25,1126.12 784.62,1126.12 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="784.62,721.904 529.306,721.904 1039.93,721.904 784.62,721.904 784.62,1126.12 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="2061.19,1732.71 1805.88,1732.71 2316.51,1732.71 2061.19,1732.71 2061.19,1471.18 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="2571.82,1471.18 2571.82,1278.95 1550.56,1278.95 1550.56,1471.18 2571.82,1471.18 2571.82,1278.95 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="2571.82,1101.61 1550.56,1101.61 1550.56,1278.95 2571.82,1278.95 2571.82,1101.61 2061.19,1101.61 "></polyline>
+<polyline clip-path="url(#clip162)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:0; stroke-opacity:1; fill:none" points="2061.19,643.38 1805.88,643.38 2316.51,643.38 2061.19,643.38 2061.19,1101.61 "></polyline>
+<path clip-path="url(#clip160)" d="M1961.23 209.375 L2559.57 209.375 L2559.57 105.695 L1961.23 105.695  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1961.23,209.375 2559.57,209.375 2559.57,105.695 1961.23,105.695 1961.23,209.375 "></polyline>
+<path clip-path="url(#clip160)" d="M1988.29 178.271 L2150.67 178.271 L2150.67 136.799 L1988.29 136.799 L1988.29 178.271  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip160)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1988.29,178.271 2150.67,178.271 2150.67,136.799 1988.29,136.799 1988.29,178.271 "></polyline>
+<path clip-path="url(#clip160)" d="M2185.14 141.528 L2185.14 148.889 L2193.92 148.889 L2193.92 152.2 L2185.14 152.2 L2185.14 166.274 Q2185.14 169.445 2186 170.348 Q2186.88 171.25 2189.54 171.25 L2193.92 171.25 L2193.92 174.815 L2189.54 174.815 Q2184.61 174.815 2182.74 172.987 Q2180.86 171.135 2180.86 166.274 L2180.86 152.2 L2177.74 152.2 L2177.74 148.889 L2180.86 148.889 L2180.86 141.528 L2185.14 141.528 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2199.52 148.889 L2203.78 148.889 L2203.78 174.815 L2199.52 174.815 L2199.52 148.889 M2199.52 138.797 L2203.78 138.797 L2203.78 144.19 L2199.52 144.19 L2199.52 138.797 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2232.87 153.866 Q2234.47 150.996 2236.69 149.63 Q2238.92 148.264 2241.93 148.264 Q2245.98 148.264 2248.18 151.112 Q2250.37 153.936 2250.37 159.167 L2250.37 174.815 L2246.09 174.815 L2246.09 159.306 Q2246.09 155.579 2244.77 153.774 Q2243.45 151.968 2240.74 151.968 Q2237.43 151.968 2235.51 154.167 Q2233.59 156.366 2233.59 160.163 L2233.59 174.815 L2229.31 174.815 L2229.31 159.306 Q2229.31 155.556 2227.99 153.774 Q2226.67 151.968 2223.92 151.968 Q2220.65 151.968 2218.73 154.19 Q2216.81 156.389 2216.81 160.163 L2216.81 174.815 L2212.53 174.815 L2212.53 148.889 L2216.81 148.889 L2216.81 152.917 Q2218.27 150.533 2220.31 149.399 Q2222.34 148.264 2225.14 148.264 Q2227.97 148.264 2229.93 149.7 Q2231.93 151.135 2232.87 153.866 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2281.05 160.788 L2281.05 162.871 L2261.46 162.871 Q2261.74 167.269 2264.1 169.584 Q2266.49 171.875 2270.72 171.875 Q2273.18 171.875 2275.47 171.274 Q2277.78 170.672 2280.05 169.468 L2280.05 173.496 Q2277.76 174.468 2275.35 174.977 Q2272.94 175.487 2270.47 175.487 Q2264.26 175.487 2260.63 171.875 Q2257.02 168.264 2257.02 162.107 Q2257.02 155.741 2260.44 152.014 Q2263.89 148.264 2269.73 148.264 Q2274.96 148.264 2277.99 151.644 Q2281.05 155.001 2281.05 160.788 M2276.79 159.538 Q2276.74 156.042 2274.82 153.959 Q2272.92 151.876 2269.77 151.876 Q2266.21 151.876 2264.05 153.889 Q2261.93 155.903 2261.6 159.561 L2276.79 159.538 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2307.32 141.528 L2307.32 148.889 L2316.09 148.889 L2316.09 152.2 L2307.32 152.2 L2307.32 166.274 Q2307.32 169.445 2308.18 170.348 Q2309.05 171.25 2311.72 171.25 L2316.09 171.25 L2316.09 174.815 L2311.72 174.815 Q2306.79 174.815 2304.91 172.987 Q2303.04 171.135 2303.04 166.274 L2303.04 152.2 L2299.91 152.2 L2299.91 148.889 L2303.04 148.889 L2303.04 141.528 L2307.32 141.528 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2331.74 151.876 Q2328.31 151.876 2326.32 154.561 Q2324.33 157.223 2324.33 161.876 Q2324.33 166.528 2326.3 169.213 Q2328.29 171.875 2331.74 171.875 Q2335.14 171.875 2337.13 169.19 Q2339.12 166.505 2339.12 161.876 Q2339.12 157.269 2337.13 154.584 Q2335.14 151.876 2331.74 151.876 M2331.74 148.264 Q2337.3 148.264 2340.47 151.876 Q2343.64 155.487 2343.64 161.876 Q2343.64 168.241 2340.47 171.875 Q2337.3 175.487 2331.74 175.487 Q2326.16 175.487 2322.99 171.875 Q2319.84 168.241 2319.84 161.876 Q2319.84 155.487 2322.99 151.876 Q2326.16 148.264 2331.74 148.264 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2369.89 170.926 L2369.89 184.676 L2365.61 184.676 L2365.61 148.889 L2369.89 148.889 L2369.89 152.825 Q2371.23 150.51 2373.27 149.399 Q2375.33 148.264 2378.17 148.264 Q2382.9 148.264 2385.84 152.014 Q2388.8 155.764 2388.8 161.876 Q2388.8 167.987 2385.84 171.737 Q2382.9 175.487 2378.17 175.487 Q2375.33 175.487 2373.27 174.375 Q2371.23 173.241 2369.89 170.926 M2384.38 161.876 Q2384.38 157.176 2382.43 154.514 Q2380.51 151.829 2377.13 151.829 Q2373.75 151.829 2371.81 154.514 Q2369.89 157.176 2369.89 161.876 Q2369.89 166.575 2371.81 169.26 Q2373.75 171.922 2377.13 171.922 Q2380.51 171.922 2382.43 169.26 Q2384.38 166.575 2384.38 161.876 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2411.48 153.288 L2441.16 153.288 L2441.16 157.176 L2411.48 157.176 L2411.48 153.288 M2411.48 162.732 L2441.16 162.732 L2441.16 166.667 L2411.48 166.667 L2411.48 162.732 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2476.32 143.334 Q2472.71 143.334 2470.88 146.899 Q2469.08 150.44 2469.08 157.57 Q2469.08 164.676 2470.88 168.241 Q2472.71 171.783 2476.32 171.783 Q2479.96 171.783 2481.76 168.241 Q2483.59 164.676 2483.59 157.57 Q2483.59 150.44 2481.76 146.899 Q2479.96 143.334 2476.32 143.334 M2476.32 139.63 Q2482.13 139.63 2485.19 144.237 Q2488.27 148.82 2488.27 157.57 Q2488.27 166.297 2485.19 170.903 Q2482.13 175.487 2476.32 175.487 Q2470.51 175.487 2467.43 170.903 Q2464.38 166.297 2464.38 157.57 Q2464.38 148.82 2467.43 144.237 Q2470.51 139.63 2476.32 139.63 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2496.48 168.936 L2501.37 168.936 L2501.37 174.815 L2496.48 174.815 L2496.48 168.936 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip160)" d="M2511.6 140.255 L2529.96 140.255 L2529.96 144.19 L2515.88 144.19 L2515.88 152.663 Q2516.9 152.315 2517.92 152.153 Q2518.94 151.968 2519.96 151.968 Q2525.74 151.968 2529.12 155.139 Q2532.5 158.311 2532.5 163.727 Q2532.5 169.306 2529.03 172.408 Q2525.56 175.487 2519.24 175.487 Q2517.06 175.487 2514.79 175.116 Q2512.55 174.746 2510.14 174.005 L2510.14 169.306 Q2512.22 170.44 2514.45 170.996 Q2516.67 171.551 2519.15 171.551 Q2523.15 171.551 2525.49 169.445 Q2527.83 167.338 2527.83 163.727 Q2527.83 160.116 2525.49 158.01 Q2523.15 155.903 2519.15 155.903 Q2517.27 155.903 2515.4 156.32 Q2513.54 156.737 2511.6 157.616 L2511.6 140.255 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path></svg>
+</div>
+</div>
+<p>We see that the distributions of <span class="math inline">\(T\)</span> numbers overlap to a large extent; this is a visual representation of the fact that there is no difference between the two sets.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Peruse the <a href="https://docs.juliaplots.org/stable/generated/statsplots/">StatsPlots.jl documentation</a> to learn more about the <code>@df</code> macro and all the visualization functions you can use with dataframes.</p>
+</div>
+</div>
+
+
+</section>
+
+<p><span class="myfooter">© 2024 Henri Kauhanen. Reproduction of these materials without written permission from the author is prohibited.</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

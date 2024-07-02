@@ -1,5 +1,29 @@
 [
   {
+    "listing": "/homework.html",
+    "items": [
+      "/homework/installing-julia.html",
+      "/homework/fly.html",
+      "/homework/vl.html",
+      "/homework/modules.html",
+      "/homework/change.html",
+      "/homework/project.html",
+      "/homework/clustering.html",
+      "/homework/ensembles.html"
+    ]
+  },
+  {
+    "listing": "/solutions.html",
+    "items": [
+      "/solutions/fly.html",
+      "/solutions/vl.html",
+      "/solutions/modules.html",
+      "/solutions/change.html",
+      "/solutions/clustering.html",
+      "/solutions/ensembles.html"
+    ]
+  },
+  {
     "listing": "/lectures.html",
     "items": [
       "/lectures/intro.html",
@@ -11,29 +35,6 @@
       "/lectures/bestpractices.html",
       "/lectures/networks.html",
       "/lectures/network-simulations.html"
-    ]
-  },
-  {
-    "listing": "/solutions.html",
-    "items": [
-      "/solutions/fly.html",
-      "/solutions/vl.html",
-      "/solutions/modules.html",
-      "/solutions/change.html",
-      "/solutions/clustering.html"
-    ]
-  },
-  {
-    "listing": "/homework.html",
-    "items": [
-      "/homework/installing-julia.html",
-      "/homework/fly.html",
-      "/homework/vl.html",
-      "/homework/modules.html",
-      "/homework/change.html",
-      "/homework/project.html",
-      "/homework/clustering.html",
-      "/homework/ensembles.html"
     ]
   }
 ]

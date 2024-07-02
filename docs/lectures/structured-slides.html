@@ -428,7 +428,7 @@ Henri Kauhanen
 <li>First, though, a technical remark about function arguments</li>
 <li>We’ve seen function calls like this:</li>
 </ul>
-<div id="910e6f14" class="cell" data-execution_count="2">
+<div id="07da817a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="fu">plot</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, (<span class="fl">1</span><span class="op">:</span><span class="fl">100</span>) <span class="op">.^</span> <span class="fl">2</span>, seriestype <span class="op">=</span> <span class="op">:</span>scatter, color <span class="op">=</span> <span class="op">:</span>blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -445,7 +445,7 @@ Henri Kauhanen
 <ul>
 <li>To create keyword arguments in your own function, you separate the list of keyword and positional arguments with a semicolon (<code>;</code>):</li>
 </ul>
-<div id="9bc19434" class="cell" data-execution_count="3">
+<div id="ad54c066" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a><span class="kw">function</span> <span class="fu">my_fun</span>(pos1, pos2; keyword1, keyword2)</span>
 <span id="cb2-2"><a></a>  <span class="op">...</span></span>
 <span id="cb2-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -453,7 +453,7 @@ Henri Kauhanen
 <ul>
 <li>If you don’t want any positional arguments, you have to write the following!</li>
 </ul>
-<div id="1942b9c3" class="cell" data-execution_count="4">
+<div id="a1abce2c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a></a><span class="kw">function</span> <span class="fu">my_fun</span>(; keyword1, keyword2)</span>
 <span id="cb3-2"><a></a>  <span class="op">...</span></span>
 <span id="cb3-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -464,7 +464,7 @@ Henri Kauhanen
 <ul>
 <li>Keyword (but not positional) arguments can have default values:</li>
 </ul>
-<div id="5959a83a" class="cell" data-execution_count="5">
+<div id="88c860aa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a><span class="kw">function</span> <span class="fu">my_fun</span>(; firstname <span class="op">=</span> <span class="st">"John"</span>, lastname)</span>
 <span id="cb4-2"><a></a>  <span class="fu">println</span>(firstname <span class="op">*</span> <span class="st">" "</span> <span class="op">*</span> lastname)</span>
 <span id="cb4-3"><a></a><span class="kw">end</span></span>
@@ -507,7 +507,7 @@ John Doe</code></pre>
 <li>Enter the <a href="https://juliadynamics.github.io/Agents.jl/stable/"><em>Agents.jl</em></a> package, an ecosystem/framework for ABMs in Julia</li>
 <li>You should already have <em>Agents</em> installed. If not, now’s the time to:</li>
 </ul>
-<div id="8c0c7978" class="cell" data-execution_count="6">
+<div id="c9961cbd" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a><span class="im">using</span> <span class="bu">Pkg</span></span>
 <span id="cb6-2"><a></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"Agents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -544,7 +544,7 @@ John Doe</code></pre>
 <ul>
 <li>To implement this in Julia with Agents.jl:</li>
 </ul>
-<div id="2599a6aa" class="cell" data-execution_count="7">
+<div id="2b986cdf" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a></a>dims <span class="op">=</span> (<span class="fl">50</span>, <span class="fl">50</span>)</span>
 <span id="cb7-2"><a></a>space <span class="op">=</span> <span class="fu">GridSpaceSingle</span>(dims)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -557,7 +557,7 @@ John Doe</code></pre>
 </section>
 <section id="aside-tuples-are-immutable" class="slide level2">
 <h2>Aside: tuples are immutable</h2>
-<div id="77580de3" class="cell" data-execution_count="8">
+<div id="118be200" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a>arr <span class="op">=</span> [<span class="fl">10</span>,<span class="fl">20</span>]</span>
 <span id="cb8-2"><a></a>tup <span class="op">=</span> (<span class="fl">10</span>,<span class="fl">20</span>)</span>
 <span id="cb8-3"><a></a>arr[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">30</span>   <span class="co"># arr is now [30,20]</span></span>
@@ -582,7 +582,7 @@ John Doe</code></pre>
 <ul>
 <li>To make use of the machinery provided by <em>Agents.jl</em>, we replace:</li>
 </ul>
-<div id="1b8f235c" class="cell" data-execution_count="11">
+<div id="febbee54" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a></a><span class="kw">mutable struct</span> VariationalLearner</span>
 <span id="cb9-2"><a></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb9-3"><a></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
@@ -596,7 +596,7 @@ John Doe</code></pre>
 <ul>
 <li>with this:</li>
 </ul>
-<div id="492a62eb" class="cell" data-execution_count="12">
+<div id="339edf08" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a><span class="pp">@agent</span> <span class="kw">struct</span> <span class="fu">VariationalLearner</span>(GridAgent{<span class="fl">2</span>})</span>
 <span id="cb10-2"><a></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb10-3"><a></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
@@ -607,7 +607,7 @@ John Doe</code></pre>
 </section>
 <section id="agent-redefinition-2" class="slide level2">
 <h2>Agent redefinition</h2>
-<div id="7899d71d" class="cell" data-execution_count="13">
+<div id="22a23e45" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a></a><span class="pp">@agent</span> <span class="kw">struct</span> <span class="fu">VariationalLearner</span>(GridAgent{<span class="fl">2</span>})</span>
 <span id="cb11-2"><a></a>  p<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb11-3"><a></a>  gamma<span class="op">::</span><span class="dt">Float64</span></span>
@@ -627,7 +627,7 @@ John Doe</code></pre>
 <li>This is a function that takes a single agent and the model as arguments</li>
 <li>We can make use of the <code>interact!</code> function we have already written:</li>
 </ul>
-<div id="2807ce2a" class="cell" data-execution_count="14">
+<div id="44bd7c3f" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a></a><span class="kw">function</span> <span class="fu">VL_step!</span>(agent, model)</span>
 <span id="cb12-2"><a></a>  interlocutor <span class="op">=</span> <span class="fu">random_nearby_agent</span>(agent, model)</span>
 <span id="cb12-3"><a></a>  <span class="fu">interact!</span>(interlocutor, agent)</span>
@@ -639,7 +639,7 @@ John Doe</code></pre>
 <ul>
 <li>We now have all the ingredients we need to initialize the ABM:</li>
 </ul>
-<div id="bda76da4" class="cell" data-execution_count="15">
+<div id="9c35a9bd" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a></a>model <span class="op">=</span> <span class="fu">StandardABM</span>(VariationalLearner, space; </span>
 <span id="cb13-2"><a></a>                    agent_step! <span class="op">=</span> VL_step!)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -655,7 +655,7 @@ John Doe</code></pre>
 <ul>
 <li>This creates a sort of an “empty” container (it has no agents yet). To add agents, we call:</li>
 </ul>
-<div id="3df887cb" class="cell" data-execution_count="16">
+<div id="6285ccfd" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a></a><span class="fu">add_agent_single!</span>(model; p <span class="op">=</span> <span class="fl">0.1</span>, gamma <span class="op">=</span> <span class="fl">0.01</span>, </span>
 <span id="cb15-2"><a></a>                  P1 <span class="op">=</span> <span class="fl">0.4</span>, P2 <span class="op">=</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -672,7 +672,7 @@ John Doe</code></pre>
 <li>We have a space of 50 x 50 = 2,500 nodes</li>
 <li>Let’s add 2,499 more agents:</li>
 </ul>
-<div id="953bfe7d" class="cell" data-execution_count="17">
+<div id="7ae6da43" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2499</span></span>
 <span id="cb17-2"><a></a>  <span class="fu">add_agent_single!</span>(model; p <span class="op">=</span> <span class="fl">0.1</span>, gamma <span class="op">=</span> <span class="fl">0.01</span>, </span>
 <span id="cb17-3"><a></a>                    P1 <span class="op">=</span> <span class="fl">0.4</span>, P2 <span class="op">=</span> <span class="fl">0.1</span>)</span>
@@ -681,7 +681,7 @@ John Doe</code></pre>
 <ul>
 <li>Check number of agents:</li>
 </ul>
-<div id="17b58a2a" class="cell" data-execution_count="18">
+<div id="b2428ab9" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a></a><span class="fu">nagents</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>2500</code></pre>
@@ -693,7 +693,7 @@ John Doe</code></pre>
 <ul>
 <li>Stepping the model is now easy:</li>
 </ul>
-<div id="1afb0ca6" class="cell" data-execution_count="19">
+<div id="9bd66bc1" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a></a><span class="fu">step!</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>StandardABM with 2500 agents of type VariationalLearner
@@ -705,7 +705,7 @@ John Doe</code></pre>
 <ul>
 <li>Or, for a desired number of steps:</li>
 </ul>
-<div id="7c990973" class="cell" data-execution_count="20">
+<div id="a3805b41" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a></a><span class="fu">step!</span>(model, <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>StandardABM with 2500 agents of type VariationalLearner
@@ -743,7 +743,7 @@ John Doe</code></pre>
 </ul></li>
 <li>To actually see the plot, you have to call the first return value explicitly:</li>
 </ul>
-<div id="2cda17eb" class="cell" data-execution_count="21">
+<div id="d7b8c507" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model)</span>
 <span id="cb24-2"><a></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -767,7 +767,7 @@ John Doe</code></pre>
 <ul>
 <li>In this case, the function is as simple as:</li>
 </ul>
-<div id="cffce1aa" class="cell" data-execution_count="24">
+<div id="9d6acb49" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a></a><span class="kw">function</span> <span class="fu">getp</span>(a)</span>
 <span id="cb25-2"><a></a>  <span class="cf">return</span> a.p</span>
 <span id="cb25-3"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -781,7 +781,7 @@ John Doe</code></pre>
 <ul>
 <li>We now pass our <code>getp</code> function as the value of the <code>agent_color</code> keyword argument to <code>abmplot</code>:</li>
 </ul>
-<div id="84b16f54" class="cell" data-execution_count="26">
+<div id="e05b6cec" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp)</span>
 <span id="cb27-2"><a></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -792,7 +792,7 @@ John Doe</code></pre>
 <ul>
 <li>We can see how the population changes as we evolve the model further (the new <code>as</code> keyword argument specifies the size of the dots that represent the agents):</li>
 </ul>
-<div id="9e0c5823" class="cell" data-execution_count="27">
+<div id="0f56ab13" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a></a><span class="fu">step!</span>(model, <span class="fl">1000</span>)</span>
 <span id="cb28-2"><a></a>fig2, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb28-3"><a></a>fig2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -804,7 +804,7 @@ John Doe</code></pre>
 <ul>
 <li>And further:</li>
 </ul>
-<div id="c4440b70" class="cell" data-execution_count="28">
+<div id="ffb777f0" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a></a><span class="fu">step!</span>(model, <span class="fl">1000</span>)</span>
 <span id="cb29-2"><a></a>fig3, meta <span class="op">=</span> <span class="fu">abmplot</span>(model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb29-3"><a></a>fig3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -817,7 +817,7 @@ John Doe</code></pre>
 <li>Making an animation/video allows us to visualize the evolution dynamically</li>
 <li>This is achieved with the <code>abmvideo</code> function</li>
 </ul>
-<div id="88a7ae31" class="cell" data-execution_count="29">
+<div id="9d263a42" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a></a><span class="fu">abmvideo</span>(<span class="st">"vid.mp4"</span>, model; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>, </span>
 <span id="cb30-2"><a></a>         frames <span class="op">=</span> <span class="fl">100</span>, framerate <span class="op">=</span> <span class="fl">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -843,7 +843,7 @@ John Doe</code></pre>
 <ul>
 <li>We first reinitialize the model:</li>
 </ul>
-<div id="684da8ac" class="cell" data-execution_count="31">
+<div id="7087b90b" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a></a>space2 <span class="op">=</span> <span class="fu">GridSpaceSingle</span>((<span class="fl">50</span>, <span class="fl">50</span>))</span>
 <span id="cb31-2"><a></a>model2 <span class="op">=</span> <span class="fu">StandardABM</span>(VariationalLearner, space2;</span>
 <span id="cb31-3"><a></a>                     agent_step! <span class="op">=</span> VL_step!)</span>
@@ -864,7 +864,7 @@ John Doe</code></pre>
 <ul>
 <li>Visualize initial state of population:</li>
 </ul>
-<div id="dfd52c6a" class="cell" data-execution_count="32">
+<div id="0210a419" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a></a>fig, meta <span class="op">=</span> <span class="fu">abmplot</span>(model2; agent_color <span class="op">=</span> getp, as <span class="op">=</span> <span class="fl">12</span>)</span>
 <span id="cb32-2"><a></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -875,7 +875,7 @@ John Doe</code></pre>
 <ul>
 <li>Animate for 1,000 iterations (every agent gets to learn 1,000 times):</li>
 </ul>
-<div id="08fdbe85" class="cell" data-execution_count="33">
+<div id="ebd2970a" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a></a><span class="fu">abmvideo</span>(<span class="st">"interesting.mp4"</span>, model2; agent_color <span class="op">=</span> getp,</span>
 <span id="cb33-2"><a></a>         as <span class="op">=</span> <span class="fl">12</span>, frames <span class="op">=</span> <span class="fl">1000</span>, framerate <span class="op">=</span> <span class="fl">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

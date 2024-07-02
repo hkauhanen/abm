@@ -149,5 +149,9 @@
   "solutions/clustering.qmd": {
     "clustering.html": "99ce91ed",
     "clustering.tex": "d225b12a"
+  },
+  "solutions/ensembles.qmd": {
+    "ensembles.html": "17802f62",
+    "ensembles.tex": "6a402d93"
   }
 }
